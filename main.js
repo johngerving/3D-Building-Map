@@ -3,6 +3,15 @@ import { SVGLoader } from "three/addons/loaders/SVGLoader.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import * as BufferGeometryUtils from "three/addons/utils/BufferGeometryUtils.js";
 
+const floorProperties = [
+  {
+    name: "Floor 1",
+    svg: "./Library-1.svg",
+    extrudedSections: ["A-WALL-FULL"],
+    locations: [],
+  },
+];
+
 // Initialize canvas and renderer, enable antialiasing
 const canvas = document.querySelector("#c");
 const renderer = new THREE.WebGLRenderer({ antialias: true, canvas });
@@ -67,4 +76,24 @@ function resizeRendererToDisplaySize(renderer) {
     renderer.setSize(width, height, false);
   }
   return needResize;
+}
+
+// Load the floor SVGs, create meshes, and return groups out of them
+function loadFloors(floorProperties) {
+  let floorGroups = [];
+  floorProperties.forEach((floorProperty) => {
+    let geometries = {
+      extruded: {}, // Object for extruded sections geometries
+      nonExtruded: { other: [] }, // Object for non-extruded sections geometries - for now, all in one set of geometries
+    };
+
+    // For each extruded section in the floor, create two arrays of geometries for that section
+    floorProperty.extrudedSections.forEach((el) => {
+      geometries.extruded[el] = {
+        pathGeometries: [], // One array for the SVG paths of the section
+        extrudeGeometries: [], // One array for the extruded mesh portion of the section
+      };
+    });
+  });
+  return floorGroups;
 }
