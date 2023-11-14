@@ -3,6 +3,7 @@ import { SVGLoader } from "three/addons/loaders/SVGLoader.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import * as BufferGeometryUtils from "three/addons/utils/BufferGeometryUtils.js";
 
+// Floor properties - defines name of floor, location of svg, which sections are extruded, and the locations on the floor
 const floorProperties = [
   {
     name: "Floor 1",
@@ -53,10 +54,13 @@ scene.add(directionalLight);
 const ambientLight = new THREE.AmbientLight(0x404040);
 scene.add(ambientLight);
 
+// Example cube
 const cubeMaterial = new THREE.MeshPhongMaterial();
 const cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
 const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
 scene.add(cube);
+
+render();
 
 function render() {
   // Check if window has been resized and update camera accordingly
@@ -80,7 +84,10 @@ function resizeRendererToDisplaySize(renderer) {
 
 // Load the floor SVGs, create meshes, and return groups out of them
 function loadFloors(floorProperties) {
+  const loader = new SVGLoader();
+
   let floorGroups = [];
+
   floorProperties.forEach((floorProperty) => {
     let geometries = {
       extruded: {}, // Object for extruded sections geometries
@@ -93,6 +100,57 @@ function loadFloors(floorProperties) {
         pathGeometries: [], // One array for the SVG paths of the section
         extrudeGeometries: [], // One array for the extruded mesh portion of the section
       };
+    });
+
+    loader.load(floorProperty.svg, function (data) {
+      // Loop through paths in svg data
+      for (const path of data.paths) {
+        const fillColor = path.userData.style.fill; // Get fill color of SVG path
+
+        // Get parent group id to identify the current section of the SVG
+        const pathNode = path.userData.node;
+        const parentGroup = pathNode.parentElement.parentElement;
+        const id = parentGroup.id;
+
+        if (fillColor !== undefined && fillColor !== "none") {
+          // If SVG path is not empty
+          // Create shapes from filled SVG shapes
+          const shapes = SVGLoader.createShapes(path);
+
+          for (const shape of shapes) {
+            // Create geometry from SVG shape
+            const geometry = new THREE.ShapeGeometry(shape).toNonIndexed();
+
+            // Check if current path section should be extruded
+            if (floorProperty.extrudedSections.includes(id))
+              geometries.extruded[id].pathGeometries.push(geometry);
+            // Add geometry to extruded geometries array
+            else geometries.nonExtruded.other.push(geometry); // Add geometry to non-extruded geometries array
+          }
+        }
+
+        const strokeColor = path.userData.style.stroke; // Get stroke color of SVG path
+
+        if (strokeColor !== undefined && strokeColor !== "none") {
+          // If stroke is not empty
+          for (const subPath of path.subPaths) {
+            // Create geometry from subpath
+            const geometry = SVGLoader.pointsToStroke(
+              subPath.getPoints(),
+              path.userData.style
+            ).toNonIndexed();
+
+            if (geometry) {
+              // If geometry exists
+              // Check if current path section should be extruded
+              if (floorProperty.extrudedSections.includes(id))
+                geometries.extruded[id].pathGeometries.push(geometry);
+              // Add geometry to extruded geometries array
+              else geometries.nonExtruded.other.push(geometry); // Add geometry to non-extruded geometries array
+            }
+          }
+        }
+      }
     });
   });
   return floorGroups;
