@@ -6,9 +6,19 @@ import * as BufferGeometryUtils from "three/addons/utils/BufferGeometryUtils.js"
 // Floor properties - defines name of floor, location of svg, which sections are extruded, and the locations on the floor
 const floorProperties = [
   {
+    name: "Basement",
+    svg: "./Library-B.svg",
+    svgScale: 0.01,
+    position: [0, 0],
+    extrudedSections: ["A-WALL-FULL"],
+    extrudeDepth: 20,
+    locations: [],
+  },
+  {
     name: "Floor 1",
     svg: "./Library-1.svg",
     svgScale: 0.01,
+    position: [0.015, 0.15],
     extrudedSections: ["A-WALL-FULL"],
     extrudeDepth: 20,
     locations: [],
@@ -64,8 +74,6 @@ scene.add(ambientLight);
 
 const floorGroups = loadFloors(floorProperties);
 
-render();
-
 function render() {
   // Check if window has been resized and update camera accordingly
   if (resizeRendererToDisplaySize(renderer)) {
@@ -76,7 +84,7 @@ function render() {
   renderer.render(scene, camera); // Render scene
 }
 
-async function resizeRendererToDisplaySize(renderer) {
+function resizeRendererToDisplaySize(renderer) {
   const width = canvas.clientWidth;
   const height = canvas.clientHeight;
   const needResize = canvas.width !== width || canvas.height !== height; // Check if canvas dimensions do not match client dimensions
@@ -92,7 +100,7 @@ function loadFloors(floorProperties) {
 
   let floorGroups = [];
 
-  floorProperties.forEach((floorProperty) => {
+  floorProperties.forEach((floorProperty, i, arr) => {
     const geometries = {
       extruded: {}, // Object for extruded sections geometries
       nonExtruded: { other: [] }, // Object for non-extruded sections geometries - for now, all in one set of geometries
@@ -148,7 +156,7 @@ function loadFloors(floorProperties) {
               const geometry = SVGLoader.pointsToStroke(
                 subPath.getPoints(),
                 path.userData.style
-              ).toNonIndexed();
+              );
 
               if (geometry) {
                 // If geometry exists
@@ -181,9 +189,7 @@ function loadFloors(floorProperties) {
         // Create Group for the floor
         const floorGroup = new THREE.Group();
 
-        // Materials for paths and extruded meshes
-        const pathMaterial = new THREE.MeshStandardMaterial({
-          // color: "#09c",
+        let pathMaterial = new THREE.MeshStandardMaterial({
           side: THREE.DoubleSide,
         });
 
@@ -241,10 +247,27 @@ function loadFloors(floorProperties) {
 
         // Center floor group based on bounding box
         floorGroup.position.x = -size.x / 2;
-        floorGroup.position.y = size.y / 2;
         floorGroup.position.z = -size.z / 2;
 
+        // Shift floor group to align with others
+        floorGroup.position.x += floorProperty.position[0];
+        floorGroup.position.z -= floorProperty.position[1];
+
+        // Change y position so levels are stacked on top of each other
+        if (i > 0) {
+          let sum = 0;
+          for (let j = 0; j < i; j++) {
+            sum += arr[j].extrudeDepth / 100;
+          }
+          console.log(sum);
+          floorGroup.position.y = sum;
+        }
+
+        // Add group to scene and to array for later use
+        scene.add(floorGroup);
         floorGroups.push(floorGroup);
+
+        render();
       },
       function (xhr) {
         console.log("SVG " + (xhr.loaded / xhr.total) * 100 + "% loaded");
