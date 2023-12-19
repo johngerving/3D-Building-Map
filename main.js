@@ -11,16 +11,48 @@ const floorProperties = [
     svgScale: 0.01,
     position: [0, 0],
     extrudedSections: ["A-WALL-FULL"],
-    extrudeDepth: 20,
+    floorLayer: "A-FLOOR-OUTLINE",
+    extrudeDepth: 30,
     locations: [],
   },
   {
     name: "Floor 1",
     svg: "./Library-1.svg",
     svgScale: 0.01,
-    position: [0.015, 0.15],
+    position: [0.15, -0.05],
     extrudedSections: ["A-WALL-FULL"],
-    extrudeDepth: 20,
+    floorLayer: "A-FLOOR-OUTLINE",
+    extrudeDepth: 30,
+    locations: [],
+  },
+  {
+    name: "Floor 2",
+    svg: "./Library-2.svg",
+    svgScale: 0.01,
+    position: [0.21, 0],
+    extrudedSections: ["A-WALL-FULL"],
+    floorLayer: "A-FLOOR-OUTLINE",
+    extrudeDepth: 30,
+    locations: [],
+  },
+  {
+    name: "Floor 3",
+    svg: "./Library-3.svg",
+    svgScale: 0.01,
+    position: [-0.05, 0.17],
+    extrudedSections: ["A-WALL-FULL"],
+    floorLayer: "A-FLOOR-OUTLINE",
+    extrudeDepth: 30,
+    locations: [],
+  },
+  {
+    name: "Roof",
+    svg: "./Library-4.svg",
+    svgScale: 0.01,
+    position: [0.2, -0.25],
+    extrudedSections: [],
+    floorLayer: "",
+    extrudeDepth: 0,
     locations: [],
   },
 ];
@@ -32,7 +64,7 @@ const renderer = new THREE.WebGLRenderer({ antialias: true, canvas });
 // Define camera and its properties
 const fov = 75;
 const aspect = 2;
-const near = 0.1;
+const near = 0.01;
 const far = 1000;
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 
@@ -44,6 +76,8 @@ camera.lookAt(0, 0, 0);
 // Define scene
 const scene = new THREE.Scene();
 
+scene.background = new THREE.Color(0xcfe2e3);
+
 // Define orbit controls - render scene whenever camera moves
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.addEventListener("change", render);
@@ -54,7 +88,7 @@ window.addEventListener("resize", render);
 
 // White directional lighting
 const directionalLightColor = 0xffffff;
-const directionalLightIntensity = 3;
+const directionalLightIntensity = 2.5;
 const directionalLight = new THREE.DirectionalLight(
   directionalLightColor,
   directionalLightIntensity
@@ -63,7 +97,7 @@ directionalLight.position.set(-1, 2, 4);
 scene.add(directionalLight);
 
 // Soft white ambient light
-const ambientLight = new THREE.AmbientLight(0x404040);
+const ambientLight = new THREE.AmbientLight(0xcfe2e3);
 scene.add(ambientLight);
 
 // Example cube
@@ -104,6 +138,7 @@ function loadFloors(floorProperties) {
     const geometries = {
       extruded: {}, // Object for extruded sections geometries
       nonExtruded: { other: [] }, // Object for non-extruded sections geometries - for now, all in one set of geometries
+      floorGeometries: [], // Array of geometries for floor and ceiling
     };
 
     // For each extruded section in the floor, create two arrays of geometries for that section
@@ -141,6 +176,12 @@ function loadFloors(floorProperties) {
               if (floorProperty.extrudedSections.includes(id)) {
                 // Add geometry to extruded geometries paths array
                 geometries.extruded[id].pathGeometries.push(pathGeometry);
+              } else if (
+                floorProperty.floorLayer.length > 0 &&
+                floorProperty.floorLayer == id
+              ) {
+                // Add floor geometry to array
+                geometries.floorGeometries.push(pathGeometry);
               } else {
                 geometries.nonExtruded.other.push(pathGeometry); // Add geometry to non-extruded geometries array
               }
@@ -161,10 +202,18 @@ function loadFloors(floorProperties) {
               if (geometry) {
                 // If geometry exists
                 // Check if current path section should be extruded
-                if (floorProperty.extrudedSections.includes(id))
+                if (floorProperty.extrudedSections.includes(id)) {
                   geometries.extruded[id].pathGeometries.push(geometry);
-                // Add geometry to extruded geometries array
-                else geometries.nonExtruded.other.push(geometry); // Add geometry to non-extruded geometries array
+                  // Add geometry to extruded geometries array
+                } else if (
+                  floorProperty.floorLayer.length > 0 &&
+                  floorProperty.floorLayer == id
+                ) {
+                  // Add floor geometry to array
+                  geometries.floorGeometries.push(geometry);
+                } else {
+                  geometries.nonExtruded.other.push(geometry); // Add geometry to non-extruded geometries array
+                }
               }
             }
           }
@@ -190,15 +239,27 @@ function loadFloors(floorProperties) {
         const floorGroup = new THREE.Group();
 
         let pathMaterial = new THREE.MeshStandardMaterial({
+          color: 0x000000,
           side: THREE.DoubleSide,
         });
 
-        const extrudeMaterial = new THREE.MeshPhongMaterial();
+        // if (i > 0) {
+        //   pathMaterial = new THREE.MeshStandardMaterial({
+        //     color: 0x34cfeb,
+        //     side: THREE.DoubleSide,
+        //   });
+        // }
+
+        const extrudeMaterial = new THREE.MeshPhongMaterial({
+          //   color: 0x7d7d7d,
+          //   transparent: true,
+          //   depthWrite: false,
+          opacity: 0.5,
+        });
 
         floorProperty.extrudedSections.forEach((id) => {
           // Loop through each extruded section
           // Merge array of extruded geometries into single geometry for performance
-
           const extrudeGeometry = BufferGeometryUtils.mergeGeometries(
             geometries.extruded[id].extrudeGeometries
           );
@@ -219,7 +280,7 @@ function loadFloors(floorProperties) {
           extrudeMesh.scale.y *= -1;
 
           pathMesh.scale.multiplyScalar(floorProperty.svgScale);
-          pathMesh.position.z = floorProperty.extrudeDepth / 100; // Shift path mesh up to be at top of extrusion
+          pathMesh.position.z = floorProperty.extrudeDepth / 100 + 1 / 100; // Shift path mesh up to be at top of extrusion
           pathMesh.scale.y *= -1;
 
           floorGroup.add(extrudeMesh);
@@ -236,8 +297,29 @@ function loadFloors(floorProperties) {
         const otherPathMesh = new THREE.Mesh(otherPathGeometry, pathMaterial);
         otherPathMesh.scale.multiplyScalar(floorProperty.svgScale);
         otherPathMesh.scale.y *= -1;
+        otherPathMesh.position.z += 1 / 100;
 
         floorGroup.add(otherPathMesh);
+
+        if (geometries.floorGeometries.length > 0) {
+          // Merge array of floor geometries
+          const floorGeometry = BufferGeometryUtils.mergeGeometries(
+            geometries.floorGeometries
+          );
+          floorGeometry.computeBoundingSphere();
+
+          // Create mesh from floor geometry
+          const floorMesh = new THREE.Mesh(floorGeometry, extrudeMaterial);
+          floorMesh.scale.multiplyScalar(floorProperty.svgScale);
+          floorMesh.scale.y *= -1;
+
+          floorGroup.add(floorMesh);
+
+          const upperFloorMesh = floorMesh.clone();
+          upperFloorMesh.position.z += floorProperty.extrudeDepth / 100;
+
+          floorGroup.add(upperFloorMesh);
+        }
 
         floorGroup.rotateX(-Math.PI / 2); // Rotate group so it is horizontal
 
@@ -257,9 +339,8 @@ function loadFloors(floorProperties) {
         if (i > 0) {
           let sum = 0;
           for (let j = 0; j < i; j++) {
-            sum += arr[j].extrudeDepth / 100;
+            sum += arr[j].extrudeDepth / 100 + 3 / 100;
           }
-          console.log(sum);
           floorGroup.position.y = sum;
         }
 
