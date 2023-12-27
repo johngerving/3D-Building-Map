@@ -413,23 +413,8 @@ function populateFloorListUI(floorList) {
       render();
     };
 
+    // Append list element to list
     li.appendChild(document.createTextNode(floor.name));
     ul.appendChild(li);
-    // Append list element to list
   });
 }
-
-function getAndModifySVG(url) {
-  return (
-    fetch(url)
-      // Get SVG response as text
-      .then((response) => response.text())
-      .then((text) => {
-        console.log(text);
-      })
-    // Parse to a DOM tree using DOMParser
-    // .then((str) => new window.DOMParser().parseFromString(str, "text/xml"))
-  );
-}
-
-// getAndModifySVG("./Library-1.svg");
