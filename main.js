@@ -10,8 +10,9 @@ const floorProperties = [
     svg: "./Library-B.svg",
     svgScale: 0.01,
     position: [0, 0],
-    extrudedSections: ["A-WALL-FULL"],
-    floorLayer: "A-FLOOR-OUTLINE",
+    extrudedSections: [], //["A-WALL-FULL"],
+    floorLayer: { layer: "A-FLOOR-OUTLINE", enabled: false },
+    excludedSections: ["A-FLOOR-OUTLINE"],
     extrudeDepth: 30,
     locations: [
       {
@@ -537,7 +538,7 @@ const floorProperties = [
       {
         name: "M-0L",
         type: "Room",
-        position: [228.61, "343.34)", "rotate(-90"],
+        position: [228.61, 343.34],
       },
       {
         name: "M-0R",
@@ -566,1089 +567,1089 @@ const floorProperties = [
       },
     ],
   },
-  {
-    name: "Floor 1",
-    svg: "./Library-1.svg",
-    svgScale: 0.01,
-    position: [0.15, -0.05],
-    extrudedSections: ["A-WALL-FULL"],
-    floorLayer: "A-FLOOR-OUTLINE",
-    extrudeDepth: 30,
-    locations: [
-      {
-        name: "101A",
-        type: "Room",
-        position: [352.49, 225.03],
-      },
-      {
-        name: "111B",
-        type: "Room",
-        position: [496.54, 271.4],
-      },
-      {
-        name: "111H",
-        type: "Room",
-        position: [549.66, 287.6],
-      },
-      {
-        name: "111G",
-        type: "Room",
-        position: [545.64, 228.35],
-      },
-      {
-        name: "111F",
-        type: "Room",
-        position: [499.23, 171.64],
-      },
-      {
-        name: "111K",
-        type: "Room",
-        position: [540.15, 174.39],
-      },
-      {
-        name: "111E",
-        type: "Room",
-        position: [505.07, 201.68],
-      },
-      {
-        name: "111J",
-        type: "Room",
-        position: [495.09, 221.98],
-      },
-      {
-        name: "110",
-        type: "Room",
-        position: [431.83, 278.75],
-      },
-      {
-        name: "111A",
-        type: "Room",
-        position: [469.75, 221.2],
-      },
-      {
-        name: "111C",
-        type: "Room",
-        position: [455.27, 202.88],
-      },
-      {
-        name: "111D",
-        type: "Room",
-        position: [475, 202.88],
-      },
-      {
-        name: "111I",
-        type: "Room",
-        position: [467.86, 271.86],
-      },
-      {
-        name: "110C",
-        type: "Room",
-        position: [440.39, 214.15],
-      },
-      {
-        name: "110B",
-        type: "Room",
-        position: [441.11, 231.28],
-      },
-      {
-        name: "110A",
-        type: "Room",
-        position: [421.21, 225.16],
-      },
-      {
-        name: "T-1A",
-        type: "Room",
-        position: [227.08, 240.02],
-      },
-      {
-        name: "122",
-        type: "Room",
-        position: [104.03, 292.2],
-      },
-      {
-        name: "121",
-        type: "Room",
-        position: [181.67, 326.55],
-      },
-      {
-        name: "115",
-        type: "Room",
-        position: [236.01, 148.21],
-      },
-      {
-        name: "117",
-        type: "Room",
-        position: [240.55, 110.23],
-      },
-      {
-        name: "118",
-        type: "Room",
-        position: [241, 88.43],
-      },
-      {
-        name: "116",
-        type: "Room",
-        position: [238.59, 130.67],
-      },
-      {
-        name: "112",
-        type: "Room",
-        position: [276.16, 185.18],
-      },
-      {
-        name: "112A",
-        type: "Room",
-        position: [283.37, 166.41],
-      },
-      {
-        name: "113",
-        type: "Room",
-        position: [267.47, 166.41],
-      },
-      {
-        name: "114",
-        type: "Room",
-        position: [264.16, 138.89],
-      },
-      {
-        name: "101B",
-        type: "Room",
-        position: [256.98, 140.65],
-      },
-      {
-        name: "120",
-        type: "Room",
-        position: [248.83, 318.38],
-      },
-      {
-        name: "C-1A",
-        type: "Room",
-        position: [228.18, 282.11],
-      },
-      {
-        name: "E-1",
-        type: "Room",
-        position: [228.11, 272.82],
-      },
-      {
-        name: "C-1B",
-        type: "Room",
-        position: [409.44, 354.09],
-      },
-      {
-        name: "109A",
-        type: "Room",
-        position: [493.26, 338.85],
-      },
-      {
-        name: "106",
-        type: "Room",
-        position: [440.77, 339.77],
-      },
-      {
-        name: "106B",
-        type: "Room",
-        position: [439.5, 362.25],
-      },
-      {
-        name: "106C",
-        type: "Room",
-        position: [446.02, 385.65],
-      },
-      {
-        name: "109B",
-        type: "Room",
-        position: [493.97, 358.5],
-      },
-      {
-        name: "109",
-        type: "Room",
-        position: [550.47, 366.03],
-      },
-      {
-        name: "107",
-        type: "Room",
-        position: [462.63, 339.17],
-      },
-      {
-        name: "108A",
-        type: "Room",
-        position: [458.54, 367.96],
-      },
-      {
-        name: "108",
-        type: "Room",
-        position: [477.64, 363.92],
-      },
-      {
-        name: "101",
-        type: "Room",
-        position: [130.34, 174.95],
-      },
-      {
-        name: "102",
-        type: "Room",
-        position: [336.37, 290.47],
-      },
-      {
-        name: "111",
-        type: "Room",
-        position: [505.75, 240.97],
-      },
-      {
-        name: "E-1B",
-        type: "Room",
-        position: [455.91, 223.83],
-      },
-      {
-        name: "104",
-        type: "Room",
-        position: [381.4, 385.43],
-      },
-      {
-        name: "S-1C",
-        type: "Room",
-        position: [93.43, 74.17],
-      },
-      {
-        name: "S-1B",
-        type: "Room",
-        position: [56.69, 316.25],
-      },
-      {
-        name: "S-1E",
-        type: "Room",
-        position: [522.61, 358.35],
-      },
-      {
-        name: "S-1D",
-        type: "Room",
-        position: [428.47, 192.66],
-      },
-      {
-        name: "S-1A",
-        type: "Room",
-        position: [272.29, 266.92],
-      },
-      {
-        name: "[BG]100",
-        type: "Room",
-        position: [57.79, 347.73],
-      },
-      {
-        name: "[CG]100",
-        type: "Room",
-        position: [71.11, 349.31],
-      },
-      {
-        name: "[CG]101",
-        type: "Room",
-        position: [188.87, 377],
-      },
-      {
-        name: "[CG]102",
-        type: "Room",
-        position: [242.57, 408.18],
-      },
-      {
-        name: "[CG]103",
-        type: "Room",
-        position: [457.29, 186.73],
-      },
-      {
-        name: "EL-1A",
-        type: "Room",
-        position: [226.86, 256.67],
-      },
-      {
-        name: "[XX]101",
-        type: "Room",
-        position: [434.93, 331.67],
-      },
-      {
-        name: "EL-1B",
-        type: "Room",
-        position: [528.83, 301.18],
-      },
-      {
-        name: "M-1A",
-        type: "Room",
-        position: [228.14, 366.85],
-      },
-      {
-        name: "RR-M-1",
-        type: "Room",
-        position: [419.6, 374.59],
-      },
-      {
-        name: "RR-W-1",
-        type: "Room",
-        position: [394.16, 374.59],
-      },
-      {
-        name: "101C",
-        type: "Room",
-        position: [398.73, 222.09],
-      },
-    ],
-  },
-  {
-    name: "Floor 2",
-    svg: "./Library-2.svg",
-    svgScale: 0.01,
-    position: [0.21, 0],
-    extrudedSections: ["A-WALL-FULL"],
-    floorLayer: "A-FLOOR-OUTLINE",
-    extrudeDepth: 30,
-    locations: [
-      {
-        name: "T-2B",
-        type: "Room",
-        position: [227.04, 240.89],
-      },
-      {
-        name: "204",
-        type: "Room",
-        position: [487.58, 319.83],
-      },
-      {
-        name: "203",
-        type: "Room",
-        position: [482.01, 338.73],
-      },
-      {
-        name: "208",
-        type: "Room",
-        position: [276.81, 139.04],
-      },
-      {
-        name: "206",
-        type: "Room",
-        position: [275.73, 187.74],
-      },
-      {
-        name: "207",
-        type: "Room",
-        position: [275.57, 169.99],
-      },
-      {
-        name: "205",
-        type: "Room",
-        position: [425.08, 219.18],
-      },
-      {
-        name: "C-2A",
-        type: "Room",
-        position: [227.23, 322.4],
-      },
-      {
-        name: "205B",
-        type: "Room",
-        position: [455.74, 207.7],
-      },
-      {
-        name: "209",
-        type: "Room",
-        position: [271.12, 375.57],
-      },
-      {
-        name: "E-2A",
-        type: "Room",
-        position: [227.75, 271.88],
-      },
-      {
-        name: "EL-2A",
-        type: "Room",
-        position: [226.71, 256.96],
-      },
-      {
-        name: "S-2C",
-        type: "Room",
-        position: [81.4, 70.2],
-      },
-      {
-        name: "S-2B",
-        type: "Room",
-        position: [58.37, 316.06],
-      },
-      {
-        name: "S-2E",
-        type: "Room",
-        position: [522.75, 357.02],
-      },
-      {
-        name: "S-2D",
-        type: "Room",
-        position: [428.29, 193.78],
-      },
-      {
-        name: "S-2A",
-        type: "Room",
-        position: [278.85, 278.92],
-      },
-      {
-        name: "L-2",
-        type: "Room",
-        position: [247.92, 278.25],
-      },
-      {
-        name: "T-2A",
-        type: "Room",
-        position: [229.48, 282.04],
-      },
-      {
-        name: "M-2A",
-        type: "Room",
-        position: [455.83, 225.63],
-      },
-      {
-        name: "[XX]201",
-        type: "Room",
-        position: [284.11, 265.34],
-      },
-      {
-        name: "[SA]202",
-        type: "Room",
-        position: [520.44, 309.89],
-      },
-      {
-        name: "[BG]200",
-        type: "Room",
-        position: [226.03, 353.69],
-      },
-      {
-        name: "EL-2B",
-        type: "Room",
-        position: [529.11, 301.18],
-      },
-      {
-        name: "RR-M-2",
-        type: "Room",
-        position: [241.22, 307.84],
-      },
-      {
-        name: "RR-2",
-        type: "Room",
-        position: [250.11, 328.32],
-      },
-      {
-        name: "FPS-2",
-        type: "Room",
-        position: [292.21, 290.26],
-      },
-      {
-        name: "[SA]2-B10",
-        type: "Room",
-        position: [110.96, 118.4],
-      },
-      {
-        name: "[SA]2-C10",
-        type: "Room",
-        position: [149.23, 118.4],
-      },
-      {
-        name: "[SA]2-D10",
-        type: "Room",
-        position: [187.49, 118.4],
-      },
-      {
-        name: "[SA]2-E10",
-        type: "Room",
-        position: [225.77, 118.4],
-      },
-      {
-        name: "[SA]2-B9",
-        type: "Room",
-        position: [111.03, 156.67],
-      },
-      {
-        name: "[SA]2-C9",
-        type: "Room",
-        position: [149.3, 156.67],
-      },
-      {
-        name: "[SA]2-D9",
-        type: "Room",
-        position: [187.56, 156.67],
-      },
-      {
-        name: "[SA]2-E9",
-        type: "Room",
-        position: [225.84, 156.67],
-      },
-      {
-        name: "[SA]2-B8",
-        type: "Room",
-        position: [111.03, 194.94],
-      },
-      {
-        name: "[SA]2-C8",
-        type: "Room",
-        position: [149.29, 194.94],
-      },
-      {
-        name: "[SA]2-D8",
-        type: "Room",
-        position: [187.56, 194.94],
-      },
-      {
-        name: "[SA]2-E8",
-        type: "Room",
-        position: [225.84, 194.94],
-      },
-      {
-        name: "[SA]2-H8",
-        type: "Room",
-        position: [340.63, 194.94],
-      },
-      {
-        name: "[SA]2-I8",
-        type: "Room",
-        position: [378.94, 194.94],
-      },
-      {
-        name: "[SA]2-B7",
-        type: "Room",
-        position: [111.03, 233.21],
-      },
-      {
-        name: "[SA]2-C7",
-        type: "Room",
-        position: [149.29, 233.21],
-      },
-      {
-        name: "[SA]2-D7",
-        type: "Room",
-        position: [187.56, 233.21],
-      },
-      {
-        name: "[SA]2-F7",
-        type: "Room",
-        position: [264.11, 233.21],
-      },
-      {
-        name: "[SA]2-H7",
-        type: "Room",
-        position: [340.63, 233.21],
-      },
-      {
-        name: "[SA]2-I7",
-        type: "Room",
-        position: [378.94, 233.21],
-      },
-      {
-        name: "[SA]2-L8",
-        type: "Room",
-        position: [493.72, 194.94],
-      },
-      {
-        name: "[SA]2-L7",
-        type: "Room",
-        position: [493.72, 233.21],
-      },
-      {
-        name: "[SA]2-B6",
-        type: "Room",
-        position: [111.03, 271.47],
-      },
-      {
-        name: "[SA]2-C6",
-        type: "Room",
-        position: [149.29, 271.47],
-      },
-      {
-        name: "[SA]2-D6",
-        type: "Room",
-        position: [187.56, 271.47],
-      },
-      {
-        name: "[SA]2-L6",
-        type: "Room",
-        position: [493.72, 271.47],
-      },
-      {
-        name: "[SA]2-H6",
-        type: "Room",
-        position: [340.63, 271.47],
-      },
-      {
-        name: "[SA]2-I6",
-        type: "Room",
-        position: [378.94, 271.47],
-      },
-      {
-        name: "[SA]2-J6",
-        type: "Room",
-        position: [417.18, 271.47],
-      },
-      {
-        name: "[SA]2-K6",
-        type: "Room",
-        position: [455.43, 271.47],
-      },
-      {
-        name: "[SA]2-B5",
-        type: "Room",
-        position: [111.03, 309.74],
-      },
-      {
-        name: "[SA]2-C5",
-        type: "Room",
-        position: [149.29, 309.74],
-      },
-      {
-        name: "[SA]2-D5",
-        type: "Room",
-        position: [187.56, 309.74],
-      },
-      {
-        name: "[SA]2-H5",
-        type: "Room",
-        position: [340.63, 309.74],
-      },
-      {
-        name: "[SA]2-I5",
-        type: "Room",
-        position: [378.94, 309.74],
-      },
-      {
-        name: "[SA]2-J5",
-        type: "Room",
-        position: [417.18, 309.74],
-      },
-      {
-        name: "[SA]2-H4",
-        type: "Room",
-        position: [340.62, 348.01],
-      },
-      {
-        name: "[SA]2-I4",
-        type: "Room",
-        position: [378.94, 348.01],
-      },
-      {
-        name: "[SA]2-J4",
-        type: "Room",
-        position: [417.18, 348.01],
-      },
-      {
-        name: "[SA]2-G7",
-        type: "Room",
-        position: [302.36, 233.21],
-      },
-      {
-        name: "210",
-        type: "Room",
-        position: [552.92, 178.15],
-      },
-      {
-        name: "201",
-        type: "Room",
-        position: [248.59, 216.99],
-      },
-      {
-        name: "[SA]2-M6",
-        type: "Room",
-        position: [531.96, 271.47],
-      },
-      {
-        name: "202",
-        type: "Room",
-        position: [392.55, 254.48],
-      },
-    ],
-  },
-  {
-    name: "Floor 3",
-    svg: "./Library-3.svg",
-    svgScale: 0.01,
-    position: [-0.05, 0.17],
-    extrudedSections: ["A-WALL-FULL"],
-    floorLayer: "A-FLOOR-OUTLINE",
-    extrudeDepth: 30,
-    locations: [
-      {
-        name: "S-3C",
-        type: "Room",
-        position: [82.15, 78.27],
-      },
-      {
-        name: "S-3B",
-        type: "Room",
-        position: [60.25, 316.06],
-      },
-      {
-        name: "S-3E",
-        type: "Room",
-        position: [522.61, 357.3],
-      },
-      {
-        name: "S-3D",
-        type: "Room",
-        position: [428.05, 194.66],
-      },
-      {
-        name: "S-3A",
-        type: "Room",
-        position: [278.71, 278.92],
-      },
-      {
-        name: "EL-3A",
-        type: "Room",
-        position: [226.71, 256.67],
-      },
-      {
-        name: "L-3",
-        type: "Room",
-        position: [247.66, 267.11],
-      },
-      {
-        name: "301",
-        type: "Room",
-        position: [276.06, 234.93],
-      },
-      {
-        name: "314",
-        type: "Room",
-        position: [276.43, 128.87],
-      },
-      {
-        name: "312",
-        type: "Room",
-        position: [276.83, 168.16],
-      },
-      {
-        name: "313",
-        type: "Room",
-        position: [276.83, 148.35],
-      },
-      {
-        name: "315A",
-        type: "Room",
-        position: [246.52, 94.78],
-      },
-      {
-        name: "315B",
-        type: "Room",
-        position: [227.36, 94.78],
-      },
-      {
-        name: "311",
-        type: "Room",
-        position: [277.26, 187.83],
-      },
-      {
-        name: "310",
-        type: "Room",
-        position: [276.09, 208.8],
-      },
-      {
-        name: "C-3B",
-        type: "Room",
-        position: [495.88, 309.31],
-      },
-      {
-        name: "306",
-        type: "Room",
-        position: [493.35, 294.66],
-      },
-      {
-        name: "307",
-        type: "Room",
-        position: [468.21, 296.85],
-      },
-      {
-        name: "305",
-        type: "Room",
-        position: [488.71, 322.57],
-      },
-      {
-        name: "304",
-        type: "Room",
-        position: [460.51, 324.18],
-      },
-      {
-        name: "309",
-        type: "Room",
-        position: [438.63, 221.52],
-      },
-      {
-        name: "308",
-        type: "Room",
-        position: [488, 220.47],
-      },
-      {
-        name: "E-3A",
-        type: "Room",
-        position: [228.13, 271.76],
-      },
-      {
-        name: "T-3B",
-        type: "Room",
-        position: [226.73, 240.53],
-      },
-      {
-        name: "C-3A",
-        type: "Room",
-        position: [227.04, 322.01],
-      },
-      {
-        name: "T-3A",
-        type: "Room",
-        position: [229.34, 282.18],
-      },
-      {
-        name: "301B",
-        type: "Room",
-        position: [78.29, 356.81],
-      },
-      {
-        name: "301A",
-        type: "Room",
-        position: [244.34, 74.71],
-      },
-      {
-        name: "301C",
-        type: "Room",
-        position: [61.53, 252.98],
-      },
-      {
-        name: "301D",
-        type: "Room",
-        position: [61.54, 94.27],
-      },
-      {
-        name: "301E",
-        type: "Room",
-        position: [161.13, 75.7],
-      },
-      {
-        name: "[XX]301",
-        type: "Room",
-        position: [283.97, 265.24],
-      },
-      {
-        name: "H-3",
-        type: "Room",
-        position: [474.2, 346.4],
-      },
-      {
-        name: "[BG]300",
-        type: "Room",
-        position: [59.99, 67.05],
-      },
-      {
-        name: "EL-3B",
-        type: "Room",
-        position: [528.83, 300.89],
-      },
-      {
-        name: "RR-M-3",
-        type: "Room",
-        position: [243.86, 304.47],
-      },
-      {
-        name: "RR-W-3",
-        type: "Room",
-        position: [243.86, 325.2],
-      },
-      {
-        name: "M-3A",
-        type: "Room",
-        position: [455.1, 224.78],
-      },
-      {
-        name: "315",
-        type: "Room",
-        position: [239.26, 113.03],
-      },
-      {
-        name: "316",
-        type: "Room",
-        position: [200.92, 109.08],
-      },
-      {
-        name: "317",
-        type: "Room",
-        position: [201.49, 199.57],
-      },
-      {
-        name: "[SA]3-B10",
-        type: "Room",
-        position: [110.82, 118.4],
-      },
-      {
-        name: "[SA]3-B9",
-        type: "Room",
-        position: [110.89, 156.67],
-      },
-      {
-        name: "[SA]3-B8",
-        type: "Room",
-        position: [110.88, 194.94],
-      },
-      {
-        name: "[SA]3-B7",
-        type: "Room",
-        position: [110.88, 233.21],
-      },
-      {
-        name: "[SA]3-B6",
-        type: "Room",
-        position: [110.88, 271.47],
-      },
-      {
-        name: "[SA]3-B5",
-        type: "Room",
-        position: [110.88, 309.74],
-      },
-      {
-        name: "[SA]3-A9",
-        type: "Room",
-        position: [72.63, 156.67],
-      },
-      {
-        name: "[SA]3-A8",
-        type: "Room",
-        position: [72.63, 194.94],
-      },
-      {
-        name: "[SA]3-C10",
-        type: "Room",
-        position: [149.08, 118.4],
-      },
-      {
-        name: "[SA]3-C9",
-        type: "Room",
-        position: [149.15, 156.67],
-      },
-      {
-        name: "[SA]3-C8",
-        type: "Room",
-        position: [149.15, 194.94],
-      },
-      {
-        name: "[SA]3-C7",
-        type: "Room",
-        position: [149.15, 233.21],
-      },
-      {
-        name: "[SA]3-C6",
-        type: "Room",
-        position: [149.15, 271.47],
-      },
-      {
-        name: "[SA]3-C5",
-        type: "Room",
-        position: [149.15, 309.74],
-      },
-      {
-        name: "[SA]3-C4",
-        type: "Room",
-        position: [149.15, 348.01],
-      },
-      {
-        name: "[SA]3-D7",
-        type: "Room",
-        position: [187.42, 233.21],
-      },
-      {
-        name: "[SA]3-D6",
-        type: "Room",
-        position: [187.42, 271.47],
-      },
-      {
-        name: "[SA]3-D5",
-        type: "Room",
-        position: [187.42, 309.74],
-      },
-      {
-        name: "[SA]3-D4",
-        type: "Room",
-        position: [187.42, 348.01],
-      },
-      {
-        name: "[SA]3-317",
-        type: "Room",
-        position: [230.39, 155.7],
-      },
-      {
-        name: "[SA]3-F7",
-        type: "Room",
-        position: [263.96, 233.21],
-      },
-      {
-        name: "[SA]3-H7",
-        type: "Room",
-        position: [340.49, 233.21],
-      },
-      {
-        name: "[SA]3-H8",
-        type: "Room",
-        position: [340.49, 194.94],
-      },
-      {
-        name: "[SA]3-H5",
-        type: "Room",
-        position: [340.49, 309.74],
-      },
-      {
-        name: "[SA]3-I7",
-        type: "Room",
-        position: [378.8, 233.21],
-      },
-      {
-        name: "[SA]3-I8",
-        type: "Room",
-        position: [378.8, 194.94],
-      },
-      {
-        name: "[SA]3-I5",
-        type: "Room",
-        position: [378.8, 309.74],
-      },
-      {
-        name: "[SA]3-J7",
-        type: "Room",
-        position: [417.04, 233.21],
-      },
-      {
-        name: "[SA]3-J5",
-        type: "Room",
-        position: [417.04, 309.74],
-      },
-      {
-        name: "[SA]3-L6",
-        type: "Room",
-        position: [493.57, 271.47],
-      },
-      {
-        name: "302",
-        type: "Room",
-        position: [391.48, 248.45],
-      },
-      {
-        name: "303",
-        type: "Room",
-        position: [392.01, 294.12],
-      },
-      {
-        name: "FPS-3",
-        type: "Room",
-        position: [292.07, 290.26],
-      },
-    ],
-  },
-  {
-    name: "Roof",
-    svg: "./Library-4.svg",
-    svgScale: 0.01,
-    position: [0.2, -0.25],
-    extrudedSections: [],
-    floorLayer: "",
-    extrudeDepth: 0,
-    locations: [],
-  },
+  // {
+  //   name: "Floor 1",
+  //   svg: "./Library-1.svg",
+  //   svgScale: 0.01,
+  //   position: [0.15, -0.05],
+  //   extrudedSections: ["A-WALL-FULL"],
+  //   floorLayer: "A-FLOOR-OUTLINE",
+  //   extrudeDepth: 30,
+  //   locations: [
+  //     {
+  //       name: "101A",
+  //       type: "Room",
+  //       position: [352.49, 225.03],
+  //     },
+  //     {
+  //       name: "111B",
+  //       type: "Room",
+  //       position: [496.54, 271.4],
+  //     },
+  //     {
+  //       name: "111H",
+  //       type: "Room",
+  //       position: [549.66, 287.6],
+  //     },
+  //     {
+  //       name: "111G",
+  //       type: "Room",
+  //       position: [545.64, 228.35],
+  //     },
+  //     {
+  //       name: "111F",
+  //       type: "Room",
+  //       position: [499.23, 171.64],
+  //     },
+  //     {
+  //       name: "111K",
+  //       type: "Room",
+  //       position: [540.15, 174.39],
+  //     },
+  //     {
+  //       name: "111E",
+  //       type: "Room",
+  //       position: [505.07, 201.68],
+  //     },
+  //     {
+  //       name: "111J",
+  //       type: "Room",
+  //       position: [495.09, 221.98],
+  //     },
+  //     {
+  //       name: "110",
+  //       type: "Room",
+  //       position: [431.83, 278.75],
+  //     },
+  //     {
+  //       name: "111A",
+  //       type: "Room",
+  //       position: [469.75, 221.2],
+  //     },
+  //     {
+  //       name: "111C",
+  //       type: "Room",
+  //       position: [455.27, 202.88],
+  //     },
+  //     {
+  //       name: "111D",
+  //       type: "Room",
+  //       position: [475, 202.88],
+  //     },
+  //     {
+  //       name: "111I",
+  //       type: "Room",
+  //       position: [467.86, 271.86],
+  //     },
+  //     {
+  //       name: "110C",
+  //       type: "Room",
+  //       position: [440.39, 214.15],
+  //     },
+  //     {
+  //       name: "110B",
+  //       type: "Room",
+  //       position: [441.11, 231.28],
+  //     },
+  //     {
+  //       name: "110A",
+  //       type: "Room",
+  //       position: [421.21, 225.16],
+  //     },
+  //     {
+  //       name: "T-1A",
+  //       type: "Room",
+  //       position: [227.08, 240.02],
+  //     },
+  //     {
+  //       name: "122",
+  //       type: "Room",
+  //       position: [104.03, 292.2],
+  //     },
+  //     {
+  //       name: "121",
+  //       type: "Room",
+  //       position: [181.67, 326.55],
+  //     },
+  //     {
+  //       name: "115",
+  //       type: "Room",
+  //       position: [236.01, 148.21],
+  //     },
+  //     {
+  //       name: "117",
+  //       type: "Room",
+  //       position: [240.55, 110.23],
+  //     },
+  //     {
+  //       name: "118",
+  //       type: "Room",
+  //       position: [241, 88.43],
+  //     },
+  //     {
+  //       name: "116",
+  //       type: "Room",
+  //       position: [238.59, 130.67],
+  //     },
+  //     {
+  //       name: "112",
+  //       type: "Room",
+  //       position: [276.16, 185.18],
+  //     },
+  //     {
+  //       name: "112A",
+  //       type: "Room",
+  //       position: [283.37, 166.41],
+  //     },
+  //     {
+  //       name: "113",
+  //       type: "Room",
+  //       position: [267.47, 166.41],
+  //     },
+  //     {
+  //       name: "114",
+  //       type: "Room",
+  //       position: [264.16, 138.89],
+  //     },
+  //     {
+  //       name: "101B",
+  //       type: "Room",
+  //       position: [256.98, 140.65],
+  //     },
+  //     {
+  //       name: "120",
+  //       type: "Room",
+  //       position: [248.83, 318.38],
+  //     },
+  //     {
+  //       name: "C-1A",
+  //       type: "Room",
+  //       position: [228.18, 282.11],
+  //     },
+  //     {
+  //       name: "E-1",
+  //       type: "Room",
+  //       position: [228.11, 272.82],
+  //     },
+  //     {
+  //       name: "C-1B",
+  //       type: "Room",
+  //       position: [409.44, 354.09],
+  //     },
+  //     {
+  //       name: "109A",
+  //       type: "Room",
+  //       position: [493.26, 338.85],
+  //     },
+  //     {
+  //       name: "106",
+  //       type: "Room",
+  //       position: [440.77, 339.77],
+  //     },
+  //     {
+  //       name: "106B",
+  //       type: "Room",
+  //       position: [439.5, 362.25],
+  //     },
+  //     {
+  //       name: "106C",
+  //       type: "Room",
+  //       position: [446.02, 385.65],
+  //     },
+  //     {
+  //       name: "109B",
+  //       type: "Room",
+  //       position: [493.97, 358.5],
+  //     },
+  //     {
+  //       name: "109",
+  //       type: "Room",
+  //       position: [550.47, 366.03],
+  //     },
+  //     {
+  //       name: "107",
+  //       type: "Room",
+  //       position: [462.63, 339.17],
+  //     },
+  //     {
+  //       name: "108A",
+  //       type: "Room",
+  //       position: [458.54, 367.96],
+  //     },
+  //     {
+  //       name: "108",
+  //       type: "Room",
+  //       position: [477.64, 363.92],
+  //     },
+  //     {
+  //       name: "101",
+  //       type: "Room",
+  //       position: [130.34, 174.95],
+  //     },
+  //     {
+  //       name: "102",
+  //       type: "Room",
+  //       position: [336.37, 290.47],
+  //     },
+  //     {
+  //       name: "111",
+  //       type: "Room",
+  //       position: [505.75, 240.97],
+  //     },
+  //     {
+  //       name: "E-1B",
+  //       type: "Room",
+  //       position: [455.91, 223.83],
+  //     },
+  //     {
+  //       name: "104",
+  //       type: "Room",
+  //       position: [381.4, 385.43],
+  //     },
+  //     {
+  //       name: "S-1C",
+  //       type: "Room",
+  //       position: [93.43, 74.17],
+  //     },
+  //     {
+  //       name: "S-1B",
+  //       type: "Room",
+  //       position: [56.69, 316.25],
+  //     },
+  //     {
+  //       name: "S-1E",
+  //       type: "Room",
+  //       position: [522.61, 358.35],
+  //     },
+  //     {
+  //       name: "S-1D",
+  //       type: "Room",
+  //       position: [428.47, 192.66],
+  //     },
+  //     {
+  //       name: "S-1A",
+  //       type: "Room",
+  //       position: [272.29, 266.92],
+  //     },
+  //     {
+  //       name: "[BG]100",
+  //       type: "Room",
+  //       position: [57.79, 347.73],
+  //     },
+  //     {
+  //       name: "[CG]100",
+  //       type: "Room",
+  //       position: [71.11, 349.31],
+  //     },
+  //     {
+  //       name: "[CG]101",
+  //       type: "Room",
+  //       position: [188.87, 377],
+  //     },
+  //     {
+  //       name: "[CG]102",
+  //       type: "Room",
+  //       position: [242.57, 408.18],
+  //     },
+  //     {
+  //       name: "[CG]103",
+  //       type: "Room",
+  //       position: [457.29, 186.73],
+  //     },
+  //     {
+  //       name: "EL-1A",
+  //       type: "Room",
+  //       position: [226.86, 256.67],
+  //     },
+  //     {
+  //       name: "[XX]101",
+  //       type: "Room",
+  //       position: [434.93, 331.67],
+  //     },
+  //     {
+  //       name: "EL-1B",
+  //       type: "Room",
+  //       position: [528.83, 301.18],
+  //     },
+  //     {
+  //       name: "M-1A",
+  //       type: "Room",
+  //       position: [228.14, 366.85],
+  //     },
+  //     {
+  //       name: "RR-M-1",
+  //       type: "Room",
+  //       position: [419.6, 374.59],
+  //     },
+  //     {
+  //       name: "RR-W-1",
+  //       type: "Room",
+  //       position: [394.16, 374.59],
+  //     },
+  //     {
+  //       name: "101C",
+  //       type: "Room",
+  //       position: [398.73, 222.09],
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: "Floor 2",
+  //   svg: "./Library-2.svg",
+  //   svgScale: 0.01,
+  //   position: [0.21, 0],
+  //   extrudedSections: ["A-WALL-FULL"],
+  //   floorLayer: "A-FLOOR-OUTLINE",
+  //   extrudeDepth: 30,
+  //   locations: [
+  //     {
+  //       name: "T-2B",
+  //       type: "Room",
+  //       position: [227.04, 240.89],
+  //     },
+  //     {
+  //       name: "204",
+  //       type: "Room",
+  //       position: [487.58, 319.83],
+  //     },
+  //     {
+  //       name: "203",
+  //       type: "Room",
+  //       position: [482.01, 338.73],
+  //     },
+  //     {
+  //       name: "208",
+  //       type: "Room",
+  //       position: [276.81, 139.04],
+  //     },
+  //     {
+  //       name: "206",
+  //       type: "Room",
+  //       position: [275.73, 187.74],
+  //     },
+  //     {
+  //       name: "207",
+  //       type: "Room",
+  //       position: [275.57, 169.99],
+  //     },
+  //     {
+  //       name: "205",
+  //       type: "Room",
+  //       position: [425.08, 219.18],
+  //     },
+  //     {
+  //       name: "C-2A",
+  //       type: "Room",
+  //       position: [227.23, 322.4],
+  //     },
+  //     {
+  //       name: "205B",
+  //       type: "Room",
+  //       position: [455.74, 207.7],
+  //     },
+  //     {
+  //       name: "209",
+  //       type: "Room",
+  //       position: [271.12, 375.57],
+  //     },
+  //     {
+  //       name: "E-2A",
+  //       type: "Room",
+  //       position: [227.75, 271.88],
+  //     },
+  //     {
+  //       name: "EL-2A",
+  //       type: "Room",
+  //       position: [226.71, 256.96],
+  //     },
+  //     {
+  //       name: "S-2C",
+  //       type: "Room",
+  //       position: [81.4, 70.2],
+  //     },
+  //     {
+  //       name: "S-2B",
+  //       type: "Room",
+  //       position: [58.37, 316.06],
+  //     },
+  //     {
+  //       name: "S-2E",
+  //       type: "Room",
+  //       position: [522.75, 357.02],
+  //     },
+  //     {
+  //       name: "S-2D",
+  //       type: "Room",
+  //       position: [428.29, 193.78],
+  //     },
+  //     {
+  //       name: "S-2A",
+  //       type: "Room",
+  //       position: [278.85, 278.92],
+  //     },
+  //     {
+  //       name: "L-2",
+  //       type: "Room",
+  //       position: [247.92, 278.25],
+  //     },
+  //     {
+  //       name: "T-2A",
+  //       type: "Room",
+  //       position: [229.48, 282.04],
+  //     },
+  //     {
+  //       name: "M-2A",
+  //       type: "Room",
+  //       position: [455.83, 225.63],
+  //     },
+  //     {
+  //       name: "[XX]201",
+  //       type: "Room",
+  //       position: [284.11, 265.34],
+  //     },
+  //     {
+  //       name: "[SA]202",
+  //       type: "Room",
+  //       position: [520.44, 309.89],
+  //     },
+  //     {
+  //       name: "[BG]200",
+  //       type: "Room",
+  //       position: [226.03, 353.69],
+  //     },
+  //     {
+  //       name: "EL-2B",
+  //       type: "Room",
+  //       position: [529.11, 301.18],
+  //     },
+  //     {
+  //       name: "RR-M-2",
+  //       type: "Room",
+  //       position: [241.22, 307.84],
+  //     },
+  //     {
+  //       name: "RR-2",
+  //       type: "Room",
+  //       position: [250.11, 328.32],
+  //     },
+  //     {
+  //       name: "FPS-2",
+  //       type: "Room",
+  //       position: [292.21, 290.26],
+  //     },
+  //     {
+  //       name: "[SA]2-B10",
+  //       type: "Room",
+  //       position: [110.96, 118.4],
+  //     },
+  //     {
+  //       name: "[SA]2-C10",
+  //       type: "Room",
+  //       position: [149.23, 118.4],
+  //     },
+  //     {
+  //       name: "[SA]2-D10",
+  //       type: "Room",
+  //       position: [187.49, 118.4],
+  //     },
+  //     {
+  //       name: "[SA]2-E10",
+  //       type: "Room",
+  //       position: [225.77, 118.4],
+  //     },
+  //     {
+  //       name: "[SA]2-B9",
+  //       type: "Room",
+  //       position: [111.03, 156.67],
+  //     },
+  //     {
+  //       name: "[SA]2-C9",
+  //       type: "Room",
+  //       position: [149.3, 156.67],
+  //     },
+  //     {
+  //       name: "[SA]2-D9",
+  //       type: "Room",
+  //       position: [187.56, 156.67],
+  //     },
+  //     {
+  //       name: "[SA]2-E9",
+  //       type: "Room",
+  //       position: [225.84, 156.67],
+  //     },
+  //     {
+  //       name: "[SA]2-B8",
+  //       type: "Room",
+  //       position: [111.03, 194.94],
+  //     },
+  //     {
+  //       name: "[SA]2-C8",
+  //       type: "Room",
+  //       position: [149.29, 194.94],
+  //     },
+  //     {
+  //       name: "[SA]2-D8",
+  //       type: "Room",
+  //       position: [187.56, 194.94],
+  //     },
+  //     {
+  //       name: "[SA]2-E8",
+  //       type: "Room",
+  //       position: [225.84, 194.94],
+  //     },
+  //     {
+  //       name: "[SA]2-H8",
+  //       type: "Room",
+  //       position: [340.63, 194.94],
+  //     },
+  //     {
+  //       name: "[SA]2-I8",
+  //       type: "Room",
+  //       position: [378.94, 194.94],
+  //     },
+  //     {
+  //       name: "[SA]2-B7",
+  //       type: "Room",
+  //       position: [111.03, 233.21],
+  //     },
+  //     {
+  //       name: "[SA]2-C7",
+  //       type: "Room",
+  //       position: [149.29, 233.21],
+  //     },
+  //     {
+  //       name: "[SA]2-D7",
+  //       type: "Room",
+  //       position: [187.56, 233.21],
+  //     },
+  //     {
+  //       name: "[SA]2-F7",
+  //       type: "Room",
+  //       position: [264.11, 233.21],
+  //     },
+  //     {
+  //       name: "[SA]2-H7",
+  //       type: "Room",
+  //       position: [340.63, 233.21],
+  //     },
+  //     {
+  //       name: "[SA]2-I7",
+  //       type: "Room",
+  //       position: [378.94, 233.21],
+  //     },
+  //     {
+  //       name: "[SA]2-L8",
+  //       type: "Room",
+  //       position: [493.72, 194.94],
+  //     },
+  //     {
+  //       name: "[SA]2-L7",
+  //       type: "Room",
+  //       position: [493.72, 233.21],
+  //     },
+  //     {
+  //       name: "[SA]2-B6",
+  //       type: "Room",
+  //       position: [111.03, 271.47],
+  //     },
+  //     {
+  //       name: "[SA]2-C6",
+  //       type: "Room",
+  //       position: [149.29, 271.47],
+  //     },
+  //     {
+  //       name: "[SA]2-D6",
+  //       type: "Room",
+  //       position: [187.56, 271.47],
+  //     },
+  //     {
+  //       name: "[SA]2-L6",
+  //       type: "Room",
+  //       position: [493.72, 271.47],
+  //     },
+  //     {
+  //       name: "[SA]2-H6",
+  //       type: "Room",
+  //       position: [340.63, 271.47],
+  //     },
+  //     {
+  //       name: "[SA]2-I6",
+  //       type: "Room",
+  //       position: [378.94, 271.47],
+  //     },
+  //     {
+  //       name: "[SA]2-J6",
+  //       type: "Room",
+  //       position: [417.18, 271.47],
+  //     },
+  //     {
+  //       name: "[SA]2-K6",
+  //       type: "Room",
+  //       position: [455.43, 271.47],
+  //     },
+  //     {
+  //       name: "[SA]2-B5",
+  //       type: "Room",
+  //       position: [111.03, 309.74],
+  //     },
+  //     {
+  //       name: "[SA]2-C5",
+  //       type: "Room",
+  //       position: [149.29, 309.74],
+  //     },
+  //     {
+  //       name: "[SA]2-D5",
+  //       type: "Room",
+  //       position: [187.56, 309.74],
+  //     },
+  //     {
+  //       name: "[SA]2-H5",
+  //       type: "Room",
+  //       position: [340.63, 309.74],
+  //     },
+  //     {
+  //       name: "[SA]2-I5",
+  //       type: "Room",
+  //       position: [378.94, 309.74],
+  //     },
+  //     {
+  //       name: "[SA]2-J5",
+  //       type: "Room",
+  //       position: [417.18, 309.74],
+  //     },
+  //     {
+  //       name: "[SA]2-H4",
+  //       type: "Room",
+  //       position: [340.62, 348.01],
+  //     },
+  //     {
+  //       name: "[SA]2-I4",
+  //       type: "Room",
+  //       position: [378.94, 348.01],
+  //     },
+  //     {
+  //       name: "[SA]2-J4",
+  //       type: "Room",
+  //       position: [417.18, 348.01],
+  //     },
+  //     {
+  //       name: "[SA]2-G7",
+  //       type: "Room",
+  //       position: [302.36, 233.21],
+  //     },
+  //     {
+  //       name: "210",
+  //       type: "Room",
+  //       position: [552.92, 178.15],
+  //     },
+  //     {
+  //       name: "201",
+  //       type: "Room",
+  //       position: [248.59, 216.99],
+  //     },
+  //     {
+  //       name: "[SA]2-M6",
+  //       type: "Room",
+  //       position: [531.96, 271.47],
+  //     },
+  //     {
+  //       name: "202",
+  //       type: "Room",
+  //       position: [392.55, 254.48],
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: "Floor 3",
+  //   svg: "./Library-3.svg",
+  //   svgScale: 0.01,
+  //   position: [-0.05, 0.17],
+  //   extrudedSections: ["A-WALL-FULL"],
+  //   floorLayer: "A-FLOOR-OUTLINE",
+  //   extrudeDepth: 30,
+  //   locations: [
+  //     {
+  //       name: "S-3C",
+  //       type: "Room",
+  //       position: [82.15, 78.27],
+  //     },
+  //     {
+  //       name: "S-3B",
+  //       type: "Room",
+  //       position: [60.25, 316.06],
+  //     },
+  //     {
+  //       name: "S-3E",
+  //       type: "Room",
+  //       position: [522.61, 357.3],
+  //     },
+  //     {
+  //       name: "S-3D",
+  //       type: "Room",
+  //       position: [428.05, 194.66],
+  //     },
+  //     {
+  //       name: "S-3A",
+  //       type: "Room",
+  //       position: [278.71, 278.92],
+  //     },
+  //     {
+  //       name: "EL-3A",
+  //       type: "Room",
+  //       position: [226.71, 256.67],
+  //     },
+  //     {
+  //       name: "L-3",
+  //       type: "Room",
+  //       position: [247.66, 267.11],
+  //     },
+  //     {
+  //       name: "301",
+  //       type: "Room",
+  //       position: [276.06, 234.93],
+  //     },
+  //     {
+  //       name: "314",
+  //       type: "Room",
+  //       position: [276.43, 128.87],
+  //     },
+  //     {
+  //       name: "312",
+  //       type: "Room",
+  //       position: [276.83, 168.16],
+  //     },
+  //     {
+  //       name: "313",
+  //       type: "Room",
+  //       position: [276.83, 148.35],
+  //     },
+  //     {
+  //       name: "315A",
+  //       type: "Room",
+  //       position: [246.52, 94.78],
+  //     },
+  //     {
+  //       name: "315B",
+  //       type: "Room",
+  //       position: [227.36, 94.78],
+  //     },
+  //     {
+  //       name: "311",
+  //       type: "Room",
+  //       position: [277.26, 187.83],
+  //     },
+  //     {
+  //       name: "310",
+  //       type: "Room",
+  //       position: [276.09, 208.8],
+  //     },
+  //     {
+  //       name: "C-3B",
+  //       type: "Room",
+  //       position: [495.88, 309.31],
+  //     },
+  //     {
+  //       name: "306",
+  //       type: "Room",
+  //       position: [493.35, 294.66],
+  //     },
+  //     {
+  //       name: "307",
+  //       type: "Room",
+  //       position: [468.21, 296.85],
+  //     },
+  //     {
+  //       name: "305",
+  //       type: "Room",
+  //       position: [488.71, 322.57],
+  //     },
+  //     {
+  //       name: "304",
+  //       type: "Room",
+  //       position: [460.51, 324.18],
+  //     },
+  //     {
+  //       name: "309",
+  //       type: "Room",
+  //       position: [438.63, 221.52],
+  //     },
+  //     {
+  //       name: "308",
+  //       type: "Room",
+  //       position: [488, 220.47],
+  //     },
+  //     {
+  //       name: "E-3A",
+  //       type: "Room",
+  //       position: [228.13, 271.76],
+  //     },
+  //     {
+  //       name: "T-3B",
+  //       type: "Room",
+  //       position: [226.73, 240.53],
+  //     },
+  //     {
+  //       name: "C-3A",
+  //       type: "Room",
+  //       position: [227.04, 322.01],
+  //     },
+  //     {
+  //       name: "T-3A",
+  //       type: "Room",
+  //       position: [229.34, 282.18],
+  //     },
+  //     {
+  //       name: "301B",
+  //       type: "Room",
+  //       position: [78.29, 356.81],
+  //     },
+  //     {
+  //       name: "301A",
+  //       type: "Room",
+  //       position: [244.34, 74.71],
+  //     },
+  //     {
+  //       name: "301C",
+  //       type: "Room",
+  //       position: [61.53, 252.98],
+  //     },
+  //     {
+  //       name: "301D",
+  //       type: "Room",
+  //       position: [61.54, 94.27],
+  //     },
+  //     {
+  //       name: "301E",
+  //       type: "Room",
+  //       position: [161.13, 75.7],
+  //     },
+  //     {
+  //       name: "[XX]301",
+  //       type: "Room",
+  //       position: [283.97, 265.24],
+  //     },
+  //     {
+  //       name: "H-3",
+  //       type: "Room",
+  //       position: [474.2, 346.4],
+  //     },
+  //     {
+  //       name: "[BG]300",
+  //       type: "Room",
+  //       position: [59.99, 67.05],
+  //     },
+  //     {
+  //       name: "EL-3B",
+  //       type: "Room",
+  //       position: [528.83, 300.89],
+  //     },
+  //     {
+  //       name: "RR-M-3",
+  //       type: "Room",
+  //       position: [243.86, 304.47],
+  //     },
+  //     {
+  //       name: "RR-W-3",
+  //       type: "Room",
+  //       position: [243.86, 325.2],
+  //     },
+  //     {
+  //       name: "M-3A",
+  //       type: "Room",
+  //       position: [455.1, 224.78],
+  //     },
+  //     {
+  //       name: "315",
+  //       type: "Room",
+  //       position: [239.26, 113.03],
+  //     },
+  //     {
+  //       name: "316",
+  //       type: "Room",
+  //       position: [200.92, 109.08],
+  //     },
+  //     {
+  //       name: "317",
+  //       type: "Room",
+  //       position: [201.49, 199.57],
+  //     },
+  //     {
+  //       name: "[SA]3-B10",
+  //       type: "Room",
+  //       position: [110.82, 118.4],
+  //     },
+  //     {
+  //       name: "[SA]3-B9",
+  //       type: "Room",
+  //       position: [110.89, 156.67],
+  //     },
+  //     {
+  //       name: "[SA]3-B8",
+  //       type: "Room",
+  //       position: [110.88, 194.94],
+  //     },
+  //     {
+  //       name: "[SA]3-B7",
+  //       type: "Room",
+  //       position: [110.88, 233.21],
+  //     },
+  //     {
+  //       name: "[SA]3-B6",
+  //       type: "Room",
+  //       position: [110.88, 271.47],
+  //     },
+  //     {
+  //       name: "[SA]3-B5",
+  //       type: "Room",
+  //       position: [110.88, 309.74],
+  //     },
+  //     {
+  //       name: "[SA]3-A9",
+  //       type: "Room",
+  //       position: [72.63, 156.67],
+  //     },
+  //     {
+  //       name: "[SA]3-A8",
+  //       type: "Room",
+  //       position: [72.63, 194.94],
+  //     },
+  //     {
+  //       name: "[SA]3-C10",
+  //       type: "Room",
+  //       position: [149.08, 118.4],
+  //     },
+  //     {
+  //       name: "[SA]3-C9",
+  //       type: "Room",
+  //       position: [149.15, 156.67],
+  //     },
+  //     {
+  //       name: "[SA]3-C8",
+  //       type: "Room",
+  //       position: [149.15, 194.94],
+  //     },
+  //     {
+  //       name: "[SA]3-C7",
+  //       type: "Room",
+  //       position: [149.15, 233.21],
+  //     },
+  //     {
+  //       name: "[SA]3-C6",
+  //       type: "Room",
+  //       position: [149.15, 271.47],
+  //     },
+  //     {
+  //       name: "[SA]3-C5",
+  //       type: "Room",
+  //       position: [149.15, 309.74],
+  //     },
+  //     {
+  //       name: "[SA]3-C4",
+  //       type: "Room",
+  //       position: [149.15, 348.01],
+  //     },
+  //     {
+  //       name: "[SA]3-D7",
+  //       type: "Room",
+  //       position: [187.42, 233.21],
+  //     },
+  //     {
+  //       name: "[SA]3-D6",
+  //       type: "Room",
+  //       position: [187.42, 271.47],
+  //     },
+  //     {
+  //       name: "[SA]3-D5",
+  //       type: "Room",
+  //       position: [187.42, 309.74],
+  //     },
+  //     {
+  //       name: "[SA]3-D4",
+  //       type: "Room",
+  //       position: [187.42, 348.01],
+  //     },
+  //     {
+  //       name: "[SA]3-317",
+  //       type: "Room",
+  //       position: [230.39, 155.7],
+  //     },
+  //     {
+  //       name: "[SA]3-F7",
+  //       type: "Room",
+  //       position: [263.96, 233.21],
+  //     },
+  //     {
+  //       name: "[SA]3-H7",
+  //       type: "Room",
+  //       position: [340.49, 233.21],
+  //     },
+  //     {
+  //       name: "[SA]3-H8",
+  //       type: "Room",
+  //       position: [340.49, 194.94],
+  //     },
+  //     {
+  //       name: "[SA]3-H5",
+  //       type: "Room",
+  //       position: [340.49, 309.74],
+  //     },
+  //     {
+  //       name: "[SA]3-I7",
+  //       type: "Room",
+  //       position: [378.8, 233.21],
+  //     },
+  //     {
+  //       name: "[SA]3-I8",
+  //       type: "Room",
+  //       position: [378.8, 194.94],
+  //     },
+  //     {
+  //       name: "[SA]3-I5",
+  //       type: "Room",
+  //       position: [378.8, 309.74],
+  //     },
+  //     {
+  //       name: "[SA]3-J7",
+  //       type: "Room",
+  //       position: [417.04, 233.21],
+  //     },
+  //     {
+  //       name: "[SA]3-J5",
+  //       type: "Room",
+  //       position: [417.04, 309.74],
+  //     },
+  //     {
+  //       name: "[SA]3-L6",
+  //       type: "Room",
+  //       position: [493.57, 271.47],
+  //     },
+  //     {
+  //       name: "302",
+  //       type: "Room",
+  //       position: [391.48, 248.45],
+  //     },
+  //     {
+  //       name: "303",
+  //       type: "Room",
+  //       position: [392.01, 294.12],
+  //     },
+  //     {
+  //       name: "FPS-3",
+  //       type: "Room",
+  //       position: [292.07, 290.26],
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: "Roof",
+  //   svg: "./Library-4.svg",
+  //   svgScale: 0.01,
+  //   position: [0.2, -0.25],
+  //   extrudedSections: [],
+  //   floorLayer: "",
+  //   extrudeDepth: 0,
+  //   locations: [],
+  // },
 ];
 
 // Initialize canvas and renderer, enable antialiasing
@@ -1694,11 +1695,22 @@ scene.add(directionalLight);
 const ambientLight = new THREE.AmbientLight(0xcfe2e3);
 scene.add(ambientLight);
 
-// Example cube
-// const cubeMaterial = new THREE.MeshPhongMaterial();
-// const cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
-// const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
-// scene.add(cube);
+// let pointMaterial = new THREE.PointsMaterial({
+//   size: 0.1,
+//   map: createCanvasCircleMaterial(0x000000, 256),
+//   transparent: true,
+//   depthWrite: false,
+// });
+
+// const dotGeometry = new THREE.BufferGeometry();
+// dotGeometry.setAttribute(
+//   "position",
+//   new THREE.BufferAttribute(new Float32Array([0, 0, 0]), 3)
+// );
+
+// let point = new THREE.Points(dotGeometry, pointMaterial);
+
+// scene.add(point);
 
 // Load floors
 loadFloors(floorProperties)
@@ -1778,8 +1790,8 @@ function loadFloors(floorProperties) {
                   // Add geometry to extruded geometries paths array
                   geometries.extruded[id].pathGeometries.push(pathGeometry);
                 } else if (
-                  floorProperty.floorLayer.length > 0 &&
-                  floorProperty.floorLayer == id
+                  floorProperty.floorLayer.layer.length > 0 &&
+                  floorProperty.floorLayer.layer == id
                 ) {
                   // Add floor geometry to array
                   geometries.floorGeometries.push(pathGeometry);
@@ -1908,7 +1920,10 @@ function loadFloors(floorProperties) {
 
           floorGroup.add(otherPathMesh);
 
-          if (geometries.floorGeometries.length > 0) {
+          if (
+            geometries.floorGeometries.length > 0 &&
+            floorProperty.floorLayer.enabled
+          ) {
             // Merge array of floor geometries
             const floorGeometry = BufferGeometryUtils.mergeGeometries(
               geometries.floorGeometries
@@ -1927,6 +1942,43 @@ function loadFloors(floorProperties) {
 
             floorGroup.add(upperFloorMesh);
           }
+
+          // Group for location meshes
+          let locationGroup = new THREE.Group();
+
+          // Draw points at each location
+          let pointMaterial = new THREE.PointsMaterial({
+            // Material for points
+            size: 0.05,
+            map: createCanvasCircleMaterial(0x000000, 256),
+            transparent: true,
+            depthWrite: false,
+          });
+
+          floorProperty.locations.forEach((location) => {
+            // Point geometry
+            const dotGeometry = new THREE.BufferGeometry();
+
+            // Position point based off of location position in floorProperties
+            dotGeometry.setAttribute(
+              "position",
+              new THREE.BufferAttribute(
+                new Float32Array([
+                  location.position[0] * floorProperty.svgScale,
+                  location.position[1] * -1 * floorProperty.svgScale,
+                  0,
+                ]),
+                3
+              )
+            );
+
+            let point = new THREE.Points(dotGeometry, pointMaterial);
+
+            locationGroup.add(point);
+          });
+
+          // Add location group to floorGroup
+          floorGroup.add(locationGroup);
 
           floorGroup.rotateX(-Math.PI / 2); // Rotate group so it is horizontal
 
@@ -1972,6 +2024,25 @@ function loadFloors(floorProperties) {
     });
   });
   // return floorGroups;
+}
+
+function createCanvasCircleMaterial(color, size) {
+  var matCanvas = document.createElement("canvas");
+  matCanvas.width = matCanvas.height = size;
+  var matContext = matCanvas.getContext("2d");
+  // Create texture object from canvas.
+  var texture = new THREE.Texture(matCanvas);
+  // Draw a circle
+  var center = size / 2;
+  matContext.beginPath();
+  matContext.arc(center, center, size / 2, 0, 2 * Math.PI, false);
+  matContext.closePath();
+  matContext.fillStyle = color;
+  matContext.fill();
+  // Need to set needsUpdate
+  texture.needsUpdate = true;
+  // Return a texture made from the canvas
+  return texture;
 }
 
 // Sort floors by name so they are in the correct order in UI
