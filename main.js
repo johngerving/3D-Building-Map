@@ -2,6 +2,10 @@ import * as THREE from "three";
 import { SVGLoader } from "three/addons/loaders/SVGLoader.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import * as BufferGeometryUtils from "three/addons/utils/BufferGeometryUtils.js";
+import {
+  CSS2DRenderer,
+  CSS2DObject,
+} from "three/addons/renderers/CSS2DRenderer.js";
 
 // Floor properties - defines name of floor, location of svg, which sections are extruded, and the locations on the floor
 const floorProperties = [
@@ -1656,6 +1660,13 @@ const floorProperties = [
 const canvas = document.querySelector("#c");
 const renderer = new THREE.WebGLRenderer({ antialias: true, canvas });
 
+// Create label renderer for location labels
+const labelRenderer = new CSS2DRenderer();
+labelRenderer.setSize(window.innerWidth, window.innerHeight);
+labelRenderer.domElement.style.position = "absolute";
+labelRenderer.domElement.style.top = "0px";
+document.body.appendChild(labelRenderer.domElement);
+
 // Define camera and its properties
 const fov = 75;
 const aspect = 2;
@@ -1674,7 +1685,7 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xcfe2e3);
 
 // Define orbit controls - render scene whenever camera moves
-const controls = new OrbitControls(camera, renderer.domElement);
+const controls = new OrbitControls(camera, labelRenderer.domElement);
 controls.addEventListener("change", render);
 controls.screenSpacePanning = true;
 
@@ -1695,23 +1706,6 @@ scene.add(directionalLight);
 const ambientLight = new THREE.AmbientLight(0xcfe2e3);
 scene.add(ambientLight);
 
-// let pointMaterial = new THREE.PointsMaterial({
-//   size: 0.1,
-//   map: createCanvasCircleMaterial(0x000000, 256),
-//   transparent: true,
-//   depthWrite: false,
-// });
-
-// const dotGeometry = new THREE.BufferGeometry();
-// dotGeometry.setAttribute(
-//   "position",
-//   new THREE.BufferAttribute(new Float32Array([0, 0, 0]), 3)
-// );
-
-// let point = new THREE.Points(dotGeometry, pointMaterial);
-
-// scene.add(point);
-
 // Load floors
 loadFloors(floorProperties)
   .then((floorGroups) => sortFloorsByName(floorGroups)) // Sort floors so they aren't out of order in the UI
@@ -1721,12 +1715,16 @@ loadFloors(floorProperties)
 
 function render() {
   // Check if window has been resized and update camera accordingly
-  if (resizeRendererToDisplaySize(renderer)) {
+  if (
+    resizeRendererToDisplaySize(renderer) ||
+    resizeRendererToDisplaySize(labelRenderer)
+  ) {
     camera.aspect = canvas.clientWidth / canvas.clientHeight;
     camera.updateProjectionMatrix();
   }
 
   renderer.render(scene, camera); // Render scene
+  labelRenderer.render(scene, camera); // Render labels
 }
 
 function resizeRendererToDisplaySize(renderer) {
@@ -1956,25 +1954,40 @@ function loadFloors(floorProperties) {
           });
 
           floorProperty.locations.forEach((location) => {
-            // Point geometry
-            const dotGeometry = new THREE.BufferGeometry();
+            // // Point geometry
+            // const dotGeometry = new THREE.BufferGeometry();
 
-            // Position point based off of location position in floorProperties
-            dotGeometry.setAttribute(
-              "position",
-              new THREE.BufferAttribute(
-                new Float32Array([
-                  location.position[0] * floorProperty.svgScale,
-                  location.position[1] * -1 * floorProperty.svgScale,
-                  0,
-                ]),
-                3
-              )
+            // // Position point based off of location position in floorProperties
+            // dotGeometry.setAttribute(
+            //   "position",
+            //   new THREE.BufferAttribute(
+            //     new Float32Array([
+            //       location.position[0] * floorProperty.svgScale,
+            //       location.position[1] * -1 * floorProperty.svgScale,
+            //       0,
+            //     ]),
+            //     3
+            //   )
+            // );
+
+            // let point = new THREE.Points(dotGeometry, pointMaterial);
+
+            // locationGroup.add(point);
+
+            const labelDiv = document.createElement("div");
+            labelDiv.className = "label";
+            labelDiv.textContent = location.name;
+            labelDiv.style.backgroundColor = "transparent";
+
+            const label = new CSS2DObject(labelDiv);
+            label.position.set(
+              location.position[0] * floorProperty.svgScale,
+              location.position[1] * -1 * floorProperty.svgScale,
+              0
             );
-
-            let point = new THREE.Points(dotGeometry, pointMaterial);
-
-            locationGroup.add(point);
+            // label.center.set(0, 1);
+            locationGroup.add(label);
+            label.layers.set(0);
           });
 
           // Add location group to floorGroup
@@ -2023,7 +2036,6 @@ function loadFloors(floorProperties) {
       );
     });
   });
-  // return floorGroups;
 }
 
 function createCanvasCircleMaterial(color, size) {
