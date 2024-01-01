@@ -12,562 +12,562 @@ const floorProperties = [
   {
     name: "Basement",
     svg: "./Library-B.svg",
-    svgScale: 0.01,
+    svgScale: 0.04,
     position: [0, 0],
-    extrudedSections: [], //["A-WALL-FULL"],
+    extrudedSections: ["A-WALL-FULL"], //["A-WALL-FULL"],
     floorLayer: { layer: "A-FLOOR-OUTLINE", enabled: false },
-    excludedSections: ["A-FLOOR-OUTLINE"],
-    extrudeDepth: 30,
+    excludedSections: [],
+    extrudeDepth: 0,
     locations: [
       {
         name: "19A",
         type: "Room",
-        position: [431.09, 239.46],
+        position: [100.19, 55.62],
       },
       {
         name: "40",
         type: "Room",
-        position: [211.24, 185.63],
+        position: [49.06, 43.1],
       },
       {
         name: "19",
         type: "Room",
-        position: [355.41, 241.82],
+        position: [82.59, 56.17],
       },
       {
         name: "17",
         type: "Room",
-        position: [315.34, 269.6],
+        position: [73.27, 62.63],
       },
       {
         name: "7",
         type: "Room",
-        position: [272.32, 167.07],
+        position: [63.27, 38.79],
       },
       {
         name: "2",
         type: "Room",
-        position: [150.61, 177.13],
+        position: [34.96, 41.13],
       },
       {
         name: "T-0A",
         type: "Room",
-        position: [230.7, 240.69],
+        position: [53.58, 55.91],
       },
       {
         name: "8",
         type: "Room",
-        position: [235.1, 176.26],
+        position: [54.61, 40.92],
       },
       {
         name: "6",
         type: "Room",
-        position: [232.56, 147.96],
+        position: [54.02, 34.34],
       },
       {
         name: "44",
         type: "Room",
-        position: [209.64, 147.71],
+        position: [48.69, 34.28],
       },
       {
         name: "S-0C",
         type: "Room",
-        position: [93.7, 76.3],
+        position: [21.72, 17.68],
       },
       {
         name: "S-0B",
         type: "Room",
-        position: [58.53, 315.87],
+        position: [13.54, 73.39],
       },
       {
         name: "S-0A",
         type: "Room",
-        position: [272.71, 266.81],
+        position: [63.36, 61.98],
       },
       {
         name: "64",
         type: "Room",
-        position: [527.02, 318.54],
+        position: [122.5, 74.02],
       },
       {
         name: "EL-0A",
         type: "Room",
-        position: [226.41, 256.11],
+        position: [52.59, 59.5],
       },
       {
         name: "C-0A",
         type: "Room",
-        position: [226.19, 322.07],
+        position: [52.54, 74.84],
       },
       {
         name: "C-0B",
         type: "Room",
-        position: [261.23, 151.08],
+        position: [60.69, 35.07],
       },
       {
         name: "[BG]01",
         type: "Room",
-        position: [67.13, 78.86],
+        position: [15.54, 18.27],
       },
       {
         name: "[BG]02",
         type: "Room",
-        position: [528.76, 290.97],
+        position: [122.91, 67.6],
       },
       {
         name: "[CG]01",
         type: "Room",
-        position: [56.3, 62.49],
+        position: [13.02, 14.46],
       },
       {
         name: "[CG]02",
         type: "Room",
-        position: [270.66, 117.31],
+        position: [62.88, 27.21],
       },
       {
         name: "H-0A",
         type: "Room",
-        position: [123.4, 244.34],
+        position: [28.63, 56.76],
       },
       {
         name: "S-0D",
         type: "Room",
-        position: [426.57, 201.27],
+        position: [99.14, 46.74],
       },
       {
         name: "S-0E",
         type: "Room",
-        position: [522.56, 356.76],
+        position: [121.47, 82.9],
       },
       {
         name: "RR-W-0",
         type: "Room",
-        position: [247.13, 327.68],
+        position: [57.41, 76.14],
       },
       {
         name: "RR-M-0",
         type: "Room",
-        position: [238.73, 306.8],
+        position: [55.45, 71.29],
       },
       {
         name: "H-0B",
         type: "Room",
-        position: [175.55, 134.86],
+        position: [40.76, 31.29],
       },
       {
         name: "H-0E",
         type: "Room",
-        position: [190.75, 214.86],
+        position: [44.29, 49.9],
       },
       {
         name: "L-0C",
         type: "Room",
-        position: [244.23, 267.16],
+        position: [56.73, 62.07],
       },
       {
         name: "H-0D",
         type: "Room",
-        position: [197.48, 299.9],
+        position: [45.86, 69.68],
       },
       {
         name: "[SA]B-I4",
         type: "Room",
-        position: [378.9, 347.09],
+        position: [88.05, 80.66],
       },
       {
         name: "[SA]B-H7",
         type: "Room",
-        position: [340.58, 232.29],
+        position: [79.14, 53.95],
       },
       {
         name: "[SA]B-H6",
         type: "Room",
-        position: [340.58, 270.55],
+        position: [79.14, 62.85],
       },
       {
         name: "[SA]B-I6",
         type: "Room",
-        position: [378.9, 270.55],
+        position: [88.05, 62.85],
       },
       {
         name: "[SA]B-I7",
         type: "Room",
-        position: [378.9, 232.29],
+        position: [88.05, 53.95],
       },
       {
         name: "5",
         type: "Room",
-        position: [234.54, 99.07],
+        position: [54.48, 22.97],
       },
       {
         name: "5B",
         type: "Room",
-        position: [193.48, 93.77],
+        position: [44.93, 21.74],
       },
       {
         name: "5C",
         type: "Room",
-        position: [212.61, 89.75],
+        position: [49.38, 20.8],
       },
       {
         name: "5E",
         type: "Room",
-        position: [232.09, 118.86],
+        position: [53.91, 27.57],
       },
       {
         name: "5D",
         type: "Room",
-        position: [251.21, 118.84],
+        position: [58.36, 27.57],
       },
       {
         name: "5A",
         type: "Room",
-        position: [193.58, 117.28],
+        position: [44.95, 27.21],
       },
       {
         name: "M-0A",
         type: "Room",
-        position: [90.51, 93.66],
+        position: [20.98, 21.71],
       },
       {
         name: "3",
         type: "Room",
-        position: [166.56, 102.56],
+        position: [38.67, 23.78],
       },
       {
         name: "3A",
         type: "Room",
-        position: [117.18, 115.28],
+        position: [27.18, 26.74],
       },
       {
         name: "3B",
         type: "Room",
-        position: [117.08, 91.72],
+        position: [27.16, 21.26],
       },
       {
         name: "1",
         type: "Room",
-        position: [92.22, 177.23],
+        position: [21.38, 41.15],
       },
       {
         name: "1A",
         type: "Room",
-        position: [81.02, 147.84],
+        position: [18.77, 34.31],
       },
       {
         name: "1B",
         type: "Room",
-        position: [80.91, 128.98],
+        position: [18.75, 29.93],
       },
       {
         name: "1C",
         type: "Room",
-        position: [81.22, 109.27],
+        position: [18.82, 25.34],
       },
       {
         name: "37",
         type: "Room",
-        position: [180.73, 176.95],
+        position: [41.96, 41.08],
       },
       {
         name: "39",
         type: "Room",
-        position: [179.31, 147.86],
+        position: [41.63, 34.32],
       },
       {
         name: "4",
         type: "Room",
-        position: [150.51, 148.73],
+        position: [34.94, 34.52],
       },
       {
         name: "42",
         type: "Room",
-        position: [211.62, 168.17],
+        position: [49.15, 39.04],
       },
       {
         name: "7A",
         type: "Room",
-        position: [288.43, 166.73],
+        position: [67.01, 38.71],
       },
       {
         name: "9",
         type: "Room",
-        position: [280.7, 186.78],
+        position: [65.22, 43.37],
       },
       {
         name: "11",
         type: "Room",
-        position: [278.01, 206.91],
+        position: [64.59, 48.05],
       },
       {
         name: "13",
         type: "Room",
-        position: [267.94, 224.02],
+        position: [62.25, 52.03],
       },
       {
         name: "13A",
         type: "Room",
-        position: [284.48, 224.02],
+        position: [66.09, 52.03],
       },
       {
         name: "15",
         type: "Room",
-        position: [278.58, 240.98],
+        position: [64.72, 55.98],
       },
       {
         name: "10",
         type: "Room",
-        position: [234.97, 214.19],
+        position: [54.58, 49.75],
       },
       {
         name: "35",
         type: "Room",
-        position: [176.5, 206.3],
+        position: [40.98, 47.91],
       },
       {
         name: "33",
         type: "Room",
-        position: [176.63, 225.27],
+        position: [41.01, 52.32],
       },
       {
         name: "38",
         type: "Room",
-        position: [214.43, 207.4],
+        position: [49.8, 48.17],
       },
       {
         name: "36",
         type: "Room",
-        position: [213.76, 224.64],
+        position: [49.65, 52.18],
       },
       {
         name: "L-0A",
         type: "Room",
-        position: [89.55, 215.35],
+        position: [20.76, 50.02],
       },
       {
         name: "28",
         type: "Room",
-        position: [147.64, 214.93],
+        position: [34.27, 49.92],
       },
       {
         name: "26",
         type: "Room",
-        position: [140.22, 262.71],
+        position: [32.54, 61.03],
       },
       {
         name: "26A",
         type: "Room",
-        position: [156.9, 244.14],
+        position: [36.42, 56.71],
       },
       {
         name: "31",
         type: "Room",
-        position: [180.92, 250.81],
+        position: [42.01, 58.26],
       },
       {
         name: "29",
         type: "Room",
-        position: [178.6, 281.47],
+        position: [41.47, 65.39],
       },
       {
         name: "22",
         type: "Room",
-        position: [158.55, 282.52],
+        position: [36.81, 65.64],
       },
       {
         name: "24",
         type: "Room",
-        position: [137.98, 281.34],
+        position: [32.02, 65.36],
       },
       {
         name: "34",
         type: "Room",
-        position: [210.94, 244.02],
+        position: [48.99, 56.68],
       },
       {
         name: "32",
         type: "Room",
-        position: [211.44, 261.63],
+        position: [49.11, 60.78],
       },
       {
         name: "30",
         type: "Room",
-        position: [212.25, 280.96],
+        position: [49.29, 65.28],
       },
       {
         name: "26B",
         type: "Room",
-        position: [161.31, 263.02],
+        position: [37.45, 61.1],
       },
       {
         name: "27",
         type: "Room",
-        position: [81.8, 272.29],
+        position: [18.95, 63.26],
       },
       {
         name: "27E",
         type: "Room",
-        position: [112.36, 246.43],
+        position: [26.06, 57.25],
       },
       {
         name: "27A",
         type: "Room",
-        position: [103.97, 262.44],
+        position: [24.11, 60.97],
       },
       {
         name: "27B",
         type: "Room",
-        position: [103.49, 282.31],
+        position: [24, 65.59],
       },
       {
         name: "27C",
         type: "Room",
-        position: [102.87, 299.84],
+        position: [23.85, 69.67],
       },
       {
         name: "27D",
         type: "Room",
-        position: [79.97, 322.99],
+        position: [18.53, 75.05],
       },
       {
         name: "27F",
         type: "Room",
-        position: [76.14, 337.8],
+        position: [17.64, 78.49],
       },
       {
         name: "25",
         type: "Room",
-        position: [116.33, 331.61],
+        position: [26.98, 77.06],
       },
       {
         name: "25A",
         type: "Room",
-        position: [133.2, 310.85],
+        position: [30.91, 72.23],
       },
       {
         name: "23",
         type: "Room",
-        position: [154.06, 310.64],
+        position: [35.76, 72.18],
       },
       {
         name: "21",
         type: "Room",
-        position: [174, 310.8],
+        position: [40.4, 72.21],
       },
       {
         name: "M-0B",
         type: "Room",
-        position: [200.14, 337.7],
+        position: [46.48, 78.47],
       },
       {
         name: "M-0C",
         type: "Room",
-        position: [161.71, 338.11],
+        position: [37.54, 78.57],
       },
       {
         name: "M-0D",
         type: "Room",
-        position: [188.11, 372.77],
+        position: [43.68, 86.63],
       },
       {
         name: "M-0M",
         type: "Room",
-        position: [379.06, 364.6],
+        position: [88.09, 84.73],
       },
       {
         name: "19D",
         type: "Room",
-        position: [430.65, 368.1],
+        position: [100.09, 85.54],
       },
       {
         name: "19C",
         type: "Room",
-        position: [437.05, 340.79],
+        position: [101.58, 79.19],
       },
       {
         name: "M-0P",
         type: "Room",
-        position: [315.44, 325.74],
+        position: [73.29, 75.69],
       },
       {
         name: "M-0N",
         type: "Room",
-        position: [348.79, 340.1],
+        position: [81.05, 79.03],
       },
       {
         name: "M-0O",
         type: "Room",
-        position: [348.58, 362.08],
+        position: [81, 84.14],
       },
       {
         name: "M-0Q",
         type: "Room",
-        position: [324.13, 369.59],
+        position: [75.32, 85.89],
       },
       {
         name: "M-0K",
         type: "Room",
-        position: [247.14, 344.24],
+        position: [57.41, 79.99],
       },
       {
         name: "M-0E",
         type: "Room",
-        position: [213.94, 362.37],
+        position: [49.69, 84.21],
       },
       {
         name: "M-0F",
         type: "Room",
-        position: [218.59, 375.49],
+        position: [50.77, 87.26],
       },
       {
         name: "M-0G",
         type: "Room",
-        position: [218.51, 391.47],
+        position: [50.75, 90.98],
       },
       {
         name: "M-0H",
         type: "Room",
-        position: [218.79, 401.39],
+        position: [50.82, 93.29],
       },
       {
         name: "M-0I",
         type: "Room",
-        position: [250.74, 382.27],
+        position: [58.25, 88.84],
       },
       {
         name: "M-0J",
         type: "Room",
-        position: [268.55, 370.33],
+        position: [62.39, 86.06],
       },
       {
         name: "M-0L",
         type: "Room",
-        position: [228.61, 343.34],
+        position: [53.1, "79.78)", "rotate(-90"],
       },
       {
         name: "M-0R",
         type: "Room",
-        position: [306.71, 370.48],
+        position: [71.26, 86.1],
       },
       {
         name: "H-0C",
         type: "Room",
-        position: [251.82, 202.55],
+        position: [58.5, 47.04],
       },
       {
         name: "L-0B",
         type: "Room",
-        position: [247.92, 141.81],
+        position: [57.59, 32.91],
       },
       {
         name: "EL/M-0A",
         type: "Room",
-        position: [227.44, 266.74],
+        position: [52.83, 61.97],
       },
       {
         name: "19B",
         type: "Room",
-        position: [431.01, 193.07],
+        position: [100.17, 44.83],
       },
     ],
   },
@@ -577,7 +577,7 @@ const floorProperties = [
   //   svgScale: 0.01,
   //   position: [0.15, -0.05],
   //   extrudedSections: ["A-WALL-FULL"],
-  //   floorLayer: "A-FLOOR-OUTLINE",
+  //   floorLayer: { layer: "A-FLOOR-OUTLINE", enabled: true },
   //   extrudeDepth: 30,
   //   locations: [
   //     {
@@ -903,7 +903,7 @@ const floorProperties = [
   //   svgScale: 0.01,
   //   position: [0.21, 0],
   //   extrudedSections: ["A-WALL-FULL"],
-  //   floorLayer: "A-FLOOR-OUTLINE",
+  //   floorLayer: { layer: "A-FLOOR-OUTLINE", enabled: true },
   //   extrudeDepth: 30,
   //   locations: [
   //     {
@@ -1269,7 +1269,7 @@ const floorProperties = [
   //   svgScale: 0.01,
   //   position: [-0.05, 0.17],
   //   extrudedSections: ["A-WALL-FULL"],
-  //   floorLayer: "A-FLOOR-OUTLINE",
+  //   floorLayer: { layer: "A-FLOOR-OUTLINE", enabled: true },
   //   extrudeDepth: 30,
   //   locations: [
   //     {
@@ -1650,7 +1650,7 @@ const floorProperties = [
   //   svgScale: 0.01,
   //   position: [0.2, -0.25],
   //   extrudedSections: [],
-  //   floorLayer: "",
+  //   floorLayer: { layer: "", enabled: false },
   //   extrudeDepth: 0,
   //   locations: [],
   // },
@@ -1670,7 +1670,7 @@ document.body.appendChild(labelRenderer.domElement);
 // Define camera and its properties
 const fov = 75;
 const aspect = 2;
-const near = 0.01;
+const near = 0.1;
 const far = 1000;
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 
@@ -1710,7 +1710,9 @@ scene.add(ambientLight);
 loadFloors(floorProperties)
   .then((floorGroups) => sortFloorsByName(floorGroups)) // Sort floors so they aren't out of order in the UI
   .then((floorGroups) => {
+    addLocationUI();
     populateFloorListUI(floorGroups); // Populate list of floors with enable/disable checkboxes
+    render();
   });
 
 function render() {
@@ -1728,11 +1730,12 @@ function render() {
 }
 
 function resizeRendererToDisplaySize(renderer) {
-  const width = canvas.clientWidth;
-  const height = canvas.clientHeight;
+  const width = window.innerWidth;
+  const height = window.innerHeight;
   const needResize = canvas.width !== width || canvas.height !== height; // Check if canvas dimensions do not match client dimensions
   if (needResize) {
     renderer.setSize(width, height, false);
+    labelRenderer.setSize(width, height);
   }
   return needResize;
 }
@@ -1817,7 +1820,7 @@ function loadFloors(floorProperties) {
                     geometries.extruded[id].pathGeometries.push(geometry);
                     // Add geometry to extruded geometries array
                   } else if (
-                    floorProperty.floorLayer.length > 0 &&
+                    floorProperty.floorLayer.layer.length > 0 &&
                     floorProperty.floorLayer == id
                   ) {
                     // Add floor geometry to array
@@ -1831,21 +1834,24 @@ function loadFloors(floorProperties) {
 
             const shapes = SVGLoader.createShapes(path);
 
-            shapes.forEach((shape, j) => {
-              if (floorProperty.extrudedSections.includes(id)) {
-                // Create extruded geometry
-                const extrudedGeometry = new THREE.ExtrudeGeometry(shape, {
-                  depth: floorProperty.extrudeDepth,
-                  bevelEnabled: false,
-                });
-                extrudedGeometry.computeVertexNormals();
+            // Only create extruded mesh if extrudeDepth is greater than 0
+            if (floorProperty.extrudeDepth > 0) {
+              shapes.forEach((shape, j) => {
+                if (floorProperty.extrudedSections.includes(id)) {
+                  // Create extruded geometry
+                  const extrudedGeometry = new THREE.ExtrudeGeometry(shape, {
+                    depth: floorProperty.extrudeDepth,
+                    bevelEnabled: false,
+                  });
+                  extrudedGeometry.computeVertexNormals();
 
-                // Add geometry to extruded geometries meshes array
-                geometries.extruded[id].extrudeGeometries.push(
-                  extrudedGeometry
-                );
-              }
-            });
+                  // Add geometry to extruded geometries meshes array
+                  geometries.extruded[id].extrudeGeometries.push(
+                    extrudedGeometry
+                  );
+                }
+              });
+            }
           }
 
           // Create Group for the floor
@@ -1872,12 +1878,26 @@ function loadFloors(floorProperties) {
           });
 
           floorProperty.extrudedSections.forEach((id) => {
-            // Loop through each extruded section
-            // Merge array of extruded geometries into single geometry for performance
-            const extrudeGeometry = BufferGeometryUtils.mergeGeometries(
-              geometries.extruded[id].extrudeGeometries
-            );
-            extrudeGeometry.computeBoundingSphere();
+            if (floorProperty.extrudeDepth > 0) {
+              // Loop through each extruded section
+              // Merge array of extruded geometries into single geometry for performance
+              const extrudeGeometry = BufferGeometryUtils.mergeGeometries(
+                geometries.extruded[id].extrudeGeometries
+              );
+              extrudeGeometry.computeBoundingSphere();
+
+              // Create meshes from extruded geometry
+              const extrudeMesh = new THREE.Mesh(
+                extrudeGeometry,
+                extrudeMaterial
+              );
+
+              // Scale mesh to appropriate size
+              extrudeMesh.scale.multiplyScalar(floorProperty.svgScale);
+              extrudeMesh.scale.y *= -1;
+
+              floorGroup.add(extrudeMesh);
+            }
 
             // Merge array of extruded path geometries into single geometry
             const pathGeometry = BufferGeometryUtils.mergeGeometries(
@@ -1885,22 +1905,17 @@ function loadFloors(floorProperties) {
             );
             pathGeometry.computeBoundingSphere();
 
-            // Create meshes from extruded geometry and path geometry
-            const extrudeMesh = new THREE.Mesh(
-              extrudeGeometry,
-              extrudeMaterial
-            );
+            // Create meshes from path geometry
             const pathMesh = new THREE.Mesh(pathGeometry, pathMaterial);
 
-            // Scale meshes to appropriate size
-            extrudeMesh.scale.multiplyScalar(floorProperty.svgScale);
-            extrudeMesh.scale.y *= -1;
-
+            // Scale mesh to appropriate size
             pathMesh.scale.multiplyScalar(floorProperty.svgScale);
-            pathMesh.position.z = floorProperty.extrudeDepth / 100 + 1 / 100; // Shift path mesh up to be at top of extrusion
             pathMesh.scale.y *= -1;
+            if (floorProperty.extrudeDepth > 0) {
+              pathMesh.position.z =
+                floorProperty.extrudeDepth * floorProperty.svgScale + 1 / 100; // Shift path mesh up to be at top of extrusion
+            }
 
-            floorGroup.add(extrudeMesh);
             floorGroup.add(pathMesh);
           });
 
@@ -1941,9 +1956,6 @@ function loadFloors(floorProperties) {
             floorGroup.add(upperFloorMesh);
           }
 
-          // Group for location meshes
-          let locationGroup = new THREE.Group();
-
           // Draw points at each location
           let pointMaterial = new THREE.PointsMaterial({
             // Material for points
@@ -1952,46 +1964,6 @@ function loadFloors(floorProperties) {
             transparent: true,
             depthWrite: false,
           });
-
-          floorProperty.locations.forEach((location) => {
-            // // Point geometry
-            // const dotGeometry = new THREE.BufferGeometry();
-
-            // // Position point based off of location position in floorProperties
-            // dotGeometry.setAttribute(
-            //   "position",
-            //   new THREE.BufferAttribute(
-            //     new Float32Array([
-            //       location.position[0] * floorProperty.svgScale,
-            //       location.position[1] * -1 * floorProperty.svgScale,
-            //       0,
-            //     ]),
-            //     3
-            //   )
-            // );
-
-            // let point = new THREE.Points(dotGeometry, pointMaterial);
-
-            // locationGroup.add(point);
-
-            const labelDiv = document.createElement("div");
-            labelDiv.className = "label";
-            labelDiv.textContent = location.name;
-            labelDiv.style.backgroundColor = "transparent";
-
-            const label = new CSS2DObject(labelDiv);
-            label.position.set(
-              location.position[0] * floorProperty.svgScale,
-              location.position[1] * -1 * floorProperty.svgScale,
-              0
-            );
-            // label.center.set(0, 1);
-            locationGroup.add(label);
-            label.layers.set(0);
-          });
-
-          // Add location group to floorGroup
-          floorGroup.add(locationGroup);
 
           floorGroup.rotateX(-Math.PI / 2); // Rotate group so it is horizontal
 
@@ -2024,8 +1996,6 @@ function loadFloors(floorProperties) {
           if (floorGroups.length == arr.length) {
             resolve(floorGroups);
           }
-
-          render();
         },
         function (xhr) {
           console.log("SVG " + (xhr.loaded / xhr.total) * 100 + "% loaded");
@@ -2038,11 +2008,51 @@ function loadFloors(floorProperties) {
   });
 }
 
+function addLocationUI() {
+  // Loop through floors
+  floorProperties.forEach((floorProperty) => {
+    // Get floor group from floor name, check if it exists
+    let floorGroup = scene.getObjectByName(floorProperty.name);
+    if (typeof floorGroup !== "undefined") {
+      // Group for location meshes
+      let locationGroup = new THREE.Group();
+
+      // Loop through locations in floor
+      floorProperty.locations.forEach((location) => {
+        // Create div for location to store text
+        const labelDiv = document.createElement("div");
+        labelDiv.className = "label";
+        labelDiv.textContent = location.name; // Set content to location name
+        labelDiv.style.backgroundColor = "transparent";
+
+        // Create CSS2DObject from div
+        const label = new CSS2DObject(labelDiv);
+        // Set location from location object, scale so it lines up with SVG
+        label.position.set(
+          location.position[0] * floorProperty.svgScale,
+          location.position[1] * -1 * floorProperty.svgScale,
+          0
+        );
+        // label.center.set(0, 1);
+        // Add to group
+        locationGroup.add(label);
+        label.layers.set(0);
+      });
+
+      // Set type of locationGroup to 'location'
+      locationGroup.userData.type = "location";
+
+      // Add to floorGroup
+      floorGroup.add(locationGroup);
+    }
+  });
+}
+
 function createCanvasCircleMaterial(color, size) {
   var matCanvas = document.createElement("canvas");
   matCanvas.width = matCanvas.height = size;
   var matContext = matCanvas.getContext("2d");
-  // Create texture object from canvas.
+  // Create texture object from canvas
   var texture = new THREE.Texture(matCanvas);
   // Draw a circle
   var center = size / 2;
@@ -2085,13 +2095,29 @@ function populateFloorListUI(floorList) {
 
     checkbox.onclick = () => {
       // Change visibility of floor Group based on status of checkbox
-      if (checkbox.checked) floor.visible = true;
-      else floor.visible = false;
+      if (checkbox.checked) toggleFloorVisibility(floor, true);
+      else toggleFloorVisibility(floor, false);
       render();
     };
 
     // Append list element to list
     li.appendChild(document.createTextNode(floor.name));
     ul.appendChild(li);
+  });
+}
+
+function toggleFloorVisibility(floor, isVisible) {
+  // Enable/disable floor in scene
+  floor.visible = isVisible;
+
+  // Loop through children of floorGroup
+  floor.children.forEach((child) => {
+    // Check if the child is a location group
+    if (child.userData.type == "location") {
+      // Enable/disable all CSS2DObjects
+      child.children.forEach((cssObject) => {
+        cssObject.visible = isVisible;
+      });
+    }
   });
 }
