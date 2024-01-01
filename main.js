@@ -17,7 +17,7 @@ const floorProperties = [
     extrudedSections: ["A-WALL-FULL"], //["A-WALL-FULL"],
     floorLayer: { layer: "A-FLOOR-OUTLINE", enabled: false },
     excludedSections: [],
-    extrudeDepth: 0,
+    extrudeDepth: 15,
     locations: [
       {
         name: "19A",
@@ -1670,8 +1670,8 @@ document.body.appendChild(labelRenderer.domElement);
 // Define camera and its properties
 const fov = 75;
 const aspect = 2;
-const near = 0.1;
-const far = 1000;
+const near = 0.01;
+const far = 500;
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 
 // Initial camera position - away from origin, looking at origin
@@ -1705,6 +1705,8 @@ scene.add(directionalLight);
 // Soft white ambient light
 const ambientLight = new THREE.AmbientLight(0xcfe2e3);
 scene.add(ambientLight);
+
+let state = {};
 
 // Load floors
 loadFloors(floorProperties)
@@ -1896,6 +1898,8 @@ function loadFloors(floorProperties) {
               extrudeMesh.scale.multiplyScalar(floorProperty.svgScale);
               extrudeMesh.scale.y *= -1;
 
+              extrudeMesh.name = "extruded_mesh";
+
               floorGroup.add(extrudeMesh);
             }
 
@@ -1916,6 +1920,8 @@ function loadFloors(floorProperties) {
                 floorProperty.extrudeDepth * floorProperty.svgScale + 1 / 100; // Shift path mesh up to be at top of extrusion
             }
 
+            pathMesh.name = "extruded_path";
+
             floorGroup.add(pathMesh);
           });
 
@@ -1930,6 +1936,8 @@ function loadFloors(floorProperties) {
           otherPathMesh.scale.multiplyScalar(floorProperty.svgScale);
           otherPathMesh.scale.y *= -1;
           otherPathMesh.position.z += 1 / 100;
+
+          otherPathMesh.name = "other_path";
 
           floorGroup.add(otherPathMesh);
 
@@ -1948,22 +1956,18 @@ function loadFloors(floorProperties) {
             floorMesh.scale.multiplyScalar(floorProperty.svgScale);
             floorMesh.scale.y *= -1;
 
+            floorMesh.name = "lower_floor";
+
             floorGroup.add(floorMesh);
 
             const upperFloorMesh = floorMesh.clone();
-            upperFloorMesh.position.z += floorProperty.extrudeDepth / 100;
+            upperFloorMesh.position.z +=
+              floorProperty.extrudeDepth * floorProperty.svgScale;
+
+            upperFloorMesh.name = "upper_floor";
 
             floorGroup.add(upperFloorMesh);
           }
-
-          // Draw points at each location
-          let pointMaterial = new THREE.PointsMaterial({
-            // Material for points
-            size: 0.05,
-            map: createCanvasCircleMaterial(0x000000, 256),
-            transparent: true,
-            depthWrite: false,
-          });
 
           floorGroup.rotateX(-Math.PI / 2); // Rotate group so it is horizontal
 
@@ -1983,7 +1987,7 @@ function loadFloors(floorProperties) {
           if (i > 0) {
             let sum = 0;
             for (let j = 0; j < i; j++) {
-              sum += arr[j].extrudeDepth / 100 + 3 / 100;
+              sum += arr[j].extrudeDepth * floorProperty.svgScale + 3 / 100;
             }
             floorGroup.position.y = sum;
           }
@@ -2040,10 +2044,12 @@ function addLocationUI() {
       });
 
       // Set type of locationGroup to 'location'
-      locationGroup.userData.type = "location";
+      locationGroup.name = "locations";
 
       // Add to floorGroup
       floorGroup.add(locationGroup);
+
+      toggleFloorLocationsVisibility(floorGroup, false);
     }
   });
 }
@@ -2079,30 +2085,21 @@ function sortFloorsByName(floorList) {
   return sortedGroups;
 }
 
-// Populate list of floors with enable/disable checkboxes
+// Populate list of floors in UI
 function populateFloorListUI(floorList) {
-  const ul = document.getElementById("floor-list");
+  const floorDiv = document.getElementById("floor-buttons");
 
-  // For each floor, add an element to the list
+  // For each floor, add a button to the div
   floorList.forEach((floor) => {
-    let li = document.createElement("li");
+    let button = document.createElement("BUTTON");
+    button.appendChild(document.createTextNode(floor.name));
 
-    // Add checkbox to list element to enable/disable floor
-    let checkbox = document.createElement("input");
-    checkbox.setAttribute("type", "checkbox");
-    checkbox.checked = true;
-    li.appendChild(checkbox);
-
-    checkbox.onclick = () => {
-      // Change visibility of floor Group based on status of checkbox
-      if (checkbox.checked) toggleFloorVisibility(floor, true);
-      else toggleFloorVisibility(floor, false);
-      render();
+    // Focus on floor when clicked
+    button.onclick = () => {
+      focusOnFloor(floorList, floor);
     };
 
-    // Append list element to list
-    li.appendChild(document.createTextNode(floor.name));
-    ul.appendChild(li);
+    floorDiv.appendChild(button);
   });
 }
 
@@ -2110,14 +2107,44 @@ function toggleFloorVisibility(floor, isVisible) {
   // Enable/disable floor in scene
   floor.visible = isVisible;
 
+  // Enable/disable locations in floor
+  toggleFloorLocationsVisibility(floor, isVisible);
+}
+
+function toggleFloorLocationsVisibility(floor, isVisible) {
   // Loop through children of floorGroup
   floor.children.forEach((child) => {
     // Check if the child is a location group
-    if (child.userData.type == "location") {
+    if (child.name == "locations") {
       // Enable/disable all CSS2DObjects
       child.children.forEach((cssObject) => {
         cssObject.visible = isVisible;
       });
     }
   });
+}
+
+function focusOnFloor(floorGroups, selectedFloor) {
+  // Disable all floors
+  floorGroups.forEach((floor) => {
+    toggleFloorVisibility(floor, false);
+  });
+
+  // Enable selected floor
+  toggleFloorVisibility(selectedFloor, true);
+  // Disable extruded mesh
+  selectedFloor.getObjectByName("extruded_mesh").visible = false;
+
+  // Get properties of current floor
+  let floorProperty =
+    floorProperties[
+      floorProperties.findIndex((elem) => elem["name"] == selectedFloor.name)
+    ];
+  // Move extruded path down to be level with rest of floor
+  selectedFloor.getObjectByName("extruded_path").position.z -=
+    floorProperty.extrudeDepth * floorProperty.svgScale + 1 / 100;
+  // Enable floor locations
+  toggleFloorLocationsVisibility(selectedFloor, true);
+
+  render();
 }

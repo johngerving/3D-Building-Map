@@ -21,26 +21,29 @@ body {
   border-radius: 5px;
   top: 10px;
   left: 10px;
-  width: fit-content;
+  min-width: 150px;
   height: fit-content;
-  padding: 10px;
   z-index: 100;
 }
 
 #floors h3 {
   text-align: center;
+  margin: 10px;
 }
 
-#floors ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+#floor-buttons {
+  width: 100%;
+  border-top: 1px solid gray;
 }
 
-#floors li {
-  margin: 5px;
+#floors button {
+  width: 100%;
+  border: none;
+  padding: 10px;
+  font-size: 1rem;
+  background-color: transparent;
 }
 
-#floors input[type="checkbox"] {
-  margin-right: 5px;
+#floors button:hover {
+  background-color: rgba(179, 179, 179, 0.333);
 }
