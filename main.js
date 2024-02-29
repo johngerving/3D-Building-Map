@@ -6,6 +6,8 @@ import {
   CSS2DRenderer,
   CSS2DObject,
 } from "three/addons/renderers/CSS2DRenderer.js";
+import TWEEN from "@tweenjs/tween.js";
+import { gsap } from "gsap";
 
 // Floor properties - defines name of floor, location of svg, which sections are extruded, and the locations on the floor
 const floorProperties = [
@@ -1717,6 +1719,17 @@ loadFloors(floorProperties)
     render();
   });
 
+// Update controls, animations, and call render function
+function animate() {
+  requestAnimationFrame(animate);
+
+  TWEEN.update();
+
+  render();
+}
+
+animate();
+
 function render() {
   // Check if window has been resized and update camera accordingly
   if (
@@ -2124,6 +2137,53 @@ function toggleFloorLocationsVisibility(floor, isVisible) {
   });
 }
 
+// Animate camera and controls to focus on object
+function moveCameraToObject(a, zoom, duration) {
+  // Get spherical coordinates of camera position
+  const spherical = new THREE.Spherical().setFromVector3(camera.position);
+
+  const controlSpherical = new THREE.Spherical().setFromVector3(
+    controls.target
+  );
+
+  // Calculate spherical coordinates from target position
+  const finalSpherical = spherical.clone();
+  finalSpherical.radius = a.position.y + zoom; // Position camera above target
+  finalSpherical.phi = 0.0001;
+  finalSpherical.theta = 0; // Set camera rotation to 0
+
+  // Begin animation of camera position and rotation
+  gsap.to(spherical, {
+    duration: duration,
+    radius: finalSpherical.radius,
+    phi: finalSpherical.phi,
+    theta: finalSpherical.theta,
+    onUpdate: function () {
+      const position = new THREE.Vector3().setFromSpherical(spherical);
+      camera.position.set(position.x, position.y, position.z);
+      controls.update();
+    },
+  });
+
+  const finalControlSpherical = spherical.clone();
+  finalControlSpherical.radius = a.position.y;
+  finalControlSpherical.phi = 0.0001;
+  finalControlSpherical.theta = 0;
+
+  // Begin Tween animation of controls target position, look at object
+  gsap.to(controlSpherical, {
+    duration: duration,
+    radius: finalControlSpherical.radius,
+    phi: finalControlSpherical.phi,
+    theta: finalControlSpherical.theta,
+    onUpdate: function () {
+      // Set target position of controls from current sphere coordinates
+      controls.target = new THREE.Vector3().setFromSpherical(controlSpherical);
+      controls.update();
+    },
+  });
+}
+
 function focusOnFloor(floorGroups, selectedFloor) {
   // Disable all floors
   floorGroups.forEach((floor) => {
@@ -2141,10 +2201,12 @@ function focusOnFloor(floorGroups, selectedFloor) {
       floorProperties.findIndex((elem) => elem["name"] == selectedFloor.name)
     ];
   // Move extruded path down to be level with rest of floor
-  selectedFloor.getObjectByName("extruded_path").position.z -=
-    floorProperty.extrudeDepth * floorProperty.svgScale + 1 / 100;
+  selectedFloor.getObjectByName("extruded_path").position.z =
+    selectedFloor.getObjectByName("other_path").position.z;
   // Enable floor locations
   toggleFloorLocationsVisibility(selectedFloor, true);
+
+  moveCameraToObject(selectedFloor, 3, 2); // Animate camera movement to focus on object
 
   render();
 }

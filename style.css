@@ -20,7 +20,7 @@ body {
   background: white;
   border-radius: 5px;
   top: 10px;
-  left: 10px;
+  right: 10px;
   min-width: 150px;
   height: fit-content;
   z-index: 100;
