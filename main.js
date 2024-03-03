@@ -1677,8 +1677,10 @@ const far = 500;
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 
 // Initial camera position - away from origin, looking at origin
-camera.position.y = 3;
-camera.position.z = 3;
+const initialCameraPosition = { x: 0, y: 4, z: 4 };
+camera.position.x = initialCameraPosition.x;
+camera.position.y = initialCameraPosition.y;
+camera.position.z = initialCameraPosition.z;
 camera.lookAt(0, 0, 0);
 
 // Define scene
@@ -1715,7 +1717,7 @@ loadFloors(floorProperties)
   .then((floorGroups) => sortFloorsByName(floorGroups)) // Sort floors so they aren't out of order in the UI
   .then((floorGroups) => {
     addLocationUI();
-    populateFloorListUI(floorGroups); // Populate list of floors with enable/disable checkboxes
+    populateUI(floorGroups);
     render();
   });
 
@@ -2098,6 +2100,14 @@ function sortFloorsByName(floorList) {
   return sortedGroups;
 }
 
+function populateUI(floorList) {
+  document.getElementById("back-arrow").onclick = () => {
+    unfocus(floorList);
+  }; // Unfocus on all floors when arrow is pressed
+
+  populateFloorListUI(floorList); // Populate list of floors with enable/disable checkboxes
+}
+
 // Populate list of floors in UI
 function populateFloorListUI(floorList) {
   const floorDiv = document.getElementById("floor-buttons");
@@ -2137,20 +2147,52 @@ function toggleFloorLocationsVisibility(floor, isVisible) {
   });
 }
 
+function toggleFloorExtrusions(floor, isExtruded) {
+  // Get necessary meshes for extrusions
+  let extruded_mesh = floor.getObjectByName("extruded_mesh");
+  let upper_floor = floor.getObjectByName("upper_floor");
+  let extruded_path = floor.getObjectByName("extruded_path");
+  let other_path = floor.getObjectByName("other_path");
+
+  if (extruded_mesh && upper_floor && extruded_path && other_path) {
+    if (!isExtruded) {
+      // Disable extruded mesh
+      extruded_mesh.visible = false;
+      upper_floor.visible = false;
+
+      // Move extruded path down to be level with rest of floor
+      extruded_path.position.z = other_path.position.z;
+    } else {
+      // Get properties of current floor
+      let floorProperty =
+        floorProperties[
+          floorProperties.findIndex((elem) => elem["name"] == floor.name)
+        ];
+
+      // Enable extruded mesh
+      extruded_mesh.visible = true;
+      // Enable upper floor mesh
+      upper_floor.visible = true;
+
+      // Move extruded path up to proper height
+      extruded_path.position.z = floorProperty.extrudeDepth;
+    }
+  }
+}
+
 // Animate camera and controls to focus on object
-function moveCameraToObject(a, zoom, duration) {
+function moveCameraToPosition(pos, lookAt, duration) {
   // Get spherical coordinates of camera position
   const spherical = new THREE.Spherical().setFromVector3(camera.position);
-
   const controlSpherical = new THREE.Spherical().setFromVector3(
     controls.target
   );
-
   // Calculate spherical coordinates from target position
-  const finalSpherical = spherical.clone();
-  finalSpherical.radius = a.position.y + zoom; // Position camera above target
-  finalSpherical.phi = 0.0001;
-  finalSpherical.theta = 0; // Set camera rotation to 0
+  const finalSpherical = new THREE.Spherical().setFromCartesianCoords(
+    pos.x,
+    pos.y,
+    pos.z
+  );
 
   // Begin animation of camera position and rotation
   gsap.to(spherical, {
@@ -2159,14 +2201,20 @@ function moveCameraToObject(a, zoom, duration) {
     phi: finalSpherical.phi,
     theta: finalSpherical.theta,
     onUpdate: function () {
+      // Get coordinates from spherical coordinates, set camera position
       const position = new THREE.Vector3().setFromSpherical(spherical);
       camera.position.set(position.x, position.y, position.z);
       controls.update();
     },
   });
 
-  const finalControlSpherical = spherical.clone();
-  finalControlSpherical.radius = a.position.y;
+  // Calculate spherical coordinates from lookAt position
+  const finalControlSpherical = new THREE.Spherical().setFromCartesianCoords(
+    lookAt.x,
+    lookAt.y,
+    lookAt.z
+  );
+  finalControlSpherical.radius = 0;
   finalControlSpherical.phi = 0.0001;
   finalControlSpherical.theta = 0;
 
@@ -2192,23 +2240,34 @@ function focusOnFloor(floorGroups, selectedFloor) {
 
   // Enable selected floor
   toggleFloorVisibility(selectedFloor, true);
-  // Disable extruded mesh
-  selectedFloor.getObjectByName("extruded_mesh").visible = false;
-  selectedFloor.getObjectByName("upper_floor").visible = false;
-
-  // Get properties of current floor
-  let floorProperty =
-    floorProperties[
-      floorProperties.findIndex((elem) => elem["name"] == selectedFloor.name)
-    ];
-  // Move extruded path down to be level with rest of floor
-  selectedFloor.getObjectByName("extruded_path").position.z =
-    selectedFloor.getObjectByName("other_path").position.z;
 
   // Enable floor locations
   toggleFloorLocationsVisibility(selectedFloor, true);
 
-  moveCameraToObject(selectedFloor, 3, 1); // Animate camera movement to focus on object
+  // Disable extrusions
+  toggleFloorExtrusions(selectedFloor, false);
+
+  // Position camera above floor by (zoom) units
+  const zoom = 4;
+  let newCameraPos = {
+    x: 0,
+    y: selectedFloor.position.y + zoom,
+    z: 0,
+  };
+  moveCameraToPosition(newCameraPos, { x: 0, y: 0, z: 0 }, 1); // Animate camera movement to focus on object
 
   render();
+}
+
+function unfocus(floorGroups) {
+  floorGroups.forEach((floor) => {
+    // Enable all floors
+    toggleFloorVisibility(floor, true);
+    // Disable all locations
+    toggleFloorLocationsVisibility(floor, false);
+    // Enable extruded sections
+    toggleFloorExtrusions(floor, true);
+    // Move camera to default position
+    moveCameraToPosition(initialCameraPosition, { x: 0, y: 0, z: 0 }, 1);
+  });
 }

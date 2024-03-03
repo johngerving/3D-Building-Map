@@ -5,11 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>3D Building Map</title>
     <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
   </head>
   <body>
     <script type="module" src="./main.js"></script>
     <canvas id="c"></canvas>
-    <div id="floors">
+    <div id="back-arrow-div" class="ui-element">
+      <button id="back-arrow">
+        <span class="material-symbols-outlined prevent-select">
+          arrow_back
+        </span>
+      </button>
+    </div>
+    <div id="floors" class="ui-element">
       <h3>Floors</h3>
       <div id="floor-buttons"></div>
     </div>
