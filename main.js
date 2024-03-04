@@ -1892,6 +1892,7 @@ function loadFloors(floorProperties) {
             //   transparent: true,
             //   depthWrite: false,
             opacity: 0.5,
+            // side: THREE.DoubleSide,
           });
 
           floorProperty.extrudedSections.forEach((id) => {
@@ -1932,7 +1933,7 @@ function loadFloors(floorProperties) {
             pathMesh.scale.y *= -1;
             if (floorProperty.extrudeDepth > 0) {
               pathMesh.position.z =
-                floorProperty.extrudeDepth * floorProperty.svgScale + 1 / 100; // Shift path mesh up to be at top of extrusion
+                (floorProperty.extrudeDepth + 1) * floorProperty.svgScale; // Shift path mesh up to be at top of extrusion
             }
 
             pathMesh.name = "extruded_path";
@@ -2040,8 +2041,15 @@ function addLocationUI() {
       floorProperty.locations.forEach((location) => {
         // Create div for location to store text
         const labelDiv = document.createElement("div");
-        labelDiv.className = "label";
-        labelDiv.textContent = location.name; // Set content to location name
+        // labelDiv.className = "label";
+        // labelDiv.textContent = location.name; // Set content to location name
+        let button = document.createElement("BUTTON");
+        button.setAttribute("class", "label highlight-onselect");
+        button.appendChild(document.createTextNode(location.name));
+        labelDiv.appendChild(button);
+        button.addEventListener("pointerdown", function () {
+          console.log(location);
+        });
         labelDiv.style.backgroundColor = "transparent";
 
         // Create CSS2DObject from div
@@ -2115,6 +2123,7 @@ function populateFloorListUI(floorList) {
   // For each floor, add a button to the div
   floorList.forEach((floor) => {
     let button = document.createElement("BUTTON");
+    button.setAttribute("class", "highlight-onselect");
     button.appendChild(document.createTextNode(floor.name));
 
     // Focus on floor when clicked
@@ -2175,7 +2184,8 @@ function toggleFloorExtrusions(floor, isExtruded) {
       upper_floor.visible = true;
 
       // Move extruded path up to proper height
-      extruded_path.position.z = floorProperty.extrudeDepth;
+      extruded_path.position.z =
+        (floorProperty.extrudeDepth + 1) * floorProperty.svgScale;
     }
   }
 }

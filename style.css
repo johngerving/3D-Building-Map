@@ -8,6 +8,7 @@ body {
   height: 100%;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   overflow: hidden;
+  color: black;
 }
 
 .prevent-select {
@@ -19,6 +20,10 @@ body {
 .ui-element {
   z-index: 100;
   position: absolute;
+}
+
+button {
+  color: black;
 }
 
 #c {
@@ -41,11 +46,6 @@ body {
   border: none;
 }
 
-#back-arrow:hover {
-  cursor: pointer;
-  color: #4a80f5;
-}
-
 #back-arrow span {
   font-size: 35px;
 }
@@ -56,13 +56,13 @@ body {
   background: white;
   border-radius: 5px;
   height: fit-content;
-  min-width: 75px;
+  min-width: 150px;
   margin: 10px;
 }
 
 #floors h3 {
   text-align: center;
-  margin: 10px;
+  margin: 10px 0;
 }
 
 #floor-buttons {
@@ -71,12 +71,26 @@ body {
 
 #floors button {
   width: 100%;
+  display: block;
   border: none;
   padding: 10px 0;
   font-size: 1rem;
   background-color: transparent;
 }
 
-#floors button:hover {
-  background-color: rgba(179, 179, 179, 0.333);
+.label {
+  background: none;
+  border: none;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+@media (hover: hover) {
+  .highlight-onselect:hover {
+    cursor: pointer;
+    color: #4a80f5;
+  }
+
+  #floors button:hover {
+    background-color: rgba(179, 179, 179, 0.333);
+  }
 }
