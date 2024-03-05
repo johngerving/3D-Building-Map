@@ -2120,7 +2120,12 @@ function populateUI(floorList) {
   const search_input = document.getElementById("search-bar");
   search_input.addEventListener("input", function (e) {
     if (e.target.value.length > 0) {
-      toggleSearchBarClose(true);
+      toggleSearchBarCloseButton(true);
+    } else {
+      const information_panel = document.getElementById("information-panel");
+      if (information_panel.style.display == "none") {
+        toggleSearchBarCloseButton(false);
+      }
     }
   });
 
@@ -2129,7 +2134,7 @@ function populateUI(floorList) {
   clear_search_button.onclick = () => {
     search_input.value = "";
     toggleInformationPanel(false);
-    toggleSearchBarClose(false);
+    toggleSearchBarCloseButton(false);
   };
 
   floorListUI(floorList); // Populate list of floors with enable/disable checkboxes
@@ -2160,7 +2165,7 @@ function updateInformationPanel(location) {
   if (location.name) {
     information_panel_name.textContent = location.name; // Set title in information panel to location name
     search_bar.value = location.name; // Set search bar value to location name
-    toggleSearchBarClose(true); // Enable the close button
+    toggleSearchBarCloseButton(true); // Enable the close button
 
     // If the location is a room, add "room" to the title
     if (location.type == "Room") {
@@ -2180,17 +2185,25 @@ function updateInformationPanel(location) {
 
 // Enable/disable the information panel
 function toggleInformationPanel(isVisible) {
+  const information_panel = document.getElementById("information-panel");
   if (isVisible) {
     // Start an animation moving the information panel right to be in view
+    information_panel.style.display = "block";
     gsap.to("#information-panel", { left: 0, duration: 0.25 });
   } else {
     // Start an animation moving the information panel left to be out of view
-    gsap.to("#information-panel", { left: -360, duration: 0.25 });
+    gsap.to("#information-panel", {
+      left: -360,
+      duration: 0.25,
+      onComplete: function () {
+        information_panel.style.display = "none";
+      },
+    });
   }
 }
 
 // Enable/disable the close button
-function toggleSearchBarClose(isVisible) {
+function toggleSearchBarCloseButton(isVisible) {
   // Get the div containing the close button
   const clear_search_div = document.getElementById("clear-search-div");
   // Enable/disable button
