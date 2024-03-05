@@ -13,6 +13,19 @@
   <body>
     <script type="module" src="./main.js"></script>
     <canvas id="c"></canvas>
+    <div id="search-bar-div" class="ui-element">
+      <input type="text" id="search-bar" />
+      <div id="clear-search-div" class="ui-element">
+        <button id="clear-search" class="highlight-onselect">
+          <span class="material-symbols-outlined prevent-select"> close </span>
+        </button>
+      </div>
+    </div>
+    <div id="information-panel" class="ui-element">
+      <img id="information-panel-img" src="" alt="" />
+      <h1 id="information-panel-name">Test</h1>
+      <p id="information-panel-description"></p>
+    </div>
     <div id="back-arrow-div" class="ui-element">
       <button id="back-arrow" class="highlight-onselect">
         <span class="material-symbols-outlined prevent-select">
@@ -20,6 +33,7 @@
         </span>
       </button>
     </div>
+
     <div id="floors" class="ui-element">
       <h3>Floors</h3>
       <div id="floor-buttons"></div>

@@ -1667,6 +1667,7 @@ const labelRenderer = new CSS2DRenderer();
 labelRenderer.setSize(window.innerWidth, window.innerHeight);
 labelRenderer.domElement.style.position = "absolute";
 labelRenderer.domElement.style.top = "0px";
+labelRenderer.domElement.style.zIndex = 1;
 document.body.appendChild(labelRenderer.domElement);
 
 // Define camera and its properties
@@ -1892,7 +1893,7 @@ function loadFloors(floorProperties) {
             //   transparent: true,
             //   depthWrite: false,
             opacity: 0.5,
-            // side: THREE.DoubleSide,
+            side: THREE.DoubleSide,
           });
 
           floorProperty.extrudedSections.forEach((id) => {
@@ -2041,14 +2042,15 @@ function addLocationUI() {
       floorProperty.locations.forEach((location) => {
         // Create div for location to store text
         const labelDiv = document.createElement("div");
-        // labelDiv.className = "label";
-        // labelDiv.textContent = location.name; // Set content to location name
+
         let button = document.createElement("BUTTON");
         button.setAttribute("class", "label highlight-onselect");
         button.appendChild(document.createTextNode(location.name));
         labelDiv.appendChild(button);
         button.addEventListener("pointerdown", function () {
-          console.log(location);
+          // Update information panel with location information and open information panel
+          updateInformationPanel(location);
+          toggleInformationPanel(true);
         });
         labelDiv.style.backgroundColor = "transparent";
 
@@ -2108,16 +2110,99 @@ function sortFloorsByName(floorList) {
   return sortedGroups;
 }
 
+// Popualte all UI
 function populateUI(floorList) {
   document.getElementById("back-arrow").onclick = () => {
     unfocus(floorList);
   }; // Unfocus on all floors when arrow is pressed
 
-  populateFloorListUI(floorList); // Populate list of floors with enable/disable checkboxes
+  // Listen for input - if there is text in the search bar, make the close button visible
+  const search_input = document.getElementById("search-bar");
+  search_input.addEventListener("input", function (e) {
+    if (e.target.value.length > 0) {
+      toggleSearchBarClose(true);
+    }
+  });
+
+  // If the clear search button is clicked, clear the search bar, hide the information panel, and disable the close button
+  const clear_search_button = document.getElementById("clear-search");
+  clear_search_button.onclick = () => {
+    search_input.value = "";
+    toggleInformationPanel(false);
+    toggleSearchBarClose(false);
+  };
+
+  floorListUI(floorList); // Populate list of floors with enable/disable checkboxes
+}
+
+// Given location data, update the information panel
+function updateInformationPanel(location) {
+  // Get elements inside information panel
+  const information_panel_img = document.getElementById(
+    "information-panel-img"
+  );
+  const information_panel_name = document.getElementById(
+    "information-panel-name"
+  );
+  const information_panel_description = document.getElementById(
+    "information-panel-description"
+  );
+
+  // Get search bar for changing its value
+  const search_bar = document.getElementById("search-bar");
+
+  // If there is no image provided, disable the image in the information panel
+  if (!location.img) {
+    information_panel_img.style.display = "none";
+  }
+
+  // If the location has a name,
+  if (location.name) {
+    information_panel_name.textContent = location.name; // Set title in information panel to location name
+    search_bar.value = location.name; // Set search bar value to location name
+    toggleSearchBarClose(true); // Enable the close button
+
+    // If the location is a room, add "room" to the title
+    if (location.type == "Room") {
+      information_panel_name.textContent = "Room " + location.name;
+    }
+  }
+
+  // If the location is a room, set the description to "room" - if the location has a description, this will be overridden
+  if (location.type == "Room") {
+    information_panel_description.textContent = "Room";
+  }
+  // If the location has a description, set the text content of the description element to the location description
+  if (location.description) {
+    information_panel_description.textContent = location.description;
+  }
+}
+
+// Enable/disable the information panel
+function toggleInformationPanel(isVisible) {
+  if (isVisible) {
+    // Start an animation moving the information panel right to be in view
+    gsap.to("#information-panel", { left: 0, duration: 0.25 });
+  } else {
+    // Start an animation moving the information panel left to be out of view
+    gsap.to("#information-panel", { left: -360, duration: 0.25 });
+  }
+}
+
+// Enable/disable the close button
+function toggleSearchBarClose(isVisible) {
+  // Get the div containing the close button
+  const clear_search_div = document.getElementById("clear-search-div");
+  // Enable/disable button
+  if (isVisible) {
+    clear_search_div.style.display = "block";
+  } else {
+    clear_search_div.style.display = "none";
+  }
 }
 
 // Populate list of floors in UI
-function populateFloorListUI(floorList) {
+function floorListUI(floorList) {
   const floorDiv = document.getElementById("floor-buttons");
 
   // For each floor, add a button to the div
