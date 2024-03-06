@@ -13,14 +13,20 @@
   <body>
     <script type="module" src="./main.js"></script>
     <canvas id="c"></canvas>
-    <div id="search-bar-div" class="ui-element">
+    <form
+      autocomplete="off"
+      id="search-bar-div"
+      class="ui-element"
+      onsubmit="return false"
+    >
       <input type="text" id="search-bar" />
       <div id="clear-search-div" class="ui-element">
-        <button id="clear-search" class="highlight-onselect">
+        <button type="button" id="clear-search" class="highlight-onselect">
           <span class="material-symbols-outlined prevent-select"> close </span>
         </button>
       </div>
-    </div>
+      <ul id="search-items" class="ui-element"></ul>
+    </form>
     <div id="information-panel" class="ui-element">
       <img id="information-panel-img" src="" alt="" />
       <h1 id="information-panel-name">Test</h1>

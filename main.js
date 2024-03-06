@@ -8,6 +8,7 @@ import {
 } from "three/addons/renderers/CSS2DRenderer.js";
 import TWEEN from "@tweenjs/tween.js";
 import { gsap } from "gsap";
+import fuzzysort from "fuzzysort";
 
 // Floor properties - defines name of floor, location of svg, which sections are extruded, and the locations on the floor
 const floorProperties = [
@@ -2116,16 +2117,44 @@ function populateUI(floorList) {
     unfocus(floorList);
   }; // Unfocus on all floors when arrow is pressed
 
+  // Disable information panel by default
+  const information_panel = document.getElementById("information-panel");
+  information_panel.style.display = "none";
+
   // Listen for input - if there is text in the search bar, make the close button visible
   const search_input = document.getElementById("search-bar");
   search_input.addEventListener("input", function (e) {
     if (e.target.value.length > 0) {
-      toggleSearchBarCloseButton(true);
+      toggleSearchBarCloseButton(true); // Enable close button
+
+      toggleSearchBarResults(e.target.value, true); // Show search bar results
     } else {
       const information_panel = document.getElementById("information-panel");
+      // Disable close button if the information panel isn't enabled
       if (information_panel.style.display == "none") {
         toggleSearchBarCloseButton(false);
       }
+
+      toggleSearchBarResults("", false); // Disable search bar results
+    }
+  });
+
+  // When the search bar is selected, show the search results if the user has typed anything in
+  search_input.addEventListener("focusin", function (e) {
+    if (search_input.value.length > 0) {
+      toggleSearchBarResults(search_input.value, true);
+    }
+  });
+
+  // When the search bar is deselected, hide the search results
+  search_input.addEventListener("focusout", function (e) {
+    // If the selection is not the search results, disable the search results
+    if (
+      !e.relatedTarget ||
+      (e.relatedTarget &&
+        !e.relatedTarget.classList.contains("search-result-button"))
+    ) {
+      toggleSearchBarResults("", false);
     }
   });
 
@@ -2211,6 +2240,73 @@ function toggleSearchBarCloseButton(isVisible) {
     clear_search_div.style.display = "block";
   } else {
     clear_search_div.style.display = "none";
+  }
+}
+
+// Get search bar results given the input value and number of results
+function searchBarResults(term, n) {
+  // Compile array of locations
+  let locations = [];
+  floorProperties.forEach((floorProperty) => {
+    locations = locations.concat(floorProperty.locations);
+  });
+
+  // Search for locations by name and sort by relevance
+  const results = fuzzysort.go(term, locations, { key: "name", limit: n });
+
+  // Return n results
+  return results.map((result) => result.obj);
+}
+
+// Enable/Disable search bar results panel
+function toggleSearchBarResults(term, isVisible) {
+  // Get element with list of results
+  const search_results_ul = document.getElementById("search-items");
+  // Get search bar element
+  const search_bar = document.getElementById("search-bar");
+
+  if (isVisible) {
+    // Clear search bar results
+    toggleSearchBarResults("", false);
+
+    // Get 5 most relevant search results
+    let search_results = searchBarResults(term, 5);
+
+    // For each result, make a button
+    search_results.forEach((result) => {
+      const li = document.createElement("li");
+      const button = document.createElement("BUTTON");
+
+      button.setAttribute("class", "search-result-button highlight-onselect");
+      button.appendChild(document.createTextNode(result.name)); // Set button text to location name
+
+      // When button is clicked, update information panel with location information, enable information panel, and disable search bar results
+      button.onclick = () => {
+        updateInformationPanel(result);
+        toggleInformationPanel(true);
+        toggleSearchBarResults("", false);
+      };
+
+      // Add list to search bar results
+      li.appendChild(button);
+      search_results_ul.appendChild(li);
+    });
+
+    // Change the border radius of the search bar to line up with the search results
+    search_bar.style.borderRadius = "15px 15px 0 0";
+    // Add a box shadow to the search results
+    search_results_ul.style.boxShadow =
+      "rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset";
+  } else {
+    // Remove all search results
+    while (search_results_ul.firstChild) {
+      search_results_ul.removeChild(search_results_ul.firstChild);
+    }
+
+    // Reset border radius of search bar
+    search_bar.style.borderRadius = "25px";
+    // Remove box shadow from search results
+    search_results_ul.style.boxShadow = "none";
   }
 }
 
