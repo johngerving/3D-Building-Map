@@ -157,6 +157,14 @@ button {
   z-index: 1;
 }
 
+.location-point {
+  width: 10px;
+  height: 10px;
+  background: #48abe0;
+  box-shadow: 0 0 10px 1px #48abe0;
+  border-radius: 50%;
+}
+
 @media (hover: hover) {
   .highlight-onselect:hover {
     cursor: pointer;
