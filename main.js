@@ -14,7 +14,7 @@ import fuzzysort from "fuzzysort";
 const floorProperties = [
   {
     name: "Basement",
-    svg: "./Library-B.svg",
+    svg: "https://aohkolcopromuzleqove.supabase.co/storage/v1/object/sign/Maps/Library-B.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJNYXBzL0xpYnJhcnktQi5zdmciLCJpYXQiOjE3MTMyODcwNDIsImV4cCI6MTc0NDgyMzA0Mn0.i4ACUeQrptv0ceCCtGfE0J8BaIl3lU2rL7iBIIcVlHw&t=2024-04-16T17%3A04%3A02.170Z",
     svgScale: 0.01,
     position: [0, 0],
     extrudedSections: ["A-WALL-FULL"], //["A-WALL-FULL"],
@@ -686,7 +686,7 @@ const floorProperties = [
   },
   {
     name: "Floor 1",
-    svg: "./Library-1.svg",
+    svg: "https://aohkolcopromuzleqove.supabase.co/storage/v1/object/sign/Maps/Library-1.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJNYXBzL0xpYnJhcnktMS5zdmciLCJpYXQiOjE3MTMyODcwNjEsImV4cCI6MTc0NDgyMzA2MX0.jBoD_VdDGTNUmb0xSS5Y1IX_x7kbmHU_fXUK2i1LeeQ&t=2024-04-16T17%3A04%3A21.826Z",
     svgScale: 0.01,
     position: [0.15, -0.05],
     extrudedSections: ["A-WALL-FULL"],
@@ -1075,7 +1075,7 @@ const floorProperties = [
   },
   {
     name: "Floor 2",
-    svg: "./Library-2.svg",
+    svg: "https://aohkolcopromuzleqove.supabase.co/storage/v1/object/sign/Maps/Library-2.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJNYXBzL0xpYnJhcnktMi5zdmciLCJpYXQiOjE3MTMyODcwNzcsImV4cCI6MTc0NDgyMzA3N30.GhUQVGrb2BgcIY8S6K6pGFozOATOmlmm9MD4KadKZOg&t=2024-04-16T17%3A04%3A37.265Z",
     svgScale: 0.01,
     position: [0.21, 0],
     extrudedSections: ["A-WALL-FULL"],
@@ -1512,7 +1512,7 @@ const floorProperties = [
   },
   {
     name: "Floor 3",
-    svg: "./Library-3.svg",
+    svg: "https://aohkolcopromuzleqove.supabase.co/storage/v1/object/sign/Maps/Library-3.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJNYXBzL0xpYnJhcnktMy5zdmciLCJpYXQiOjE3MTMyODcxMTUsImV4cCI6MTc0NDgyMzExNX0.5wNF7SAq_3XIOwycrQhEba6YAUr1X_OMP_LH9YbOi2A&t=2024-04-16T17%3A05%3A15.724Z",
     svgScale: 0.01,
     position: [-0.05, 0.17],
     extrudedSections: ["A-WALL-FULL"],
@@ -1967,7 +1967,7 @@ const floorProperties = [
   },
   {
     name: "Roof",
-    svg: "./Library-4.svg",
+    svg: "https://aohkolcopromuzleqove.supabase.co/storage/v1/object/sign/Maps/Library-4.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJNYXBzL0xpYnJhcnktNC5zdmciLCJpYXQiOjE3MTMyODcxMjMsImV4cCI6MTc0NDgyMzEyM30.ZBPiaevWngeuYsgxcaJNsUyOixKoTBnCrc6P0BIqFgQ&t=2024-04-16T17%3A05%3A23.294Z",
     svgScale: 0.01,
     position: [0.2, -0.25],
     extrudedSections: [],

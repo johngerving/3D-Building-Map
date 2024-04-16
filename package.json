@@ -1,0 +1,20 @@
+{
+  "name": "3d-building-map",
+  "version": "1.0.0",
+  "description": "A project allowing users to visualize a 3D floor plan of a building and access information about locations inside the building.",
+  "main": "main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fuzzysort": "^2.0.4",
+    "gsap": "^3.12.5",
+    "three": "^0.163.0",
+    "tween": "^0.9.0",
+    "vite": "^5.2.8"
+  }
+}
