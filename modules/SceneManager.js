@@ -31,6 +31,7 @@ class SceneManager {
 
     this.controls = controls;
 
+    this.currentSelectedFloor;
     this.currentSelectedLocation;
   }
 
@@ -255,6 +256,7 @@ class SceneManager {
         this.currentSelectedLocation.removeFromParent();
       }
     }
+    this.render();
   };
 
   toggleFloorLocationsVisibility = (floor, isVisible) => {
@@ -287,10 +289,7 @@ class SceneManager {
         extruded_path.position.z = other_path.position.z;
       } else {
         // Get properties of current floor
-        let floorProperty =
-          this.floorProperties[
-            this.floorProperties.findIndex((elem) => elem["name"] == floor.name)
-          ];
+        let floorProperty = this.getFloorPropertyByFloor(floor);
 
         // Enable extruded mesh
         extruded_mesh.visible = true;
@@ -361,6 +360,12 @@ class SceneManager {
         controls.update();
       },
     });
+  };
+
+  getFloorPropertyByFloor = (floor) => {
+    return this.floorProperties[
+      this.floorProperties.findIndex((elem) => elem["name"] == floor.name)
+    ];
   };
 }
 

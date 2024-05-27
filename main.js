@@ -1506,10 +1506,11 @@ const floorProperties = [
     ],
   },
   {
+    // https://aohkolcopromuzleqove.supabase.co/storage/v1/object/sign/Maps/Library-3.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJNYXBzL0xpYnJhcnktMy5zdmciLCJpYXQiOjE3MTMyODcxMTUsImV4cCI6MTc0NDgyMzExNX0.5wNF7SAq_3XIOwycrQhEba6YAUr1X_OMP_LH9YbOi2A&t=2024-04-16T17%3A05%3A15.724Z
     name: "Floor 3",
-    svg: "https://aohkolcopromuzleqove.supabase.co/storage/v1/object/sign/Maps/Library-3.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJNYXBzL0xpYnJhcnktMy5zdmciLCJpYXQiOjE3MTMyODcxMTUsImV4cCI6MTc0NDgyMzExNX0.5wNF7SAq_3XIOwycrQhEba6YAUr1X_OMP_LH9YbOi2A&t=2024-04-16T17%3A05%3A15.724Z",
+    svg: "https://aohkolcopromuzleqove.supabase.co/storage/v1/object/sign/Maps/Library-3__1_.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJNYXBzL0xpYnJhcnktM19fMV8uc3ZnIiwiaWF0IjoxNzE2NDg3MzgwLCJleHAiOjE3NDgwMjMzODB9.q5TJW587DjEE_hgkWByYQ-TYHW-VCxjWXgeAd87NefQ&t=2024-05-23T18%3A03%3A00.912Z",
     svgScale: 0.01,
-    position: [-0.05, 0.17],
+    position: [0.11, 0.1],
     extrudedSections: ["A-WALL-FULL"],
     floorLayer: { layer: "A-FLOOR-OUTLINE", enabled: true },
     extrudeDepth: 30,
@@ -1961,12 +1962,13 @@ const floorProperties = [
     ],
   },
   {
+    // https://aohkolcopromuzleqove.supabase.co/storage/v1/object/sign/Maps/Library-4.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJNYXBzL0xpYnJhcnktNC5zdmciLCJpYXQiOjE3MTMyODcxMjMsImV4cCI6MTc0NDgyMzEyM30.ZBPiaevWngeuYsgxcaJNsUyOixKoTBnCrc6P0BIqFgQ&t=2024-04-16T17%3A05%3A23.294Z
     name: "Roof",
-    svg: "https://aohkolcopromuzleqove.supabase.co/storage/v1/object/sign/Maps/Library-4.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJNYXBzL0xpYnJhcnktNC5zdmciLCJpYXQiOjE3MTMyODcxMjMsImV4cCI6MTc0NDgyMzEyM30.ZBPiaevWngeuYsgxcaJNsUyOixKoTBnCrc6P0BIqFgQ&t=2024-04-16T17%3A05%3A23.294Z",
+    svg: "https://aohkolcopromuzleqove.supabase.co/storage/v1/object/sign/Maps/Library-4__1_.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJNYXBzL0xpYnJhcnktNF9fMV8uc3ZnIiwiaWF0IjoxNzE2NDg3NDAxLCJleHAiOjE3NDgwMjM0MDF9.bfwJf10qGRgJaS0HJVn1wr6blVea3ppVbrtJbFAJTaQ&t=2024-05-23T18%3A03%3A21.207Z",
     svgScale: 0.01,
     position: [0.2, -0.25],
     extrudedSections: [],
-    floorLayer: { layer: "", enabled: false },
+    floorLayer: { layer: "A-FLOOR-OUTLINE", enabled: true },
     extrudeDepth: 0,
     locations: [],
   },
