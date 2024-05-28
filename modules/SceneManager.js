@@ -166,8 +166,12 @@ class SceneManager {
 
   locationUIHandler = (location) => {
     // Update information panel with location information and open information panel
-    this.uiManager.updateInformationPanel(location);
-    this.uiManager.toggleInformationPanel(true);
+    this.uiManager.informationPanel.update(location);
+    this.uiManager.informationPanel.toggle(true);
+
+    this.uiManager.searchBar.setValue(location.name);
+    this.uiManager.searchBar.toggleClearButton(true);
+
     this.toggleLocationIndicator(location, true);
   };
 
