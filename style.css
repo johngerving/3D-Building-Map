@@ -98,11 +98,25 @@ button {
 }
 
 #information-panel-name {
-  margin: 70px 10px 10px 10px;
+  margin: 10px;
 }
 
 #information-panel-description {
   margin: 10px;
+}
+
+#information-panel li {
+  list-style-type: none;
+}
+
+.floor-selector {
+  width: 100%;
+  display: block;
+  border: none;
+  padding: 15px;
+  text-align: left;
+  font-size: 1rem;
+  background-color: transparent;
 }
 
 .material-symbols-outlined {
@@ -172,6 +186,7 @@ button {
   }
 
   #floors button:hover,
+  .floor-selector:hover,
   #search-items li button:hover {
     background-color: rgba(179, 179, 179, 0.333);
   }
