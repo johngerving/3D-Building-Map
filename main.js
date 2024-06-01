@@ -1,5 +1,6 @@
 import { SceneManager, sortFloorsByName } from "./modules/SceneManager.js";
-import { EditorUIManager } from "./modules/EditorUIManager.js";
+import { UIManager } from "./modules/UIManager.js";
+import { SearchBar } from "./modules/SearchBar.js";
 
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
@@ -1999,17 +2000,25 @@ const sceneManager = new SceneManager(
 );
 sceneManager.constructScene();
 
-const editorUIManager = new EditorUIManager(floorProperties);
+const uiManager = new UIManager(floorProperties);
 
-sceneManager.setUIManager(editorUIManager);
-editorUIManager.setSceneManager(sceneManager);
+sceneManager.setUIManager(UIManager);
+uiManager.setSceneManager(sceneManager);
+
+const searchBar = new SearchBar(
+  floorProperties,
+  sceneManager,
+  uiManager.informationPanel
+);
+
+uiManager.setSearchBar(searchBar);
 
 sceneManager
   .addFloors()
   .then((floorGroups) => sortFloorsByName(floorProperties, floorGroups))
   .then((floorGroups) => {
     sceneManager.addLocationUI();
-    editorUIManager.populateUI(floorGroups);
+    uiManager.populateUI(floorGroups);
     sceneManager.render();
   });
 
