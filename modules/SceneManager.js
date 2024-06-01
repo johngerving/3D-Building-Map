@@ -33,6 +33,8 @@ class SceneManager {
 
     this.currentSelectedFloor;
     this.currentSelectedLocation;
+
+    this.floorGroups;
   }
 
   constructScene() {
@@ -77,12 +79,15 @@ class SceneManager {
 
   addFloors() {
     // Load floor SVGs and add to scene
-    return loadFloors(this.floorProperties).then((floorGroups) => {
+    let floorGroups = loadFloors(this.floorProperties).then((floorGroups) => {
       floorGroups.forEach((floorGroup) => {
         this.scene.add(floorGroup);
       });
       return floorGroups;
     });
+    this.floorGroups = floorGroups;
+
+    return floorGroups;
   }
 
   resizeRendererToDisplaySize(renderer) {

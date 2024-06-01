@@ -6,7 +6,7 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { CSS2DRenderer } from "three/addons/renderers/CSS2DRenderer.js";
 
 // Floor properties - defines name of floor, location of svg, which sections are extruded, and the locations on the floor
-const floorProperties = [
+let floorProperties = [
   {
     name: "Basement",
     svg: "https://aohkolcopromuzleqove.supabase.co/storage/v1/object/sign/Maps/Library-B.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJNYXBzL0xpYnJhcnktQi5zdmciLCJpYXQiOjE3MTMyODcwNDIsImV4cCI6MTc0NDgyMzA0Mn0.i4ACUeQrptv0ceCCtGfE0J8BaIl3lU2rL7iBIIcVlHw&t=2024-04-16T17%3A04%3A02.170Z",

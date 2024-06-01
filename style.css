@@ -109,6 +109,10 @@ button {
   list-style-type: none;
 }
 
+.form-group {
+  display: block;
+}
+
 .floor-selector {
   width: 100%;
   display: block;

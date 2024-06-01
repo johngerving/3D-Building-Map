@@ -54,6 +54,61 @@ class EditorPanel extends InformationPanel {
   floorView = (floorProperty) => {
     this.clear();
     this.addHeader(floorProperty.name);
+
+    const form = document.createElement("form");
+
+    const name = this.addFormInput("Name");
+    form.appendChild(name);
+
+    const svg = this.addFormInput("SVG");
+    form.appendChild(svg);
+
+    const scale = this.addFormInput("Scale");
+    form.appendChild(scale);
+
+    const positionDiv = document.createElement("div");
+    positionDiv.setAttribute("class", "form-group");
+
+    const xInput = document.createElement("input");
+    xInput.setAttribute("type", "text");
+    xInput.setAttribute("name", "XPosition");
+
+    const yInput = document.createElement("input");
+    yInput.setAttribute("type", "text");
+    yInput.setAttribute("name", "YPosition");
+
+    const xLabel = document.createElement("label");
+    xLabel.setAttribute("for", "XPosition");
+    xLabel.appendChild(document.createTextNode("X"));
+
+    const yLabel = document.createElement("label");
+    yLabel.setAttribute("for", "YPosition");
+    yLabel.appendChild(document.createTextNode("Y"));
+
+    positionDiv.appendChild(xLabel);
+    positionDiv.appendChild(xInput);
+    positionDiv.appendChild(yLabel);
+    positionDiv.appendChild(yInput);
+
+    form.appendChild(positionDiv);
+
+    this.information_panel.appendChild(form);
+  };
+
+  addFormInput = (name) => {
+    const div = document.createElement("div");
+    div.setAttribute("class", "form-group");
+
+    const input = document.createElement("input");
+    input.setAttribute("type", "text");
+    input.setAttribute("name", name);
+    const label = document.createElement("label");
+    label.setAttribute("for", name);
+    label.appendChild(document.createTextNode(name));
+
+    div.appendChild(label);
+    div.appendChild(input);
+    return div;
   };
 }
 
