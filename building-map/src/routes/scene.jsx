@@ -2,11 +2,10 @@ import * as THREE from "three";
 import { useState, useMemo, useRef, useLayoutEffect } from "react";
 import { Canvas, useLoader, useFrame } from "@react-three/fiber";
 import { SVGLoader } from "three/examples/jsm/loaders/SVGLoader";
-import { OrbitControls } from "@react-three/drei";
+import * as BufferGeometryUtils from "three/addons/utils/BufferGeometryUtils.js";
+import { OrbitControls, Merged } from "@react-three/drei";
 
-function FloorOutline({ paths }) {}
-
-function Walls({ paths }) {
+function FloorOutline({ position = [0, 0, 0], paths, floorProps }) {
   const [shapePaths, strokePaths] = useMemo(() => {
     let shapePaths = [];
     let strokePaths = [];
@@ -47,20 +46,29 @@ function Walls({ paths }) {
     return geometries;
   }, [shapePaths, strokePaths]);
 
+  const mergedGeometry = useMemo(() => {
+    const merged = BufferGeometryUtils.mergeGeometries(geometries);
+    merged.computeBoundingSphere();
+    return merged;
+  }, [geometries]);
+
   return (
-    <>
-      {geometries.map((geometry, index) => {
-        return (
-          <mesh key={index} geometry={geometry}>
-            <meshStandardMaterial color={0x000000} side={THREE.DoubleSide} />
-          </mesh>
-        );
-      })}
-    </>
+    <mesh
+      position={position}
+      scale={[
+        floorProps.svgScale,
+        -1 * floorProps.svgScale,
+        floorProps.svgScale,
+      ]}
+      rotation-x={-Math.PI / 2}
+      geometry={mergedGeometry}
+    >
+      <meshPhongMaterial side={THREE.DoubleSide} />
+    </mesh>
   );
 }
 
-function Map({ paths }) {
+function Walls({ position = [0, 0, 0], paths, floorProps }) {
   const [shapePaths, strokePaths] = useMemo(() => {
     let shapePaths = [];
     let strokePaths = [];
@@ -101,16 +109,88 @@ function Map({ paths }) {
     return geometries;
   }, [shapePaths, strokePaths]);
 
+  const mergedGeometry = useMemo(() => {
+    const merged = BufferGeometryUtils.mergeGeometries(geometries);
+    merged.computeBoundingSphere();
+    return merged;
+  }, [geometries]);
+
   return (
-    <>
-      {geometries.map((geometry, index) => {
-        return (
-          <mesh key={index} geometry={geometry}>
-            <meshStandardMaterial color={0x000000} side={THREE.DoubleSide} />
-          </mesh>
+    <mesh
+      position={position}
+      scale={[
+        floorProps.svgScale,
+        -1 * floorProps.svgScale,
+        floorProps.svgScale,
+      ]}
+      rotation-x={-Math.PI / 2}
+      geometry={mergedGeometry}
+    >
+      <meshStandardMaterial color={0x000000} side={THREE.DoubleSide} />
+    </mesh>
+  );
+}
+
+function Map({ position = [0, 0, 0], paths, floorProps }) {
+  const [shapePaths, strokePaths] = useMemo(() => {
+    let shapePaths = [];
+    let strokePaths = [];
+
+    paths.forEach((path) => {
+      const fillColor = path.userData.style.fill;
+      const strokeColor = path.userData.style.stroke;
+
+      if (fillColor !== undefined && fillColor !== "none") {
+        shapePaths.push(path);
+      }
+      if (strokeColor !== undefined && strokeColor !== "none") {
+        strokePaths.push(path);
+      }
+    });
+
+    return [shapePaths, strokePaths];
+  }, [paths]);
+
+  const geometries = useMemo(() => {
+    let geometries = [];
+
+    shapePaths.map((path) => {
+      const shapes = SVGLoader.createShapes(path);
+      shapes.forEach((shape) => {
+        geometries.push(new THREE.ShapeGeometry(shape).toNonIndexed());
+      });
+    });
+
+    strokePaths.forEach((path) => {
+      path.subPaths.forEach((subPath) => {
+        geometries.push(
+          SVGLoader.pointsToStroke(subPath.getPoints(), path.userData.style)
         );
-      })}
-    </>
+      });
+    });
+
+    return geometries;
+  }, [shapePaths, strokePaths]);
+
+  const mergedGeometry = useMemo(() => {
+    const merged = BufferGeometryUtils.mergeGeometries(geometries);
+    merged.computeBoundingSphere();
+    return merged;
+  }, [geometries]);
+
+  return (
+    <mesh
+      position={position}
+      scale={[
+        floorProps.svgScale,
+        -1 * floorProps.svgScale,
+        floorProps.svgScale,
+      ]}
+      rotation-x={-Math.PI / 2}
+      geometry={mergedGeometry}
+    >
+      <meshStandardMaterial color={0x000000} side={THREE.DoubleSide} />
+    </mesh>
   );
 }
 
@@ -158,16 +238,22 @@ function Floor({ floorProps }) {
     const sphere = new THREE.Box3()
       .setFromObject(ref.current)
       .getBoundingSphere(new THREE.Sphere());
-    // ref.current.position.set(-sphere.center.x, -sphere.center.y, 0);
-    // ref.current.position.set(0, 0, 0);
-    console.log(ref.current.position);
+    ref.current.position.set(-sphere.center.x, 0, -sphere.center.z);
   });
 
   return (
     <group ref={ref}>
-      <Map paths={mapPaths} />
-      <Walls paths={wallPaths} />
-      <FloorOutline paths={outlinePaths} />
+      <Map
+        position={[0, floorProps.verticalGap, 0]}
+        paths={mapPaths}
+        floorProps={floorProps}
+      />
+      <Walls
+        position={[0, floorProps.verticalGap, 0]}
+        paths={wallPaths}
+        floorProps={floorProps}
+      />
+      <FloorOutline paths={outlinePaths} floorProps={floorProps} />
     </group>
   );
 }
@@ -217,7 +303,7 @@ export default function Scene({ buildingProps }) {
         <OrbitControls makeDefault />
         <directionalLight args={[0xffffff, 2.5]} />
         <ambientLight args={[0xcfe2e3]} />
-        <Box position={[0, 0, 0]} />
+        <Box position={[0, 3, 0]} />
         <Building buildingProps={buildingProps} />
       </Canvas>
     </div>
