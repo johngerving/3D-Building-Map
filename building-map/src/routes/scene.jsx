@@ -88,46 +88,84 @@ function Walls({ position = [0, 0, 0], paths, floorProps }) {
     return [shapePaths, strokePaths];
   }, [paths]);
 
-  const geometries = useMemo(() => {
-    let geometries = [];
+  const shapeGeometries = useMemo(() => {
+    let shapeGeometries = [];
 
     shapePaths.map((path) => {
+      console.log(path);
       const shapes = SVGLoader.createShapes(path);
       shapes.forEach((shape) => {
-        geometries.push(new THREE.ShapeGeometry(shape).toNonIndexed());
+        shapeGeometries.push(new THREE.ShapeGeometry(shape).toNonIndexed());
       });
     });
 
     strokePaths.forEach((path) => {
       path.subPaths.forEach((subPath) => {
-        geometries.push(
+        shapeGeometries.push(
           SVGLoader.pointsToStroke(subPath.getPoints(), path.userData.style)
         );
       });
     });
 
-    return geometries;
+    return shapeGeometries;
   }, [shapePaths, strokePaths]);
 
-  const mergedGeometry = useMemo(() => {
-    const merged = BufferGeometryUtils.mergeGeometries(geometries);
+  const extrudeGeometries = useMemo(() => {
+    let extrudeGeometries = [];
+    paths.map((path) => {
+      const shapes = SVGLoader.createShapes(path);
+
+      shapes.forEach((shape) => {
+        const extrudeGeometry = new THREE.ExtrudeGeometry(shape, {
+          depth: floorProps.extrudeDepth,
+          bevelEnabled: false,
+        });
+        extrudeGeometry.computeVertexNormals();
+        extrudeGeometries.push(extrudeGeometry);
+      });
+    });
+    return extrudeGeometries;
+  }, [paths]);
+
+  const mergedShapeGeometry = useMemo(() => {
+    const merged = BufferGeometryUtils.mergeGeometries(shapeGeometries);
     merged.computeBoundingSphere();
     return merged;
-  }, [geometries]);
+  }, [shapeGeometries]);
+
+  const mergedExtrudeGeometry = useMemo(() => {
+    const merged = BufferGeometryUtils.mergeGeometries(extrudeGeometries);
+    merged.computeBoundingSphere();
+    return merged;
+  }, [extrudeGeometries]);
 
   return (
-    <mesh
-      position={position}
-      scale={[
-        floorProps.svgScale,
-        -1 * floorProps.svgScale,
-        floorProps.svgScale,
-      ]}
-      rotation-x={-Math.PI / 2}
-      geometry={mergedGeometry}
-    >
-      <meshStandardMaterial color={0x000000} side={THREE.DoubleSide} />
-    </mesh>
+    <>
+      <mesh
+        position={position}
+        scale={[
+          floorProps.svgScale,
+          -1 * floorProps.svgScale,
+          floorProps.svgScale,
+        ]}
+        rotation-x={-Math.PI / 2}
+        geometry={mergedShapeGeometry}
+      >
+        <meshStandardMaterial color={0x000000} side={THREE.DoubleSide} />
+      </mesh>
+      <mesh
+        position={position}
+        scale={[
+          floorProps.svgScale,
+          -1 * floorProps.svgScale,
+          floorProps.svgScale,
+        ]}
+        rotation-x={-Math.PI / 2}
+        geometry={mergedExtrudeGeometry}
+      >
+        <meshPhongMaterial transparent opacity={0.5} />
+      </mesh>
+    </>
   );
 }
 
@@ -205,7 +243,7 @@ function groupPaths(paths) {
   return groupedPaths;
 }
 
-function Floor({ floorProps }) {
+function Floor({ yPos, floorProps }) {
   const { paths } = useLoader(SVGLoader, floorProps.svg);
 
   const groupedPaths = useMemo(() => {
@@ -238,7 +276,7 @@ function Floor({ floorProps }) {
     const sphere = new THREE.Box3()
       .setFromObject(ref.current)
       .getBoundingSphere(new THREE.Sphere());
-    ref.current.position.set(-sphere.center.x, 0, -sphere.center.z);
+    ref.current.position.set(-sphere.center.x, yPos, -sphere.center.z);
   });
 
   return (
@@ -262,37 +300,9 @@ function Building({ buildingProps }) {
   return (
     <>
       {buildingProps.map((floorProps, index) => {
-        if (index !== 3) {
-          return null;
-        } else {
-          return <Floor key={floorProps.name} floorProps={floorProps} />;
-        }
+        return <Floor yPos={0} key={floorProps.name} floorProps={floorProps} />;
       })}
     </>
-  );
-}
-
-function Box(props) {
-  // This reference will give us direct access to the mesh
-  const meshRef = useRef();
-  // Set up state for the hovered and active state
-  const [hovered, setHover] = useState(false);
-  const [active, setActive] = useState(false);
-  // Subscribe this component to the render-loop, rotate the mesh every frame
-  useFrame((state, delta) => (meshRef.current.rotation.x += delta));
-  // Return view, these are regular three.js elements expressed in JSX
-  return (
-    <mesh
-      {...props}
-      ref={meshRef}
-      scale={active ? 1.5 : 1}
-      onClick={(event) => setActive(!active)}
-      onPointerOver={(event) => setHover(true)}
-      onPointerOut={(event) => setHover(false)}
-    >
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={hovered ? "hotpink" : "orange"} />
-    </mesh>
   );
 }
 
@@ -303,7 +313,6 @@ export default function Scene({ buildingProps }) {
         <OrbitControls makeDefault />
         <directionalLight args={[0xffffff, 2.5]} />
         <ambientLight args={[0xcfe2e3]} />
-        <Box position={[0, 3, 0]} />
         <Building buildingProps={buildingProps} />
       </Canvas>
     </div>
