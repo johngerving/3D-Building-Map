@@ -3,7 +3,7 @@ import { useState, useMemo, useRef, useLayoutEffect } from "react";
 import { Canvas, useLoader, useFrame } from "@react-three/fiber";
 import { SVGLoader } from "three/examples/jsm/loaders/SVGLoader";
 import * as BufferGeometryUtils from "three/addons/utils/BufferGeometryUtils.js";
-import { OrbitControls, Merged } from "@react-three/drei";
+import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
 
 function FloorOutline({ position = [0, 0, 0], paths, floorProps }) {
   const [shapePaths, strokePaths] = useMemo(() => {
@@ -92,7 +92,6 @@ function Walls({ position = [0, 0, 0], paths, floorProps }) {
     let shapeGeometries = [];
 
     shapePaths.map((path) => {
-      console.log(path);
       const shapes = SVGLoader.createShapes(path);
       shapes.forEach((shape) => {
         shapeGeometries.push(new THREE.ShapeGeometry(shape).toNonIndexed());
@@ -142,7 +141,7 @@ function Walls({ position = [0, 0, 0], paths, floorProps }) {
   return (
     <>
       <mesh
-        position={position}
+        position={[0, floorProps.verticalGap, 0]}
         scale={[
           floorProps.svgScale,
           -1 * floorProps.svgScale,
@@ -154,7 +153,24 @@ function Walls({ position = [0, 0, 0], paths, floorProps }) {
         <meshStandardMaterial color={0x000000} side={THREE.DoubleSide} />
       </mesh>
       <mesh
-        position={position}
+        position={[
+          0,
+          floorProps.extrudeDepth * floorProps.svgScale +
+            floorProps.verticalGap * 2.5,
+          0,
+        ]}
+        scale={[
+          floorProps.svgScale,
+          -1 * floorProps.svgScale,
+          floorProps.svgScale,
+        ]}
+        rotation-x={-Math.PI / 2}
+        geometry={mergedShapeGeometry}
+      >
+        <meshStandardMaterial color={0x000000} side={THREE.DoubleSide} />
+      </mesh>
+      <mesh
+        position={[0, floorProps.verticalGap * 1.5, 0]}
         scale={[
           floorProps.svgScale,
           -1 * floorProps.svgScale,
@@ -162,7 +178,9 @@ function Walls({ position = [0, 0, 0], paths, floorProps }) {
         ]}
         rotation-x={-Math.PI / 2}
         geometry={mergedExtrudeGeometry}
+        renderOrder={-1}
       >
+        {/* <meshStandardMaterial /> */}
         <meshPhongMaterial transparent opacity={0.5} />
       </mesh>
     </>
@@ -276,7 +294,11 @@ function Floor({ yPos, floorProps }) {
     const sphere = new THREE.Box3()
       .setFromObject(ref.current)
       .getBoundingSphere(new THREE.Sphere());
-    ref.current.position.set(-sphere.center.x, yPos, -sphere.center.z);
+    ref.current.position.set(
+      -sphere.center.x + floorProps.position[0],
+      yPos,
+      -sphere.center.z - floorProps.position[1]
+    );
   });
 
   return (
@@ -286,21 +308,61 @@ function Floor({ yPos, floorProps }) {
         paths={mapPaths}
         floorProps={floorProps}
       />
-      <Walls
-        position={[0, floorProps.verticalGap, 0]}
-        paths={wallPaths}
-        floorProps={floorProps}
-      />
-      <FloorOutline paths={outlinePaths} floorProps={floorProps} />
+      {floorProps.extrudedSections.length > 0 && floorProps.extrudeDepth > 0 ? (
+        <Walls
+          position={[0, floorProps.verticalGap, 0]}
+          paths={wallPaths}
+          floorProps={floorProps}
+        />
+      ) : null}
+      {floorProps.floorLayer.layer !== undefined &&
+      floorProps.floorLayer.enabled ? (
+        <>
+          <FloorOutline paths={outlinePaths} floorProps={floorProps} />
+          {floorProps.extrudeDepth > 0 ? (
+            <FloorOutline
+              position={[
+                0,
+                floorProps.extrudeDepth * floorProps.svgScale +
+                  floorProps.verticalGap * 2,
+                0,
+              ]}
+              paths={outlinePaths}
+              floorProps={floorProps}
+            />
+          ) : null}
+        </>
+      ) : null}
     </group>
   );
 }
 
 function Building({ buildingProps }) {
+  function getYPosFromIndex(index) {
+    let height = 0;
+    for (let i = 0; i < index; i++) {
+      if (
+        buildingProps[i].extrudedSections.length > 0 &&
+        buildingProps[i].extrudeDepth > 0
+      ) {
+        height +=
+          buildingProps[i].extrudeDepth * buildingProps[i].svgScale +
+          buildingProps[i].verticalGap * 3;
+      }
+    }
+    return height;
+  }
+
   return (
     <>
-      {buildingProps.map((floorProps, index) => {
-        return <Floor yPos={0} key={floorProps.name} floorProps={floorProps} />;
+      {buildingProps.slice(0, 5).map((floorProps, index) => {
+        return (
+          <Floor
+            yPos={getYPosFromIndex(index)}
+            key={floorProps.name}
+            floorProps={floorProps}
+          />
+        );
       })}
     </>
   );
@@ -308,10 +370,17 @@ function Building({ buildingProps }) {
 
 export default function Scene({ buildingProps }) {
   return (
-    <div style={{ width: "100vw", height: "100vh" }}>
-      <Canvas>
+    <div style={{ width: "100vw", height: "100vh", overflow: "hidden" }}>
+      <Canvas
+        camera={{
+          fov: 75,
+          aspect: 2,
+          near: 0.1,
+          far: 500,
+        }}
+      >
         <OrbitControls makeDefault />
-        <directionalLight args={[0xffffff, 2.5]} />
+        <directionalLight args={[0xffffff, 2.5]} position={[-1, 2, 4]} />
         <ambientLight args={[0xcfe2e3]} />
         <Building buildingProps={buildingProps} />
       </Canvas>
