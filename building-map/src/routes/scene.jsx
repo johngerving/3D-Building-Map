@@ -180,7 +180,6 @@ function Walls({ position = [0, 0, 0], paths, floorProps }) {
         geometry={mergedExtrudeGeometry}
         renderOrder={-1}
       >
-        {/* <meshStandardMaterial /> */}
         <meshPhongMaterial transparent opacity={0.5} />
       </mesh>
     </>
@@ -370,11 +369,10 @@ function Building({ buildingProps }) {
 
 export default function Scene({ buildingProps }) {
   return (
-    <div style={{ width: "100vw", height: "100vh", overflow: "hidden" }}>
+    <div style={{ width: "100vw", height: "100vh" }}>
       <Canvas
         camera={{
           fov: 75,
-          aspect: 2,
           near: 0.1,
           far: 500,
         }}
