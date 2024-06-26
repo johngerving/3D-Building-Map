@@ -5,47 +5,65 @@ import { SVGLoader } from "three/examples/jsm/loaders/SVGLoader";
 import * as BufferGeometryUtils from "three/addons/utils/BufferGeometryUtils.js";
 import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
 
+// Given an array of paths, return an array of two arrays, one containing shape paths and the other containing stroke paths
+function separatePathsIntoShapeAndStroke(paths) {
+  let shapePaths = [];
+  let strokePaths = [];
+
+  paths.forEach((path) => {
+    // Use fillColor and strokeColor properties to determine if path should be pushed to shapePaths, strokePaths, or both
+    const fillColor = path.userData.style.fill;
+    const strokeColor = path.userData.style.stroke;
+
+    if (fillColor !== undefined && fillColor !== "none") {
+      shapePaths.push(path);
+    }
+    if (strokeColor !== undefined && strokeColor !== "none") {
+      strokePaths.push(path);
+    }
+  });
+
+  return [shapePaths, strokePaths];
+}
+
+// Given two arrays, shapePaths, and strokePaths, return an array of geometries created from the shapes and strokes
+function getGeometriesFromShapeAndStroke(shapePaths, strokePaths) {
+  let geometries = [];
+
+  shapePaths.map((path) => {
+    const shapes = SVGLoader.createShapes(path);
+    shapes.forEach((shape) => {
+      // Create a new ShapeGeometry with createShapes and push to geometries array
+      geometries.push(new THREE.ShapeGeometry(shape).toNonIndexed());
+    });
+  });
+
+  strokePaths.forEach((path) => {
+    path.subPaths.forEach((subPath) => {
+      // Create buffer geometry from subpath with pointsToStroke and push to geometries array
+      geometries.push(
+        SVGLoader.pointsToStroke(subPath.getPoints(), path.userData.style)
+      );
+    });
+  });
+
+  return geometries;
+}
+
 function FloorOutline({ position = [0, 0, 0], paths, floorProps }) {
-  const [shapePaths, strokePaths] = useMemo(() => {
-    let shapePaths = [];
-    let strokePaths = [];
+  // Separate floor outline into shape paths and stroke paths
+  const [shapePaths, strokePaths] = useMemo(
+    () => separatePathsIntoShapeAndStroke(paths),
+    [paths]
+  );
 
-    paths.forEach((path) => {
-      const fillColor = path.userData.style.fill;
-      const strokeColor = path.userData.style.stroke;
+  // Get geometries from shapes and strokes
+  const geometries = useMemo(
+    () => getGeometriesFromShapeAndStroke(shapePaths, strokePaths),
+    [shapePaths, strokePaths]
+  );
 
-      if (fillColor !== undefined && fillColor !== "none") {
-        shapePaths.push(path);
-      }
-      if (strokeColor !== undefined && strokeColor !== "none") {
-        strokePaths.push(path);
-      }
-    });
-
-    return [shapePaths, strokePaths];
-  }, [paths]);
-
-  const geometries = useMemo(() => {
-    let geometries = [];
-
-    shapePaths.map((path) => {
-      const shapes = SVGLoader.createShapes(path);
-      shapes.forEach((shape) => {
-        geometries.push(new THREE.ShapeGeometry(shape).toNonIndexed());
-      });
-    });
-
-    strokePaths.forEach((path) => {
-      path.subPaths.forEach((subPath) => {
-        geometries.push(
-          SVGLoader.pointsToStroke(subPath.getPoints(), path.userData.style)
-        );
-      });
-    });
-
-    return geometries;
-  }, [shapePaths, strokePaths]);
-
+  // Merge the geometries
   const mergedGeometry = useMemo(() => {
     const merged = BufferGeometryUtils.mergeGeometries(geometries);
     merged.computeBoundingSphere();
@@ -68,47 +86,48 @@ function FloorOutline({ position = [0, 0, 0], paths, floorProps }) {
   );
 }
 
+function FloorCeiling({ outlinePaths, floorProps }) {
+  return (
+    <>
+      {/* Draw floor and ceiling if property is enabled */}
+      {floorProps.floorLayer.layer !== undefined &&
+      floorProps.floorLayer.enabled ? (
+        <>
+          {/* Lower floor outline */}
+          <FloorOutline paths={outlinePaths} floorProps={floorProps} />
+          {/* Only draw upper floor outline if floor is extruded */}
+          {floorProps.extrudeDepth > 0 ? (
+            <FloorOutline
+              position={[
+                0,
+                floorProps.extrudeDepth * floorProps.svgScale +
+                  floorProps.verticalGap * 2,
+                0,
+              ]}
+              paths={outlinePaths}
+              floorProps={floorProps}
+            />
+          ) : null}
+        </>
+      ) : null}
+    </>
+  );
+}
+
 function Walls({ position = [0, 0, 0], paths, floorProps }) {
-  const [shapePaths, strokePaths] = useMemo(() => {
-    let shapePaths = [];
-    let strokePaths = [];
+  // Separate paths into shape paths and stroke paths
+  const [shapePaths, strokePaths] = useMemo(
+    () => separatePathsIntoShapeAndStroke(paths),
+    [paths]
+  );
 
-    paths.forEach((path) => {
-      const fillColor = path.userData.style.fill;
-      const strokeColor = path.userData.style.stroke;
+  // Make array of geometries for outline of walls
+  const shapeGeometries = useMemo(
+    () => getGeometriesFromShapeAndStroke(shapePaths, strokePaths),
+    [shapePaths, strokePaths]
+  );
 
-      if (fillColor !== undefined && fillColor !== "none") {
-        shapePaths.push(path);
-      }
-      if (strokeColor !== undefined && strokeColor !== "none") {
-        strokePaths.push(path);
-      }
-    });
-
-    return [shapePaths, strokePaths];
-  }, [paths]);
-
-  const shapeGeometries = useMemo(() => {
-    let shapeGeometries = [];
-
-    shapePaths.map((path) => {
-      const shapes = SVGLoader.createShapes(path);
-      shapes.forEach((shape) => {
-        shapeGeometries.push(new THREE.ShapeGeometry(shape).toNonIndexed());
-      });
-    });
-
-    strokePaths.forEach((path) => {
-      path.subPaths.forEach((subPath) => {
-        shapeGeometries.push(
-          SVGLoader.pointsToStroke(subPath.getPoints(), path.userData.style)
-        );
-      });
-    });
-
-    return shapeGeometries;
-  }, [shapePaths, strokePaths]);
-
+  // Make array of geometries for extruded walls
   const extrudeGeometries = useMemo(() => {
     let extrudeGeometries = [];
     paths.map((path) => {
@@ -126,6 +145,7 @@ function Walls({ position = [0, 0, 0], paths, floorProps }) {
     return extrudeGeometries;
   }, [paths]);
 
+  // Merge shape and extruded wall geometries into two geometries
   const mergedShapeGeometry = useMemo(() => {
     const merged = BufferGeometryUtils.mergeGeometries(shapeGeometries);
     merged.computeBoundingSphere();
@@ -140,7 +160,9 @@ function Walls({ position = [0, 0, 0], paths, floorProps }) {
 
   return (
     <>
+      {/* Lower floor wall outline */}
       <mesh
+        // Add gap to lower shape to be above outline plane
         position={[0, floorProps.verticalGap, 0]}
         scale={[
           floorProps.svgScale,
@@ -152,7 +174,9 @@ function Walls({ position = [0, 0, 0], paths, floorProps }) {
       >
         <meshStandardMaterial color={0x000000} side={THREE.DoubleSide} />
       </mesh>
+      {/* Upper floor wall outline */}
       <mesh
+        // Move upper shape up by extrude depth plus gap
         position={[
           0,
           floorProps.extrudeDepth * floorProps.svgScale +
@@ -169,7 +193,9 @@ function Walls({ position = [0, 0, 0], paths, floorProps }) {
       >
         <meshStandardMaterial color={0x000000} side={THREE.DoubleSide} />
       </mesh>
+      {/* Extruded walls */}
       <mesh
+        // Move walls up by gap
         position={[0, floorProps.verticalGap * 1.5, 0]}
         scale={[
           floorProps.svgScale,
@@ -187,46 +213,19 @@ function Walls({ position = [0, 0, 0], paths, floorProps }) {
 }
 
 function Map({ position = [0, 0, 0], paths, floorProps }) {
-  const [shapePaths, strokePaths] = useMemo(() => {
-    let shapePaths = [];
-    let strokePaths = [];
+  // Separate paths into shape paths and stroke paths based on fill and stroke properties
+  const [shapePaths, strokePaths] = useMemo(
+    () => separatePathsIntoShapeAndStroke(paths),
+    [paths]
+  );
 
-    paths.forEach((path) => {
-      const fillColor = path.userData.style.fill;
-      const strokeColor = path.userData.style.stroke;
+  // Create geometries for map, store in one single array
+  const geometries = useMemo(
+    () => getGeometriesFromShapeAndStroke(shapePaths, strokePaths),
+    [shapePaths, strokePaths]
+  );
 
-      if (fillColor !== undefined && fillColor !== "none") {
-        shapePaths.push(path);
-      }
-      if (strokeColor !== undefined && strokeColor !== "none") {
-        strokePaths.push(path);
-      }
-    });
-
-    return [shapePaths, strokePaths];
-  }, [paths]);
-
-  const geometries = useMemo(() => {
-    let geometries = [];
-
-    shapePaths.map((path) => {
-      const shapes = SVGLoader.createShapes(path);
-      shapes.forEach((shape) => {
-        geometries.push(new THREE.ShapeGeometry(shape).toNonIndexed());
-      });
-    });
-
-    strokePaths.forEach((path) => {
-      path.subPaths.forEach((subPath) => {
-        geometries.push(
-          SVGLoader.pointsToStroke(subPath.getPoints(), path.userData.style)
-        );
-      });
-    });
-
-    return geometries;
-  }, [shapePaths, strokePaths]);
-
+  // Merge array of geometries for performance
   const mergedGeometry = useMemo(() => {
     const merged = BufferGeometryUtils.mergeGeometries(geometries);
     merged.computeBoundingSphere();
@@ -236,11 +235,13 @@ function Map({ position = [0, 0, 0], paths, floorProps }) {
   return (
     <mesh
       position={position}
+      // Scale properly
       scale={[
         floorProps.svgScale,
         -1 * floorProps.svgScale,
         floorProps.svgScale,
       ]}
+      // Rotate to be horizontal
       rotation-x={-Math.PI / 2}
       geometry={mergedGeometry}
     >
@@ -249,6 +250,7 @@ function Map({ position = [0, 0, 0], paths, floorProps }) {
   );
 }
 
+// Function that takes in array of paths and adds them to a dictionary grouped by the ID of their parent
 function groupPaths(paths) {
   let groupedPaths = {};
   paths.forEach((path) => {
@@ -261,17 +263,20 @@ function groupPaths(paths) {
 }
 
 function Floor({ yPos, floorProps }) {
-  const { paths } = useLoader(SVGLoader, floorProps.svg);
+  const { paths } = useLoader(SVGLoader, floorProps.svg); // Get paths from SVG
 
+  // Group paths by parent ID
   const groupedPaths = useMemo(() => {
     return groupPaths(paths);
   }, [paths]);
 
+  // Separate paths into three arrays
   const [mapPaths, wallPaths, outlinePaths] = useMemo(() => {
     let mapPaths = [],
       wallPaths = [],
       outlinePaths = [];
 
+    // For each parent ID group in paths, add to wall, outline, or map paths array
     for (const group in groupedPaths) {
       if (floorProps.extrudedSections.includes(group)) {
         wallPaths = wallPaths.concat(groupedPaths[group]);
@@ -288,6 +293,7 @@ function Floor({ yPos, floorProps }) {
     return [mapPaths, wallPaths, outlinePaths];
   }, [groupedPaths]);
 
+  // Center floor group, add offset, and add vertical position
   const ref = useRef();
   useLayoutEffect(() => {
     const sphere = new THREE.Box3()
@@ -307,6 +313,7 @@ function Floor({ yPos, floorProps }) {
         paths={mapPaths}
         floorProps={floorProps}
       />
+      {/* Only add walls if extruded section exists */}
       {floorProps.extrudedSections.length > 0 && floorProps.extrudeDepth > 0 ? (
         <Walls
           position={[0, floorProps.verticalGap, 0]}
@@ -314,32 +321,18 @@ function Floor({ yPos, floorProps }) {
           floorProps={floorProps}
         />
       ) : null}
-      {floorProps.floorLayer.layer !== undefined &&
-      floorProps.floorLayer.enabled ? (
-        <>
-          <FloorOutline paths={outlinePaths} floorProps={floorProps} />
-          {floorProps.extrudeDepth > 0 ? (
-            <FloorOutline
-              position={[
-                0,
-                floorProps.extrudeDepth * floorProps.svgScale +
-                  floorProps.verticalGap * 2,
-                0,
-              ]}
-              paths={outlinePaths}
-              floorProps={floorProps}
-            />
-          ) : null}
-        </>
-      ) : null}
+      <FloorCeiling outlinePaths={outlinePaths} floorProps={floorProps} />
     </group>
   );
 }
 
 function Building({ buildingProps }) {
+  // Given an index for a floor in the building, return the height of the floor by summing the heights of the previous floors
   function getYPosFromIndex(index) {
     let height = 0;
+    // Loop through floors before index
     for (let i = 0; i < index; i++) {
+      // If floor is extruded, add height of floor plus gaps in between layers
       if (
         buildingProps[i].extrudedSections.length > 0 &&
         buildingProps[i].extrudeDepth > 0
@@ -352,9 +345,10 @@ function Building({ buildingProps }) {
     return height;
   }
 
+  // Map buildingProps to Floor components
   return (
     <>
-      {buildingProps.slice(0, 5).map((floorProps, index) => {
+      {buildingProps.map((floorProps, index) => {
         return (
           <Floor
             yPos={getYPosFromIndex(index)}
@@ -370,6 +364,7 @@ function Building({ buildingProps }) {
 export default function Scene({ buildingProps }) {
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
+      {/* Fill entire screen */}
       <Canvas
         camera={{
           fov: 75,
