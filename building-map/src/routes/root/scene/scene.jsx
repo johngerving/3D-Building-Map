@@ -3,7 +3,7 @@ import { useState, useMemo, useRef, useLayoutEffect } from "react";
 import { Canvas, useLoader, useFrame } from "@react-three/fiber";
 import { SVGLoader } from "three/examples/jsm/loaders/SVGLoader";
 import * as BufferGeometryUtils from "three/addons/utils/BufferGeometryUtils.js";
-import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 
 // Given an array of paths, return an array of two arrays, one containing shape paths and the other containing stroke paths
 function separatePathsIntoShapeAndStroke(paths) {
@@ -363,7 +363,14 @@ function Building({ buildingProps }) {
 
 export default function Scene({ buildingProps }) {
   return (
-    <div style={{ width: "100vw", height: "100vh", background: "#cfe2e3" }}>
+    <div
+      style={{
+        width: "100vw",
+        height: "100vh",
+        background:
+          "radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(207,226,227,1) 93%, rgba(205,205,205,1) 100%)",
+      }}
+    >
       {/* Fill entire screen */}
       <Canvas
         camera={{
