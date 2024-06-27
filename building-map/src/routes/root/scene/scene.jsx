@@ -363,7 +363,7 @@ function Building({ buildingProps }) {
 
 export default function Scene({ buildingProps }) {
   return (
-    <div style={{ width: "100vw", height: "100vh" }}>
+    <div style={{ width: "100vw", height: "100vh", background: "#cfe2e3" }}>
       {/* Fill entire screen */}
       <Canvas
         camera={{

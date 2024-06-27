@@ -8,7 +8,7 @@ export default function Root() {
   return (
     <>
       <SearchBar />
-      {/* <Scene buildingProps={buildingProps} /> */}
+      <Scene buildingProps={buildingProps} />
     </>
   );
 }
