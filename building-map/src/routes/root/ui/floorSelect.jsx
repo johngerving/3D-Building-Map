@@ -11,10 +11,10 @@ function FloorButton({ text, isTop, isBottom }) {
     return (
       <button
         onClick={handleClick}
-        className={`bg-white w-11 h-11 border border-gray-100 rounded-t-md ${
+        className={`w-11 h-11 border border-gray-100 rounded-t-md ${
           selected
-            ? "bg-blue-600 text-white border-none"
-            : "hover:text-blue-600"
+            ? "bg-blue-600 text-white border-none shadow-inner"
+            : "bg-white hover:text-blue-600"
         }`}
       >
         {text}
@@ -24,10 +24,10 @@ function FloorButton({ text, isTop, isBottom }) {
     return (
       <button
         onClick={handleClick}
-        className={`bg-white w-11 h-11 border border-gray-100 rounded-b-md ${
+        className={`w-11 h-11 border border-gray-100 rounded-b-md ${
           selected
-            ? "bg-blue-600 text-white border-none"
-            : "hover:text-blue-600"
+            ? "bg-blue-600 text-white border-none shadow-inner"
+            : "bg-white hover:text-blue-600"
         }`}
       >
         {text}
@@ -37,10 +37,10 @@ function FloorButton({ text, isTop, isBottom }) {
     return (
       <button
         onClick={handleClick}
-        className={`bg-white w-11 h-11 border border-gray-100 ${
+        className={`w-11 h-11 border border-gray-100 ${
           selected
-            ? "bg-blue-600 text-white border-none"
-            : "hover:text-blue-600"
+            ? "bg-blue-600 text-white border-none shadow-inner"
+            : "bg-white hover:text-blue-600"
         }`}
       >
         {text}
@@ -56,7 +56,7 @@ export default function FloorSelect({ buildingProps }) {
         return (
           <FloorButton
             key={index}
-            text={buildingProps.length - 1 - index}
+            text={buildingProps[buildingProps.length - 1 - index].name}
             isTop={index == 0}
             isBottom={index == buildingProps.length - 1}
           />
