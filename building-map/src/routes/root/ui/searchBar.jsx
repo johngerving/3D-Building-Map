@@ -10,6 +10,7 @@ function CloseButton() {
       onPointerLeave={() => setHover(false)}
       className="absolute right-4 top-1"
     >
+      {/* Show SVG icon, blue on hover */}
       <CloseIcon fill={hover ? "#2563EB" : "black"} />
     </button>
   );
@@ -25,6 +26,7 @@ export default function SearchBar() {
         value={text}
         onChange={(e) => setText(e.target.value)}
       ></input>
+      {/* Only show clear button if input has value */}
       {text.length > 0 ? <CloseButton /> : null}
     </div>
   );

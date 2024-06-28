@@ -1,7 +1,9 @@
 import { useState } from "react";
 
 function FloorButton({ text, onSelect, selected, isTop, isBottom }) {
+  // Select floor when clicked
   if (isTop) {
+    // Rounded top corners if at top of list
     return (
       <button
         onClick={onSelect}
@@ -15,6 +17,7 @@ function FloorButton({ text, onSelect, selected, isTop, isBottom }) {
       </button>
     );
   } else if (isBottom) {
+    // Rounded bottom corners if at bottom of list
     return (
       <button
         onClick={onSelect}
@@ -50,12 +53,14 @@ export default function FloorSelect({
 }) {
   return (
     <div className="z-10 absolute bottom-4 right-4 flex flex-col-reverse shadow-md">
+      {/* Add button for each floor */}
       {buildingProps.map((floorProps, index) => {
         return (
           <FloorButton
             key={index}
             text={buildingProps[index].name}
             onSelect={() => {
+              // When button clicked, select or unselected floor
               if (selectedFloorIndex == index) {
                 setSelectedFloorIndex(null);
               } else {

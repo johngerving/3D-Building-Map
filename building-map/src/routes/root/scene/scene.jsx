@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { useState, useMemo, useRef, useLayoutEffect } from "react";
-import { Canvas, useLoader, useFrame } from "@react-three/fiber";
+import { Canvas, useLoader, useFrame, useThree } from "@react-three/fiber";
 import { SVGLoader } from "three/examples/jsm/loaders/SVGLoader";
 import * as BufferGeometryUtils from "three/addons/utils/BufferGeometryUtils.js";
 import { OrbitControls } from "@react-three/drei";
@@ -86,7 +86,7 @@ function FloorOutline({ position = [0, 0, 0], paths, floorProps }) {
   );
 }
 
-function FloorCeiling({ outlinePaths, floorProps }) {
+function FloorCeiling({ outlinePaths, floorProps, selected }) {
   return (
     <>
       {/* Draw floor and ceiling if property is enabled */}
@@ -95,8 +95,8 @@ function FloorCeiling({ outlinePaths, floorProps }) {
         <>
           {/* Lower floor outline */}
           <FloorOutline paths={outlinePaths} floorProps={floorProps} />
-          {/* Only draw upper floor outline if floor is extruded */}
-          {floorProps.extrudeDepth > 0 ? (
+          {/* Only draw upper floor outline if floor is extruded, don't draw if selected */}
+          {floorProps.extrudeDepth > 0 && !selected ? (
             <FloorOutline
               position={[
                 0,
@@ -262,7 +262,7 @@ function groupPaths(paths) {
   return groupedPaths;
 }
 
-function Floor({ yPos, floorProps }) {
+function Floor({ yPos, floorProps, selected }) {
   const { paths } = useLoader(SVGLoader, floorProps.svg); // Get paths from SVG
 
   // Group paths by parent ID
@@ -331,12 +331,16 @@ function Floor({ yPos, floorProps }) {
           floorProps={floorProps}
         />
       ) : null}
-      <FloorCeiling outlinePaths={outlinePaths} floorProps={floorProps} />
+      <FloorCeiling
+        outlinePaths={outlinePaths}
+        floorProps={floorProps}
+        selected={selected}
+      />
     </group>
   );
 }
 
-function Building({ buildingProps }) {
+function Building({ buildingProps, selectedFloorIndex }) {
   // Given an index for a floor in the building, return the height of the floor by summing the heights of the previous floors
   function getYPosFromIndex(index) {
     let height = 0;
@@ -359,13 +363,19 @@ function Building({ buildingProps }) {
   return (
     <>
       {buildingProps.map((floorProps, index) => {
-        return (
-          <Floor
-            yPos={getYPosFromIndex(index)}
-            key={floorProps.name}
-            floorProps={floorProps}
-          />
-        );
+        // Only display if floor is selected or no floor is selected
+        if (index == selectedFloorIndex || selectedFloorIndex == null) {
+          return (
+            <Floor
+              yPos={getYPosFromIndex(index)}
+              key={floorProps.name}
+              floorProps={floorProps}
+              selected={index == selectedFloorIndex}
+            />
+          );
+        } else {
+          return null;
+        }
       })}
     </>
   );
@@ -387,12 +397,16 @@ export default function Scene({ buildingProps, selectedFloorIndex }) {
           fov: 75,
           near: 0.1,
           far: 500,
+          position: [0, 2, 5],
         }}
       >
         <OrbitControls makeDefault />
         <directionalLight args={[0xffffff, 2.5]} position={[-1, 2, 4]} />
         <ambientLight args={[0xcfe2e3]} />
-        <Building buildingProps={buildingProps} />
+        <Building
+          buildingProps={buildingProps}
+          selectedFloorIndex={selectedFloorIndex}
+        />
       </Canvas>
     </div>
   );
