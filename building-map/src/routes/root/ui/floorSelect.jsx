@@ -55,7 +55,13 @@ export default function FloorSelect({
           <FloorButton
             key={index}
             text={buildingProps[index].name}
-            onSelect={() => setSelectedFloorIndex(index)}
+            onSelect={() => {
+              if (selectedFloorIndex == index) {
+                setSelectedFloorIndex(null);
+              } else {
+                setSelectedFloorIndex(index);
+              }
+            }}
             selected={selectedFloorIndex == index}
             isTop={index == buildingProps.length - 1}
             isBottom={index == 0}

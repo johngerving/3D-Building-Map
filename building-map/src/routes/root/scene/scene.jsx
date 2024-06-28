@@ -371,30 +371,6 @@ function Building({ buildingProps }) {
   );
 }
 
-function Box(props) {
-  // This reference will give us direct access to the mesh
-  const meshRef = useRef();
-  // Set up state for the hovered and active state
-  const [hovered, setHover] = useState(false);
-  const [active, setActive] = useState(false);
-  // Subscribe this component to the render-loop, rotate the mesh every frame
-  useFrame((state, delta) => (meshRef.current.rotation.x += delta));
-  // Return view, these are regular three.js elements expressed in JSX
-  return (
-    <mesh
-      {...props}
-      ref={meshRef}
-      scale={active ? 1.5 : 1}
-      onClick={(event) => setActive(!active)}
-      onPointerOver={(event) => setHover(true)}
-      onPointerOut={(event) => setHover(false)}
-    >
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={hovered ? "hotpink" : "orange"} />
-    </mesh>
-  );
-}
-
 export default function Scene({ buildingProps, selectedFloorIndex }) {
   return (
     <div
@@ -413,7 +389,6 @@ export default function Scene({ buildingProps, selectedFloorIndex }) {
           far: 500,
         }}
       >
-        <Box position={[-1.2, 0, 0]} />
         <OrbitControls makeDefault />
         <directionalLight args={[0xffffff, 2.5]} position={[-1, 2, 4]} />
         <ambientLight args={[0xcfe2e3]} />
