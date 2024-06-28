@@ -6,11 +6,21 @@ import { buildingPropertiesData } from "../../assets/buildingProperties.js";
 
 export default function Root() {
   const [buildingProps, setBuildingProps] = useState(buildingPropertiesData);
+  const [selectedFloorIndex, setSelectedFloorIndex] = useState(null);
+  const [selectedLocationIndex, setSelectedLocationIndex] = useState(null);
+
   return (
     <>
       <SearchBar />
-      <FloorSelect buildingProps={buildingProps}></FloorSelect>
-      <Scene buildingProps={buildingProps} />
+      <FloorSelect
+        buildingProps={buildingProps}
+        selectedFloorIndex={selectedFloorIndex}
+        setSelectedFloorIndex={setSelectedFloorIndex}
+      ></FloorSelect>
+      <Scene
+        buildingProps={buildingProps}
+        selectedFloorIndex={selectedFloorIndex}
+      />
     </>
   );
 }

@@ -295,16 +295,26 @@ function Floor({ yPos, floorProps }) {
 
   // Center floor group, add offset, and add vertical position
   const ref = useRef();
+  let center = {};
+
   useLayoutEffect(() => {
     const sphere = new THREE.Box3()
       .setFromObject(ref.current)
       .getBoundingSphere(new THREE.Sphere());
+    ref.current.position.set(-sphere.center.x, yPos, -sphere.center.z);
+    center = {
+      x: -sphere.center.x,
+      z: -sphere.center.z,
+    };
+  }, []);
+
+  useLayoutEffect(() => {
     ref.current.position.set(
-      -sphere.center.x + floorProps.position[0],
+      center.x + floorProps.position[0],
       yPos,
-      -sphere.center.z - floorProps.position[1]
+      center.z - floorProps.position[1]
     );
-  });
+  }, [floorProps.position]);
 
   return (
     <group ref={ref}>
@@ -361,7 +371,31 @@ function Building({ buildingProps }) {
   );
 }
 
-export default function Scene({ buildingProps }) {
+function Box(props) {
+  // This reference will give us direct access to the mesh
+  const meshRef = useRef();
+  // Set up state for the hovered and active state
+  const [hovered, setHover] = useState(false);
+  const [active, setActive] = useState(false);
+  // Subscribe this component to the render-loop, rotate the mesh every frame
+  useFrame((state, delta) => (meshRef.current.rotation.x += delta));
+  // Return view, these are regular three.js elements expressed in JSX
+  return (
+    <mesh
+      {...props}
+      ref={meshRef}
+      scale={active ? 1.5 : 1}
+      onClick={(event) => setActive(!active)}
+      onPointerOver={(event) => setHover(true)}
+      onPointerOut={(event) => setHover(false)}
+    >
+      <boxGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial color={hovered ? "hotpink" : "orange"} />
+    </mesh>
+  );
+}
+
+export default function Scene({ buildingProps, selectedFloorIndex }) {
   return (
     <div
       style={{
@@ -379,6 +413,7 @@ export default function Scene({ buildingProps }) {
           far: 500,
         }}
       >
+        <Box position={[-1.2, 0, 0]} />
         <OrbitControls makeDefault />
         <directionalLight args={[0xffffff, 2.5]} position={[-1, 2, 4]} />
         <ambientLight args={[0xcfe2e3]} />

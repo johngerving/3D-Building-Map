@@ -1,16 +1,10 @@
 import { useState } from "react";
 
-function FloorButton({ text, isTop, isBottom }) {
-  const [selected, setSelected] = useState(false);
-
-  function handleClick() {
-    setSelected(!selected);
-  }
-
+function FloorButton({ text, onSelect, selected, isTop, isBottom }) {
   if (isTop) {
     return (
       <button
-        onClick={handleClick}
+        onClick={onSelect}
         className={`w-11 h-11 border border-gray-100 rounded-t-md ${
           selected
             ? "bg-blue-600 text-white border-none shadow-inner"
@@ -23,7 +17,7 @@ function FloorButton({ text, isTop, isBottom }) {
   } else if (isBottom) {
     return (
       <button
-        onClick={handleClick}
+        onClick={onSelect}
         className={`w-11 h-11 border border-gray-100 rounded-b-md ${
           selected
             ? "bg-blue-600 text-white border-none shadow-inner"
@@ -36,7 +30,7 @@ function FloorButton({ text, isTop, isBottom }) {
   } else {
     return (
       <button
-        onClick={handleClick}
+        onClick={onSelect}
         className={`w-11 h-11 border border-gray-100 ${
           selected
             ? "bg-blue-600 text-white border-none shadow-inner"
@@ -49,16 +43,22 @@ function FloorButton({ text, isTop, isBottom }) {
   }
 }
 
-export default function FloorSelect({ buildingProps }) {
+export default function FloorSelect({
+  buildingProps,
+  selectedFloorIndex,
+  setSelectedFloorIndex,
+}) {
   return (
-    <div className="z-10 absolute bottom-4 right-4 flex flex-col shadow-md">
+    <div className="z-10 absolute bottom-4 right-4 flex flex-col-reverse shadow-md">
       {buildingProps.map((floorProps, index) => {
         return (
           <FloorButton
             key={index}
-            text={buildingProps[buildingProps.length - 1 - index].name}
-            isTop={index == 0}
-            isBottom={index == buildingProps.length - 1}
+            text={buildingProps[index].name}
+            onSelect={() => setSelectedFloorIndex(index)}
+            selected={selectedFloorIndex == index}
+            isTop={index == buildingProps.length - 1}
+            isBottom={index == 0}
           />
         );
       })}
