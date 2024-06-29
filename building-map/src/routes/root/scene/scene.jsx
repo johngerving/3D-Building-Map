@@ -18,7 +18,7 @@ function groupPaths(paths) {
   return groupedPaths;
 }
 
-function Floor({ yPos, floorProps, selected }) {
+function Floor({ yPos, floorProps, selected, visible }) {
   const { paths } = useLoader(SVGLoader, floorProps.svg); // Get paths from SVG
 
   // Group paths by parent ID
@@ -73,7 +73,7 @@ function Floor({ yPos, floorProps, selected }) {
   }, [floorProps.position]);
 
   return (
-    <group ref={ref}>
+    <group ref={ref} visible={visible}>
       <Map
         position={[0, floorProps.verticalGap, 0]}
         paths={mapPaths}
@@ -102,18 +102,15 @@ function Building({ buildingProps, selectedFloorIndex }) {
     <>
       {buildingProps.map((floorProps, index) => {
         // Only display if floor is selected or no floor is selected
-        if (index == selectedFloorIndex || selectedFloorIndex == null) {
-          return (
-            <Floor
-              yPos={getFloorYPosFromIndex(buildingProps, index)}
-              key={floorProps.name}
-              floorProps={floorProps}
-              selected={index == selectedFloorIndex}
-            />
-          );
-        } else {
-          return null;
-        }
+        return (
+          <Floor
+            yPos={getFloorYPosFromIndex(buildingProps, index)}
+            key={floorProps.name}
+            floorProps={floorProps}
+            selected={index == selectedFloorIndex}
+            visible={index == selectedFloorIndex || selectedFloorIndex == null}
+          />
+        );
       })}
     </>
   );
