@@ -9,7 +9,7 @@ export default function getFloorYPosFromIndex(buildingProps, index) {
       buildingProps[i].extrudeDepth > 0
     ) {
       height +=
-        buildingProps[i].extrudeDepth * buildingProps[i].svgScale +
+        buildingProps[i].extrudeDepth * buildingProps[i].scale +
         buildingProps[i].verticalGap * 3;
     }
   }

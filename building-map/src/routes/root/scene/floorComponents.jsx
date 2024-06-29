@@ -71,11 +71,7 @@ function FloorOutline({ position = [0, 0, 0], paths, floorProps }) {
   return (
     <mesh
       position={position}
-      scale={[
-        floorProps.svgScale,
-        -1 * floorProps.svgScale,
-        floorProps.svgScale,
-      ]}
+      scale={[floorProps.scale, -1 * floorProps.scale, floorProps.scale]}
       rotation-x={-Math.PI / 2}
       geometry={mergedGeometry}
     >
@@ -98,7 +94,7 @@ export function FloorCeiling({ outlinePaths, floorProps, selected }) {
             <FloorOutline
               position={[
                 0,
-                floorProps.extrudeDepth * floorProps.svgScale +
+                floorProps.extrudeDepth * floorProps.scale +
                   floorProps.verticalGap * 2,
                 0,
               ]}
@@ -162,11 +158,7 @@ export function Walls({ position = [0, 0, 0], paths, floorProps }) {
       <mesh
         // Add gap to lower shape to be above outline plane
         position={[0, floorProps.verticalGap, 0]}
-        scale={[
-          floorProps.svgScale,
-          -1 * floorProps.svgScale,
-          floorProps.svgScale,
-        ]}
+        scale={[floorProps.scale, -1 * floorProps.scale, floorProps.scale]}
         rotation-x={-Math.PI / 2}
         geometry={mergedShapeGeometry}
       >
@@ -177,15 +169,11 @@ export function Walls({ position = [0, 0, 0], paths, floorProps }) {
         // Move upper shape up by extrude depth plus gap
         position={[
           0,
-          floorProps.extrudeDepth * floorProps.svgScale +
+          floorProps.extrudeDepth * floorProps.scale +
             floorProps.verticalGap * 2.5,
           0,
         ]}
-        scale={[
-          floorProps.svgScale,
-          -1 * floorProps.svgScale,
-          floorProps.svgScale,
-        ]}
+        scale={[floorProps.scale, -1 * floorProps.scale, floorProps.scale]}
         rotation-x={-Math.PI / 2}
         geometry={mergedShapeGeometry}
       >
@@ -195,11 +183,7 @@ export function Walls({ position = [0, 0, 0], paths, floorProps }) {
       <mesh
         // Move walls up by gap
         position={[0, floorProps.verticalGap * 1.5, 0]}
-        scale={[
-          floorProps.svgScale,
-          -1 * floorProps.svgScale,
-          floorProps.svgScale,
-        ]}
+        scale={[floorProps.scale, -1 * floorProps.scale, floorProps.scale]}
         rotation-x={-Math.PI / 2}
         geometry={mergedExtrudeGeometry}
         renderOrder={-1}
@@ -234,11 +218,7 @@ export function Map({ position = [0, 0, 0], paths, floorProps }) {
     <mesh
       position={position}
       // Scale properly
-      scale={[
-        floorProps.svgScale,
-        -1 * floorProps.svgScale,
-        floorProps.svgScale,
-      ]}
+      scale={[floorProps.scale, -1 * floorProps.scale, floorProps.scale]}
       // Rotate to be horizontal
       rotation-x={-Math.PI / 2}
       geometry={mergedGeometry}
