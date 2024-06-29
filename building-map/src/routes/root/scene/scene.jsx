@@ -1,9 +1,10 @@
 import * as THREE from "three";
-import { useState, useMemo, useRef, useLayoutEffect } from "react";
-import { Canvas, useLoader, useFrame, useThree } from "@react-three/fiber";
+import { useState, useMemo, useRef, useLayoutEffect, useEffect } from "react";
+import { Canvas, useLoader, useThree } from "@react-three/fiber";
 import { SVGLoader } from "three/examples/jsm/loaders/SVGLoader";
 import * as BufferGeometryUtils from "three/addons/utils/BufferGeometryUtils.js";
 import { OrbitControls } from "@react-three/drei";
+import { animated, useSpring } from "@react-spring/three";
 
 // Given an array of paths, return an array of two arrays, one containing shape paths and the other containing stroke paths
 function separatePathsIntoShapeAndStroke(paths) {
@@ -381,6 +382,47 @@ function Building({ buildingProps, selectedFloorIndex }) {
   );
 }
 
+function Controls({ initialPosition, zoomMultiplier }) {
+  // Get reference to OrbitControls
+  const controlsRef = useRef();
+
+  // Animation at start of application - zoom in
+  useSpring(() => ({
+    // Start zoomed out
+    from: {
+      x: initialPosition[0] * zoomMultiplier,
+      y: initialPosition[1] * zoomMultiplier,
+      z: initialPosition[2] * zoomMultiplier,
+    },
+    // End at default position
+    to: {
+      x: initialPosition[0],
+      y: initialPosition[1],
+      z: initialPosition[2],
+    },
+    config: {
+      precision: 0.01,
+    },
+    // Disable OrbitControls at start of animation
+    onStart: () => {
+      controlsRef.current.enabled = false;
+    },
+    // Update position of orbitcontrols
+    onChange: (props) => {
+      controlsRef.current.object.position.y = props.value.x;
+      controlsRef.current.object.position.y = props.value.y;
+      controlsRef.current.object.position.z = props.value.z;
+      controlsRef.current.update();
+    },
+    // Enable OrbitControls at end of animation
+    onRest: () => {
+      controlsRef.current.enabled = true;
+    },
+  }));
+
+  return <OrbitControls ref={controlsRef} target={[0, 0, 0]} />;
+}
+
 export default function Scene({ buildingProps, selectedFloorIndex }) {
   return (
     <div
@@ -392,15 +434,8 @@ export default function Scene({ buildingProps, selectedFloorIndex }) {
       }}
     >
       {/* Fill entire screen */}
-      <Canvas
-        camera={{
-          fov: 75,
-          near: 0.1,
-          far: 500,
-          position: [0, 2, 5],
-        }}
-      >
-        <OrbitControls makeDefault />
+      <Canvas>
+        <Controls initialPosition={[0, 3, 5]} zoomMultiplier={75} />
         <directionalLight args={[0xffffff, 2.5]} position={[-1, 2, 4]} />
         <ambientLight args={[0xcfe2e3]} />
         <Building
