@@ -341,25 +341,25 @@ function Floor({ yPos, floorProps, selected }) {
   );
 }
 
-function Building({ buildingProps, selectedFloorIndex }) {
-  // Given an index for a floor in the building, return the height of the floor by summing the heights of the previous floors
-  function getYPosFromIndex(index) {
-    let height = 0;
-    // Loop through floors before index
-    for (let i = 0; i < index; i++) {
-      // If floor is extruded, add height of floor plus gaps in between layers
-      if (
-        buildingProps[i].extrudedSections.length > 0 &&
-        buildingProps[i].extrudeDepth > 0
-      ) {
-        height +=
-          buildingProps[i].extrudeDepth * buildingProps[i].svgScale +
-          buildingProps[i].verticalGap * 3;
-      }
+// Given an index for a floor in the building, return the height of the floor by summing the heights of the previous floors
+function getFloorYPosFromIndex(buildingProps, index) {
+  let height = 0;
+  // Loop through floors before index
+  for (let i = 0; i < index; i++) {
+    // If floor is extruded, add height of floor plus gaps in between layers
+    if (
+      buildingProps[i].extrudedSections.length > 0 &&
+      buildingProps[i].extrudeDepth > 0
+    ) {
+      height +=
+        buildingProps[i].extrudeDepth * buildingProps[i].svgScale +
+        buildingProps[i].verticalGap * 3;
     }
-    return height;
   }
+  return height;
+}
 
+function Building({ buildingProps, selectedFloorIndex }) {
   // Map buildingProps to Floor components
   return (
     <>
@@ -368,7 +368,7 @@ function Building({ buildingProps, selectedFloorIndex }) {
         if (index == selectedFloorIndex || selectedFloorIndex == null) {
           return (
             <Floor
-              yPos={getYPosFromIndex(index)}
+              yPos={getFloorYPosFromIndex(buildingProps, index)}
               key={floorProps.name}
               floorProps={floorProps}
               selected={index == selectedFloorIndex}
@@ -382,7 +382,12 @@ function Building({ buildingProps, selectedFloorIndex }) {
   );
 }
 
-function Controls({ initialPosition, zoomMultiplier }) {
+function Controls({
+  initialPosition,
+  zoomMultiplier,
+  buildingProps,
+  selectedFloorIndex,
+}) {
   // Get reference to OrbitControls
   const controlsRef = useRef();
 
@@ -409,7 +414,7 @@ function Controls({ initialPosition, zoomMultiplier }) {
     },
     // Update position of orbitcontrols
     onChange: (props) => {
-      controlsRef.current.object.position.y = props.value.x;
+      controlsRef.current.object.position.x = props.value.x;
       controlsRef.current.object.position.y = props.value.y;
       controlsRef.current.object.position.z = props.value.z;
       controlsRef.current.update();
@@ -419,6 +424,94 @@ function Controls({ initialPosition, zoomMultiplier }) {
       controlsRef.current.enabled = true;
     },
   }));
+
+  const [cameraPos, api] = useSpring(() => ({
+    from: {
+      radius: 0,
+      phi: 0,
+      theta: 0,
+      height: 0,
+    },
+  }));
+
+  useEffect(() => {
+    if (selectedFloorIndex != null) {
+      const floorHeight = getFloorYPosFromIndex(
+        buildingProps,
+        selectedFloorIndex
+      );
+
+      // Get distance from camera to selected floor and convert to spherical coordinates
+      const initialSpherical = new THREE.Spherical().setFromCartesianCoords(
+        controlsRef.current.object.position.x,
+        controlsRef.current.object.position.y - floorHeight,
+        controlsRef.current.object.position.z
+      );
+
+      // Convert default position to spherical coordinates
+      const defaultPositionToSpherical =
+        new THREE.Spherical().setFromCartesianCoords(
+          initialPosition[0],
+          initialPosition[1],
+          initialPosition[2]
+        );
+
+      api.start(() => ({
+        from: {
+          // Set spherical coordinates to initial camera spherical coordinates
+          radius: initialSpherical.radius,
+          phi: initialSpherical.phi,
+          theta: initialSpherical.theta,
+          height: controlsRef.current.target.y,
+        },
+        to: {
+          // Animate to be centered around selected floor
+          radius: defaultPositionToSpherical.radius,
+          phi: defaultPositionToSpherical.phi,
+          theta: initialSpherical.theta, // Rotation around y axis stays the same
+          height: floorHeight,
+        },
+        config: {
+          precision: 0.01, // Lower value keeps animation from jumping
+        },
+        // Disable OrbitControls at start of animation
+        onStart: () => {
+          controlsRef.current.enabled = false;
+        },
+        // Update position of orbitcontrols
+        onChange: (props) => {
+          // Convert current spherical coordinates to Vector3
+          const spherical = new THREE.Spherical(
+            props.value.radius,
+            props.value.phi,
+            props.value.theta
+          );
+          const position = new THREE.Vector3().setFromSpherical(spherical);
+
+          // Add height of floor to camera position
+          position.y += props.value.height;
+
+          // Set camera position to current animated position
+          controlsRef.current.object.position.x = position.x;
+          controlsRef.current.object.position.y = position.y;
+          controlsRef.current.object.position.z = position.z;
+
+          // Set target that camera looks at to the floor height
+          controlsRef.current.target = new THREE.Vector3(
+            0,
+            props.value.height,
+            0
+          );
+
+          controlsRef.current.update();
+        },
+        // Enable OrbitControls at end of animation
+        onRest: () => {
+          controlsRef.current.enabled = true;
+        },
+      }));
+    }
+  }, [selectedFloorIndex]);
 
   return <OrbitControls ref={controlsRef} target={[0, 0, 0]} />;
 }
@@ -435,7 +528,12 @@ export default function Scene({ buildingProps, selectedFloorIndex }) {
     >
       {/* Fill entire screen */}
       <Canvas>
-        <Controls initialPosition={[0, 3, 5]} zoomMultiplier={75} />
+        <Controls
+          initialPosition={[0, 3, 5]}
+          zoomMultiplier={75}
+          buildingProps={buildingProps}
+          selectedFloorIndex={selectedFloorIndex}
+        />
         <directionalLight args={[0xffffff, 2.5]} position={[-1, 2, 4]} />
         <ambientLight args={[0xcfe2e3]} />
         <Building
