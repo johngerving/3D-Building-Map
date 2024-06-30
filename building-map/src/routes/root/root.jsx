@@ -6,14 +6,18 @@ import {
   buildingPropertiesData,
   locationsData,
 } from "../../assets/buildingProperties.js";
+import { Stats } from "@react-three/drei";
 
 export default function Root() {
   const [buildingProps, setBuildingProps] = useState(buildingPropertiesData);
+  const [locations, setLocations] = useState(locationsData);
+
   const [selectedFloorIndex, setSelectedFloorIndex] = useState(null);
   const [selectedLocationIndex, setSelectedLocationIndex] = useState(null);
 
   return (
     <>
+      <Stats showPanel={0} className="stats" />
       <SearchBar />
       <FloorSelect
         buildingProps={buildingProps}
@@ -22,6 +26,7 @@ export default function Root() {
       ></FloorSelect>
       <Scene
         buildingProps={buildingProps}
+        locations={locations}
         selectedFloorIndex={selectedFloorIndex}
       />
     </>

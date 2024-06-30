@@ -705,7 +705,7 @@ export const locationsData = {
     {
       name: "M-0L",
       description: "",
-      position: [228.61, "343.34)", "rotate(-90"],
+      position: [228.61, 343.34],
       type: "Room",
     },
     {

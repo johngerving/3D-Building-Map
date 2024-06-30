@@ -1,9 +1,10 @@
 import { FloorCeiling, Walls, Map } from "./floorComponents.jsx";
 import Controls from "./controls.jsx";
+import Locations from "./locations.jsx";
 import getFloorYPosFromIndex from "./getFloorYPosFromIndex.jsx";
 import * as THREE from "three";
-import { useMemo, useRef, useLayoutEffect } from "react";
-import { Canvas, useLoader } from "@react-three/fiber";
+import { useMemo, useRef, useLayoutEffect, useState } from "react";
+import { Canvas, useLoader, useFrame } from "@react-three/fiber";
 import { SVGLoader } from "three/examples/jsm/loaders/SVGLoader";
 
 // Function that takes in array of paths and adds them to a dictionary grouped by the ID of their parent
@@ -18,7 +19,7 @@ function groupPaths(paths) {
   return groupedPaths;
 }
 
-function Floor({ yPos, floorProps, selected, visible }) {
+function Floor({ yPos, floorProps, locations, floorID, selected, visible }) {
   const { paths } = useLoader(SVGLoader, floorProps.svg); // Get paths from SVG
 
   // Group paths by parent ID
@@ -54,6 +55,7 @@ function Floor({ yPos, floorProps, selected, visible }) {
   let center = {};
 
   useLayoutEffect(() => {
+    console.log("test");
     const sphere = new THREE.Box3()
       .setFromObject(ref.current)
       .getBoundingSphere(new THREE.Sphere());
@@ -92,11 +94,16 @@ function Floor({ yPos, floorProps, selected, visible }) {
         floorProps={floorProps}
         selected={selected}
       />
+      <Locations
+        floorProps={floorProps}
+        locations={locations}
+        selected={selected}
+      />
     </group>
   );
 }
 
-function Building({ buildingProps, selectedFloorIndex }) {
+function Building({ buildingProps, locations, selectedFloorIndex }) {
   // Map buildingProps to Floor components
   return (
     <>
@@ -107,7 +114,9 @@ function Building({ buildingProps, selectedFloorIndex }) {
             yPos={getFloorYPosFromIndex(buildingProps, index)}
             key={floorProps.name}
             floorProps={floorProps}
-            selected={index == selectedFloorIndex}
+            locations={locations}
+            floorID={floorProps.id}
+            selected={index == selectedFloorIndex && selectedFloorIndex != null}
             visible={index == selectedFloorIndex || selectedFloorIndex == null}
           />
         );
@@ -116,7 +125,11 @@ function Building({ buildingProps, selectedFloorIndex }) {
   );
 }
 
-export default function Scene({ buildingProps, selectedFloorIndex }) {
+export default function Scene({
+  buildingProps,
+  locations,
+  selectedFloorIndex,
+}) {
   return (
     <div
       style={{
@@ -138,6 +151,7 @@ export default function Scene({ buildingProps, selectedFloorIndex }) {
         <ambientLight args={[0xcfe2e3]} />
         <Building
           buildingProps={buildingProps}
+          locations={locations}
           selectedFloorIndex={selectedFloorIndex}
         />
       </Canvas>
