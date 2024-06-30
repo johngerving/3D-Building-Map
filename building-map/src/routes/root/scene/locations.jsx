@@ -7,6 +7,8 @@ function LocationText({ floorProps, location }) {
 
   return (
     <Html
+      zIndexRange={[5, 0]}
+      center
       position={[
         location.position[0] * floorProps.scale,
         0,
@@ -18,7 +20,7 @@ function LocationText({ floorProps, location }) {
         onPointerLeave={() => setHover(false)}
         className="w-2 h-2 rounded-full bg-black hover:cursor-pointer"
       ></div> */}
-      <div className="whitespace-nowrap select-none relative bottom-5 left-5 text-sm hover:cursor-pointer hover:text-blue-600">
+      <div className="whitespace-nowrap select-none text-[12px] hover:cursor-pointer hover:text-blue-600">
         {location.name}
       </div>
     </Html>
@@ -28,7 +30,7 @@ function LocationText({ floorProps, location }) {
 export default function Locations({ floorProps, locations, selected }) {
   if (selected) {
     return (
-      <group position={[0, floorProps.verticalGap * 4, 0]}>
+      <group>
         {locations[floorProps.id].map((location, index) => {
           return (
             <LocationText

@@ -55,7 +55,6 @@ function Floor({ yPos, floorProps, locations, floorID, selected, visible }) {
   let center = {};
 
   useLayoutEffect(() => {
-    console.log("test");
     const sphere = new THREE.Box3()
       .setFromObject(ref.current)
       .getBoundingSphere(new THREE.Sphere());

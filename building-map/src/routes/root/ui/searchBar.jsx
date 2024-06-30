@@ -25,7 +25,7 @@ export default function SearchBar() {
   }
 
   return (
-    <div className="z-10 absolute top-3 left-3 w-80 h-12">
+    <div className="z-20 absolute top-3 left-3 w-80 h-12">
       <input
         className="rounded-3xl w-80 h-12 shadow-sm py-0 pl-6 pr-14"
         value={text}

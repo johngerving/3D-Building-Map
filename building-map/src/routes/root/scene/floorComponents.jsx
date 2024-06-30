@@ -3,6 +3,18 @@ import { useMemo } from "react";
 import { SVGLoader } from "three/examples/jsm/loaders/SVGLoader";
 import * as BufferGeometryUtils from "three/addons/utils/BufferGeometryUtils.js";
 
+const lineMat = new THREE.MeshStandardMaterial({
+  color: "gray",
+  side: THREE.DoubleSide,
+});
+const floorMat = new THREE.MeshPhongMaterial({
+  side: THREE.DoubleSide,
+});
+const wallMat = new THREE.MeshPhongMaterial({
+  transparent: true,
+  opacity: 0.5,
+});
+
 // Given an array of paths, return an array of two arrays, one containing shape paths and the other containing stroke paths
 function separatePathsIntoShapeAndStroke(paths) {
   let shapePaths = [];
@@ -73,10 +85,9 @@ function FloorOutline({ position = [0, 0, 0], paths, floorProps }) {
       position={position}
       scale={[floorProps.scale, -1 * floorProps.scale, floorProps.scale]}
       rotation-x={-Math.PI / 2}
+      material={floorMat}
       geometry={mergedGeometry}
-    >
-      <meshPhongMaterial side={THREE.DoubleSide} />
-    </mesh>
+    ></mesh>
   );
 }
 
@@ -160,10 +171,9 @@ export function Walls({ position = [0, 0, 0], paths, floorProps }) {
         position={[0, floorProps.verticalGap, 0]}
         scale={[floorProps.scale, -1 * floorProps.scale, floorProps.scale]}
         rotation-x={-Math.PI / 2}
+        material={lineMat}
         geometry={mergedShapeGeometry}
-      >
-        <meshStandardMaterial color={0x000000} side={THREE.DoubleSide} />
-      </mesh>
+      ></mesh>
       {/* Upper floor wall outline */}
       <mesh
         // Move upper shape up by extrude depth plus gap
@@ -175,21 +185,19 @@ export function Walls({ position = [0, 0, 0], paths, floorProps }) {
         ]}
         scale={[floorProps.scale, -1 * floorProps.scale, floorProps.scale]}
         rotation-x={-Math.PI / 2}
+        material={lineMat}
         geometry={mergedShapeGeometry}
-      >
-        <meshStandardMaterial color={0x000000} side={THREE.DoubleSide} />
-      </mesh>
+      ></mesh>
       {/* Extruded walls */}
       <mesh
         // Move walls up by gap
         position={[0, floorProps.verticalGap * 1.5, 0]}
         scale={[floorProps.scale, -1 * floorProps.scale, floorProps.scale]}
         rotation-x={-Math.PI / 2}
+        material={wallMat}
         geometry={mergedExtrudeGeometry}
         renderOrder={-1}
-      >
-        <meshPhongMaterial transparent opacity={0.5} />
-      </mesh>
+      ></mesh>
     </>
   );
 }
@@ -221,9 +229,8 @@ export function Map({ position = [0, 0, 0], paths, floorProps }) {
       scale={[floorProps.scale, -1 * floorProps.scale, floorProps.scale]}
       // Rotate to be horizontal
       rotation-x={-Math.PI / 2}
+      material={lineMat}
       geometry={mergedGeometry}
-    >
-      <meshStandardMaterial color={0x000000} side={THREE.DoubleSide} />
-    </mesh>
+    ></mesh>
   );
 }
