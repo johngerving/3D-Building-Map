@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CloseIcon from "../../../assets/close-icon.svg?react";
 
 function CloseButton({ handleClear }) {
@@ -20,8 +20,17 @@ function CloseButton({ handleClear }) {
 export default function SearchBar({ selectedLocation, setSelectedLocation }) {
   const [text, setText] = useState("");
 
+  useEffect(() => {
+    if (selectedLocation == null) {
+      setText("");
+    } else {
+      setText(selectedLocation.name);
+    }
+  }, [selectedLocation]);
+
   function handleClear() {
     setText("");
+    setSelectedLocation(null);
   }
 
   return (
