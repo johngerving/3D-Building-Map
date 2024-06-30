@@ -3,8 +3,6 @@ import * as THREE from "three";
 import { useState, useRef, useEffect } from "react";
 
 function LocationText({ floorProps, location }) {
-  const [hover, setHover] = useState(false);
-
   return (
     <Html
       zIndexRange={[5, 0]}
