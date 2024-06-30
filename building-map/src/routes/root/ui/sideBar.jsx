@@ -1,6 +1,7 @@
 import { useSpring, animated } from "@react-spring/web";
 
 export default function SideBar({ selectedLocation }) {
+  // If a location is selected, animate sidebar to the right - if location is unselected, animate sidebar to the left out of view
   const position = useSpring({
     left: selectedLocation != null ? "0" : "-344px",
     config: {

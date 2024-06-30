@@ -19,7 +19,16 @@ function groupPaths(paths) {
   return groupedPaths;
 }
 
-function Floor({ yPos, floorProps, locations, floorID, selected, visible }) {
+function Floor({
+  yPos,
+  floorProps,
+  locations,
+  floorID,
+  selected,
+  visible,
+  selectedLocation,
+  setSelectedLocation,
+}) {
   const { paths } = useLoader(SVGLoader, floorProps.svg); // Get paths from SVG
 
   // Group paths by parent ID
@@ -96,13 +105,21 @@ function Floor({ yPos, floorProps, locations, floorID, selected, visible }) {
       <Locations
         floorProps={floorProps}
         locations={locations}
-        selected={selected}
+        visible={selected}
+        selectedLocation={selectedLocation}
+        setSelectedLocation={setSelectedLocation}
       />
     </group>
   );
 }
 
-function Building({ buildingProps, locations, selectedFloorIndex }) {
+function Building({
+  buildingProps,
+  locations,
+  selectedFloorIndex,
+  selectedLocation,
+  setSelectedLocation,
+}) {
   // Map buildingProps to Floor components
   return (
     <>
@@ -117,6 +134,8 @@ function Building({ buildingProps, locations, selectedFloorIndex }) {
             floorID={floorProps.id}
             selected={index == selectedFloorIndex && selectedFloorIndex != null}
             visible={index == selectedFloorIndex || selectedFloorIndex == null}
+            selectedLocation={selectedLocation}
+            setSelectedLocation={setSelectedLocation}
           />
         );
       })}
@@ -128,6 +147,8 @@ export default function Scene({
   buildingProps,
   locations,
   selectedFloorIndex,
+  selectedLocation,
+  setSelectedLocation,
 }) {
   return (
     <div
@@ -152,6 +173,8 @@ export default function Scene({
           buildingProps={buildingProps}
           locations={locations}
           selectedFloorIndex={selectedFloorIndex}
+          selectedLocation={selectedLocation}
+          setSelectedLocation={setSelectedLocation}
         />
       </Canvas>
     </div>

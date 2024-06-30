@@ -17,7 +17,7 @@ function CloseButton({ handleClear }) {
   );
 }
 
-export default function SearchBar() {
+export default function SearchBar({ selectedLocation, setSelectedLocation }) {
   const [text, setText] = useState("");
 
   function handleClear() {
@@ -27,7 +27,6 @@ export default function SearchBar() {
   return (
     <div className="z-20 absolute top-3 left-3 w-80 h-12">
       <input
-        // className="rounded-3xl w-80 h-12 shadow-sm py-0 pl-6 pr-14"
         className="rounded-3xl w-80 h-12 shadow-[0_0_0_1px_rgba(0,0,0,0.05),rgb(209,213,219)_0_0_0_1px_inset] py-0 pl-6 pr-14"
         value={text}
         onChange={(e) => setText(e.target.value)}

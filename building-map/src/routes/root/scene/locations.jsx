@@ -2,7 +2,19 @@ import { Html, Billboard, Text } from "@react-three/drei";
 import * as THREE from "three";
 import { useState, useRef, useEffect } from "react";
 
-function LocationText({ floorProps, location }) {
+function LocationText({
+  floorProps,
+  location,
+  selectedLocation,
+  setSelectedLocation,
+}) {
+  function handleSelectLocation() {
+    if (selectedLocation != location) {
+      setSelectedLocation(location);
+    } else {
+      setSelectedLocation(null);
+    }
+  }
   return (
     <Html
       zIndexRange={[5, 0]}
@@ -13,20 +25,26 @@ function LocationText({ floorProps, location }) {
         location.position[1] * floorProps.scale,
       ]}
     >
-      {/* <div
-        onPointerEnter={() => setHover(true)}
-        onPointerLeave={() => setHover(false)}
-        className="w-2 h-2 rounded-full bg-black hover:cursor-pointer"
-      ></div> */}
-      <div className="whitespace-nowrap select-none text-[12px] hover:cursor-pointer hover:text-blue-600">
+      <div
+        onClick={handleSelectLocation}
+        className={`whitespace-nowrap select-none text-[12px] hover:cursor-pointer hover:text-blue-600 ${
+          selectedLocation == location ? "text-blue-600" : ""
+        }`}
+      >
         {location.name}
       </div>
     </Html>
   );
 }
 
-export default function Locations({ floorProps, locations, selected }) {
-  if (selected) {
+export default function Locations({
+  floorProps,
+  locations,
+  visible,
+  selectedLocation,
+  setSelectedLocation,
+}) {
+  if (visible) {
     return (
       <group>
         {locations[floorProps.id].map((location, index) => {
@@ -35,6 +53,8 @@ export default function Locations({ floorProps, locations, selected }) {
               floorProps={floorProps}
               location={location}
               key={index}
+              selectedLocation={selectedLocation}
+              setSelectedLocation={setSelectedLocation}
             />
           );
         })}
