@@ -48,8 +48,8 @@ function FloorButton({ text, onSelect, selected, isTop, isBottom }) {
 
 export default function FloorSelect({
   buildingProps,
-  selectedFloorIndex,
-  setSelectedFloorIndex,
+  selectedFloor,
+  setSelectedFloor,
 }) {
   return (
     <div className="z-20 absolute bottom-4 right-4 flex flex-col-reverse shadow-md">
@@ -61,13 +61,19 @@ export default function FloorSelect({
             text={buildingProps[index].name}
             onSelect={() => {
               // When button clicked, select or unselected floor
-              if (selectedFloorIndex == index) {
-                setSelectedFloorIndex(null);
+              if (
+                selectedFloor != null &&
+                selectedFloor.id == buildingProps[index].id
+              ) {
+                setSelectedFloor(null);
               } else {
-                setSelectedFloorIndex(index);
+                setSelectedFloor(buildingProps[index]);
               }
             }}
-            selected={selectedFloorIndex == index}
+            selected={
+              selectedFloor != null &&
+              selectedFloor.id == buildingProps[index].id
+            }
             isTop={index == buildingProps.length - 1}
             isBottom={index == 0}
           />

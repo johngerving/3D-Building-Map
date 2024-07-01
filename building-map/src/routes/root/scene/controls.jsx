@@ -8,7 +8,7 @@ export default function Controls({
   initialPosition,
   zoomMultiplier,
   buildingProps,
-  selectedFloorIndex,
+  selectedFloor,
 }) {
   // Get reference to OrbitControls
   const controlsRef = useRef();
@@ -57,10 +57,10 @@ export default function Controls({
   }));
 
   useEffect(() => {
-    if (selectedFloorIndex != null) {
+    if (selectedFloor != null) {
       const floorHeight = getFloorYPosFromIndex(
         buildingProps,
-        selectedFloorIndex
+        buildingProps.findIndex((element) => element == selectedFloor)
       );
 
       // Get distance from camera to selected floor and convert to spherical coordinates
@@ -203,7 +203,7 @@ export default function Controls({
         },
       }));
     }
-  }, [selectedFloorIndex]);
+  }, [selectedFloor]);
 
   return <OrbitControls ref={controlsRef} target={[0, 0, 0]} />;
 }

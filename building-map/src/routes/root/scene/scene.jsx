@@ -116,7 +116,7 @@ function Floor({
 function Building({
   buildingProps,
   locations,
-  selectedFloorIndex,
+  selectedFloor,
   selectedLocation,
   setSelectedLocation,
 }) {
@@ -132,8 +132,10 @@ function Building({
             floorProps={floorProps}
             locations={locations}
             floorID={floorProps.id}
-            selected={index == selectedFloorIndex && selectedFloorIndex != null}
-            visible={index == selectedFloorIndex || selectedFloorIndex == null}
+            selected={
+              selectedFloor != null && floorProps.id == selectedFloor.id
+            }
+            visible={selectedFloor == null || floorProps.id == selectedFloor.id}
             selectedLocation={selectedLocation}
             setSelectedLocation={setSelectedLocation}
           />
@@ -146,7 +148,7 @@ function Building({
 export default function Scene({
   buildingProps,
   locations,
-  selectedFloorIndex,
+  selectedFloor,
   selectedLocation,
   setSelectedLocation,
 }) {
@@ -165,14 +167,14 @@ export default function Scene({
           initialPosition={[0, 3, 5]}
           zoomMultiplier={75}
           buildingProps={buildingProps}
-          selectedFloorIndex={selectedFloorIndex}
+          selectedFloor={selectedFloor}
         />
         <directionalLight args={[0xffffff, 2.5]} position={[-1, 2, 4]} />
         <ambientLight args={[0xcfe2e3]} />
         <Building
           buildingProps={buildingProps}
           locations={locations}
-          selectedFloorIndex={selectedFloorIndex}
+          selectedFloor={selectedFloor}
           selectedLocation={selectedLocation}
           setSelectedLocation={setSelectedLocation}
         />

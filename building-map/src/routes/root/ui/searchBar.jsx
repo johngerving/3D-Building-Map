@@ -36,7 +36,13 @@ function getSearchResults(locations, term, n) {
   return results.map((result) => result.obj);
 }
 
-function Results({ results, setSelectedLocation, setFocused }) {
+function Results({
+  results,
+  setSelectedLocation,
+  setFocused,
+  buildingProps,
+  setSelectedFloor,
+}) {
   return (
     <div className="z-20 rounded-b-xl border shadow-md">
       {/* Make a button for each search result */}
@@ -51,6 +57,9 @@ function Results({ results, setSelectedLocation, setFocused }) {
           onClick={() => {
             setSelectedLocation(result);
             setFocused(false);
+            setSelectedFloor(
+              buildingProps.find((element) => element.id == result.floorID)
+            );
           }}
         >
           {result.name}
@@ -62,8 +71,10 @@ function Results({ results, setSelectedLocation, setFocused }) {
 
 export default function SearchBar({
   locations,
+  buildingProps,
   selectedLocation,
   setSelectedLocation,
+  setSelectedFloor,
 }) {
   const [text, setText] = useState("");
   const [results, setResults] = useState([]);
@@ -133,6 +144,8 @@ export default function SearchBar({
           results={results}
           setSelectedLocation={setSelectedLocation}
           setFocused={setFocused}
+          buildingProps={buildingProps}
+          setSelectedFloor={setSelectedFloor}
         />
       ) : null}
     </div>

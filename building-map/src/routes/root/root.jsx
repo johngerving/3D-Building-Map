@@ -13,7 +13,7 @@ export default function Root() {
   const [buildingProps, setBuildingProps] = useState(buildingPropertiesData);
   const [locations, setLocations] = useState(locationsData);
 
-  const [selectedFloorIndex, setSelectedFloorIndex] = useState(null);
+  const [selectedFloor, setSelectedFloor] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState(null);
 
   return (
@@ -21,20 +21,21 @@ export default function Root() {
       {/* <Stats showPanel={0} className="stats" /> */}
       <SearchBar
         locations={locations}
+        buildingProps={buildingProps}
         selectedLocation={selectedLocation}
         setSelectedLocation={setSelectedLocation}
-        setSelectedFloorIndex={setSelectedFloorIndex}
+        setSelectedFloor={setSelectedFloor}
       />
       <SideBar selectedLocation={selectedLocation} />
       <FloorSelect
         buildingProps={buildingProps}
-        selectedFloorIndex={selectedFloorIndex}
-        setSelectedFloorIndex={setSelectedFloorIndex}
+        selectedFloor={selectedFloor}
+        setSelectedFloor={setSelectedFloor}
       ></FloorSelect>
       <Scene
         buildingProps={buildingProps}
         locations={locations}
-        selectedFloorIndex={selectedFloorIndex}
+        selectedFloor={selectedFloor}
         selectedLocation={selectedLocation}
         setSelectedLocation={setSelectedLocation}
       />
