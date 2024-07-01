@@ -2,14 +2,18 @@ import { useSpring, animated } from "@react-spring/web";
 import { useEffect } from "react";
 
 function Content({ selectedLocation }) {
+  // Initially position sidebar offscreen
   const [position, api] = useSpring(() => ({
     from: {
-      left: "100vh",
+      left: "-344px",
       opacity: 0,
     },
   }));
 
   useEffect(() => {
+    // When the selected location changes, start the animation:
+    //    Animate from left to right if selectedLocation is not null
+    //    Animate from right to left if selectedLocation is null
     api.start({
       from: {
         left: selectedLocation != null ? "-344px" : "0",
@@ -22,7 +26,9 @@ function Content({ selectedLocation }) {
     });
   }, [selectedLocation]);
 
+  // Render content with name of location and description
   return (
+    // Add style attributes from animation
     <animated.div style={{ position: "relative", ...position }}>
       <h1 className="text-2xl text-slate-700 mb-2">{selectedLocation.name}</h1>
       <p className="text-slate-700">
@@ -48,9 +54,11 @@ export default function SideBar({ selectedLocation }) {
 
   return (
     <animated.div
+      // Add style attributes from animation
       style={{ position: "absolute", top: 0, ...position }}
       className={`z-10 bg-white w-[344px] h-screen pt-20 px-4`}
     >
+      {/* Only render content if a location is selected */}
       {selectedLocation != null ? (
         <Content selectedLocation={selectedLocation} />
       ) : null}

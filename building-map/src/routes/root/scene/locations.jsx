@@ -44,9 +44,11 @@ export default function Locations({
   selectedLocation,
   setSelectedLocation,
 }) {
+  // Only draw locations if floor is visible
   if (visible) {
     return (
       <group>
+        {/* For each floor, draw out all of the locations */}
         {locations[floorProps.id].map((location, index) => {
           return (
             <LocationText
