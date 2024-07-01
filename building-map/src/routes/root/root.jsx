@@ -20,8 +20,10 @@ export default function Root() {
     <>
       {/* <Stats showPanel={0} className="stats" /> */}
       <SearchBar
+        locations={locations}
         selectedLocation={selectedLocation}
         setSelectedLocation={setSelectedLocation}
+        setSelectedFloorIndex={setSelectedFloorIndex}
       />
       <SideBar selectedLocation={selectedLocation} />
       <FloorSelect
