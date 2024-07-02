@@ -4,14 +4,15 @@ import FloorSelect from "./ui/floorSelect.jsx";
 import SideBar from "./ui/sideBar.jsx";
 import { useState } from "react";
 import {
-  buildingPropertiesData,
-  locationsData,
+  buildingData,
+  floorData,
+  locationData,
 } from "../../assets/buildingProperties.js";
 import { Stats } from "@react-three/drei";
 
 export default function BuildingMap() {
-  const [buildingProps, setBuildingProps] = useState(buildingPropertiesData);
-  const [locations, setLocations] = useState(locationsData);
+  const [buildingProps, setBuildingProps] = useState(floorData);
+  const [locations, setLocations] = useState(locationData);
 
   const [selectedFloor, setSelectedFloor] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState(null);

@@ -47,8 +47,8 @@ function Floor({
       if (floorProps.extrudedSections.includes(group)) {
         wallPaths = wallPaths.concat(groupedPaths[group]);
       } else if (
-        floorProps.floorLayer.layer.length > 0 &&
-        floorProps.floorLayer.layer == group
+        floorProps.floorLayer != null &&
+        floorProps.floorLayer == group
       ) {
         outlinePaths = outlinePaths.concat(groupedPaths[group]);
       } else {
@@ -107,7 +107,8 @@ function Floor({
         locations={locations}
         selectedFloor={selectedFloor}
         visible={
-          (selectedFloor != null && selectedFloor.id == floorProps.id) ||
+          (selectedFloor != null &&
+            selectedFloor.floorID == floorProps.floorID) ||
           selectedFloor == null
         }
         selectedLocation={selectedLocation}
@@ -137,9 +138,13 @@ function Building({
             locations={locations}
             selectedFloor={selectedFloor}
             selected={
-              selectedFloor != null && floorProps.id == selectedFloor.id
+              selectedFloor != null &&
+              floorProps.floorID == selectedFloor.floorID
             }
-            visible={selectedFloor == null || floorProps.id == selectedFloor.id}
+            visible={
+              selectedFloor == null ||
+              floorProps.floorID == selectedFloor.floorID
+            }
             selectedLocation={selectedLocation}
             setSelectedLocation={setSelectedLocation}
           />

@@ -63,7 +63,7 @@ export default function FloorSelect({
               // When button clicked, select or unselected floor
               if (
                 selectedFloor != null &&
-                selectedFloor.id == buildingProps[index].id
+                selectedFloor.floorID == buildingProps[index].floorID
               ) {
                 setSelectedFloor(null);
               } else {
@@ -72,7 +72,7 @@ export default function FloorSelect({
             }}
             selected={
               selectedFloor != null &&
-              selectedFloor.id == buildingProps[index].id
+              selectedFloor.floorID == buildingProps[index].floorID
             }
             isTop={index == buildingProps.length - 1}
             isBottom={index == 0}

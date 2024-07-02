@@ -56,7 +56,7 @@ export default function Locations({
         }
       >
         {/* For each floor, draw out all of the locations */}
-        {locations[floorProps.id].map((location, index) => {
+        {locations[floorProps.floorID].map((location, index) => {
           const isIndividualLocationVisible =
             (selectedFloor == null && selectedLocation == location) ||
             selectedFloor != null;
