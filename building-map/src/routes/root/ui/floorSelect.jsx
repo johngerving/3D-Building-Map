@@ -52,7 +52,7 @@ export default function FloorSelect({
   setSelectedFloor,
 }) {
   return (
-    <div className="z-20 absolute bottom-4 right-4 flex flex-col-reverse shadow-md">
+    <div className="z-20 absolute bottom-4 right-4 flex flex-col-reverse shadow-md rounded-md">
       {/* Add button for each floor */}
       {buildingProps.map((floorProps, index) => {
         return (

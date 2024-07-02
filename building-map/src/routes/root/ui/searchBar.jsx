@@ -42,6 +42,7 @@ function Results({
   setFocused,
   buildingProps,
   setSelectedFloor,
+  setText,
 }) {
   return (
     <div className="z-20 rounded-b-xl border shadow-md">
@@ -61,6 +62,7 @@ function Results({
             setSelectedFloor(
               buildingProps.find((element) => element.id == result.floorID)
             );
+            setText(result.name);
           }}
         >
           {result.name}
@@ -88,6 +90,9 @@ export default function SearchBar({
     function handleFocusIn(e) {
       if (e.target.classList.contains("search")) {
         setFocused(true);
+        if (text.length > 0) {
+          setResults(getSearchResults(text));
+        }
       }
     }
 
@@ -128,11 +133,13 @@ export default function SearchBar({
     setResults(getSearchResults(locations, e.target.value, 5));
   }
 
+  const showResults = text.length > 0 && focused && results.length > 0;
+
   return (
     <div className="z-20 absolute top-3 left-3 w-80 h-12">
       <input
         className={`search w-80 h-12 shadow-[0_0_0_1px_rgba(0,0,0,0.05),rgb(209,213,219)_0_0_0_1px_inset] py-0 pl-6 pr-14 ${
-          text.length > 0 && focused ? "rounded-t-xl" : "rounded-3xl"
+          showResults ? "rounded-t-xl" : "rounded-3xl"
         }`}
         value={text}
         onChange={handleInputChange}
@@ -140,13 +147,14 @@ export default function SearchBar({
       {/* Only show clear button if input has value */}
       {text.length > 0 ? <CloseButton handleClear={handleClear} /> : null}
       {/* Only show search results if input has value and the search elements are focused on */}
-      {text.length > 0 && focused ? (
+      {showResults ? (
         <Results
           results={results}
           setSelectedLocation={setSelectedLocation}
           setFocused={setFocused}
           buildingProps={buildingProps}
           setSelectedFloor={setSelectedFloor}
+          setText={setText}
         />
       ) : null}
     </div>
