@@ -5,7 +5,7 @@ const defaultTheme = require("tailwindcss/defaultTheme");
 export default {
   content: [
     "./index.html",
-    "./src/main.jsx",
+    "./src/*.{js,jsx}",
     "./src/routes/*.{js,jsx}",
     "./src/routes/**/*.{js,jsx}",
     "./src/routes/**/**/*.{js,jsx}",

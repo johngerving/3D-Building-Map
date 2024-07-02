@@ -9,7 +9,7 @@ import {
 } from "../../assets/buildingProperties.js";
 import { Stats } from "@react-three/drei";
 
-export default function Root() {
+export default function BuildingMap() {
   const [buildingProps, setBuildingProps] = useState(buildingPropertiesData);
   const [locations, setLocations] = useState(locationsData);
 

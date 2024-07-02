@@ -2,12 +2,19 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
-import Root from "./routes/root/root.jsx";
+import BuildingMap from "./routes/buildingMap/buildingMap.jsx";
+import ErrorPage from "./error-page.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />,
+    element: <ErrorPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/:buildingName",
+    element: <BuildingMap />,
+    errorElement: <ErrorPage />,
   },
 ]);
 
