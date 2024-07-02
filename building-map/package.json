@@ -14,6 +14,7 @@
     "@react-spring/web": "^9.7.3",
     "@react-three/drei": "^9.106.0",
     "@react-three/fiber": "^8.16.7",
+    "@tanstack/react-query": "^5.49.2",
     "fuzzysort": "^3.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -24,6 +25,7 @@
   },
   "devDependencies": {
     "@azure/static-web-apps-cli": "^1.1.10",
+    "@tanstack/eslint-plugin-query": "^5.49.1",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react": "^4.2.1",
