@@ -40,7 +40,7 @@ function Results({
   results,
   setSelectedLocation,
   setFocused,
-  buildingProps,
+  floors,
   setSelectedFloor,
   setText,
 }) {
@@ -60,7 +60,7 @@ function Results({
             setSelectedLocation(result);
             setFocused(false);
             setSelectedFloor(
-              buildingProps.find((element) => element.id == result.floorID)
+              floors.find((element) => element.id == result.floorID)
             );
             setText(result.name);
           }}
@@ -74,7 +74,7 @@ function Results({
 
 export default function SearchBar({
   locations,
-  buildingProps,
+  floors,
   selectedLocation,
   setSelectedLocation,
   setSelectedFloor,
@@ -152,7 +152,7 @@ export default function SearchBar({
           results={results}
           setSelectedLocation={setSelectedLocation}
           setFocused={setFocused}
-          buildingProps={buildingProps}
+          floors={floors}
           setSelectedFloor={setSelectedFloor}
           setText={setText}
         />

@@ -3,7 +3,7 @@ import * as THREE from "three";
 import { useState, useRef, useEffect } from "react";
 
 function LocationText({
-  floorProps,
+  floor,
   location,
   selectedLocation,
   setSelectedLocation,
@@ -20,9 +20,9 @@ function LocationText({
       zIndexRange={[5, 0]}
       center
       position={[
-        location.position[0] * floorProps.scale,
+        location.position[0] * floor.scale,
         0,
-        location.position[1] * floorProps.scale,
+        location.position[1] * floor.scale,
       ]}
     >
       <div
@@ -38,7 +38,7 @@ function LocationText({
 }
 
 export default function Locations({
-  floorProps,
+  floor,
   locations,
   visible,
   selectedFloor,
@@ -51,19 +51,19 @@ export default function Locations({
       <group
         position={
           selectedFloor == null && selectedLocation != null
-            ? [0, floorProps.extrudeDepth * floorProps.scale * 0.5, 0]
+            ? [0, floor.extrudeDepth * floor.scale * 0.5, 0]
             : [0, 0, 0]
         }
       >
         {/* For each floor, draw out all of the locations */}
-        {locations[floorProps.floorID].map((location, index) => {
+        {locations[floor.floorID].map((location, index) => {
           const isIndividualLocationVisible =
             (selectedFloor == null && selectedLocation == location) ||
             selectedFloor != null;
           if (isIndividualLocationVisible) {
             return (
               <LocationText
-                floorProps={floorProps}
+                floor={floor}
                 location={location}
                 key={index}
                 selectedLocation={selectedLocation}

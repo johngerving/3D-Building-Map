@@ -47,34 +47,34 @@ function FloorButton({ text, onSelect, selected, isTop, isBottom }) {
 }
 
 export default function FloorSelect({
-  buildingProps,
+  floors,
   selectedFloor,
   setSelectedFloor,
 }) {
   return (
     <div className="z-20 absolute bottom-4 right-4 flex flex-col-reverse shadow-md rounded-md">
       {/* Add button for each floor */}
-      {buildingProps.map((floorProps, index) => {
+      {floors.map((floor, index) => {
         return (
           <FloorButton
             key={index}
-            text={buildingProps[index].name}
+            text={floors[index].name}
             onSelect={() => {
               // When button clicked, select or unselected floor
               if (
                 selectedFloor != null &&
-                selectedFloor.floorID == buildingProps[index].floorID
+                selectedFloor.floorID == floors[index].floorID
               ) {
                 setSelectedFloor(null);
               } else {
-                setSelectedFloor(buildingProps[index]);
+                setSelectedFloor(floors[index]);
               }
             }}
             selected={
               selectedFloor != null &&
-              selectedFloor.floorID == buildingProps[index].floorID
+              selectedFloor.floorID == floors[index].floorID
             }
-            isTop={index == buildingProps.length - 1}
+            isTop={index == floors.length - 1}
             isBottom={index == 0}
           />
         );

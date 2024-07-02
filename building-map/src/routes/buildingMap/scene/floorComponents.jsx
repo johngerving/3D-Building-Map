@@ -60,7 +60,7 @@ function getGeometriesFromShapeAndStroke(shapePaths, strokePaths) {
   return geometries;
 }
 
-function FloorOutline({ position = [0, 0, 0], paths, floorProps }) {
+function FloorOutline({ position = [0, 0, 0], paths, floor }) {
   // Separate floor outline into shape paths and stroke paths
   const [shapePaths, strokePaths] = useMemo(
     () => separatePathsIntoShapeAndStroke(paths),
@@ -83,7 +83,7 @@ function FloorOutline({ position = [0, 0, 0], paths, floorProps }) {
   return (
     <mesh
       position={position}
-      scale={[floorProps.scale, -1 * floorProps.scale, floorProps.scale]}
+      scale={[floor.scale, -1 * floor.scale, floor.scale]}
       rotation-x={-Math.PI / 2}
       material={floorMat}
       geometry={mergedGeometry}
@@ -91,25 +91,24 @@ function FloorOutline({ position = [0, 0, 0], paths, floorProps }) {
   );
 }
 
-export function FloorCeiling({ outlinePaths, floorProps, selected }) {
+export function FloorCeiling({ outlinePaths, floor, selected }) {
   return (
     <>
       {/* Draw floor and ceiling if property is enabled */}
-      {floorProps.floorLayer !== null ? (
+      {floor.floorLayer !== null ? (
         <>
           {/* Lower floor outline */}
-          <FloorOutline paths={outlinePaths} floorProps={floorProps} />
+          <FloorOutline paths={outlinePaths} floor={floor} />
           {/* Only draw upper floor outline if floor is extruded, don't draw if selected */}
-          {floorProps.extrudeDepth > 0 && !selected ? (
+          {floor.extrudeDepth > 0 && !selected ? (
             <FloorOutline
               position={[
                 0,
-                floorProps.extrudeDepth * floorProps.scale +
-                  floorProps.verticalGap * 2,
+                floor.extrudeDepth * floor.scale + floor.verticalGap * 2,
                 0,
               ]}
               paths={outlinePaths}
-              floorProps={floorProps}
+              floor={floor}
             />
           ) : null}
         </>
@@ -118,7 +117,7 @@ export function FloorCeiling({ outlinePaths, floorProps, selected }) {
   );
 }
 
-export function Walls({ position = [0, 0, 0], paths, floorProps }) {
+export function Walls({ position = [0, 0, 0], paths, floor }) {
   // Separate paths into shape paths and stroke paths
   const [shapePaths, strokePaths] = useMemo(
     () => separatePathsIntoShapeAndStroke(paths),
@@ -139,7 +138,7 @@ export function Walls({ position = [0, 0, 0], paths, floorProps }) {
 
       shapes.forEach((shape) => {
         const extrudeGeometry = new THREE.ExtrudeGeometry(shape, {
-          depth: floorProps.extrudeDepth,
+          depth: floor.extrudeDepth,
           bevelEnabled: false,
         });
         extrudeGeometry.computeVertexNormals();
@@ -167,8 +166,8 @@ export function Walls({ position = [0, 0, 0], paths, floorProps }) {
       {/* Lower floor wall outline */}
       <mesh
         // Add gap to lower shape to be above outline plane
-        position={[0, floorProps.verticalGap, 0]}
-        scale={[floorProps.scale, -1 * floorProps.scale, floorProps.scale]}
+        position={[0, floor.verticalGap, 0]}
+        scale={[floor.scale, -1 * floor.scale, floor.scale]}
         rotation-x={-Math.PI / 2}
         material={lineMat}
         geometry={mergedShapeGeometry}
@@ -178,11 +177,10 @@ export function Walls({ position = [0, 0, 0], paths, floorProps }) {
         // Move upper shape up by extrude depth plus gap
         position={[
           0,
-          floorProps.extrudeDepth * floorProps.scale +
-            floorProps.verticalGap * 2.5,
+          floor.extrudeDepth * floor.scale + floor.verticalGap * 2.5,
           0,
         ]}
-        scale={[floorProps.scale, -1 * floorProps.scale, floorProps.scale]}
+        scale={[floor.scale, -1 * floor.scale, floor.scale]}
         rotation-x={-Math.PI / 2}
         material={lineMat}
         geometry={mergedShapeGeometry}
@@ -190,8 +188,8 @@ export function Walls({ position = [0, 0, 0], paths, floorProps }) {
       {/* Extruded walls */}
       <mesh
         // Move walls up by gap
-        position={[0, floorProps.verticalGap * 1.5, 0]}
-        scale={[floorProps.scale, -1 * floorProps.scale, floorProps.scale]}
+        position={[0, floor.verticalGap * 1.5, 0]}
+        scale={[floor.scale, -1 * floor.scale, floor.scale]}
         rotation-x={-Math.PI / 2}
         material={wallMat}
         geometry={mergedExtrudeGeometry}
@@ -201,7 +199,7 @@ export function Walls({ position = [0, 0, 0], paths, floorProps }) {
   );
 }
 
-export function Map({ position = [0, 0, 0], paths, floorProps }) {
+export function Map({ position = [0, 0, 0], paths, floor }) {
   // Separate paths into shape paths and stroke paths based on fill and stroke properties
   const [shapePaths, strokePaths] = useMemo(
     () => separatePathsIntoShapeAndStroke(paths),
@@ -225,7 +223,7 @@ export function Map({ position = [0, 0, 0], paths, floorProps }) {
     <mesh
       position={position}
       // Scale properly
-      scale={[floorProps.scale, -1 * floorProps.scale, floorProps.scale]}
+      scale={[floor.scale, -1 * floor.scale, floor.scale]}
       // Rotate to be horizontal
       rotation-x={-Math.PI / 2}
       material={lineMat}

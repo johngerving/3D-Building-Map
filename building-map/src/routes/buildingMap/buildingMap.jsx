@@ -57,7 +57,7 @@ export default function BuildingMap() {
   });
 
   // Grab the data from the query
-  const buildingProps = floorQuery.data;
+  const floors = floorQuery.data;
   const locations = locationQuery.data;
 
   const [selectedFloor, setSelectedFloor] = useState(null);
@@ -75,19 +75,19 @@ export default function BuildingMap() {
       {/* <Stats showPanel={0} className="stats" /> */}
       <SearchBar
         locations={locations}
-        buildingProps={buildingProps}
+        floors={floors}
         selectedLocation={selectedLocation}
         setSelectedLocation={setSelectedLocation}
         setSelectedFloor={setSelectedFloor}
       />
       <SideBar selectedLocation={selectedLocation} />
       <FloorSelect
-        buildingProps={buildingProps}
+        floors={floors}
         selectedFloor={selectedFloor}
         setSelectedFloor={setSelectedFloor}
       ></FloorSelect>
       <Scene
-        buildingProps={buildingProps}
+        floors={floors}
         locations={locations}
         selectedFloor={selectedFloor}
         selectedLocation={selectedLocation}

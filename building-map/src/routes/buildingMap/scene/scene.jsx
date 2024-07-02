@@ -21,7 +21,7 @@ function groupPaths(paths) {
 
 function Floor({
   yPos,
-  floorProps,
+  floor,
   locations,
   selected,
   selectedFloor,
@@ -29,7 +29,7 @@ function Floor({
   selectedLocation,
   setSelectedLocation,
 }) {
-  const { paths } = useLoader(SVGLoader, floorProps.svg); // Get paths from SVG
+  const { paths } = useLoader(SVGLoader, floor.svg); // Get paths from SVG
 
   // Group paths by parent ID
   const groupedPaths = useMemo(() => {
@@ -44,12 +44,9 @@ function Floor({
 
     // For each parent ID group in paths, add to wall, outline, or map paths array
     for (const group in groupedPaths) {
-      if (floorProps.extrudedSections.includes(group)) {
+      if (floor.extrudedSections.includes(group)) {
         wallPaths = wallPaths.concat(groupedPaths[group]);
-      } else if (
-        floorProps.floorLayer != null &&
-        floorProps.floorLayer == group
-      ) {
+      } else if (floor.floorLayer != null && floor.floorLayer == group) {
         outlinePaths = outlinePaths.concat(groupedPaths[group]);
       } else {
         mapPaths = mapPaths.concat(groupedPaths[group]);
@@ -76,39 +73,38 @@ function Floor({
 
   useLayoutEffect(() => {
     ref.current.position.set(
-      center.x + floorProps.position[0],
+      center.x + floor.position[0],
       yPos,
-      center.z - floorProps.position[1]
+      center.z - floor.position[1]
     );
-  }, [floorProps.position]);
+  }, [floor.position]);
 
   return (
     <group ref={ref} visible={visible}>
       <Map
-        position={[0, floorProps.verticalGap, 0]}
+        position={[0, floor.verticalGap, 0]}
         paths={mapPaths}
-        floorProps={floorProps}
+        floor={floor}
       />
       {/* Only add walls if extruded section exists */}
-      {floorProps.extrudedSections.length > 0 && floorProps.extrudeDepth > 0 ? (
+      {floor.extrudedSections.length > 0 && floor.extrudeDepth > 0 ? (
         <Walls
-          position={[0, floorProps.verticalGap, 0]}
+          position={[0, floor.verticalGap, 0]}
           paths={wallPaths}
-          floorProps={floorProps}
+          floor={floor}
         />
       ) : null}
       <FloorCeiling
         outlinePaths={outlinePaths}
-        floorProps={floorProps}
+        floor={floor}
         selected={selected}
       />
       <Locations
-        floorProps={floorProps}
+        floor={floor}
         locations={locations}
         selectedFloor={selectedFloor}
         visible={
-          (selectedFloor != null &&
-            selectedFloor.floorID == floorProps.floorID) ||
+          (selectedFloor != null && selectedFloor.floorID == floor.floorID) ||
           selectedFloor == null
         }
         selectedLocation={selectedLocation}
@@ -119,31 +115,29 @@ function Floor({
 }
 
 function Building({
-  buildingProps,
+  floors,
   locations,
   selectedFloor,
   selectedLocation,
   setSelectedLocation,
 }) {
-  // Map buildingProps to Floor components
+  // Map floors to Floor components
   return (
     <>
-      {buildingProps.map((floorProps, index) => {
+      {floors.map((floor, index) => {
         // Only display if floor is selected or no floor is selected
         return (
           <Floor
-            yPos={getFloorYPosFromIndex(buildingProps, index)}
-            key={floorProps.name}
-            floorProps={floorProps}
+            yPos={getFloorYPosFromIndex(floors, index)}
+            key={floor.name}
+            floor={floor}
             locations={locations}
             selectedFloor={selectedFloor}
             selected={
-              selectedFloor != null &&
-              floorProps.floorID == selectedFloor.floorID
+              selectedFloor != null && floor.floorID == selectedFloor.floorID
             }
             visible={
-              selectedFloor == null ||
-              floorProps.floorID == selectedFloor.floorID
+              selectedFloor == null || floor.floorID == selectedFloor.floorID
             }
             selectedLocation={selectedLocation}
             setSelectedLocation={setSelectedLocation}
@@ -155,7 +149,7 @@ function Building({
 }
 
 export default function Scene({
-  buildingProps,
+  floors,
   locations,
   selectedFloor,
   selectedLocation,
@@ -175,13 +169,13 @@ export default function Scene({
         <Controls
           initialPosition={[0, 3, 5]}
           zoomMultiplier={75}
-          buildingProps={buildingProps}
+          floors={floors}
           selectedFloor={selectedFloor}
         />
         <directionalLight args={[0xffffff, 2.5]} position={[-1, 2, 4]} />
         <ambientLight args={[0xcfe2e3]} />
         <Building
-          buildingProps={buildingProps}
+          floors={floors}
           locations={locations}
           selectedFloor={selectedFloor}
           selectedLocation={selectedLocation}
