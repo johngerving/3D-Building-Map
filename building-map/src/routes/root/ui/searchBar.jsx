@@ -48,6 +48,7 @@ function Results({
       {/* Make a button for each search result */}
       {results.map((result, index) => (
         <button
+          tabIndex="0"
           className={`search w-full text-left pl-5 py-3 bg-white hover:bg-gray-100 hover:text-blue-600 ${
             // Rounded bottom if last button in list
             index == results.length - 1 ? "rounded-b-xl" : ""

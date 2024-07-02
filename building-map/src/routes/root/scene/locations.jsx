@@ -41,24 +41,38 @@ export default function Locations({
   floorProps,
   locations,
   visible,
+  selectedFloor,
   selectedLocation,
   setSelectedLocation,
 }) {
   // Only draw locations if floor is visible
   if (visible) {
     return (
-      <group>
+      <group
+        position={
+          selectedFloor == null && selectedLocation != null
+            ? [0, floorProps.extrudeDepth * floorProps.scale * 0.5, 0]
+            : [0, 0, 0]
+        }
+      >
         {/* For each floor, draw out all of the locations */}
         {locations[floorProps.id].map((location, index) => {
-          return (
-            <LocationText
-              floorProps={floorProps}
-              location={location}
-              key={index}
-              selectedLocation={selectedLocation}
-              setSelectedLocation={setSelectedLocation}
-            />
-          );
+          const isIndividualLocationVisible =
+            (selectedFloor == null && selectedLocation == location) ||
+            selectedFloor != null;
+          if (isIndividualLocationVisible) {
+            return (
+              <LocationText
+                floorProps={floorProps}
+                location={location}
+                key={index}
+                selectedLocation={selectedLocation}
+                setSelectedLocation={setSelectedLocation}
+              />
+            );
+          } else {
+            return null;
+          }
         })}
       </group>
     );

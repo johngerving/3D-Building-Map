@@ -23,8 +23,8 @@ function Floor({
   yPos,
   floorProps,
   locations,
-  floorID,
   selected,
+  selectedFloor,
   visible,
   selectedLocation,
   setSelectedLocation,
@@ -105,7 +105,11 @@ function Floor({
       <Locations
         floorProps={floorProps}
         locations={locations}
-        visible={selected}
+        selectedFloor={selectedFloor}
+        visible={
+          (selectedFloor != null && selectedFloor.id == floorProps.id) ||
+          selectedFloor == null
+        }
         selectedLocation={selectedLocation}
         setSelectedLocation={setSelectedLocation}
       />
@@ -131,7 +135,7 @@ function Building({
             key={floorProps.name}
             floorProps={floorProps}
             locations={locations}
-            floorID={floorProps.id}
+            selectedFloor={selectedFloor}
             selected={
               selectedFloor != null && floorProps.id == selectedFloor.id
             }
