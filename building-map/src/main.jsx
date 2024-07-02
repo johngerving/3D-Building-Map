@@ -8,7 +8,7 @@ import ErrorPage from "./error-page.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <ErrorPage />,
+    element: <BuildingMap />,
     errorElement: <ErrorPage />,
   },
   {
