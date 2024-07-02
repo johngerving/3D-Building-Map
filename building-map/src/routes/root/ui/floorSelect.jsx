@@ -45,7 +45,7 @@ function FloorButton({ text, onSelect, selected, isTop, isBottom }) {
     );
   }
 }
-// Test
+
 export default function FloorSelect({
   buildingProps,
   selectedFloor,
