@@ -3,8 +3,9 @@ import Controls from "./controls.jsx";
 import Locations from "./locations.jsx";
 import getFloorYPosFromIndex from "./getFloorYPosFromIndex.jsx";
 import * as THREE from "three";
-import { useMemo, useRef, useLayoutEffect, useState } from "react";
-import { Canvas, useLoader, useFrame } from "@react-three/fiber";
+import { useMemo, useRef, useLayoutEffect, Suspense } from "react";
+import { Await } from "react-router-dom";
+import { Canvas, useLoader } from "@react-three/fiber";
 import { SVGLoader } from "three/examples/jsm/loaders/SVGLoader";
 
 // Function that takes in array of paths and adds them to a dictionary grouped by the ID of their parent
@@ -99,17 +100,26 @@ function Floor({
         floor={floor}
         selected={selected}
       />
-      <Locations
-        floor={floor}
-        locations={locations}
-        selectedFloor={selectedFloor}
-        visible={
-          (selectedFloor != null && selectedFloor.floorID == floor.floorID) ||
-          selectedFloor == null
-        }
-        selectedLocation={selectedLocation}
-        setSelectedLocation={setSelectedLocation}
-      />
+      <Suspense>
+        <Await resolve={locations}>
+          {(locations) => (
+            <>
+              <Locations
+                floor={floor}
+                locations={locations}
+                selectedFloor={selectedFloor}
+                visible={
+                  (selectedFloor != null &&
+                    selectedFloor.floorID == floor.floorID) ||
+                  selectedFloor == null
+                }
+                selectedLocation={selectedLocation}
+                setSelectedLocation={setSelectedLocation}
+              />
+            </>
+          )}
+        </Await>
+      </Suspense>
     </group>
   );
 }

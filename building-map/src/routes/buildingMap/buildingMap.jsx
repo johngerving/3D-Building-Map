@@ -2,13 +2,15 @@ import Scene from "./scene/scene.jsx";
 import SearchBar from "./ui/searchBar.jsx";
 import FloorSelect from "./ui/floorSelect.jsx";
 import SideBar from "./ui/sideBar.jsx";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import {
   buildingData,
   floorData,
   locationData,
 } from "../../assets/buildingProperties.js";
 import { Stats } from "@react-three/drei";
+
+import { useLoaderData, defer, Await } from "react-router-dom";
 
 import {
   useQuery,
@@ -21,6 +23,49 @@ import {
   getFloorsByBuildingName,
   getLocationsByBuildingName,
 } from "../../api/get.js";
+
+const floorQuery = (name) => ({
+  queryKey: ["floors", name],
+  queryFn: () =>
+    getFloorsByBuildingName(name).then((res) => {
+      return res.data;
+    }),
+});
+
+const locationQuery = (name) => ({
+  queryKey: ["locations", name],
+  queryFn: () =>
+    getLocationsByBuildingName(name).then((res) => {
+      return res.data;
+    }),
+});
+
+export const loader =
+  (queryClient) =>
+  async ({ params }) => {
+    const newFloorQuery = floorQuery(params.buildingName);
+    const newLocationQuery = locationQuery(params.buildingName);
+    // return {
+    //   floors:
+    //     queryClient.getQueryData(newFloorQuery.queryKey) ??
+    //     (await queryClient.fetchQuery(newFloorQuery)),
+    //   locations:
+    //     queryClient.getQueryData(newLocationQuery.queryKey) ??
+    //     (await queryClient.fetchQuery(newLocationQuery)),
+    // };
+
+    const floors =
+      queryClient.getQueryData(newFloorQuery.queryKey) ??
+      queryClient.fetchQuery(newFloorQuery);
+    const locations =
+      queryClient.getQueryData(newLocationQuery.queryKey) ??
+      queryClient.fetchQuery(newLocationQuery);
+
+    return defer({
+      floors,
+      locations,
+    });
+  };
 
 function LoadingScreen() {
   return (
@@ -39,31 +84,10 @@ function LoadingScreen() {
 export default function BuildingMap() {
   const queryClient = useQueryClient();
 
-  // Make a query for floor data
-  const floorQuery = useQuery({
-    queryKey: ["floors"],
-    queryFn: () =>
-      getFloorsByBuildingName("library").then((res) => {
-        return res.data;
-      }),
-  });
-  // Make a query for location data
-  const locationQuery = useQuery({
-    queryKey: ["locations"],
-    queryFn: () =>
-      getLocationsByBuildingName("library").then((res) => {
-        return res.data;
-      }),
-  });
-
-  // Grab the data from the query
-  const floors = floorQuery.data;
-  const locations = locationQuery.data;
+  const { floors, locations } = useLoaderData();
 
   const [selectedFloor, setSelectedFloor] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState(null);
-
-  if (floorQuery.isPending || locationQuery.isPending) return <LoadingScreen />;
 
   if (floorQuery.error)
     return "An error has occurred: " + floorQuery.error.message;
@@ -71,28 +95,42 @@ export default function BuildingMap() {
     return "An error has occurred: " + locationQuery.error.message;
 
   return (
-    <>
-      {/* <Stats showPanel={0} className="stats" /> */}
-      <SearchBar
-        locations={locations}
-        floors={floors}
-        selectedLocation={selectedLocation}
-        setSelectedLocation={setSelectedLocation}
-        setSelectedFloor={setSelectedFloor}
-      />
-      <SideBar selectedLocation={selectedLocation} />
-      <FloorSelect
-        floors={floors}
-        selectedFloor={selectedFloor}
-        setSelectedFloor={setSelectedFloor}
-      ></FloorSelect>
-      <Scene
-        floors={floors}
-        locations={locations}
-        selectedFloor={selectedFloor}
-        selectedLocation={selectedLocation}
-        setSelectedLocation={setSelectedLocation}
-      />
-    </>
+    <Suspense fallback={<LoadingScreen />}>
+      <Await resolve={floors} errorElement={<p>Error!</p>}>
+        {(floors) => (
+          <>
+            {/* <Stats showPanel={0} className="stats" /> */}
+            <Suspense>
+              <Await resolve={locations} errorElement={<p>Error!</p>}>
+                {(locations) => (
+                  <>
+                    <SearchBar
+                      locations={locations}
+                      floors={floors}
+                      selectedLocation={selectedLocation}
+                      setSelectedLocation={setSelectedLocation}
+                      setSelectedFloor={setSelectedFloor}
+                    />
+                    <SideBar selectedLocation={selectedLocation} />
+                    <FloorSelect
+                      floors={floors}
+                      selectedFloor={selectedFloor}
+                      setSelectedFloor={setSelectedFloor}
+                    ></FloorSelect>
+                  </>
+                )}
+              </Await>
+            </Suspense>
+            <Scene
+              floors={floors}
+              locations={locations}
+              selectedFloor={selectedFloor}
+              selectedLocation={selectedLocation}
+              setSelectedLocation={setSelectedLocation}
+            />
+          </>
+        )}
+      </Await>
+    </Suspense>
   );
 }

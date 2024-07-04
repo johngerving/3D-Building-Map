@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { loader as buildingLoader } from "./routes/buildingMap/buildingMap.jsx";
 import "./index.css";
 import BuildingMap from "./routes/buildingMap/buildingMap.jsx";
 import ErrorPage from "./error-page.jsx";
@@ -11,14 +12,10 @@ const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <BuildingMap />,
-    errorElement: <ErrorPage />,
-  },
-  {
     path: "/:buildingName",
     element: <BuildingMap />,
     errorElement: <ErrorPage />,
+    loader: buildingLoader(queryClient),
   },
 ]);
 
