@@ -1,7 +1,6 @@
 import Scene from "./scene/scene.jsx";
-import SearchBar from "./ui/searchBar.jsx";
+import { ViewPanel } from "./ui/viewPanel.jsx";
 import FloorSelect from "./ui/floorSelect.jsx";
-import SideBar from "./ui/sideBar.jsx";
 import { useState, Suspense } from "react";
 import {
   buildingData,
@@ -10,7 +9,7 @@ import {
 } from "../../assets/buildingProperties.js";
 import { Stats } from "@react-three/drei";
 
-import { useLoaderData, defer, Await } from "react-router-dom";
+import { useLoaderData, defer, Await, Outlet } from "react-router-dom";
 
 import {
   useQuery,
@@ -45,14 +44,6 @@ export const loader =
   async ({ params }) => {
     const newFloorQuery = floorQuery(params.buildingName);
     const newLocationQuery = locationQuery(params.buildingName);
-    // return {
-    //   floors:
-    //     queryClient.getQueryData(newFloorQuery.queryKey) ??
-    //     (await queryClient.fetchQuery(newFloorQuery)),
-    //   locations:
-    //     queryClient.getQueryData(newLocationQuery.queryKey) ??
-    //     (await queryClient.fetchQuery(newLocationQuery)),
-    // };
 
     const floors =
       queryClient.getQueryData(newFloorQuery.queryKey) ??
@@ -104,14 +95,15 @@ export default function BuildingMap() {
               <Await resolve={locations} errorElement={<p>Error!</p>}>
                 {(locations) => (
                   <>
-                    <SearchBar
-                      locations={locations}
-                      floors={floors}
-                      selectedLocation={selectedLocation}
-                      setSelectedLocation={setSelectedLocation}
-                      setSelectedFloor={setSelectedFloor}
+                    <Outlet
+                      context={[
+                        floors,
+                        locations,
+                        selectedLocation,
+                        setSelectedLocation,
+                        setSelectedFloor,
+                      ]}
                     />
-                    <SideBar selectedLocation={selectedLocation} />
                     <FloorSelect
                       floors={floors}
                       selectedFloor={selectedFloor}
