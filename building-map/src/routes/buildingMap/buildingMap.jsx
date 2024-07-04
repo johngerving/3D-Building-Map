@@ -9,7 +9,7 @@ import {
 } from "../../assets/buildingProperties.js";
 import { Stats } from "@react-three/drei";
 
-import { useLoaderData, defer, Await, Outlet } from "react-router-dom";
+import { useLoaderData, defer, Await, Outlet, Link } from "react-router-dom";
 
 import {
   useQuery,
