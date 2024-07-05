@@ -8,6 +8,7 @@ export const useLocations = (buildingName) => {
       getLocationsByBuildingName(buildingName).then((res) => {
         return res.data;
       }),
+    staleTime: Infinity,
   });
 
   return {

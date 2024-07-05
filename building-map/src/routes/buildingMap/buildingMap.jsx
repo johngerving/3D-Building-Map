@@ -2,11 +2,6 @@ import Scene from "./scene/scene.jsx";
 import { ViewPanel } from "./ui/viewPanel.jsx";
 import FloorSelect from "./ui/floorSelect.jsx";
 import { useState, Suspense } from "react";
-import {
-  buildingData,
-  floorData,
-  locationData,
-} from "../../assets/buildingProperties.js";
 import { Stats } from "@react-three/drei";
 
 import { useLoaderData, Outlet } from "react-router-dom";
@@ -56,7 +51,7 @@ export default function BuildingMap() {
   const [selectedFloor, setSelectedFloor] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState(null);
 
-  if (isFloorPending && isLocationPending) return <LoadingScreen />;
+  if (isFloorPending || isLocationPending) return <LoadingScreen />;
 
   if (isFloorError || isLocationError)
     return (
@@ -65,9 +60,6 @@ export default function BuildingMap() {
         {isLocationError ? <p>Error: {locationError}</p> : null}
       </>
     );
-
-  // console.log(floors);
-  // console.log(locations);
 
   return (
     <>
@@ -89,8 +81,7 @@ export default function BuildingMap() {
             setSelectedFloor={setSelectedFloor}
           ></FloorSelect>
           <Scene
-            floors={floors}
-            locations={locations}
+            buildingName={buildingName}
             selectedFloor={selectedFloor}
             selectedLocation={selectedLocation}
             setSelectedLocation={setSelectedLocation}

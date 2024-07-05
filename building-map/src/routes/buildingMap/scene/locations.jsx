@@ -2,6 +2,8 @@ import { Html, Billboard, Text } from "@react-three/drei";
 import * as THREE from "three";
 import { useState, useRef, useEffect } from "react";
 
+import { useLocations } from "../../../hooks/api/useLocations.jsx";
+
 function LocationText({
   floor,
   location,
@@ -38,13 +40,15 @@ function LocationText({
 }
 
 export default function Locations({
+  buildingName,
   floor,
-  locations,
   visible,
   selectedFloor,
   selectedLocation,
   setSelectedLocation,
 }) {
+  const { locations } = useLocations(buildingName);
+
   // Only draw locations if floor is visible
   if (visible) {
     return (

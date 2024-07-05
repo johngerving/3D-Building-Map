@@ -8,6 +8,9 @@ import { Await } from "react-router-dom";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { SVGLoader } from "three/examples/jsm/loaders/SVGLoader";
 
+import { useFloors } from "../../../hooks/api/useFloors.jsx";
+import { useLocations } from "../../../hooks/api/useLocations.jsx";
+
 // Function that takes in array of paths and adds them to a dictionary grouped by the ID of their parent
 function groupPaths(paths) {
   let groupedPaths = {};
@@ -21,15 +24,17 @@ function groupPaths(paths) {
 }
 
 function Floor({
+  buildingName,
   yPos,
   floor,
-  locations,
   selected,
   selectedFloor,
   visible,
   selectedLocation,
   setSelectedLocation,
 }) {
+  const { locations } = useLocations(buildingName);
+
   const { paths } = useLoader(SVGLoader, floor.svg); // Get paths from SVG
 
   // Group paths by parent ID
@@ -100,37 +105,30 @@ function Floor({
         floor={floor}
         selected={selected}
       />
-      <Suspense>
-        <Await resolve={locations}>
-          {(locations) => (
-            <>
-              <Locations
-                floor={floor}
-                locations={locations}
-                selectedFloor={selectedFloor}
-                visible={
-                  (selectedFloor != null &&
-                    selectedFloor.floorID == floor.floorID) ||
-                  selectedFloor == null
-                }
-                selectedLocation={selectedLocation}
-                setSelectedLocation={setSelectedLocation}
-              />
-            </>
-          )}
-        </Await>
-      </Suspense>
+      {}
+      <Locations
+        buildingName={buildingName}
+        floor={floor}
+        selectedFloor={selectedFloor}
+        visible={
+          (selectedFloor != null && selectedFloor.floorID == floor.floorID) ||
+          selectedFloor == null
+        }
+        selectedLocation={selectedLocation}
+        setSelectedLocation={setSelectedLocation}
+      />
     </group>
   );
 }
 
 function Building({
-  floors,
-  locations,
+  buildingName,
   selectedFloor,
   selectedLocation,
   setSelectedLocation,
 }) {
+  const { floors } = useFloors(buildingName);
+
   // Map floors to Floor components
   return (
     <>
@@ -138,10 +136,10 @@ function Building({
         // Only display if floor is selected or no floor is selected
         return (
           <Floor
+            buildingName={buildingName}
             yPos={getFloorYPosFromIndex(floors, index)}
             key={floor.name}
             floor={floor}
-            locations={locations}
             selectedFloor={selectedFloor}
             selected={
               selectedFloor != null && floor.floorID == selectedFloor.floorID
@@ -159,12 +157,14 @@ function Building({
 }
 
 export default function Scene({
-  floors,
-  locations,
+  buildingName,
   selectedFloor,
   selectedLocation,
   setSelectedLocation,
 }) {
+  const { floors } = useFloors(buildingName);
+  const { locations } = useLocations(buildingName);
+
   return (
     <div
       style={{
@@ -185,8 +185,7 @@ export default function Scene({
         <directionalLight args={[0xffffff, 2.5]} position={[-1, 2, 4]} />
         <ambientLight args={[0xcfe2e3]} />
         <Building
-          floors={floors}
-          locations={locations}
+          buildingName={buildingName}
           selectedFloor={selectedFloor}
           selectedLocation={selectedLocation}
           setSelectedLocation={setSelectedLocation}
