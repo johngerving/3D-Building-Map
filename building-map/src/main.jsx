@@ -18,7 +18,7 @@ const router = createBrowserRouter([
     path: "/:buildingName",
     element: <BuildingMap />,
     errorElement: <ErrorPage />,
-    loader: buildingLoader(queryClient),
+    loader: buildingLoader,
     children: [
       {
         // At route /:buildingName, show the search bar and sidebar

@@ -9,7 +9,7 @@ import {
 } from "../../assets/buildingProperties.js";
 import { Stats } from "@react-three/drei";
 
-import { useLoaderData, defer, Await, Outlet, Link } from "react-router-dom";
+import { useLoaderData, Outlet } from "react-router-dom";
 
 import {
   useQuery,
@@ -22,41 +22,12 @@ import {
   getFloorsByBuildingName,
   getLocationsByBuildingName,
 } from "../../api/get.js";
+import { useFloors } from "../../hooks/api/useFloors.jsx";
+import { useLocations } from "../../hooks/api/useLocations.jsx";
 
-const floorQuery = (name) => ({
-  queryKey: ["floors", name],
-  queryFn: () =>
-    getFloorsByBuildingName(name).then((res) => {
-      return res.data;
-    }),
-});
-
-const locationQuery = (name) => ({
-  queryKey: ["locations", name],
-  queryFn: () =>
-    getLocationsByBuildingName(name).then((res) => {
-      return res.data;
-    }),
-});
-
-export const loader =
-  (queryClient) =>
-  async ({ params }) => {
-    const newFloorQuery = floorQuery(params.buildingName);
-    const newLocationQuery = locationQuery(params.buildingName);
-
-    const floors =
-      queryClient.getQueryData(newFloorQuery.queryKey) ??
-      queryClient.fetchQuery(newFloorQuery);
-    const locations =
-      queryClient.getQueryData(newLocationQuery.queryKey) ??
-      queryClient.fetchQuery(newLocationQuery);
-
-    return defer({
-      floors,
-      locations,
-    });
-  };
+export const loader = async ({ params }) => {
+  return await params.buildingName;
+};
 
 function LoadingScreen() {
   return (
@@ -75,54 +46,57 @@ function LoadingScreen() {
 export default function BuildingMap() {
   const queryClient = useQueryClient();
 
-  const { floors, locations } = useLoaderData();
+  const buildingName = useLoaderData();
+
+  const { isFloorPending, isFloorError, floors, floorError } =
+    useFloors(buildingName);
+  const { isLocationPending, isLocationError, locations, locationError } =
+    useLocations(buildingName);
 
   const [selectedFloor, setSelectedFloor] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState(null);
 
-  if (floorQuery.error)
-    return "An error has occurred: " + floorQuery.error.message;
-  if (locationQuery.error)
-    return "An error has occurred: " + locationQuery.error.message;
+  if (isFloorPending && isLocationPending) return <LoadingScreen />;
+
+  if (isFloorError || isLocationError)
+    return (
+      <>
+        {isFloorError ? <p>Error: {floorError}</p> : null}
+        {isLocationError ? <p>Error: {locationError}</p> : null}
+      </>
+    );
+
+  // console.log(floors);
+  // console.log(locations);
 
   return (
-    <Suspense fallback={<LoadingScreen />}>
-      <Await resolve={floors} errorElement={<p>Error!</p>}>
-        {(floors) => (
-          <>
-            {/* <Stats showPanel={0} className="stats" /> */}
-            <Suspense>
-              <Await resolve={locations} errorElement={<p>Error!</p>}>
-                {(locations) => (
-                  <>
-                    <Outlet
-                      context={[
-                        floors,
-                        locations,
-                        selectedLocation,
-                        setSelectedLocation,
-                        setSelectedFloor,
-                      ]}
-                    />
-                    <FloorSelect
-                      floors={floors}
-                      selectedFloor={selectedFloor}
-                      setSelectedFloor={setSelectedFloor}
-                    ></FloorSelect>
-                  </>
-                )}
-              </Await>
-            </Suspense>
-            <Scene
-              floors={floors}
-              locations={locations}
-              selectedFloor={selectedFloor}
-              selectedLocation={selectedLocation}
-              setSelectedLocation={setSelectedLocation}
-            />
-          </>
-        )}
-      </Await>
-    </Suspense>
+    <>
+      {/* <Stats showPanel={0} className="stats" /> */}
+      {floors && locations ? (
+        <>
+          <Outlet
+            context={[
+              floors,
+              locations,
+              selectedLocation,
+              setSelectedLocation,
+              setSelectedFloor,
+            ]}
+          />
+          <FloorSelect
+            floors={floors}
+            selectedFloor={selectedFloor}
+            setSelectedFloor={setSelectedFloor}
+          ></FloorSelect>
+          <Scene
+            floors={floors}
+            locations={locations}
+            selectedFloor={selectedFloor}
+            selectedLocation={selectedLocation}
+            setSelectedLocation={setSelectedLocation}
+          />
+        </>
+      ) : null}
+    </>
   );
 }
