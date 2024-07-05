@@ -2,18 +2,62 @@ import { useState, useEffect, useId } from "react";
 import { useOutletContext } from "react-router-dom";
 import { useSpring, animated } from "@react-spring/web";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
+import { useRevalidator } from "react-router-dom";
 
 import { useCursor } from "./useCursor.jsx";
 import { putFloor } from "../../../api/put.js";
 
-// const usePutFloor = () => {
-//   const queryClient = useQueryClient();
+const usePutFloor = () => {
+  const queryClient = useQueryClient();
+  const revalidator = useRevalidator();
 
-//   return useMutation({
-//     mutationFn: putFloor,
-//     onMutate:
-//   })
-// }
+  return useMutation({
+    mutationFn: putFloor,
+    // When mutated:
+    onMutate: async (floor) => {
+      // Cancel refetches
+      await queryClient.cancelQueries({
+        queryKey: ["floors", floor.buildingName],
+      });
+
+      // Get previous value
+      const previousFloors = queryClient.getQueryData([
+        "floors",
+        floor.buildingName,
+      ]);
+
+      // Optimistically update to new value
+      queryClient.setQueryData(["floors", floor.buildingName], (old) =>
+        // Replace old floor with new floor if they have the same ID
+        old.map((oldFloor) => {
+          if (oldFloor.floorID == floor.floorID) {
+            return floor;
+          } else {
+            return oldFloor;
+          }
+        })
+      );
+
+      // Return context object with old data
+      return { previousFloors };
+    },
+    // If the mutation fails, roll back the change
+    onError: (err, floor, context) => {
+      queryClient.setQueryData(
+        ["floors", floor.buildingName],
+        context.previousFloors
+      );
+      console.log(err);
+    },
+    // Always refetch after error or success
+    onSettled: (floor) => {
+      queryClient.invalidateQueries({
+        queryKey: ["floors", floor.data.buildingName],
+      });
+      revalidator.revalidate();
+    },
+  });
+};
 
 function SingleFloorInfo({ floor, index }) {
   const nameInputId = useId();
@@ -25,6 +69,10 @@ function SingleFloorInfo({ floor, index }) {
   const extrudedSectionsInputId = useId();
   const extrudeDepthInputId = useId();
   const floorLayerInputId = useId();
+
+  const [name, setName] = useState(floor.name);
+
+  const putFloorMutation = usePutFloor();
 
   const labelClassName = "text-right w-full";
   return (
@@ -46,7 +94,14 @@ function SingleFloorInfo({ floor, index }) {
           type="text"
           id={nameInputId}
           name="name"
-          defaultValue={floor.name}
+          value={name}
+          onChange={(e) => {
+            putFloorMutation.mutate({
+              ...floor,
+              name: e.target.value,
+            });
+            setName(e.target.value);
+          }}
           className="border"
         />
 

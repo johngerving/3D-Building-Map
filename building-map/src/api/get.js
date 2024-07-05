@@ -14,7 +14,7 @@ export const getBuilding = async (name) => {
   try {
     // Find building in array with same name as query
     const res = {};
-    res.data = buildingData.find((building) => building.name == name);
+    res.data = buildingData.find((building) => building.buildingName == name);
     await sleep(500);
     return await res;
   } catch (err) {
@@ -24,13 +24,9 @@ export const getBuilding = async (name) => {
 
 export const getFloorsByBuildingName = async (name) => {
   try {
-    // Get building ID from building name
-    const buildingRes = await getBuilding(name);
-    const buildingID = buildingRes.data.buildingID;
-
-    // Filter floors under same building ID
+    // Filter floors under same building name
     const res = {};
-    res.data = floorData.filter((floor) => floor.buildingID == buildingID);
+    res.data = floorData.filter((floor) => floor.buildingName == name);
     await sleep(500);
     return await res;
   } catch (err) {
