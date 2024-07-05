@@ -9,6 +9,7 @@ import { putFloor } from "../../../api/put.js";
 
 import { useFloors } from "../../../hooks/api/useFloors.jsx";
 import { useLocations } from "../../../hooks/api/useLocations.jsx";
+import { useUpdateFloor } from "../../../hooks/api/useUpdateFloor.jsx";
 
 const usePutFloor = () => {
   const queryClient = useQueryClient();
@@ -62,7 +63,7 @@ const usePutFloor = () => {
   });
 };
 
-function SingleFloorInfo({ floor, index }) {
+function SingleFloorInfo({ buildingName, floor, index }) {
   const nameInputId = useId();
   const svgInputId = useId();
   const scaleInputId = useId();
@@ -73,7 +74,7 @@ function SingleFloorInfo({ floor, index }) {
   const extrudeDepthInputId = useId();
   const floorLayerInputId = useId();
 
-  const [name, setName] = useState(floor.name);
+  const { update } = useUpdateFloor(buildingName);
 
   const putFloorMutation = usePutFloor();
 
@@ -97,14 +98,15 @@ function SingleFloorInfo({ floor, index }) {
           type="text"
           id={nameInputId}
           name="name"
-          value={name}
-          onChange={(e) => {
-            putFloorMutation.mutate({
-              ...floor,
-              name: e.target.value,
-            });
-            setName(e.target.value);
-          }}
+          value={floor.name}
+          onChange={(e) =>
+            update(floor.floorID, (old) => {
+              return {
+                ...old,
+                name: e.target.value,
+              };
+            })
+          }
           className="border"
         />
 
@@ -201,14 +203,19 @@ function SingleFloorInfo({ floor, index }) {
 }
 
 function FloorInfo({ buildingName }) {
-  const labelClassName = "text-right";
-
   const { floors } = useFloors(buildingName);
 
   return (
     <div className="p-4 pr-3">
       {floors.map((floor, index) => {
-        return <SingleFloorInfo key={index} floor={floor} index={index} />;
+        return (
+          <SingleFloorInfo
+            key={index}
+            buildingName={buildingName}
+            floor={floor}
+            index={index}
+          />
+        );
       })}
     </div>
   );
