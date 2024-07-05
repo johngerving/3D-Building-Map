@@ -5,18 +5,8 @@ import { useState, Suspense } from "react";
 import { Stats } from "@react-three/drei";
 
 import { useLoaderData, Outlet } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 
-import {
-  useQuery,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
-import {
-  getBuilding,
-  getFloorsByBuildingName,
-  getLocationsByBuildingName,
-} from "../../api/get.js";
 import { useFloors } from "../../hooks/api/useFloors.jsx";
 import { useLocations } from "../../hooks/api/useLocations.jsx";
 
@@ -68,15 +58,14 @@ export default function BuildingMap() {
         <>
           <Outlet
             context={[
-              floors,
-              locations,
+              buildingName,
               selectedLocation,
               setSelectedLocation,
               setSelectedFloor,
             ]}
           />
           <FloorSelect
-            floors={floors}
+            buildingName={buildingName}
             selectedFloor={selectedFloor}
             setSelectedFloor={setSelectedFloor}
           ></FloorSelect>

@@ -7,6 +7,9 @@ import { useRevalidator } from "react-router-dom";
 import { useCursor } from "./useCursor.jsx";
 import { putFloor } from "../../../api/put.js";
 
+import { useFloors } from "../../../hooks/api/useFloors.jsx";
+import { useLocations } from "../../../hooks/api/useLocations.jsx";
+
 const usePutFloor = () => {
   const queryClient = useQueryClient();
   const revalidator = useRevalidator();
@@ -197,8 +200,10 @@ function SingleFloorInfo({ floor, index }) {
   );
 }
 
-function FloorInfo({ floors }) {
+function FloorInfo({ buildingName }) {
   const labelClassName = "text-right";
+
+  const { floors } = useFloors(buildingName);
 
   return (
     <div className="p-4 pr-3">
@@ -211,8 +216,7 @@ function FloorInfo({ floors }) {
 
 export function EditorPanel() {
   const [
-    floors,
-    locations,
+    buildingName,
     selectedLocation,
     setSelectedLocation,
     setSelectedFloor,
@@ -268,7 +272,7 @@ export function EditorPanel() {
       className={`z-10 absolute top-0 left-0 h-full bg-white`}
     >
       <div id="scroll-container" className="h-full mr-2 overflow-y-scroll">
-        <FloorInfo floors={floors} />
+        <FloorInfo buildingName={buildingName} />
       </div>
       <div
         id="resize"

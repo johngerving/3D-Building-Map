@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useFloors } from "../../../hooks/api/useFloors";
 
 function FloorButton({ text, onSelect, selected, isTop, isBottom }) {
   // Select floor when clicked
@@ -47,10 +47,11 @@ function FloorButton({ text, onSelect, selected, isTop, isBottom }) {
 }
 
 export default function FloorSelect({
-  floors,
+  buildingName,
   selectedFloor,
   setSelectedFloor,
 }) {
+  const { floors } = useFloors(buildingName);
   return (
     <div className="z-20 absolute bottom-4 right-4 flex flex-col-reverse shadow-md rounded-md">
       {/* Add button for each floor */}

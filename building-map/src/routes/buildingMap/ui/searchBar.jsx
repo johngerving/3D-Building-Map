@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import CloseIcon from "../../../assets/close-icon.svg?react";
 import fuzzysort from "fuzzysort";
 
+import { useFloors } from "../../../hooks/api/useFloors.jsx";
+import { useLocations } from "../../../hooks/api/useLocations.jsx";
+
 function CloseButton({ handleClear }) {
   const [hover, setHover] = useState(false);
 
@@ -37,13 +40,15 @@ function getSearchResults(locations, term, n) {
 }
 
 function Results({
+  buildingName,
   results,
   setSelectedLocation,
   setFocused,
-  floors,
   setSelectedFloor,
   setText,
 }) {
+  const { floors } = useFloors(buildingName);
+
   return (
     <div className="z-20 rounded-b-xl border shadow-md">
       {/* Make a button for each search result */}
@@ -73,12 +78,13 @@ function Results({
 }
 
 export default function SearchBar({
-  locations,
-  floors,
+  buildingName,
   selectedLocation,
   setSelectedLocation,
   setSelectedFloor,
 }) {
+  const { locations } = useLocations(buildingName);
+
   const [text, setText] = useState("");
   const [results, setResults] = useState([]);
   const [focused, setFocused] = useState(false);
@@ -149,10 +155,10 @@ export default function SearchBar({
       {/* Only show search results if input has value and the search elements are focused on */}
       {showResults ? (
         <Results
+          buildingName={buildingName}
           results={results}
           setSelectedLocation={setSelectedLocation}
           setFocused={setFocused}
-          floors={floors}
           setSelectedFloor={setSelectedFloor}
           setText={setText}
         />

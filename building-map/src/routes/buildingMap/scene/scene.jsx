@@ -33,8 +33,6 @@ function Floor({
   selectedLocation,
   setSelectedLocation,
 }) {
-  const { locations } = useLocations(buildingName);
-
   const { paths } = useLoader(SVGLoader, floor.svg); // Get paths from SVG
 
   // Group paths by parent ID
