@@ -4,6 +4,7 @@ import { useSpring, animated } from "@react-spring/web";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { useCursor } from "./useCursor.jsx";
+import { Tree } from "./tree.jsx";
 
 import { useFloors } from "../../../hooks/api/useFloors.jsx";
 import { useLocations } from "../../../hooks/api/useLocations.jsx";
@@ -55,7 +56,6 @@ function SingleFloorInfo({ buildingName, floor, index }) {
   return (
     // Label and input for each field in floor
     <div className="p-1">
-      <h1 className="text-xl text-slate-700 mb-2">{index + 1}</h1>
       <div
         style={{
           display: "grid",
@@ -203,12 +203,18 @@ function FloorInfo({ buildingName }) {
     <div className="p-4 pr-3">
       {floors.map((floor, index) => {
         return (
-          <SingleFloorInfo
+          <Tree
             key={index}
-            buildingName={buildingName}
-            floor={floor}
-            index={index}
-          />
+            name={floor.name}
+            style={{ marginBottom: "10px" }}
+            childStyle={{ overflow: "hidden" }}
+          >
+            <SingleFloorInfo
+              buildingName={buildingName}
+              floor={floor}
+              index={index}
+            />
+          </Tree>
         );
       })}
     </div>
