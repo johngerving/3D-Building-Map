@@ -47,3 +47,37 @@ export const putFloor = async (data) => {
     throw new Error(err);
   }
 };
+
+export const putLocation = async (data) => {
+  try {
+    const res = {};
+
+    // Find floor by ID
+    const locationIndex = locationData.findIndex(
+      (location) => location.locationID == data.locationID
+    );
+    // Return err if floor doesn't exist
+    if (locationIndex == -1) return { err: "Location not found" };
+
+    // Make copy of old data
+    const oldData = locationData[locationIndex];
+
+    // Update db with new data
+    locationData[locationIndex] = {
+      locationID: oldData.locationID,
+      floorID: oldData.locationID,
+      buildingName: oldData.buildingName,
+      name: data.name,
+      description: data.description,
+      position: data.position,
+      type: data.type,
+    };
+
+    // Return the new data of floor
+    res.data = locationData[locationIndex];
+    await sleep(500);
+    return await res;
+  } catch (err) {
+    throw new Error(err);
+  }
+};

@@ -80,6 +80,8 @@ export const locationData = [
     position: [431.09, 239.46],
     type: "Room",
     floorID: "1",
+    locationID: 0,
+    buildingName: "library",
   },
   {
     name: "40",
@@ -87,6 +89,8 @@ export const locationData = [
     position: [211.24, 185.63],
     type: "Room",
     floorID: "1",
+    locationID: 1,
+    buildingName: "library",
   },
   {
     name: "19",
@@ -94,6 +98,8 @@ export const locationData = [
     position: [355.41, 241.82],
     type: "Room",
     floorID: "1",
+    locationID: 2,
+    buildingName: "library",
   },
   {
     name: "17",
@@ -101,6 +107,8 @@ export const locationData = [
     position: [315.34, 269.6],
     type: "Room",
     floorID: "1",
+    locationID: 3,
+    buildingName: "library",
   },
   {
     name: "7",
@@ -108,6 +116,8 @@ export const locationData = [
     position: [272.32, 167.07],
     type: "Room",
     floorID: "1",
+    locationID: 4,
+    buildingName: "library",
   },
   {
     name: "2",
@@ -115,6 +125,8 @@ export const locationData = [
     position: [150.61, 177.13],
     type: "Room",
     floorID: "1",
+    locationID: 5,
+    buildingName: "library",
   },
   {
     name: "T-0A",
@@ -122,6 +134,8 @@ export const locationData = [
     position: [230.7, 240.69],
     type: "Room",
     floorID: "1",
+    locationID: 6,
+    buildingName: "library",
   },
   {
     name: "8",
@@ -129,6 +143,8 @@ export const locationData = [
     position: [235.1, 176.26],
     type: "Room",
     floorID: "1",
+    locationID: 7,
+    buildingName: "library",
   },
   {
     name: "6",
@@ -136,6 +152,8 @@ export const locationData = [
     position: [232.56, 147.96],
     type: "Room",
     floorID: "1",
+    locationID: 8,
+    buildingName: "library",
   },
   {
     name: "44",
@@ -143,6 +161,8 @@ export const locationData = [
     position: [209.64, 147.71],
     type: "Room",
     floorID: "1",
+    locationID: 9,
+    buildingName: "library",
   },
   {
     name: "S-0C",
@@ -150,6 +170,8 @@ export const locationData = [
     position: [93.7, 76.3],
     type: "Room",
     floorID: "1",
+    locationID: 10,
+    buildingName: "library",
   },
   {
     name: "S-0B",
@@ -157,6 +179,8 @@ export const locationData = [
     position: [58.53, 315.87],
     type: "Room",
     floorID: "1",
+    locationID: 11,
+    buildingName: "library",
   },
   {
     name: "S-0A",
@@ -164,6 +188,8 @@ export const locationData = [
     position: [272.71, 266.81],
     type: "Room",
     floorID: "1",
+    locationID: 12,
+    buildingName: "library",
   },
   {
     name: "64",
@@ -171,6 +197,8 @@ export const locationData = [
     position: [527.02, 318.54],
     type: "Room",
     floorID: "1",
+    locationID: 13,
+    buildingName: "library",
   },
   {
     name: "EL-0A",
@@ -178,6 +206,8 @@ export const locationData = [
     position: [226.41, 256.11],
     type: "Room",
     floorID: "1",
+    locationID: 14,
+    buildingName: "library",
   },
   {
     name: "C-0A",
@@ -185,6 +215,8 @@ export const locationData = [
     position: [226.19, 322.07],
     type: "Room",
     floorID: "1",
+    locationID: 15,
+    buildingName: "library",
   },
   {
     name: "C-0B",
@@ -192,6 +224,8 @@ export const locationData = [
     position: [261.23, 151.08],
     type: "Room",
     floorID: "1",
+    locationID: 16,
+    buildingName: "library",
   },
   {
     name: "[BG]01",
@@ -199,6 +233,8 @@ export const locationData = [
     position: [67.13, 78.86],
     type: "Room",
     floorID: "1",
+    locationID: 17,
+    buildingName: "library",
   },
   {
     name: "[BG]02",
@@ -206,6 +242,8 @@ export const locationData = [
     position: [528.76, 290.97],
     type: "Room",
     floorID: "1",
+    locationID: 18,
+    buildingName: "library",
   },
   {
     name: "[CG]01",
@@ -213,6 +251,8 @@ export const locationData = [
     position: [56.3, 62.49],
     type: "Room",
     floorID: "1",
+    locationID: 19,
+    buildingName: "library",
   },
   {
     name: "[CG]02",
@@ -220,6 +260,8 @@ export const locationData = [
     position: [270.66, 117.31],
     type: "Room",
     floorID: "1",
+    locationID: 20,
+    buildingName: "library",
   },
   {
     name: "H-0A",
@@ -227,6 +269,8 @@ export const locationData = [
     position: [123.4, 244.34],
     type: "Room",
     floorID: "1",
+    locationID: 21,
+    buildingName: "library",
   },
   {
     name: "S-0D",
@@ -234,6 +278,8 @@ export const locationData = [
     position: [426.57, 201.27],
     type: "Room",
     floorID: "1",
+    locationID: 22,
+    buildingName: "library",
   },
   {
     name: "S-0E",
@@ -241,6 +287,8 @@ export const locationData = [
     position: [522.56, 356.76],
     type: "Room",
     floorID: "1",
+    locationID: 23,
+    buildingName: "library",
   },
   {
     name: "RR-W-0",
@@ -248,6 +296,8 @@ export const locationData = [
     position: [247.13, 327.68],
     type: "Room",
     floorID: "1",
+    locationID: 24,
+    buildingName: "library",
   },
   {
     name: "RR-M-0",
@@ -255,6 +305,8 @@ export const locationData = [
     position: [238.73, 306.8],
     type: "Room",
     floorID: "1",
+    locationID: 25,
+    buildingName: "library",
   },
   {
     name: "H-0B",
@@ -262,6 +314,8 @@ export const locationData = [
     position: [175.55, 134.86],
     type: "Room",
     floorID: "1",
+    locationID: 26,
+    buildingName: "library",
   },
   {
     name: "H-0E",
@@ -269,6 +323,8 @@ export const locationData = [
     position: [190.75, 214.86],
     type: "Room",
     floorID: "1",
+    locationID: 27,
+    buildingName: "library",
   },
   {
     name: "L-0C",
@@ -276,6 +332,8 @@ export const locationData = [
     position: [244.23, 267.16],
     type: "Room",
     floorID: "1",
+    locationID: 28,
+    buildingName: "library",
   },
   {
     name: "H-0D",
@@ -283,6 +341,8 @@ export const locationData = [
     position: [197.48, 299.9],
     type: "Room",
     floorID: "1",
+    locationID: 29,
+    buildingName: "library",
   },
   {
     name: "[SA]B-I4",
@@ -290,6 +350,8 @@ export const locationData = [
     position: [378.9, 347.09],
     type: "Room",
     floorID: "1",
+    locationID: 30,
+    buildingName: "library",
   },
   {
     name: "[SA]B-H7",
@@ -297,6 +359,8 @@ export const locationData = [
     position: [340.58, 232.29],
     type: "Room",
     floorID: "1",
+    locationID: 31,
+    buildingName: "library",
   },
   {
     name: "[SA]B-H6",
@@ -304,6 +368,8 @@ export const locationData = [
     position: [340.58, 270.55],
     type: "Room",
     floorID: "1",
+    locationID: 32,
+    buildingName: "library",
   },
   {
     name: "[SA]B-I6",
@@ -311,6 +377,8 @@ export const locationData = [
     position: [378.9, 270.55],
     type: "Room",
     floorID: "1",
+    locationID: 33,
+    buildingName: "library",
   },
   {
     name: "[SA]B-I7",
@@ -318,6 +386,8 @@ export const locationData = [
     position: [378.9, 232.29],
     type: "Room",
     floorID: "1",
+    locationID: 34,
+    buildingName: "library",
   },
   {
     name: "5",
@@ -325,6 +395,8 @@ export const locationData = [
     position: [234.54, 99.07],
     type: "Room",
     floorID: "1",
+    locationID: 35,
+    buildingName: "library",
   },
   {
     name: "5B",
@@ -332,6 +404,8 @@ export const locationData = [
     position: [193.48, 93.77],
     type: "Room",
     floorID: "1",
+    locationID: 36,
+    buildingName: "library",
   },
   {
     name: "5C",
@@ -339,6 +413,8 @@ export const locationData = [
     position: [212.61, 89.75],
     type: "Room",
     floorID: "1",
+    locationID: 37,
+    buildingName: "library",
   },
   {
     name: "5E",
@@ -346,6 +422,8 @@ export const locationData = [
     position: [232.09, 118.86],
     type: "Room",
     floorID: "1",
+    locationID: 38,
+    buildingName: "library",
   },
   {
     name: "5D",
@@ -353,6 +431,8 @@ export const locationData = [
     position: [251.21, 118.84],
     type: "Room",
     floorID: "1",
+    locationID: 39,
+    buildingName: "library",
   },
   {
     name: "5A",
@@ -360,6 +440,8 @@ export const locationData = [
     position: [193.58, 117.28],
     type: "Room",
     floorID: "1",
+    locationID: 40,
+    buildingName: "library",
   },
   {
     name: "M-0A",
@@ -367,6 +449,8 @@ export const locationData = [
     position: [90.51, 93.66],
     type: "Room",
     floorID: "1",
+    locationID: 41,
+    buildingName: "library",
   },
   {
     name: "3",
@@ -374,6 +458,8 @@ export const locationData = [
     position: [166.56, 102.56],
     type: "Room",
     floorID: "1",
+    locationID: 42,
+    buildingName: "library",
   },
   {
     name: "3A",
@@ -381,6 +467,8 @@ export const locationData = [
     position: [117.18, 115.28],
     type: "Room",
     floorID: "1",
+    locationID: 43,
+    buildingName: "library",
   },
   {
     name: "3B",
@@ -388,6 +476,8 @@ export const locationData = [
     position: [117.08, 91.72],
     type: "Room",
     floorID: "1",
+    locationID: 44,
+    buildingName: "library",
   },
   {
     name: "1",
@@ -395,6 +485,8 @@ export const locationData = [
     position: [92.22, 177.23],
     type: "Room",
     floorID: "1",
+    locationID: 45,
+    buildingName: "library",
   },
   {
     name: "1A",
@@ -402,6 +494,8 @@ export const locationData = [
     position: [81.02, 147.84],
     type: "Room",
     floorID: "1",
+    locationID: 46,
+    buildingName: "library",
   },
   {
     name: "1B",
@@ -409,6 +503,8 @@ export const locationData = [
     position: [80.91, 128.98],
     type: "Room",
     floorID: "1",
+    locationID: 47,
+    buildingName: "library",
   },
   {
     name: "1C",
@@ -416,6 +512,8 @@ export const locationData = [
     position: [81.22, 109.27],
     type: "Room",
     floorID: "1",
+    locationID: 48,
+    buildingName: "library",
   },
   {
     name: "37",
@@ -423,6 +521,8 @@ export const locationData = [
     position: [180.73, 176.95],
     type: "Room",
     floorID: "1",
+    locationID: 49,
+    buildingName: "library",
   },
   {
     name: "39",
@@ -430,6 +530,8 @@ export const locationData = [
     position: [179.31, 147.86],
     type: "Room",
     floorID: "1",
+    locationID: 50,
+    buildingName: "library",
   },
   {
     name: "4",
@@ -437,6 +539,8 @@ export const locationData = [
     position: [150.51, 148.73],
     type: "Room",
     floorID: "1",
+    locationID: 51,
+    buildingName: "library",
   },
   {
     name: "42",
@@ -444,6 +548,8 @@ export const locationData = [
     position: [211.62, 168.17],
     type: "Room",
     floorID: "1",
+    locationID: 52,
+    buildingName: "library",
   },
   {
     name: "7A",
@@ -451,6 +557,8 @@ export const locationData = [
     position: [288.43, 166.73],
     type: "Room",
     floorID: "1",
+    locationID: 53,
+    buildingName: "library",
   },
   {
     name: "9",
@@ -458,6 +566,8 @@ export const locationData = [
     position: [280.7, 186.78],
     type: "Room",
     floorID: "1",
+    locationID: 54,
+    buildingName: "library",
   },
   {
     name: "11",
@@ -465,6 +575,8 @@ export const locationData = [
     position: [278.01, 206.91],
     type: "Room",
     floorID: "1",
+    locationID: 55,
+    buildingName: "library",
   },
   {
     name: "13",
@@ -472,6 +584,8 @@ export const locationData = [
     position: [267.94, 224.02],
     type: "Room",
     floorID: "1",
+    locationID: 56,
+    buildingName: "library",
   },
   {
     name: "13A",
@@ -479,6 +593,8 @@ export const locationData = [
     position: [284.48, 224.02],
     type: "Room",
     floorID: "1",
+    locationID: 57,
+    buildingName: "library",
   },
   {
     name: "15",
@@ -486,6 +602,8 @@ export const locationData = [
     position: [278.58, 240.98],
     type: "Room",
     floorID: "1",
+    locationID: 58,
+    buildingName: "library",
   },
   {
     name: "10",
@@ -493,6 +611,8 @@ export const locationData = [
     position: [234.97, 214.19],
     type: "Room",
     floorID: "1",
+    locationID: 59,
+    buildingName: "library",
   },
   {
     name: "35",
@@ -500,6 +620,8 @@ export const locationData = [
     position: [176.5, 206.3],
     type: "Room",
     floorID: "1",
+    locationID: 60,
+    buildingName: "library",
   },
   {
     name: "33",
@@ -507,6 +629,8 @@ export const locationData = [
     position: [176.63, 225.27],
     type: "Room",
     floorID: "1",
+    locationID: 61,
+    buildingName: "library",
   },
   {
     name: "38",
@@ -514,6 +638,8 @@ export const locationData = [
     position: [214.43, 207.4],
     type: "Room",
     floorID: "1",
+    locationID: 62,
+    buildingName: "library",
   },
   {
     name: "36",
@@ -521,6 +647,8 @@ export const locationData = [
     position: [213.76, 224.64],
     type: "Room",
     floorID: "1",
+    locationID: 63,
+    buildingName: "library",
   },
   {
     name: "L-0A",
@@ -528,6 +656,8 @@ export const locationData = [
     position: [89.55, 215.35],
     type: "Room",
     floorID: "1",
+    locationID: 64,
+    buildingName: "library",
   },
   {
     name: "28",
@@ -535,6 +665,8 @@ export const locationData = [
     position: [147.64, 214.93],
     type: "Room",
     floorID: "1",
+    locationID: 65,
+    buildingName: "library",
   },
   {
     name: "26",
@@ -542,6 +674,8 @@ export const locationData = [
     position: [140.22, 262.71],
     type: "Room",
     floorID: "1",
+    locationID: 66,
+    buildingName: "library",
   },
   {
     name: "26A",
@@ -549,6 +683,8 @@ export const locationData = [
     position: [156.9, 244.14],
     type: "Room",
     floorID: "1",
+    locationID: 67,
+    buildingName: "library",
   },
   {
     name: "31",
@@ -556,6 +692,8 @@ export const locationData = [
     position: [180.92, 250.81],
     type: "Room",
     floorID: "1",
+    locationID: 68,
+    buildingName: "library",
   },
   {
     name: "29",
@@ -563,6 +701,8 @@ export const locationData = [
     position: [178.6, 281.47],
     type: "Room",
     floorID: "1",
+    locationID: 69,
+    buildingName: "library",
   },
   {
     name: "22",
@@ -570,6 +710,8 @@ export const locationData = [
     position: [158.55, 282.52],
     type: "Room",
     floorID: "1",
+    locationID: 70,
+    buildingName: "library",
   },
   {
     name: "24",
@@ -577,6 +719,8 @@ export const locationData = [
     position: [137.98, 281.34],
     type: "Room",
     floorID: "1",
+    locationID: 71,
+    buildingName: "library",
   },
   {
     name: "34",
@@ -584,6 +728,8 @@ export const locationData = [
     position: [210.94, 244.02],
     type: "Room",
     floorID: "1",
+    locationID: 72,
+    buildingName: "library",
   },
   {
     name: "32",
@@ -591,6 +737,8 @@ export const locationData = [
     position: [211.44, 261.63],
     type: "Room",
     floorID: "1",
+    locationID: 73,
+    buildingName: "library",
   },
   {
     name: "30",
@@ -598,6 +746,8 @@ export const locationData = [
     position: [212.25, 280.96],
     type: "Room",
     floorID: "1",
+    locationID: 74,
+    buildingName: "library",
   },
   {
     name: "26B",
@@ -605,6 +755,8 @@ export const locationData = [
     position: [161.31, 263.02],
     type: "Room",
     floorID: "1",
+    locationID: 75,
+    buildingName: "library",
   },
   {
     name: "27",
@@ -612,6 +764,8 @@ export const locationData = [
     position: [81.8, 272.29],
     type: "Room",
     floorID: "1",
+    locationID: 76,
+    buildingName: "library",
   },
   {
     name: "27E",
@@ -619,6 +773,8 @@ export const locationData = [
     position: [112.36, 246.43],
     type: "Room",
     floorID: "1",
+    locationID: 77,
+    buildingName: "library",
   },
   {
     name: "27A",
@@ -626,6 +782,8 @@ export const locationData = [
     position: [103.97, 262.44],
     type: "Room",
     floorID: "1",
+    locationID: 78,
+    buildingName: "library",
   },
   {
     name: "27B",
@@ -633,6 +791,8 @@ export const locationData = [
     position: [103.49, 282.31],
     type: "Room",
     floorID: "1",
+    locationID: 79,
+    buildingName: "library",
   },
   {
     name: "27C",
@@ -640,6 +800,8 @@ export const locationData = [
     position: [102.87, 299.84],
     type: "Room",
     floorID: "1",
+    locationID: 80,
+    buildingName: "library",
   },
   {
     name: "27D",
@@ -647,6 +809,8 @@ export const locationData = [
     position: [79.97, 322.99],
     type: "Room",
     floorID: "1",
+    locationID: 81,
+    buildingName: "library",
   },
   {
     name: "27F",
@@ -654,6 +818,8 @@ export const locationData = [
     position: [76.14, 337.8],
     type: "Room",
     floorID: "1",
+    locationID: 82,
+    buildingName: "library",
   },
   {
     name: "25",
@@ -661,6 +827,8 @@ export const locationData = [
     position: [116.33, 331.61],
     type: "Room",
     floorID: "1",
+    locationID: 83,
+    buildingName: "library",
   },
   {
     name: "25A",
@@ -668,6 +836,8 @@ export const locationData = [
     position: [133.2, 310.85],
     type: "Room",
     floorID: "1",
+    locationID: 84,
+    buildingName: "library",
   },
   {
     name: "23",
@@ -675,6 +845,8 @@ export const locationData = [
     position: [154.06, 310.64],
     type: "Room",
     floorID: "1",
+    locationID: 85,
+    buildingName: "library",
   },
   {
     name: "21",
@@ -682,6 +854,8 @@ export const locationData = [
     position: [174, 310.8],
     type: "Room",
     floorID: "1",
+    locationID: 86,
+    buildingName: "library",
   },
   {
     name: "M-0B",
@@ -689,6 +863,8 @@ export const locationData = [
     position: [200.14, 337.7],
     type: "Room",
     floorID: "1",
+    locationID: 87,
+    buildingName: "library",
   },
   {
     name: "M-0C",
@@ -696,6 +872,8 @@ export const locationData = [
     position: [161.71, 338.11],
     type: "Room",
     floorID: "1",
+    locationID: 88,
+    buildingName: "library",
   },
   {
     name: "M-0D",
@@ -703,6 +881,8 @@ export const locationData = [
     position: [188.11, 372.77],
     type: "Room",
     floorID: "1",
+    locationID: 89,
+    buildingName: "library",
   },
   {
     name: "M-0M",
@@ -710,6 +890,8 @@ export const locationData = [
     position: [379.06, 364.6],
     type: "Room",
     floorID: "1",
+    locationID: 90,
+    buildingName: "library",
   },
   {
     name: "19D",
@@ -717,6 +899,8 @@ export const locationData = [
     position: [430.65, 368.1],
     type: "Room",
     floorID: "1",
+    locationID: 91,
+    buildingName: "library",
   },
   {
     name: "19C",
@@ -724,6 +908,8 @@ export const locationData = [
     position: [437.05, 340.79],
     type: "Room",
     floorID: "1",
+    locationID: 92,
+    buildingName: "library",
   },
   {
     name: "M-0P",
@@ -731,6 +917,8 @@ export const locationData = [
     position: [315.44, 325.74],
     type: "Room",
     floorID: "1",
+    locationID: 93,
+    buildingName: "library",
   },
   {
     name: "M-0N",
@@ -738,6 +926,8 @@ export const locationData = [
     position: [348.79, 340.1],
     type: "Room",
     floorID: "1",
+    locationID: 94,
+    buildingName: "library",
   },
   {
     name: "M-0O",
@@ -745,6 +935,8 @@ export const locationData = [
     position: [348.58, 362.08],
     type: "Room",
     floorID: "1",
+    locationID: 95,
+    buildingName: "library",
   },
   {
     name: "M-0Q",
@@ -752,6 +944,8 @@ export const locationData = [
     position: [324.13, 369.59],
     type: "Room",
     floorID: "1",
+    locationID: 96,
+    buildingName: "library",
   },
   {
     name: "M-0K",
@@ -759,6 +953,8 @@ export const locationData = [
     position: [247.14, 344.24],
     type: "Room",
     floorID: "1",
+    locationID: 97,
+    buildingName: "library",
   },
   {
     name: "M-0E",
@@ -766,6 +962,8 @@ export const locationData = [
     position: [213.94, 362.37],
     type: "Room",
     floorID: "1",
+    locationID: 98,
+    buildingName: "library",
   },
   {
     name: "M-0F",
@@ -773,6 +971,8 @@ export const locationData = [
     position: [218.59, 375.49],
     type: "Room",
     floorID: "1",
+    locationID: 99,
+    buildingName: "library",
   },
   {
     name: "M-0G",
@@ -780,6 +980,8 @@ export const locationData = [
     position: [218.51, 391.47],
     type: "Room",
     floorID: "1",
+    locationID: 100,
+    buildingName: "library",
   },
   {
     name: "M-0H",
@@ -787,6 +989,8 @@ export const locationData = [
     position: [218.79, 401.39],
     type: "Room",
     floorID: "1",
+    locationID: 101,
+    buildingName: "library",
   },
   {
     name: "M-0I",
@@ -794,6 +998,8 @@ export const locationData = [
     position: [250.74, 382.27],
     type: "Room",
     floorID: "1",
+    locationID: 102,
+    buildingName: "library",
   },
   {
     name: "M-0J",
@@ -801,6 +1007,8 @@ export const locationData = [
     position: [268.55, 370.33],
     type: "Room",
     floorID: "1",
+    locationID: 103,
+    buildingName: "library",
   },
   {
     name: "M-0L",
@@ -808,6 +1016,8 @@ export const locationData = [
     position: [228.61, 343.34],
     type: "Room",
     floorID: "1",
+    locationID: 104,
+    buildingName: "library",
   },
   {
     name: "M-0R",
@@ -815,6 +1025,8 @@ export const locationData = [
     position: [306.71, 370.48],
     type: "Room",
     floorID: "1",
+    locationID: 105,
+    buildingName: "library",
   },
   {
     name: "H-0C",
@@ -822,6 +1034,8 @@ export const locationData = [
     position: [251.82, 202.55],
     type: "Room",
     floorID: "1",
+    locationID: 106,
+    buildingName: "library",
   },
   {
     name: "L-0B",
@@ -829,6 +1043,8 @@ export const locationData = [
     position: [247.92, 141.81],
     type: "Room",
     floorID: "1",
+    locationID: 107,
+    buildingName: "library",
   },
   {
     name: "EL/M-0A",
@@ -836,6 +1052,8 @@ export const locationData = [
     position: [227.44, 266.74],
     type: "Room",
     floorID: "1",
+    locationID: 108,
+    buildingName: "library",
   },
   {
     name: "19B",
@@ -843,6 +1061,8 @@ export const locationData = [
     position: [431.01, 193.07],
     type: "Room",
     floorID: "1",
+    locationID: 109,
+    buildingName: "library",
   },
   {
     name: "101A",
@@ -850,6 +1070,8 @@ export const locationData = [
     position: [352.49, 225.03],
     type: "Room",
     floorID: "2",
+    locationID: 110,
+    buildingName: "library",
   },
   {
     name: "111B",
@@ -857,6 +1079,8 @@ export const locationData = [
     position: [496.54, 271.4],
     type: "Room",
     floorID: "2",
+    locationID: 111,
+    buildingName: "library",
   },
   {
     name: "111H",
@@ -864,6 +1088,8 @@ export const locationData = [
     position: [549.66, 287.6],
     type: "Room",
     floorID: "2",
+    locationID: 112,
+    buildingName: "library",
   },
   {
     name: "111G",
@@ -871,6 +1097,8 @@ export const locationData = [
     position: [545.64, 228.35],
     type: "Room",
     floorID: "2",
+    locationID: 113,
+    buildingName: "library",
   },
   {
     name: "111F",
@@ -878,6 +1106,8 @@ export const locationData = [
     position: [499.23, 171.64],
     type: "Room",
     floorID: "2",
+    locationID: 114,
+    buildingName: "library",
   },
   {
     name: "111K",
@@ -885,6 +1115,8 @@ export const locationData = [
     position: [540.15, 174.39],
     type: "Room",
     floorID: "2",
+    locationID: 115,
+    buildingName: "library",
   },
   {
     name: "111E",
@@ -892,6 +1124,8 @@ export const locationData = [
     position: [505.07, 201.68],
     type: "Room",
     floorID: "2",
+    locationID: 116,
+    buildingName: "library",
   },
   {
     name: "111J",
@@ -899,6 +1133,8 @@ export const locationData = [
     position: [495.09, 221.98],
     type: "Room",
     floorID: "2",
+    locationID: 117,
+    buildingName: "library",
   },
   {
     name: "110",
@@ -906,6 +1142,8 @@ export const locationData = [
     position: [431.83, 278.75],
     type: "Room",
     floorID: "2",
+    locationID: 118,
+    buildingName: "library",
   },
   {
     name: "111A",
@@ -913,6 +1151,8 @@ export const locationData = [
     position: [469.75, 221.2],
     type: "Room",
     floorID: "2",
+    locationID: 119,
+    buildingName: "library",
   },
   {
     name: "111C",
@@ -920,6 +1160,8 @@ export const locationData = [
     position: [455.27, 202.88],
     type: "Room",
     floorID: "2",
+    locationID: 120,
+    buildingName: "library",
   },
   {
     name: "111D",
@@ -927,6 +1169,8 @@ export const locationData = [
     position: [475, 202.88],
     type: "Room",
     floorID: "2",
+    locationID: 121,
+    buildingName: "library",
   },
   {
     name: "111I",
@@ -934,6 +1178,8 @@ export const locationData = [
     position: [467.86, 271.86],
     type: "Room",
     floorID: "2",
+    locationID: 122,
+    buildingName: "library",
   },
   {
     name: "110C",
@@ -941,6 +1187,8 @@ export const locationData = [
     position: [440.39, 214.15],
     type: "Room",
     floorID: "2",
+    locationID: 123,
+    buildingName: "library",
   },
   {
     name: "110B",
@@ -948,6 +1196,8 @@ export const locationData = [
     position: [441.11, 231.28],
     type: "Room",
     floorID: "2",
+    locationID: 124,
+    buildingName: "library",
   },
   {
     name: "110A",
@@ -955,6 +1205,8 @@ export const locationData = [
     position: [421.21, 225.16],
     type: "Room",
     floorID: "2",
+    locationID: 125,
+    buildingName: "library",
   },
   {
     name: "T-1A",
@@ -962,6 +1214,8 @@ export const locationData = [
     position: [227.08, 240.02],
     type: "Room",
     floorID: "2",
+    locationID: 126,
+    buildingName: "library",
   },
   {
     name: "122",
@@ -969,6 +1223,8 @@ export const locationData = [
     position: [104.03, 292.2],
     type: "Room",
     floorID: "2",
+    locationID: 127,
+    buildingName: "library",
   },
   {
     name: "121",
@@ -976,6 +1232,8 @@ export const locationData = [
     position: [181.67, 326.55],
     type: "Room",
     floorID: "2",
+    locationID: 128,
+    buildingName: "library",
   },
   {
     name: "115",
@@ -983,6 +1241,8 @@ export const locationData = [
     position: [236.01, 148.21],
     type: "Room",
     floorID: "2",
+    locationID: 129,
+    buildingName: "library",
   },
   {
     name: "117",
@@ -990,6 +1250,8 @@ export const locationData = [
     position: [240.55, 110.23],
     type: "Room",
     floorID: "2",
+    locationID: 130,
+    buildingName: "library",
   },
   {
     name: "118",
@@ -997,6 +1259,8 @@ export const locationData = [
     position: [241, 88.43],
     type: "Room",
     floorID: "2",
+    locationID: 131,
+    buildingName: "library",
   },
   {
     name: "116",
@@ -1004,6 +1268,8 @@ export const locationData = [
     position: [238.59, 130.67],
     type: "Room",
     floorID: "2",
+    locationID: 132,
+    buildingName: "library",
   },
   {
     name: "112",
@@ -1011,6 +1277,8 @@ export const locationData = [
     position: [276.16, 185.18],
     type: "Room",
     floorID: "2",
+    locationID: 133,
+    buildingName: "library",
   },
   {
     name: "112A",
@@ -1018,6 +1286,8 @@ export const locationData = [
     position: [283.37, 166.41],
     type: "Room",
     floorID: "2",
+    locationID: 134,
+    buildingName: "library",
   },
   {
     name: "113",
@@ -1025,6 +1295,8 @@ export const locationData = [
     position: [267.47, 166.41],
     type: "Room",
     floorID: "2",
+    locationID: 135,
+    buildingName: "library",
   },
   {
     name: "114",
@@ -1032,6 +1304,8 @@ export const locationData = [
     position: [264.16, 138.89],
     type: "Room",
     floorID: "2",
+    locationID: 136,
+    buildingName: "library",
   },
   {
     name: "101B",
@@ -1039,6 +1313,8 @@ export const locationData = [
     position: [256.98, 140.65],
     type: "Room",
     floorID: "2",
+    locationID: 137,
+    buildingName: "library",
   },
   {
     name: "120",
@@ -1046,6 +1322,8 @@ export const locationData = [
     position: [248.83, 318.38],
     type: "Room",
     floorID: "2",
+    locationID: 138,
+    buildingName: "library",
   },
   {
     name: "C-1A",
@@ -1053,6 +1331,8 @@ export const locationData = [
     position: [228.18, 282.11],
     type: "Room",
     floorID: "2",
+    locationID: 139,
+    buildingName: "library",
   },
   {
     name: "E-1",
@@ -1060,6 +1340,8 @@ export const locationData = [
     position: [228.11, 272.82],
     type: "Room",
     floorID: "2",
+    locationID: 140,
+    buildingName: "library",
   },
   {
     name: "C-1B",
@@ -1067,6 +1349,8 @@ export const locationData = [
     position: [409.44, 354.09],
     type: "Room",
     floorID: "2",
+    locationID: 141,
+    buildingName: "library",
   },
   {
     name: "109A",
@@ -1074,6 +1358,8 @@ export const locationData = [
     position: [493.26, 338.85],
     type: "Room",
     floorID: "2",
+    locationID: 142,
+    buildingName: "library",
   },
   {
     name: "106",
@@ -1081,6 +1367,8 @@ export const locationData = [
     position: [440.77, 339.77],
     type: "Room",
     floorID: "2",
+    locationID: 143,
+    buildingName: "library",
   },
   {
     name: "106B",
@@ -1088,6 +1376,8 @@ export const locationData = [
     position: [439.5, 362.25],
     type: "Room",
     floorID: "2",
+    locationID: 144,
+    buildingName: "library",
   },
   {
     name: "106C",
@@ -1095,6 +1385,8 @@ export const locationData = [
     position: [446.02, 385.65],
     type: "Room",
     floorID: "2",
+    locationID: 145,
+    buildingName: "library",
   },
   {
     name: "109B",
@@ -1102,6 +1394,8 @@ export const locationData = [
     position: [493.97, 358.5],
     type: "Room",
     floorID: "2",
+    locationID: 146,
+    buildingName: "library",
   },
   {
     name: "109",
@@ -1109,6 +1403,8 @@ export const locationData = [
     position: [550.47, 366.03],
     type: "Room",
     floorID: "2",
+    locationID: 147,
+    buildingName: "library",
   },
   {
     name: "107",
@@ -1116,6 +1412,8 @@ export const locationData = [
     position: [462.63, 339.17],
     type: "Room",
     floorID: "2",
+    locationID: 148,
+    buildingName: "library",
   },
   {
     name: "108A",
@@ -1123,6 +1421,8 @@ export const locationData = [
     position: [458.54, 367.96],
     type: "Room",
     floorID: "2",
+    locationID: 149,
+    buildingName: "library",
   },
   {
     name: "108",
@@ -1130,6 +1430,8 @@ export const locationData = [
     position: [477.64, 363.92],
     type: "Room",
     floorID: "2",
+    locationID: 150,
+    buildingName: "library",
   },
   {
     name: "101",
@@ -1137,6 +1439,8 @@ export const locationData = [
     position: [130.34, 174.95],
     type: "Room",
     floorID: "2",
+    locationID: 151,
+    buildingName: "library",
   },
   {
     name: "102",
@@ -1144,6 +1448,8 @@ export const locationData = [
     position: [336.37, 290.47],
     type: "Room",
     floorID: "2",
+    locationID: 152,
+    buildingName: "library",
   },
   {
     name: "111",
@@ -1151,6 +1457,8 @@ export const locationData = [
     position: [505.75, 240.97],
     type: "Room",
     floorID: "2",
+    locationID: 153,
+    buildingName: "library",
   },
   {
     name: "E-1B",
@@ -1158,6 +1466,8 @@ export const locationData = [
     position: [455.91, 223.83],
     type: "Room",
     floorID: "2",
+    locationID: 154,
+    buildingName: "library",
   },
   {
     name: "104",
@@ -1165,6 +1475,8 @@ export const locationData = [
     position: [381.4, 385.43],
     type: "Room",
     floorID: "2",
+    locationID: 155,
+    buildingName: "library",
   },
   {
     name: "S-1C",
@@ -1172,6 +1484,8 @@ export const locationData = [
     position: [93.43, 74.17],
     type: "Room",
     floorID: "2",
+    locationID: 156,
+    buildingName: "library",
   },
   {
     name: "S-1B",
@@ -1179,6 +1493,8 @@ export const locationData = [
     position: [56.69, 316.25],
     type: "Room",
     floorID: "2",
+    locationID: 157,
+    buildingName: "library",
   },
   {
     name: "S-1E",
@@ -1186,6 +1502,8 @@ export const locationData = [
     position: [522.61, 358.35],
     type: "Room",
     floorID: "2",
+    locationID: 158,
+    buildingName: "library",
   },
   {
     name: "S-1D",
@@ -1193,6 +1511,8 @@ export const locationData = [
     position: [428.47, 192.66],
     type: "Room",
     floorID: "2",
+    locationID: 159,
+    buildingName: "library",
   },
   {
     name: "S-1A",
@@ -1200,6 +1520,8 @@ export const locationData = [
     position: [272.29, 266.92],
     type: "Room",
     floorID: "2",
+    locationID: 160,
+    buildingName: "library",
   },
   {
     name: "[BG]100",
@@ -1207,6 +1529,8 @@ export const locationData = [
     position: [57.79, 347.73],
     type: "Room",
     floorID: "2",
+    locationID: 161,
+    buildingName: "library",
   },
   {
     name: "[CG]100",
@@ -1214,6 +1538,8 @@ export const locationData = [
     position: [71.11, 349.31],
     type: "Room",
     floorID: "2",
+    locationID: 162,
+    buildingName: "library",
   },
   {
     name: "[CG]101",
@@ -1221,6 +1547,8 @@ export const locationData = [
     position: [188.87, 377],
     type: "Room",
     floorID: "2",
+    locationID: 163,
+    buildingName: "library",
   },
   {
     name: "[CG]102",
@@ -1228,6 +1556,8 @@ export const locationData = [
     position: [242.57, 408.18],
     type: "Room",
     floorID: "2",
+    locationID: 164,
+    buildingName: "library",
   },
   {
     name: "[CG]103",
@@ -1235,6 +1565,8 @@ export const locationData = [
     position: [457.29, 186.73],
     type: "Room",
     floorID: "2",
+    locationID: 165,
+    buildingName: "library",
   },
   {
     name: "EL-1A",
@@ -1242,6 +1574,8 @@ export const locationData = [
     position: [226.86, 256.67],
     type: "Room",
     floorID: "2",
+    locationID: 166,
+    buildingName: "library",
   },
   {
     name: "[XX]101",
@@ -1249,6 +1583,8 @@ export const locationData = [
     position: [434.93, 331.67],
     type: "Room",
     floorID: "2",
+    locationID: 167,
+    buildingName: "library",
   },
   {
     name: "EL-1B",
@@ -1256,6 +1592,8 @@ export const locationData = [
     position: [528.83, 301.18],
     type: "Room",
     floorID: "2",
+    locationID: 168,
+    buildingName: "library",
   },
   {
     name: "M-1A",
@@ -1263,6 +1601,8 @@ export const locationData = [
     position: [228.14, 366.85],
     type: "Room",
     floorID: "2",
+    locationID: 169,
+    buildingName: "library",
   },
   {
     name: "RR-M-1",
@@ -1270,6 +1610,8 @@ export const locationData = [
     position: [419.6, 374.59],
     type: "Room",
     floorID: "2",
+    locationID: 170,
+    buildingName: "library",
   },
   {
     name: "RR-W-1",
@@ -1277,6 +1619,8 @@ export const locationData = [
     position: [394.16, 374.59],
     type: "Room",
     floorID: "2",
+    locationID: 171,
+    buildingName: "library",
   },
   {
     name: "101C",
@@ -1284,6 +1628,8 @@ export const locationData = [
     position: [398.73, 222.09],
     type: "Room",
     floorID: "2",
+    locationID: 172,
+    buildingName: "library",
   },
   {
     name: "T-2B",
@@ -1291,6 +1637,8 @@ export const locationData = [
     position: [227.04, 240.89],
     type: "Room",
     floorID: "3",
+    locationID: 173,
+    buildingName: "library",
   },
   {
     name: "204",
@@ -1298,6 +1646,8 @@ export const locationData = [
     position: [487.58, 319.83],
     type: "Room",
     floorID: "3",
+    locationID: 174,
+    buildingName: "library",
   },
   {
     name: "203",
@@ -1305,6 +1655,8 @@ export const locationData = [
     position: [482.01, 338.73],
     type: "Room",
     floorID: "3",
+    locationID: 175,
+    buildingName: "library",
   },
   {
     name: "208",
@@ -1312,6 +1664,8 @@ export const locationData = [
     position: [276.81, 139.04],
     type: "Room",
     floorID: "3",
+    locationID: 176,
+    buildingName: "library",
   },
   {
     name: "206",
@@ -1319,6 +1673,8 @@ export const locationData = [
     position: [275.73, 187.74],
     type: "Room",
     floorID: "3",
+    locationID: 177,
+    buildingName: "library",
   },
   {
     name: "207",
@@ -1326,6 +1682,8 @@ export const locationData = [
     position: [275.57, 169.99],
     type: "Room",
     floorID: "3",
+    locationID: 178,
+    buildingName: "library",
   },
   {
     name: "205",
@@ -1333,6 +1691,8 @@ export const locationData = [
     position: [425.08, 219.18],
     type: "Room",
     floorID: "3",
+    locationID: 179,
+    buildingName: "library",
   },
   {
     name: "C-2A",
@@ -1340,6 +1700,8 @@ export const locationData = [
     position: [227.23, 322.4],
     type: "Room",
     floorID: "3",
+    locationID: 180,
+    buildingName: "library",
   },
   {
     name: "205B",
@@ -1347,6 +1709,8 @@ export const locationData = [
     position: [455.74, 207.7],
     type: "Room",
     floorID: "3",
+    locationID: 181,
+    buildingName: "library",
   },
   {
     name: "209",
@@ -1354,6 +1718,8 @@ export const locationData = [
     position: [271.12, 375.57],
     type: "Room",
     floorID: "3",
+    locationID: 182,
+    buildingName: "library",
   },
   {
     name: "E-2A",
@@ -1361,6 +1727,8 @@ export const locationData = [
     position: [227.75, 271.88],
     type: "Room",
     floorID: "3",
+    locationID: 183,
+    buildingName: "library",
   },
   {
     name: "EL-2A",
@@ -1368,6 +1736,8 @@ export const locationData = [
     position: [226.71, 256.96],
     type: "Room",
     floorID: "3",
+    locationID: 184,
+    buildingName: "library",
   },
   {
     name: "S-2C",
@@ -1375,6 +1745,8 @@ export const locationData = [
     position: [81.4, 70.2],
     type: "Room",
     floorID: "3",
+    locationID: 185,
+    buildingName: "library",
   },
   {
     name: "S-2B",
@@ -1382,6 +1754,8 @@ export const locationData = [
     position: [58.37, 316.06],
     type: "Room",
     floorID: "3",
+    locationID: 186,
+    buildingName: "library",
   },
   {
     name: "S-2E",
@@ -1389,6 +1763,8 @@ export const locationData = [
     position: [522.75, 357.02],
     type: "Room",
     floorID: "3",
+    locationID: 187,
+    buildingName: "library",
   },
   {
     name: "S-2D",
@@ -1396,6 +1772,8 @@ export const locationData = [
     position: [428.29, 193.78],
     type: "Room",
     floorID: "3",
+    locationID: 188,
+    buildingName: "library",
   },
   {
     name: "S-2A",
@@ -1403,6 +1781,8 @@ export const locationData = [
     position: [278.85, 278.92],
     type: "Room",
     floorID: "3",
+    locationID: 189,
+    buildingName: "library",
   },
   {
     name: "L-2",
@@ -1410,6 +1790,8 @@ export const locationData = [
     position: [247.92, 278.25],
     type: "Room",
     floorID: "3",
+    locationID: 190,
+    buildingName: "library",
   },
   {
     name: "T-2A",
@@ -1417,6 +1799,8 @@ export const locationData = [
     position: [229.48, 282.04],
     type: "Room",
     floorID: "3",
+    locationID: 191,
+    buildingName: "library",
   },
   {
     name: "M-2A",
@@ -1424,6 +1808,8 @@ export const locationData = [
     position: [455.83, 225.63],
     type: "Room",
     floorID: "3",
+    locationID: 192,
+    buildingName: "library",
   },
   {
     name: "[XX]201",
@@ -1431,6 +1817,8 @@ export const locationData = [
     position: [284.11, 265.34],
     type: "Room",
     floorID: "3",
+    locationID: 193,
+    buildingName: "library",
   },
   {
     name: "[SA]202",
@@ -1438,6 +1826,8 @@ export const locationData = [
     position: [520.44, 309.89],
     type: "Room",
     floorID: "3",
+    locationID: 194,
+    buildingName: "library",
   },
   {
     name: "[BG]200",
@@ -1445,6 +1835,8 @@ export const locationData = [
     position: [226.03, 353.69],
     type: "Room",
     floorID: "3",
+    locationID: 195,
+    buildingName: "library",
   },
   {
     name: "EL-2B",
@@ -1452,6 +1844,8 @@ export const locationData = [
     position: [529.11, 301.18],
     type: "Room",
     floorID: "3",
+    locationID: 196,
+    buildingName: "library",
   },
   {
     name: "RR-M-2",
@@ -1459,6 +1853,8 @@ export const locationData = [
     position: [241.22, 307.84],
     type: "Room",
     floorID: "3",
+    locationID: 197,
+    buildingName: "library",
   },
   {
     name: "RR-2",
@@ -1466,6 +1862,8 @@ export const locationData = [
     position: [250.11, 328.32],
     type: "Room",
     floorID: "3",
+    locationID: 198,
+    buildingName: "library",
   },
   {
     name: "FPS-2",
@@ -1473,6 +1871,8 @@ export const locationData = [
     position: [292.21, 290.26],
     type: "Room",
     floorID: "3",
+    locationID: 199,
+    buildingName: "library",
   },
   {
     name: "[SA]2-B10",
@@ -1480,6 +1880,8 @@ export const locationData = [
     position: [110.96, 118.4],
     type: "Room",
     floorID: "3",
+    locationID: 200,
+    buildingName: "library",
   },
   {
     name: "[SA]2-C10",
@@ -1487,6 +1889,8 @@ export const locationData = [
     position: [149.23, 118.4],
     type: "Room",
     floorID: "3",
+    locationID: 201,
+    buildingName: "library",
   },
   {
     name: "[SA]2-D10",
@@ -1494,6 +1898,8 @@ export const locationData = [
     position: [187.49, 118.4],
     type: "Room",
     floorID: "3",
+    locationID: 202,
+    buildingName: "library",
   },
   {
     name: "[SA]2-E10",
@@ -1501,6 +1907,8 @@ export const locationData = [
     position: [225.77, 118.4],
     type: "Room",
     floorID: "3",
+    locationID: 203,
+    buildingName: "library",
   },
   {
     name: "[SA]2-B9",
@@ -1508,6 +1916,8 @@ export const locationData = [
     position: [111.03, 156.67],
     type: "Room",
     floorID: "3",
+    locationID: 204,
+    buildingName: "library",
   },
   {
     name: "[SA]2-C9",
@@ -1515,6 +1925,8 @@ export const locationData = [
     position: [149.3, 156.67],
     type: "Room",
     floorID: "3",
+    locationID: 205,
+    buildingName: "library",
   },
   {
     name: "[SA]2-D9",
@@ -1522,6 +1934,8 @@ export const locationData = [
     position: [187.56, 156.67],
     type: "Room",
     floorID: "3",
+    locationID: 206,
+    buildingName: "library",
   },
   {
     name: "[SA]2-E9",
@@ -1529,6 +1943,8 @@ export const locationData = [
     position: [225.84, 156.67],
     type: "Room",
     floorID: "3",
+    locationID: 207,
+    buildingName: "library",
   },
   {
     name: "[SA]2-B8",
@@ -1536,6 +1952,8 @@ export const locationData = [
     position: [111.03, 194.94],
     type: "Room",
     floorID: "3",
+    locationID: 208,
+    buildingName: "library",
   },
   {
     name: "[SA]2-C8",
@@ -1543,6 +1961,8 @@ export const locationData = [
     position: [149.29, 194.94],
     type: "Room",
     floorID: "3",
+    locationID: 209,
+    buildingName: "library",
   },
   {
     name: "[SA]2-D8",
@@ -1550,6 +1970,8 @@ export const locationData = [
     position: [187.56, 194.94],
     type: "Room",
     floorID: "3",
+    locationID: 210,
+    buildingName: "library",
   },
   {
     name: "[SA]2-E8",
@@ -1557,6 +1979,8 @@ export const locationData = [
     position: [225.84, 194.94],
     type: "Room",
     floorID: "3",
+    locationID: 211,
+    buildingName: "library",
   },
   {
     name: "[SA]2-H8",
@@ -1564,6 +1988,8 @@ export const locationData = [
     position: [340.63, 194.94],
     type: "Room",
     floorID: "3",
+    locationID: 212,
+    buildingName: "library",
   },
   {
     name: "[SA]2-I8",
@@ -1571,6 +1997,8 @@ export const locationData = [
     position: [378.94, 194.94],
     type: "Room",
     floorID: "3",
+    locationID: 213,
+    buildingName: "library",
   },
   {
     name: "[SA]2-B7",
@@ -1578,6 +2006,8 @@ export const locationData = [
     position: [111.03, 233.21],
     type: "Room",
     floorID: "3",
+    locationID: 214,
+    buildingName: "library",
   },
   {
     name: "[SA]2-C7",
@@ -1585,6 +2015,8 @@ export const locationData = [
     position: [149.29, 233.21],
     type: "Room",
     floorID: "3",
+    locationID: 215,
+    buildingName: "library",
   },
   {
     name: "[SA]2-D7",
@@ -1592,6 +2024,8 @@ export const locationData = [
     position: [187.56, 233.21],
     type: "Room",
     floorID: "3",
+    locationID: 216,
+    buildingName: "library",
   },
   {
     name: "[SA]2-F7",
@@ -1599,6 +2033,8 @@ export const locationData = [
     position: [264.11, 233.21],
     type: "Room",
     floorID: "3",
+    locationID: 217,
+    buildingName: "library",
   },
   {
     name: "[SA]2-H7",
@@ -1606,6 +2042,8 @@ export const locationData = [
     position: [340.63, 233.21],
     type: "Room",
     floorID: "3",
+    locationID: 218,
+    buildingName: "library",
   },
   {
     name: "[SA]2-I7",
@@ -1613,6 +2051,8 @@ export const locationData = [
     position: [378.94, 233.21],
     type: "Room",
     floorID: "3",
+    locationID: 219,
+    buildingName: "library",
   },
   {
     name: "[SA]2-L8",
@@ -1620,6 +2060,8 @@ export const locationData = [
     position: [493.72, 194.94],
     type: "Room",
     floorID: "3",
+    locationID: 220,
+    buildingName: "library",
   },
   {
     name: "[SA]2-L7",
@@ -1627,6 +2069,8 @@ export const locationData = [
     position: [493.72, 233.21],
     type: "Room",
     floorID: "3",
+    locationID: 221,
+    buildingName: "library",
   },
   {
     name: "[SA]2-B6",
@@ -1634,6 +2078,8 @@ export const locationData = [
     position: [111.03, 271.47],
     type: "Room",
     floorID: "3",
+    locationID: 222,
+    buildingName: "library",
   },
   {
     name: "[SA]2-C6",
@@ -1641,6 +2087,8 @@ export const locationData = [
     position: [149.29, 271.47],
     type: "Room",
     floorID: "3",
+    locationID: 223,
+    buildingName: "library",
   },
   {
     name: "[SA]2-D6",
@@ -1648,6 +2096,8 @@ export const locationData = [
     position: [187.56, 271.47],
     type: "Room",
     floorID: "3",
+    locationID: 224,
+    buildingName: "library",
   },
   {
     name: "[SA]2-L6",
@@ -1655,6 +2105,8 @@ export const locationData = [
     position: [493.72, 271.47],
     type: "Room",
     floorID: "3",
+    locationID: 225,
+    buildingName: "library",
   },
   {
     name: "[SA]2-H6",
@@ -1662,6 +2114,8 @@ export const locationData = [
     position: [340.63, 271.47],
     type: "Room",
     floorID: "3",
+    locationID: 226,
+    buildingName: "library",
   },
   {
     name: "[SA]2-I6",
@@ -1669,6 +2123,8 @@ export const locationData = [
     position: [378.94, 271.47],
     type: "Room",
     floorID: "3",
+    locationID: 227,
+    buildingName: "library",
   },
   {
     name: "[SA]2-J6",
@@ -1676,6 +2132,8 @@ export const locationData = [
     position: [417.18, 271.47],
     type: "Room",
     floorID: "3",
+    locationID: 228,
+    buildingName: "library",
   },
   {
     name: "[SA]2-K6",
@@ -1683,6 +2141,8 @@ export const locationData = [
     position: [455.43, 271.47],
     type: "Room",
     floorID: "3",
+    locationID: 229,
+    buildingName: "library",
   },
   {
     name: "[SA]2-B5",
@@ -1690,6 +2150,8 @@ export const locationData = [
     position: [111.03, 309.74],
     type: "Room",
     floorID: "3",
+    locationID: 230,
+    buildingName: "library",
   },
   {
     name: "[SA]2-C5",
@@ -1697,6 +2159,8 @@ export const locationData = [
     position: [149.29, 309.74],
     type: "Room",
     floorID: "3",
+    locationID: 231,
+    buildingName: "library",
   },
   {
     name: "[SA]2-D5",
@@ -1704,6 +2168,8 @@ export const locationData = [
     position: [187.56, 309.74],
     type: "Room",
     floorID: "3",
+    locationID: 232,
+    buildingName: "library",
   },
   {
     name: "[SA]2-H5",
@@ -1711,6 +2177,8 @@ export const locationData = [
     position: [340.63, 309.74],
     type: "Room",
     floorID: "3",
+    locationID: 233,
+    buildingName: "library",
   },
   {
     name: "[SA]2-I5",
@@ -1718,6 +2186,8 @@ export const locationData = [
     position: [378.94, 309.74],
     type: "Room",
     floorID: "3",
+    locationID: 234,
+    buildingName: "library",
   },
   {
     name: "[SA]2-J5",
@@ -1725,6 +2195,8 @@ export const locationData = [
     position: [417.18, 309.74],
     type: "Room",
     floorID: "3",
+    locationID: 235,
+    buildingName: "library",
   },
   {
     name: "[SA]2-H4",
@@ -1732,6 +2204,8 @@ export const locationData = [
     position: [340.62, 348.01],
     type: "Room",
     floorID: "3",
+    locationID: 236,
+    buildingName: "library",
   },
   {
     name: "[SA]2-I4",
@@ -1739,6 +2213,8 @@ export const locationData = [
     position: [378.94, 348.01],
     type: "Room",
     floorID: "3",
+    locationID: 237,
+    buildingName: "library",
   },
   {
     name: "[SA]2-J4",
@@ -1746,6 +2222,8 @@ export const locationData = [
     position: [417.18, 348.01],
     type: "Room",
     floorID: "3",
+    locationID: 238,
+    buildingName: "library",
   },
   {
     name: "[SA]2-G7",
@@ -1753,6 +2231,8 @@ export const locationData = [
     position: [302.36, 233.21],
     type: "Room",
     floorID: "3",
+    locationID: 239,
+    buildingName: "library",
   },
   {
     name: "210",
@@ -1760,6 +2240,8 @@ export const locationData = [
     position: [552.92, 178.15],
     type: "Room",
     floorID: "3",
+    locationID: 240,
+    buildingName: "library",
   },
   {
     name: "201",
@@ -1767,6 +2249,8 @@ export const locationData = [
     position: [248.59, 216.99],
     type: "Room",
     floorID: "3",
+    locationID: 241,
+    buildingName: "library",
   },
   {
     name: "[SA]2-M6",
@@ -1774,6 +2258,8 @@ export const locationData = [
     position: [531.96, 271.47],
     type: "Room",
     floorID: "3",
+    locationID: 242,
+    buildingName: "library",
   },
   {
     name: "202",
@@ -1781,6 +2267,8 @@ export const locationData = [
     position: [392.55, 254.48],
     type: "Room",
     floorID: "3",
+    locationID: 243,
+    buildingName: "library",
   },
   {
     name: "S-3C",
@@ -1788,6 +2276,8 @@ export const locationData = [
     position: [82.15, 78.27],
     type: "Room",
     floorID: "4",
+    locationID: 244,
+    buildingName: "library",
   },
   {
     name: "S-3B",
@@ -1795,6 +2285,8 @@ export const locationData = [
     position: [60.25, 316.06],
     type: "Room",
     floorID: "4",
+    locationID: 245,
+    buildingName: "library",
   },
   {
     name: "S-3E",
@@ -1802,6 +2294,8 @@ export const locationData = [
     position: [522.61, 357.3],
     type: "Room",
     floorID: "4",
+    locationID: 246,
+    buildingName: "library",
   },
   {
     name: "S-3D",
@@ -1809,6 +2303,8 @@ export const locationData = [
     position: [428.05, 194.66],
     type: "Room",
     floorID: "4",
+    locationID: 247,
+    buildingName: "library",
   },
   {
     name: "S-3A",
@@ -1816,6 +2312,8 @@ export const locationData = [
     position: [278.71, 278.92],
     type: "Room",
     floorID: "4",
+    locationID: 248,
+    buildingName: "library",
   },
   {
     name: "EL-3A",
@@ -1823,6 +2321,8 @@ export const locationData = [
     position: [226.71, 256.67],
     type: "Room",
     floorID: "4",
+    locationID: 249,
+    buildingName: "library",
   },
   {
     name: "L-3",
@@ -1830,6 +2330,8 @@ export const locationData = [
     position: [247.66, 267.11],
     type: "Room",
     floorID: "4",
+    locationID: 250,
+    buildingName: "library",
   },
   {
     name: "301",
@@ -1837,6 +2339,8 @@ export const locationData = [
     position: [276.06, 234.93],
     type: "Room",
     floorID: "4",
+    locationID: 251,
+    buildingName: "library",
   },
   {
     name: "314",
@@ -1844,6 +2348,8 @@ export const locationData = [
     position: [276.43, 128.87],
     type: "Room",
     floorID: "4",
+    locationID: 252,
+    buildingName: "library",
   },
   {
     name: "312",
@@ -1851,6 +2357,8 @@ export const locationData = [
     position: [276.83, 168.16],
     type: "Room",
     floorID: "4",
+    locationID: 253,
+    buildingName: "library",
   },
   {
     name: "313",
@@ -1858,6 +2366,8 @@ export const locationData = [
     position: [276.83, 148.35],
     type: "Room",
     floorID: "4",
+    locationID: 254,
+    buildingName: "library",
   },
   {
     name: "315A",
@@ -1865,6 +2375,8 @@ export const locationData = [
     position: [246.52, 94.78],
     type: "Room",
     floorID: "4",
+    locationID: 255,
+    buildingName: "library",
   },
   {
     name: "315B",
@@ -1872,6 +2384,8 @@ export const locationData = [
     position: [227.36, 94.78],
     type: "Room",
     floorID: "4",
+    locationID: 256,
+    buildingName: "library",
   },
   {
     name: "311",
@@ -1879,6 +2393,8 @@ export const locationData = [
     position: [277.26, 187.83],
     type: "Room",
     floorID: "4",
+    locationID: 257,
+    buildingName: "library",
   },
   {
     name: "310",
@@ -1886,6 +2402,8 @@ export const locationData = [
     position: [276.09, 208.8],
     type: "Room",
     floorID: "4",
+    locationID: 258,
+    buildingName: "library",
   },
   {
     name: "C-3B",
@@ -1893,6 +2411,8 @@ export const locationData = [
     position: [495.88, 309.31],
     type: "Room",
     floorID: "4",
+    locationID: 259,
+    buildingName: "library",
   },
   {
     name: "306",
@@ -1900,6 +2420,8 @@ export const locationData = [
     position: [493.35, 294.66],
     type: "Room",
     floorID: "4",
+    locationID: 260,
+    buildingName: "library",
   },
   {
     name: "307",
@@ -1907,6 +2429,8 @@ export const locationData = [
     position: [468.21, 296.85],
     type: "Room",
     floorID: "4",
+    locationID: 261,
+    buildingName: "library",
   },
   {
     name: "305",
@@ -1914,6 +2438,8 @@ export const locationData = [
     position: [488.71, 322.57],
     type: "Room",
     floorID: "4",
+    locationID: 262,
+    buildingName: "library",
   },
   {
     name: "304",
@@ -1921,6 +2447,8 @@ export const locationData = [
     position: [460.51, 324.18],
     type: "Room",
     floorID: "4",
+    locationID: 263,
+    buildingName: "library",
   },
   {
     name: "309",
@@ -1928,6 +2456,8 @@ export const locationData = [
     position: [438.63, 221.52],
     type: "Room",
     floorID: "4",
+    locationID: 264,
+    buildingName: "library",
   },
   {
     name: "308",
@@ -1935,6 +2465,8 @@ export const locationData = [
     position: [488, 220.47],
     type: "Room",
     floorID: "4",
+    locationID: 265,
+    buildingName: "library",
   },
   {
     name: "E-3A",
@@ -1942,6 +2474,8 @@ export const locationData = [
     position: [228.13, 271.76],
     type: "Room",
     floorID: "4",
+    locationID: 266,
+    buildingName: "library",
   },
   {
     name: "T-3B",
@@ -1949,6 +2483,8 @@ export const locationData = [
     position: [226.73, 240.53],
     type: "Room",
     floorID: "4",
+    locationID: 267,
+    buildingName: "library",
   },
   {
     name: "C-3A",
@@ -1956,6 +2492,8 @@ export const locationData = [
     position: [227.04, 322.01],
     type: "Room",
     floorID: "4",
+    locationID: 268,
+    buildingName: "library",
   },
   {
     name: "T-3A",
@@ -1963,6 +2501,8 @@ export const locationData = [
     position: [229.34, 282.18],
     type: "Room",
     floorID: "4",
+    locationID: 269,
+    buildingName: "library",
   },
   {
     name: "301B",
@@ -1970,6 +2510,8 @@ export const locationData = [
     position: [78.29, 356.81],
     type: "Room",
     floorID: "4",
+    locationID: 270,
+    buildingName: "library",
   },
   {
     name: "301A",
@@ -1977,6 +2519,8 @@ export const locationData = [
     position: [244.34, 74.71],
     type: "Room",
     floorID: "4",
+    locationID: 271,
+    buildingName: "library",
   },
   {
     name: "301C",
@@ -1984,6 +2528,8 @@ export const locationData = [
     position: [61.53, 252.98],
     type: "Room",
     floorID: "4",
+    locationID: 272,
+    buildingName: "library",
   },
   {
     name: "301D",
@@ -1991,6 +2537,8 @@ export const locationData = [
     position: [61.54, 94.27],
     type: "Room",
     floorID: "4",
+    locationID: 273,
+    buildingName: "library",
   },
   {
     name: "301E",
@@ -1998,6 +2546,8 @@ export const locationData = [
     position: [161.13, 75.7],
     type: "Room",
     floorID: "4",
+    locationID: 274,
+    buildingName: "library",
   },
   {
     name: "[XX]301",
@@ -2005,6 +2555,8 @@ export const locationData = [
     position: [283.97, 265.24],
     type: "Room",
     floorID: "4",
+    locationID: 275,
+    buildingName: "library",
   },
   {
     name: "H-3",
@@ -2012,6 +2564,8 @@ export const locationData = [
     position: [474.2, 346.4],
     type: "Room",
     floorID: "4",
+    locationID: 276,
+    buildingName: "library",
   },
   {
     name: "[BG]300",
@@ -2019,6 +2573,8 @@ export const locationData = [
     position: [59.99, 67.05],
     type: "Room",
     floorID: "4",
+    locationID: 277,
+    buildingName: "library",
   },
   {
     name: "EL-3B",
@@ -2026,6 +2582,8 @@ export const locationData = [
     position: [528.83, 300.89],
     type: "Room",
     floorID: "4",
+    locationID: 278,
+    buildingName: "library",
   },
   {
     name: "RR-M-3",
@@ -2033,6 +2591,8 @@ export const locationData = [
     position: [243.86, 304.47],
     type: "Room",
     floorID: "4",
+    locationID: 279,
+    buildingName: "library",
   },
   {
     name: "RR-W-3",
@@ -2040,6 +2600,8 @@ export const locationData = [
     position: [243.86, 325.2],
     type: "Room",
     floorID: "4",
+    locationID: 280,
+    buildingName: "library",
   },
   {
     name: "M-3A",
@@ -2047,6 +2609,8 @@ export const locationData = [
     position: [455.1, 224.78],
     type: "Room",
     floorID: "4",
+    locationID: 281,
+    buildingName: "library",
   },
   {
     name: "315",
@@ -2054,6 +2618,8 @@ export const locationData = [
     position: [239.26, 113.03],
     type: "Room",
     floorID: "4",
+    locationID: 282,
+    buildingName: "library",
   },
   {
     name: "316",
@@ -2061,6 +2627,8 @@ export const locationData = [
     position: [200.92, 109.08],
     type: "Room",
     floorID: "4",
+    locationID: 283,
+    buildingName: "library",
   },
   {
     name: "317",
@@ -2068,6 +2636,8 @@ export const locationData = [
     position: [201.49, 199.57],
     type: "Room",
     floorID: "4",
+    locationID: 284,
+    buildingName: "library",
   },
   {
     name: "[SA]3-B10",
@@ -2075,6 +2645,8 @@ export const locationData = [
     position: [110.82, 118.4],
     type: "Room",
     floorID: "4",
+    locationID: 285,
+    buildingName: "library",
   },
   {
     name: "[SA]3-B9",
@@ -2082,6 +2654,8 @@ export const locationData = [
     position: [110.89, 156.67],
     type: "Room",
     floorID: "4",
+    locationID: 286,
+    buildingName: "library",
   },
   {
     name: "[SA]3-B8",
@@ -2089,6 +2663,8 @@ export const locationData = [
     position: [110.88, 194.94],
     type: "Room",
     floorID: "4",
+    locationID: 287,
+    buildingName: "library",
   },
   {
     name: "[SA]3-B7",
@@ -2096,6 +2672,8 @@ export const locationData = [
     position: [110.88, 233.21],
     type: "Room",
     floorID: "4",
+    locationID: 288,
+    buildingName: "library",
   },
   {
     name: "[SA]3-B6",
@@ -2103,6 +2681,8 @@ export const locationData = [
     position: [110.88, 271.47],
     type: "Room",
     floorID: "4",
+    locationID: 289,
+    buildingName: "library",
   },
   {
     name: "[SA]3-B5",
@@ -2110,6 +2690,8 @@ export const locationData = [
     position: [110.88, 309.74],
     type: "Room",
     floorID: "4",
+    locationID: 290,
+    buildingName: "library",
   },
   {
     name: "[SA]3-A9",
@@ -2117,6 +2699,8 @@ export const locationData = [
     position: [72.63, 156.67],
     type: "Room",
     floorID: "4",
+    locationID: 291,
+    buildingName: "library",
   },
   {
     name: "[SA]3-A8",
@@ -2124,6 +2708,8 @@ export const locationData = [
     position: [72.63, 194.94],
     type: "Room",
     floorID: "4",
+    locationID: 292,
+    buildingName: "library",
   },
   {
     name: "[SA]3-C10",
@@ -2131,6 +2717,8 @@ export const locationData = [
     position: [149.08, 118.4],
     type: "Room",
     floorID: "4",
+    locationID: 293,
+    buildingName: "library",
   },
   {
     name: "[SA]3-C9",
@@ -2138,6 +2726,8 @@ export const locationData = [
     position: [149.15, 156.67],
     type: "Room",
     floorID: "4",
+    locationID: 294,
+    buildingName: "library",
   },
   {
     name: "[SA]3-C8",
@@ -2145,6 +2735,8 @@ export const locationData = [
     position: [149.15, 194.94],
     type: "Room",
     floorID: "4",
+    locationID: 295,
+    buildingName: "library",
   },
   {
     name: "[SA]3-C7",
@@ -2152,6 +2744,8 @@ export const locationData = [
     position: [149.15, 233.21],
     type: "Room",
     floorID: "4",
+    locationID: 296,
+    buildingName: "library",
   },
   {
     name: "[SA]3-C6",
@@ -2159,6 +2753,8 @@ export const locationData = [
     position: [149.15, 271.47],
     type: "Room",
     floorID: "4",
+    locationID: 297,
+    buildingName: "library",
   },
   {
     name: "[SA]3-C5",
@@ -2166,6 +2762,8 @@ export const locationData = [
     position: [149.15, 309.74],
     type: "Room",
     floorID: "4",
+    locationID: 298,
+    buildingName: "library",
   },
   {
     name: "[SA]3-C4",
@@ -2173,6 +2771,8 @@ export const locationData = [
     position: [149.15, 348.01],
     type: "Room",
     floorID: "4",
+    locationID: 299,
+    buildingName: "library",
   },
   {
     name: "[SA]3-D7",
@@ -2180,6 +2780,8 @@ export const locationData = [
     position: [187.42, 233.21],
     type: "Room",
     floorID: "4",
+    locationID: 300,
+    buildingName: "library",
   },
   {
     name: "[SA]3-D6",
@@ -2187,6 +2789,8 @@ export const locationData = [
     position: [187.42, 271.47],
     type: "Room",
     floorID: "4",
+    locationID: 301,
+    buildingName: "library",
   },
   {
     name: "[SA]3-D5",
@@ -2194,6 +2798,8 @@ export const locationData = [
     position: [187.42, 309.74],
     type: "Room",
     floorID: "4",
+    locationID: 302,
+    buildingName: "library",
   },
   {
     name: "[SA]3-D4",
@@ -2201,6 +2807,8 @@ export const locationData = [
     position: [187.42, 348.01],
     type: "Room",
     floorID: "4",
+    locationID: 303,
+    buildingName: "library",
   },
   {
     name: "[SA]3-317",
@@ -2208,6 +2816,8 @@ export const locationData = [
     position: [230.39, 155.7],
     type: "Room",
     floorID: "4",
+    locationID: 304,
+    buildingName: "library",
   },
   {
     name: "[SA]3-F7",
@@ -2215,6 +2825,8 @@ export const locationData = [
     position: [263.96, 233.21],
     type: "Room",
     floorID: "4",
+    locationID: 305,
+    buildingName: "library",
   },
   {
     name: "[SA]3-H7",
@@ -2222,6 +2834,8 @@ export const locationData = [
     position: [340.49, 233.21],
     type: "Room",
     floorID: "4",
+    locationID: 306,
+    buildingName: "library",
   },
   {
     name: "[SA]3-H8",
@@ -2229,6 +2843,8 @@ export const locationData = [
     position: [340.49, 194.94],
     type: "Room",
     floorID: "4",
+    locationID: 307,
+    buildingName: "library",
   },
   {
     name: "[SA]3-H5",
@@ -2236,6 +2852,8 @@ export const locationData = [
     position: [340.49, 309.74],
     type: "Room",
     floorID: "4",
+    locationID: 308,
+    buildingName: "library",
   },
   {
     name: "[SA]3-I7",
@@ -2243,6 +2861,8 @@ export const locationData = [
     position: [378.8, 233.21],
     type: "Room",
     floorID: "4",
+    locationID: 309,
+    buildingName: "library",
   },
   {
     name: "[SA]3-I8",
@@ -2250,6 +2870,8 @@ export const locationData = [
     position: [378.8, 194.94],
     type: "Room",
     floorID: "4",
+    locationID: 310,
+    buildingName: "library",
   },
   {
     name: "[SA]3-I5",
@@ -2257,6 +2879,8 @@ export const locationData = [
     position: [378.8, 309.74],
     type: "Room",
     floorID: "4",
+    locationID: 311,
+    buildingName: "library",
   },
   {
     name: "[SA]3-J7",
@@ -2264,6 +2888,8 @@ export const locationData = [
     position: [417.04, 233.21],
     type: "Room",
     floorID: "4",
+    locationID: 312,
+    buildingName: "library",
   },
   {
     name: "[SA]3-J5",
@@ -2271,6 +2897,8 @@ export const locationData = [
     position: [417.04, 309.74],
     type: "Room",
     floorID: "4",
+    locationID: 313,
+    buildingName: "library",
   },
   {
     name: "[SA]3-L6",
@@ -2278,6 +2906,8 @@ export const locationData = [
     position: [493.57, 271.47],
     type: "Room",
     floorID: "4",
+    locationID: 314,
+    buildingName: "library",
   },
   {
     name: "302",
@@ -2285,6 +2915,8 @@ export const locationData = [
     position: [391.48, 248.45],
     type: "Room",
     floorID: "4",
+    locationID: 315,
+    buildingName: "library",
   },
   {
     name: "303",
@@ -2292,6 +2924,8 @@ export const locationData = [
     position: [392.01, 294.12],
     type: "Room",
     floorID: "4",
+    locationID: 316,
+    buildingName: "library",
   },
   {
     name: "FPS-3",
@@ -2299,5 +2933,7 @@ export const locationData = [
     position: [292.07, 290.26],
     type: "Room",
     floorID: "4",
+    locationID: 317,
+    buildingName: "library",
   },
 ];

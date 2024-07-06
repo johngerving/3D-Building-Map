@@ -12,6 +12,58 @@ import { useUpdateFloor } from "../../../hooks/api/useUpdateFloor.jsx";
 import { useDebounce } from "../../../hooks/api/useDebounce.jsx";
 import { usePutFloor } from "../../../hooks/api/usePutFloor.jsx";
 
+function SingleLocation({ buildingName, location }) {
+  const nameInputId = useId();
+
+  const labelClassName = "text-right w-full";
+
+  return (
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "max-content auto",
+        gridGap: "10px",
+        padding: "0 0.25rem 0.5rem 1rem",
+      }}
+    >
+      <label className={labelClassName} htmlFor={nameInputId}>
+        Name
+      </label>
+      <input
+        type="text"
+        id={nameInputId}
+        name="name"
+        value={location.name}
+        onChange={() => {}}
+        className="border"
+      />
+    </div>
+  );
+}
+
+function Locations({ buildingName, floorID }) {
+  const { locations } = useLocations(buildingName);
+
+  return (
+    <Tree
+      name={"Locations"}
+      style={{ margin: "20px 0 0 35px" }}
+      childStyle={{ margin: "0 0 0 40px" }}
+      border={false}
+    >
+      {locations[floorID].map((location, index) => (
+        <Tree
+          key={location.locationID}
+          name={location.name}
+          style={{ margin: "0 5px 5px 0" }}
+        >
+          <SingleLocation buildingName={buildingName} location={location} />
+        </Tree>
+      ))}
+    </Tree>
+  );
+}
+
 function SingleFloorInfo({ buildingName, floor, index }) {
   const nameInputId = useId();
   const svgInputId = useId();
@@ -214,6 +266,7 @@ function FloorInfo({ buildingName }) {
               floor={floor}
               index={index}
             />
+            <Locations buildingName={buildingName} floorID={floor.floorID} />
           </Tree>
         );
       })}

@@ -7,12 +7,15 @@ export function Tree({
   name,
   style,
   childStyle,
+  border = true,
   defaultOpen = false,
 }) {
   const [isOpen, setOpen] = useState(defaultOpen);
 
+  const className = border ? "border rounded-md" : "";
+
   return (
-    <div className="border rounded-md" style={style}>
+    <div className={className} style={style}>
       <button
         onClick={() => setOpen((isOpen) => !isOpen)}
         className="flex items-center w-full"
