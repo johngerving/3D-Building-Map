@@ -4,12 +4,13 @@ import Locations from "./locations.jsx";
 import getFloorYPosFromIndex from "./getFloorYPosFromIndex.jsx";
 import * as THREE from "three";
 import { useMemo, useRef, useLayoutEffect, Suspense } from "react";
-import { Await } from "react-router-dom";
+
 import { Canvas, useLoader } from "@react-three/fiber";
 import { SVGLoader } from "three/examples/jsm/loaders/SVGLoader";
 
 import { useFloors } from "../../../hooks/api/useFloors.jsx";
 import { useLocations } from "../../../hooks/api/useLocations.jsx";
+import { ErrorBoundary } from "react-error-boundary";
 
 // Function that takes in array of paths and adds them to a dictionary grouped by the ID of their parent
 function groupPaths(paths) {
@@ -117,9 +118,9 @@ function Building({
         // Only display if floor is selected or no floor is selected
         return (
           <Floor
+            key={floor.name}
             buildingName={buildingName}
             yPos={getFloorYPosFromIndex(floors, index)}
-            key={floor.name}
             floor={floor}
             selectedFloor={selectedFloor}
             selected={

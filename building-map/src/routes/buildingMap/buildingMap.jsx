@@ -3,6 +3,7 @@ import { ViewPanel } from "./ui/viewPanel.jsx";
 import FloorSelect from "./ui/floorSelect.jsx";
 import { useState, Suspense } from "react";
 import { Stats } from "@react-three/drei";
+import { ErrorBoundary } from "react-error-boundary";
 
 import { useLoaderData, Outlet } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
@@ -25,6 +26,33 @@ function LoadingScreen() {
           "radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(207,226,227,1) 93%, rgba(205,205,205,1) 100%)",
       }}
     />
+  );
+}
+
+function SceneFallback({ error, resetErrorBoundary }) {
+  return (
+    <div
+      className="flex justify-center w-screen h-screen"
+      style={{
+        background:
+          "radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(207,226,227,1) 93%, rgba(205,205,205,1) 100%)",
+      }}
+      id="error-page"
+    >
+      <div className="m-auto text-center">
+        <h1 className="text-4xl mb-5">Oops!</h1>
+        <p className="text-lg mb-4">Sorry, an unexpected error has occurred.</p>
+        <p className="m-auto mb-5 text-lg text-center w-3/4 text-wrap break-all">
+          <i>{error.message}</i>
+        </p>
+        <button
+          onClick={resetErrorBoundary}
+          className="bg-blue-600 rounded-md shadow-sm text-white p-3"
+        >
+          Try Again
+        </button>
+      </div>
+    </div>
   );
 }
 
@@ -69,12 +97,14 @@ export default function BuildingMap() {
             selectedFloor={selectedFloor}
             setSelectedFloor={setSelectedFloor}
           ></FloorSelect>
-          <Scene
-            buildingName={buildingName}
-            selectedFloor={selectedFloor}
-            selectedLocation={selectedLocation}
-            setSelectedLocation={setSelectedLocation}
-          />
+          <ErrorBoundary FallbackComponent={SceneFallback}>
+            <Scene
+              buildingName={buildingName}
+              selectedFloor={selectedFloor}
+              selectedLocation={selectedLocation}
+              setSelectedLocation={setSelectedLocation}
+            />
+          </ErrorBoundary>
         </>
       ) : null}
     </>

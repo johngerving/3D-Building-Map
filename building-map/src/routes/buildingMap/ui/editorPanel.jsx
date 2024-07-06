@@ -402,7 +402,7 @@ export function EditorPanel() {
 
   // Set min and max width of editor panel
   const maxWidth = 800;
-  const minWidth = 300;
+  const minWidth = 20;
 
   const [isHovering, setIsHovering] = useState(false);
   const [isResizing, setIsResizing] = useState(false);
@@ -453,7 +453,12 @@ export function EditorPanel() {
       style={{ width: width, ...position }}
       className={`z-10 absolute top-0 h-full bg-white`}
     >
-      <div id="scroll-container" className="h-full mr-2 overflow-y-scroll">
+      <div
+        id="scroll-container"
+        className={`h-full mr-2 overflow-y-scroll ${
+          width < 100 ? "hidden" : ""
+        }`}
+      >
         <FloorInfo buildingName={buildingName} />
       </div>
       <div
