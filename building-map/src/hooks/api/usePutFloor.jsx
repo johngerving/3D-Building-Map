@@ -6,9 +6,9 @@ export const usePutFloor = (buildingName, isDebouncing) => {
 
   return useMutation({
     mutationFn: putFloor,
-    onMutate: async (location) => {
+    onMutate: async (floor) => {
       await queryClient.cancelQueries({
-        queryKey: ["locations", buildingName],
+        queryKey: ["floors", buildingName],
       });
     },
     // If the mutation fails, roll back the change

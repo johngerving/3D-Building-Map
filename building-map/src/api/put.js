@@ -12,6 +12,7 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 // Edit floor
 export const putFloor = async (data) => {
   try {
+    console.log("put floor");
     const res = {};
 
     // Find floor by ID
@@ -65,7 +66,7 @@ export const putLocation = async (data) => {
     // Update db with new data
     locationData[locationIndex] = {
       locationID: oldData.locationID,
-      floorID: oldData.locationID,
+      floorID: oldData.floorID,
       buildingName: oldData.buildingName,
       name: data.name,
       description: data.description,
@@ -75,6 +76,7 @@ export const putLocation = async (data) => {
 
     // Return the new data of floor
     res.data = locationData[locationIndex];
+
     await sleep(500);
     return await res;
   } catch (err) {

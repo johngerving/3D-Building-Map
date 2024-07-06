@@ -1,7 +1,7 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { putLocation } from "../../api/put.js";
 
-export const usePutLocation = (buildingName) => {
+export const usePutLocation = (buildingName, isDebouncing) => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -17,10 +17,12 @@ export const usePutLocation = (buildingName) => {
     },
     // Always refetch after error or success
     onSettled: (location) => {
-      queryClient.invalidateQueries({
-        queryKey: ["locations", location.data.buildingName],
-      });
-      console.log("Invalidate");
+      // Do not invalidate queries if state is debouncing
+      if (!isDebouncing) {
+        queryClient.invalidateQueries({
+          queryKey: ["locations", buildingName],
+        });
+      }
     },
   });
 };

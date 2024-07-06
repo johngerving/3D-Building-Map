@@ -19,23 +19,27 @@ function SingleLocation({ buildingName, location }) {
 
   const queryClient = useQueryClient();
 
-  // Get update and mutate functions
-  const { update } = useUpdateLocation(buildingName, location.floorID);
-  const { mutate } = usePutLocation(buildingName);
-
   // Set initial delay to infinity to prevent mutation at start
-  const [debounceDelay, setDebounceDelay] = useState(Infinity);
+  const [inputChanged, setInputChanged] = useState(false);
 
   // Debounce the floor state and mutate 2 seconds after last input change
-  useDebounce(location, debounceDelay, (location) => {
-    console.log("debounce");
-    mutate(location);
-  });
+  const { isDebouncing, debouncedValue } = useDebounce(location, 2000);
+
+  // Get update and mutate functions
+  const { update } = useUpdateLocation(buildingName, location.floorID);
+  const { mutate } = usePutLocation(buildingName, isDebouncing);
+
+  // When the debounced value changes, mutate the data if input has been changed
+  useEffect(() => {
+    if (inputChanged) {
+      mutate(debouncedValue);
+    }
+  }, [debouncedValue]);
 
   // Function to update the value of a parameter in the floor
   const handleInputChange = (newParam) => {
     // Set the debounce delay to 2 seconds
-    setDebounceDelay(2000);
+    setInputChanged(true);
     // Cancel any current queries to prevent overwriting new input with fetched data
     queryClient.cancelQueries({
       queryKey: ["locations", location.buildingName],
@@ -303,7 +307,7 @@ function FloorInfo({ buildingName }) {
               floor={floor}
               index={index}
             />
-            {/* <Locations buildingName={buildingName} floorID={floor.floorID} /> */}
+            <Locations buildingName={buildingName} floorID={floor.floorID} />
           </Tree>
         );
       })}
@@ -384,9 +388,9 @@ export function EditorPanel() {
         onMouseLeave={() => setIsHovering(false)}
         // Resizer should change cursor on hover if resizing is not enabled
         // Resizer should be blue if hovered over or resizing is enabled
-        className={`resize z-10 absolute top-0 right-0 w-2 h-full bg-white shadow-md ${
+        className={`resize z-10 absolute top-0 right-0 w-2 h-full shadow-md ${
           !isResizing ? "hover:cursor-col-resize" : ""
-        } ${isHovering || isResizing ? "bg-blue-500" : ""}`}
+        } ${isHovering || isResizing ? "bg-blue-500" : "bg-white"}`}
       ></div>
     </div>
   );
