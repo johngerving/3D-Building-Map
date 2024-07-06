@@ -16,6 +16,10 @@ import { usePutLocation } from "../../../hooks/api/usePutLocation.jsx";
 
 function SingleLocation({ buildingName, location }) {
   const nameInputId = useId();
+  const descriptionInputId = useId();
+  const positionXInputId = useId();
+  const positionYInputId = useId();
+  const typeInputId = useId();
 
   const queryClient = useQueryClient();
 
@@ -55,6 +59,7 @@ function SingleLocation({ buildingName, location }) {
 
   return (
     <div
+      className="p-1"
       style={{
         display: "grid",
         gridTemplateColumns: "max-content auto",
@@ -71,6 +76,74 @@ function SingleLocation({ buildingName, location }) {
         name="name"
         value={location.name}
         onChange={(e) => handleInputChange({ name: e.target.value })}
+        className="border"
+      />
+
+      <label className={labelClassName} htmlFor={descriptionInputId}>
+        Description
+      </label>
+      <textarea
+        id={descriptionInputId}
+        rows={5}
+        name="description"
+        value={location.description}
+        onChange={(e) => handleInputChange({ description: e.target.value })}
+        className="border"
+      />
+
+      <label className={labelClassName} htmlFor={positionXInputId}>
+        Position X
+      </label>
+      <input
+        type="text"
+        id={positionXInputId}
+        name="positionX"
+        value={location.position[0]}
+        onChange={(e) =>
+          handleInputChange({
+            position: location.position.map((el, i) => {
+              if (i == 0) {
+                return e.target.value;
+              } else {
+                return el;
+              }
+            }),
+          })
+        }
+        className="border"
+      />
+
+      <label className={labelClassName} htmlFor={positionYInputId}>
+        Position Y
+      </label>
+      <input
+        type="text"
+        id={positionYInputId}
+        name="positionY"
+        value={location.position[1]}
+        onChange={(e) =>
+          handleInputChange({
+            position: location.position.map((el, i) => {
+              if (i == 1) {
+                return e.target.value;
+              } else {
+                return el;
+              }
+            }),
+          })
+        }
+        className="border"
+      />
+
+      <label className={labelClassName} htmlFor={typeInputId}>
+        Type
+      </label>
+      <input
+        type="text"
+        id={typeInputId}
+        name="type"
+        value={location.type}
+        onChange={(e) => handleInputChange({ type: e.target.value })}
         className="border"
       />
     </div>
@@ -92,6 +165,7 @@ function Locations({ buildingName, floorID }) {
           key={location.locationID}
           name={location.name}
           style={{ margin: "0 5px 5px 0" }}
+          childStyle={{ overflowX: "hidden" }}
         >
           <SingleLocation buildingName={buildingName} location={location} />
         </Tree>
@@ -332,7 +406,7 @@ export function EditorPanel() {
 
   const [isHovering, setIsHovering] = useState(false);
   const [isResizing, setIsResizing] = useState(false);
-  const [width, setWidth] = useState(400); // Initial width is 400px
+  const [width, setWidth] = useState(600); // Initial width is 400px
 
   const cursor = useCursor(isResizing);
 
