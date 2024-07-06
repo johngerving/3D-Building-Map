@@ -1,67 +1,15 @@
-import { useState, useEffect, useId } from "react";
+import { useState, useEffect, useId, useRef } from "react";
 import { useOutletContext } from "react-router-dom";
 import { useSpring, animated } from "@react-spring/web";
-import { useQueryClient, useMutation } from "@tanstack/react-query";
-import { useRevalidator } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { useCursor } from "./useCursor.jsx";
-import { putFloor } from "../../../api/put.js";
 
 import { useFloors } from "../../../hooks/api/useFloors.jsx";
 import { useLocations } from "../../../hooks/api/useLocations.jsx";
 import { useUpdateFloor } from "../../../hooks/api/useUpdateFloor.jsx";
-
-const usePutFloor = () => {
-  const queryClient = useQueryClient();
-  const revalidator = useRevalidator();
-
-  return useMutation({
-    mutationFn: putFloor,
-    // When mutated:
-    onMutate: async (floor) => {
-      // Cancel refetches
-      await queryClient.cancelQueries({
-        queryKey: ["floors", floor.buildingName],
-      });
-
-      // Get previous value
-      const previousFloors = queryClient.getQueryData([
-        "floors",
-        floor.buildingName,
-      ]);
-
-      // Optimistically update to new value
-      queryClient.setQueryData(["floors", floor.buildingName], (old) =>
-        // Replace old floor with new floor if they have the same ID
-        old.map((oldFloor) => {
-          if (oldFloor.floorID == floor.floorID) {
-            return floor;
-          } else {
-            return oldFloor;
-          }
-        })
-      );
-
-      // Return context object with old data
-      return { previousFloors };
-    },
-    // If the mutation fails, roll back the change
-    onError: (err, floor, context) => {
-      queryClient.setQueryData(
-        ["floors", floor.buildingName],
-        context.previousFloors
-      );
-      console.log(err);
-    },
-    // Always refetch after error or success
-    onSettled: (floor) => {
-      queryClient.invalidateQueries({
-        queryKey: ["floors", floor.data.buildingName],
-      });
-      revalidator.revalidate();
-    },
-  });
-};
+import { useDebounce } from "../../../hooks/api/useDebounce.jsx";
+import { usePutFloor } from "../../../hooks/api/usePutFloor.jsx";
 
 function SingleFloorInfo({ buildingName, floor, index }) {
   const nameInputId = useId();
@@ -74,9 +22,26 @@ function SingleFloorInfo({ buildingName, floor, index }) {
   const extrudeDepthInputId = useId();
   const floorLayerInputId = useId();
 
-  const { update } = useUpdateFloor(buildingName);
+  const queryClient = useQueryClient();
 
-  const putFloorMutation = usePutFloor();
+  const { update } = useUpdateFloor(buildingName);
+  const { mutate } = usePutFloor();
+
+  const [debounceDelay, setDebounceDelay] = useState(Infinity);
+  // Debounce the floor state and mutate after 2 seconds
+  useDebounce(floor, debounceDelay, (floor) => {
+    mutate(floor);
+  });
+
+  const handleInputChange = (newParam) => {
+    setDebounceDelay(2000);
+    queryClient.cancelQueries({
+      queryKey: ["floors", floor.buildingName],
+    });
+    update(floor.floorID, (old) => {
+      return Object.assign({}, old, newParam);
+    });
+  };
 
   const labelClassName = "text-right w-full";
   return (
@@ -99,14 +64,7 @@ function SingleFloorInfo({ buildingName, floor, index }) {
           id={nameInputId}
           name="name"
           value={floor.name}
-          onChange={(e) =>
-            update(floor.floorID, (old) => {
-              return {
-                ...old,
-                name: e.target.value,
-              };
-            })
-          }
+          onChange={(e) => handleInputChange({ name: e.target.value })}
           className="border"
         />
 
@@ -117,7 +75,8 @@ function SingleFloorInfo({ buildingName, floor, index }) {
           type="text"
           id={svgInputId}
           name="svg"
-          defaultValue={floor.svg}
+          value={floor.svg}
+          onChange={(e) => handleInputChange({ svg: e.target.value })}
           className="border"
         />
 
@@ -229,6 +188,9 @@ export function EditorPanel() {
     setSelectedFloor,
   ] = useOutletContext();
 
+  const { isFloorPending } = useFloors(buildingName);
+  const { isLocationPending } = useLocations(buildingName);
+
   // Set min and max width of editor panel
   const maxWidth = 800;
   const minWidth = 300;
@@ -238,6 +200,10 @@ export function EditorPanel() {
   const [width, setWidth] = useState(400); // Initial width is 400px
 
   const cursor = useCursor(isResizing);
+
+  const position = useSpring({
+    left: !isFloorPending && !isLocationPending ? `0px` : `${-1 * width}px`,
+  });
 
   useEffect(() => {
     // On mouse down, if the resizer was clicked, enable resizing
@@ -275,8 +241,8 @@ export function EditorPanel() {
   return (
     <div
       id="editor-panel"
-      style={{ width: width }}
-      className={`z-10 absolute top-0 left-0 h-full bg-white`}
+      style={{ width: width, ...position }}
+      className={`z-10 absolute top-0 h-full bg-white`}
     >
       <div id="scroll-container" className="h-full mr-2 overflow-y-scroll">
         <FloorInfo buildingName={buildingName} />

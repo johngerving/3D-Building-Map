@@ -9,6 +9,7 @@ export const useFloors = (buildingName, refetch = false) => {
         return res.data;
       }),
     staleTime: Infinity,
+    gcTime: Infinity,
   });
 
   return {
