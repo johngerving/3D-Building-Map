@@ -1,10 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-export const useDebounce = (value, delay, cb) => {
+export const useDebounce = (value, delay) => {
+  const [isDebouncing, setIsDebouncing] = useState(false);
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
   useEffect(() => {
-    // Update debounced value after delay
+    // When value changes, isDebouncing is set to true
+    setIsDebouncing(true);
+
+    // Update debounced value and isDebouncing after delay
     const handler = setTimeout(() => {
-      cb(value);
+      setIsDebouncing(false);
+      setDebouncedValue(value);
     }, delay);
 
     // Cancel timeout if value or delay changes or on unmount
@@ -12,4 +19,6 @@ export const useDebounce = (value, delay, cb) => {
       clearTimeout(handler);
     };
   }, [value, delay]);
+
+  return { isDebouncing, debouncedValue };
 };

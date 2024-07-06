@@ -1,20 +1,26 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { putLocation } from "../../api/put.js";
 
-export const usePutLocation = () => {
+export const usePutLocation = (buildingName) => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: putLocation,
+    onMutate: async (location) => {
+      await queryClient.cancelQueries({
+        queryKey: ["locations", buildingName],
+      });
+    },
     // If the mutation fails, roll back the change
     onError: (err) => {
       console.log(err);
     },
     // Always refetch after error or success
-    onSettled: (floor) => {
+    onSettled: (location) => {
       queryClient.invalidateQueries({
         queryKey: ["locations", location.data.buildingName],
       });
+      console.log("Invalidate");
     },
   });
 };

@@ -1,7 +1,7 @@
 import { useState, useEffect, useId, useRef } from "react";
 import { useOutletContext } from "react-router-dom";
 import { useSpring, animated } from "@react-spring/web";
-import { useQueryClient } from "@tanstack/react-query";
+import { useIsFetching, useQueryClient } from "@tanstack/react-query";
 
 import { useCursor } from "./useCursor.jsx";
 import { Tree } from "./tree.jsx";
@@ -9,11 +9,43 @@ import { Tree } from "./tree.jsx";
 import { useFloors } from "../../../hooks/api/useFloors.jsx";
 import { useLocations } from "../../../hooks/api/useLocations.jsx";
 import { useUpdateFloor } from "../../../hooks/api/useUpdateFloor.jsx";
+import { useUpdateLocation } from "../../../hooks/api/useUpdateLocation.jsx";
 import { useDebounce } from "../../../hooks/api/useDebounce.jsx";
 import { usePutFloor } from "../../../hooks/api/usePutFloor.jsx";
+import { usePutLocation } from "../../../hooks/api/usePutLocation.jsx";
 
 function SingleLocation({ buildingName, location }) {
   const nameInputId = useId();
+
+  const queryClient = useQueryClient();
+
+  // Get update and mutate functions
+  const { update } = useUpdateLocation(buildingName, location.floorID);
+  const { mutate } = usePutLocation(buildingName);
+
+  // Set initial delay to infinity to prevent mutation at start
+  const [debounceDelay, setDebounceDelay] = useState(Infinity);
+
+  // Debounce the floor state and mutate 2 seconds after last input change
+  useDebounce(location, debounceDelay, (location) => {
+    console.log("debounce");
+    mutate(location);
+  });
+
+  // Function to update the value of a parameter in the floor
+  const handleInputChange = (newParam) => {
+    // Set the debounce delay to 2 seconds
+    setDebounceDelay(2000);
+    // Cancel any current queries to prevent overwriting new input with fetched data
+    queryClient.cancelQueries({
+      queryKey: ["locations", location.buildingName],
+    });
+
+    // Update the location with the new parameter
+    update(location.locationID, (old) => {
+      return Object.assign({}, old, newParam);
+    });
+  };
 
   const labelClassName = "text-right w-full";
 
@@ -34,7 +66,7 @@ function SingleLocation({ buildingName, location }) {
         id={nameInputId}
         name="name"
         value={location.name}
-        onChange={() => {}}
+        onChange={(e) => handleInputChange({ name: e.target.value })}
         className="border"
       />
     </div>
@@ -77,22 +109,27 @@ function SingleFloorInfo({ buildingName, floor, index }) {
 
   const queryClient = useQueryClient();
 
-  // Get update and mutate functions
-  const { update } = useUpdateFloor(buildingName);
-  const { mutate } = usePutFloor();
-
   // Set initial delay to infinity to prevent mutation at start
-  const [debounceDelay, setDebounceDelay] = useState(Infinity);
+  const [inputChanged, setInputChanged] = useState(false);
 
   // Debounce the floor state and mutate 2 seconds after last input change
-  useDebounce(floor, debounceDelay, (floor) => {
-    mutate(floor);
-  });
+  const { isDebouncing, debouncedValue } = useDebounce(floor, 2000);
+
+  // Get update and mutate functions
+  const { update } = useUpdateFloor(buildingName);
+  const { mutate } = usePutFloor(buildingName, isDebouncing);
+
+  // When the debounced value changes, mutate the data if input has been changed
+  useEffect(() => {
+    if (inputChanged) {
+      mutate(debouncedValue);
+    }
+  }, [debouncedValue]);
 
   // Function to update the value of a parameter in the floor
   const handleInputChange = (newParam) => {
     // Set the debounce delay to 2 seconds
-    setDebounceDelay(2000);
+    setInputChanged(true);
     // Cancel any current queries to prevent overwriting new input with fetched data
     queryClient.cancelQueries({
       queryKey: ["floors", floor.buildingName],
@@ -266,7 +303,7 @@ function FloorInfo({ buildingName }) {
               floor={floor}
               index={index}
             />
-            <Locations buildingName={buildingName} floorID={floor.floorID} />
+            {/* <Locations buildingName={buildingName} floorID={floor.floorID} /> */}
           </Tree>
         );
       })}

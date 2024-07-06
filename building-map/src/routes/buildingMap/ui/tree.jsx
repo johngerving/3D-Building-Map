@@ -27,7 +27,11 @@ export function Tree({
         )}
         <h2 className="text-lg">{name}</h2>
       </button>
-      {isOpen ? <div children={children} style={childStyle} /> : null}
+      <div
+        children={children}
+        style={childStyle}
+        className={isOpen ? "" : "hidden"}
+      />
     </div>
   );
 }
