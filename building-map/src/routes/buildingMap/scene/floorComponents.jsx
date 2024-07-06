@@ -146,7 +146,7 @@ export function Walls({ position = [0, 0, 0], paths, floor }) {
       });
     });
     return extrudeGeometries;
-  }, [paths]);
+  }, [paths, floor.extrudeDepth]);
 
   // Merge shape and extruded wall geometries into two geometries
   const mergedShapeGeometry = useMemo(() => {

@@ -60,27 +60,10 @@ function Floor({
     return [mapPaths, wallPaths, outlinePaths];
   }, [groupedPaths]);
 
-  // Center floor group, add offset, and add vertical position
+  // Add offset and vertical position
   const ref = useRef();
-  let center = {};
-
   useLayoutEffect(() => {
-    const sphere = new THREE.Box3()
-      .setFromObject(ref.current)
-      .getBoundingSphere(new THREE.Sphere());
-    ref.current.position.set(-sphere.center.x, yPos, -sphere.center.z);
-    center = {
-      x: -sphere.center.x,
-      z: -sphere.center.z,
-    };
-  }, []);
-
-  useLayoutEffect(() => {
-    ref.current.position.set(
-      center.x + floor.position[0],
-      yPos,
-      center.z - floor.position[1]
-    );
+    ref.current.position.set(floor.position[0], yPos, -1 * floor.position[1]);
   }, [floor.position]);
 
   return (

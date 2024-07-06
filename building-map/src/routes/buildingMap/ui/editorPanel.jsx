@@ -24,20 +24,28 @@ function SingleFloorInfo({ buildingName, floor, index }) {
 
   const queryClient = useQueryClient();
 
+  // Get update and mutate functions
   const { update } = useUpdateFloor(buildingName);
   const { mutate } = usePutFloor();
 
+  // Set initial delay to infinity to prevent mutation at start
   const [debounceDelay, setDebounceDelay] = useState(Infinity);
-  // Debounce the floor state and mutate after 2 seconds
+
+  // Debounce the floor state and mutate 2 seconds after last input change
   useDebounce(floor, debounceDelay, (floor) => {
     mutate(floor);
   });
 
+  // Function to update the value of a parameter in the floor
   const handleInputChange = (newParam) => {
+    // Set the debounce delay to 2 seconds
     setDebounceDelay(2000);
+    // Cancel any current queries to prevent overwriting new input with fetched data
     queryClient.cancelQueries({
       queryKey: ["floors", floor.buildingName],
     });
+
+    // Update the floor with the new parameter
     update(floor.floorID, (old) => {
       return Object.assign({}, old, newParam);
     });
@@ -87,7 +95,8 @@ function SingleFloorInfo({ buildingName, floor, index }) {
           type="text"
           id={scaleInputId}
           name="scale"
-          defaultValue={floor.scale}
+          value={floor.scale}
+          onChange={(e) => handleInputChange({ scale: e.target.value })}
           className="border"
         />
 
@@ -98,7 +107,18 @@ function SingleFloorInfo({ buildingName, floor, index }) {
           type="text"
           id={positionXInputId}
           name="positionX"
-          defaultValue={floor.position[0]}
+          value={floor.position[0]}
+          onChange={(e) =>
+            handleInputChange({
+              position: floor.position.map((el, i) => {
+                if (i == 0) {
+                  return e.target.value;
+                } else {
+                  return el;
+                }
+              }),
+            })
+          }
           className="border"
         />
 
@@ -109,7 +129,18 @@ function SingleFloorInfo({ buildingName, floor, index }) {
           type="text"
           id={positionYInputId}
           name="positionY"
-          defaultValue={floor.position[1]}
+          value={floor.position[1]}
+          onChange={(e) =>
+            handleInputChange({
+              position: floor.position.map((el, i) => {
+                if (i == 1) {
+                  return e.target.value;
+                } else {
+                  return el;
+                }
+              }),
+            })
+          }
           className="border"
         />
 
@@ -120,10 +151,12 @@ function SingleFloorInfo({ buildingName, floor, index }) {
           type="text"
           id={verticalGapInputId}
           name="verticalGap"
-          defaultValue={floor.verticalGap}
+          value={floor.verticalGap}
+          onChange={(e) => handleInputChange({ verticalGap: e.target.value })}
           className="border"
         />
 
+        {/* TODO: Change to add buttons */}
         <label className={labelClassName} htmlFor={extrudedSectionsInputId}>
           Extruded Sections
         </label>
@@ -142,7 +175,8 @@ function SingleFloorInfo({ buildingName, floor, index }) {
           type="text"
           id={extrudeDepthInputId}
           name="extrudeDepth"
-          defaultValue={floor.extrudeDepth}
+          value={floor.extrudeDepth}
+          onChange={(e) => handleInputChange({ extrudeDepth: e.target.value })}
           className="border"
         />
 
@@ -153,7 +187,8 @@ function SingleFloorInfo({ buildingName, floor, index }) {
           type="text"
           id={floorLayerInputId}
           name="floorLayer"
-          defaultValue={floor.floorLayer}
+          value={floor.floorLayer}
+          onChange={(e) => handleInputChange({ floorLayer: e.target.value })}
           className="border"
         />
       </div>
