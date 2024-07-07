@@ -9,6 +9,7 @@ export function Tree({
   childStyle,
   border = true,
   defaultOpen = false,
+  onClick = () => {},
 }) {
   const [isOpen, setOpen] = useState(defaultOpen);
 
@@ -19,6 +20,7 @@ export function Tree({
       <button
         onClick={() => {
           setOpen((isOpen) => !isOpen);
+          onClick(isOpen);
         }}
         className="tree-button flex items-center w-full"
       >

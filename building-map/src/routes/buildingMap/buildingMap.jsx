@@ -87,6 +87,7 @@ export default function BuildingMap() {
           <Outlet
             context={[
               buildingName,
+              selectedFloor,
               selectedLocation,
               setSelectedLocation,
               setSelectedFloor,

@@ -8,6 +8,7 @@ export function ViewPanel() {
   // Get props from outlet context
   const [
     buildingName,
+    selectedFloor,
     selectedLocation,
     setSelectedLocation,
     setSelectedFloor,

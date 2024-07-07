@@ -154,7 +154,12 @@ function SingleLocation({ buildingName, location }) {
   );
 }
 
-function Locations({ buildingName, floorID }) {
+function Locations({
+  buildingName,
+  floorID,
+  selectedLocation,
+  setSelectedLocation,
+}) {
   const { locations } = useLocations(buildingName);
 
   return (
@@ -170,6 +175,13 @@ function Locations({ buildingName, floorID }) {
           name={location.name}
           style={{ margin: "0 5px 5px 0" }}
           childStyle={{ overflowX: "hidden" }}
+          onClick={(isOpen) => {
+            if (isOpen && selectedLocation == location) {
+              setSelectedLocation(null);
+            } else {
+              setSelectedLocation(location);
+            }
+          }}
         >
           <SingleLocation buildingName={buildingName} location={location} />
         </Tree>
@@ -367,7 +379,13 @@ function SingleFloorInfo({ buildingName, floor, index }) {
   );
 }
 
-function FloorInfo({ buildingName }) {
+function FloorInfo({
+  buildingName,
+  selectedFloor,
+  selectedLocation,
+  setSelectedFloor,
+  setSelectedLocation,
+}) {
   const queryClient = useQueryClient();
   const { floors } = useFloors(buildingName);
 
@@ -494,7 +512,12 @@ function FloorInfo({ buildingName }) {
                 floor={floor}
                 index={index}
               />
-              <Locations buildingName={buildingName} floorID={floor.floorID} />
+              <Locations
+                buildingName={buildingName}
+                floorID={floor.floorID}
+                selectedLocation={selectedLocation}
+                setSelectedLocation={setSelectedLocation}
+              />
             </Tree>
             {/* <div className="w-full h-2 bg-blue-400 rounded"></div>  */}
           </div>
@@ -507,6 +530,7 @@ function FloorInfo({ buildingName }) {
 export function EditorPanel() {
   const [
     buildingName,
+    selectedFloor,
     selectedLocation,
     setSelectedLocation,
     setSelectedFloor,
@@ -574,7 +598,13 @@ export function EditorPanel() {
           width < 100 ? "hidden" : ""
         }`}
       >
-        <FloorInfo buildingName={buildingName} />
+        <FloorInfo
+          buildingName={buildingName}
+          selectedFloor={selectedFloor}
+          selectedLocation={selectedLocation}
+          setSelectedFloor={setSelectedFloor}
+          setSelectedLocation={setSelectedLocation}
+        />
       </div>
       <div
         id="resize"
