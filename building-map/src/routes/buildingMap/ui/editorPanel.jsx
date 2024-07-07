@@ -14,6 +14,7 @@ import { useDebounce } from "../../../hooks/api/useDebounce.jsx";
 import { usePutFloor } from "../../../hooks/api/usePutFloor.jsx";
 import { usePutLocation } from "../../../hooks/api/usePutLocation.jsx";
 import { usePutFloors } from "../../../hooks/api/usePutFloors.jsx";
+import { usePostFloor } from "../../../hooks/api/usePostFloor.jsx";
 
 import SwapUp from "../../../assets/swap_up.svg?react";
 import SwapDown from "../../../assets/swap_down.svg?react";
@@ -163,34 +164,36 @@ function Locations({
   const { locations } = useLocations(buildingName);
 
   return (
-    <Tree
-      name={"Locations"}
-      style={{ margin: "20px 0 0 35px" }}
-      childStyle={{ margin: "0 0 0 40px" }}
-      border={false}
-    >
-      {locations[floorID].map((location, index) => (
-        <Tree
-          key={location.locationID}
-          name={location.name}
-          style={{ margin: "0 5px 5px 0" }}
-          childStyle={{ overflowX: "hidden" }}
-          onClick={(isOpen) => {
-            if (isOpen && selectedLocation == location) {
-              setSelectedLocation(null);
-            } else {
-              setSelectedLocation(location);
-            }
-          }}
-        >
-          <SingleLocation buildingName={buildingName} location={location} />
-        </Tree>
-      ))}
-    </Tree>
+    locations[floorID] && (
+      <Tree
+        name={"Locations"}
+        style={{ margin: "20px 0 0 35px" }}
+        childStyle={{ margin: "0 0 0 40px" }}
+        border={false}
+      >
+        {locations[floorID].map((location, index) => (
+          <Tree
+            key={location.locationID}
+            name={location.name}
+            style={{ margin: "0 5px 5px 0" }}
+            childStyle={{ overflowX: "hidden" }}
+            onClick={(isOpen) => {
+              if (isOpen && selectedLocation == location) {
+                setSelectedLocation(null);
+              } else {
+                setSelectedLocation(location);
+              }
+            }}
+          >
+            <SingleLocation buildingName={buildingName} location={location} />
+          </Tree>
+        ))}
+      </Tree>
+    )
   );
 }
 
-function SingleFloorInfo({ buildingName, floor, index }) {
+function SingleFloorInfo({ buildingName, floor }) {
   const nameInputId = useId();
   const svgInputId = useId();
   const scaleInputId = useId();
@@ -379,6 +382,54 @@ function SingleFloorInfo({ buildingName, floor, index }) {
   );
 }
 
+function AddNewFloor({ buildingName }) {
+  const { isPending, variables, mutate, isError } = usePostFloor(buildingName);
+
+  if (isError)
+    return (
+      <p className="text-center m-auto w-full">
+        <i>Error creating floor</i>
+      </p>
+    );
+
+  // Show temporary UI if the mutation is still occurring
+  if (isPending) {
+    const tempFloorInfo = {
+      floorID: 0,
+      buildingName: buildingName,
+      index: 0,
+      name: "Untitled Floor",
+      svg: "",
+      scale: 1,
+      verticalGap: 0,
+      position: [0, 0],
+      extrudedSections: [],
+      floorLayer: "",
+      excludedSections: [],
+      extrudeDepth: 0,
+    };
+    return (
+      <Tree
+        name={tempFloorInfo.name}
+        style={{ marginBottom: "10px", opacity: 0.5 }}
+        childStyle={{ overflow: "hidden" }}
+        disabled={true}
+      ></Tree>
+    );
+  }
+
+  return (
+    <button
+      className="w-full p-3 rounded-lg bg-gray-100 hover:bg-gray-200"
+      onClick={() => {
+        mutate({ buildingName: buildingName });
+      }}
+    >
+      Add Floor +
+    </button>
+  );
+}
+
 function FloorInfo({
   buildingName,
   selectedFloor,
@@ -507,11 +558,7 @@ function FloorInfo({
               style={{ marginBottom: "10px" }}
               childStyle={{ overflow: "hidden" }}
             >
-              <SingleFloorInfo
-                buildingName={buildingName}
-                floor={floor}
-                index={index}
-              />
+              <SingleFloorInfo buildingName={buildingName} floor={floor} />
               <Locations
                 buildingName={buildingName}
                 floorID={floor.floorID}
@@ -519,10 +566,10 @@ function FloorInfo({
                 setSelectedLocation={setSelectedLocation}
               />
             </Tree>
-            {/* <div className="w-full h-2 bg-blue-400 rounded"></div>  */}
           </div>
         );
       })}
+      <AddNewFloor buildingName={buildingName} />
     </div>
   );
 }

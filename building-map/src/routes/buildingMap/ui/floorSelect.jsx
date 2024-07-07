@@ -7,7 +7,7 @@ function FloorButton({ text, onSelect, selected, isTop, isBottom }) {
     return (
       <button
         onClick={onSelect}
-        className={`w-11 h-11 border border-gray-100 rounded-t-md ${
+        className={`w-11 h-11 border overflow-hidden border-gray-100 rounded-t-md ${
           selected
             ? "bg-blue-600 text-white border-none shadow-inner"
             : "bg-white hover:text-blue-600"

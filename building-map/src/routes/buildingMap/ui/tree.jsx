@@ -10,6 +10,7 @@ export function Tree({
   border = true,
   defaultOpen = false,
   onClick = () => {},
+  disabled = false,
 }) {
   const [isOpen, setOpen] = useState(defaultOpen);
 
@@ -22,6 +23,7 @@ export function Tree({
           setOpen((isOpen) => !isOpen);
           onClick(isOpen);
         }}
+        disabled={disabled}
         className="tree-button flex items-center w-full"
       >
         {isOpen ? (

@@ -28,7 +28,7 @@ export const postFloor = async (data) => {
       floorID: floorID,
       buildingName: data.buildingName,
       index: index,
-      name: "",
+      name: "Untitled Floor",
       svg: "",
       scale: 1,
       verticalGap: 0,
@@ -41,6 +41,9 @@ export const postFloor = async (data) => {
 
     // Add floor to db
     floorData.push(newFloor);
+
+    // Add empty locations array to db
+    locationData[floorID] = [];
 
     // Return response
     res.data = newFloor;

@@ -95,7 +95,7 @@ export function FloorCeiling({ outlinePaths, floor, selected }) {
   return (
     <>
       {/* Draw floor and ceiling if property is enabled */}
-      {floor.floorLayer !== null ? (
+      {floor.floorLayer !== null && outlinePaths.length > 0 ? (
         <>
           {/* Lower floor outline */}
           <FloorOutline paths={outlinePaths} floor={floor} />

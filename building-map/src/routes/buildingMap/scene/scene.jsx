@@ -39,7 +39,7 @@ function Floor({
   // Group paths by parent ID
   const groupedPaths = useMemo(() => {
     return groupPaths(paths);
-  }, [paths]);
+  }, [paths, floor]);
 
   // Separate paths into three arrays
   const [mapPaths, wallPaths, outlinePaths] = useMemo(() => {
@@ -67,6 +67,7 @@ function Floor({
     ref.current.position.set(floor.position[0], yPos, -1 * floor.position[1]);
   }, [floor.position]);
 
+  // Only render if paths variable has contents
   return (
     <group ref={ref} visible={visible}>
       <Map
@@ -82,12 +83,13 @@ function Floor({
           floor={floor}
         />
       ) : null}
-      <FloorCeiling
-        outlinePaths={outlinePaths}
-        floor={floor}
-        selected={selected}
-      />
-      {}
+      {floor.floorLayer.length > 0 ? (
+        <FloorCeiling
+          outlinePaths={outlinePaths}
+          floor={floor}
+          selected={selected}
+        />
+      ) : null}
       <Locations
         buildingName={buildingName}
         floor={floor}
