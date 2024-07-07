@@ -53,3 +53,33 @@ export const postFloor = async (data) => {
     throw new Error(err);
   }
 };
+
+export const postLocation = async (data) => {
+  try {
+    const res = {};
+
+    // Get location ID by getting the number of locations already existing
+    const locationID = locationData.length;
+
+    // Create new location object
+    const newLocation = {
+      locationID: locationID,
+      floorID: data.floorID,
+      buildingName: data.buildingName,
+      name: "Untitled",
+      description: "",
+      position: [0, 0],
+      type: "",
+    };
+
+    // Add location to db
+    locationData.push(newLocation);
+
+    // Return response
+    res.data = newLocation;
+    await sleep(500);
+    return await res;
+  } catch (err) {
+    throw new Error(err);
+  }
+};

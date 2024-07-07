@@ -15,9 +15,45 @@ import { usePutFloor } from "../../../hooks/api/usePutFloor.jsx";
 import { usePutLocation } from "../../../hooks/api/usePutLocation.jsx";
 import { usePutFloors } from "../../../hooks/api/usePutFloors.jsx";
 import { usePostFloor } from "../../../hooks/api/usePostFloor.jsx";
+import { usePostLocation } from "../../../hooks/api/usePostLocation.jsx";
 
 import SwapUp from "../../../assets/swap_up.svg?react";
 import SwapDown from "../../../assets/swap_down.svg?react";
+
+function AddNewLocation({ buildingName, floorID }) {
+  const { isPending, variables, mutate, isError } =
+    usePostLocation(buildingName);
+
+  if (isError)
+    return (
+      <p className="text-center m-auto w-full">
+        <i>Error creating location</i>
+      </p>
+    );
+
+  // Show temporary UI if the mutation is still occurring
+  if (isPending) {
+    return (
+      <Tree
+        name={"Untitled"}
+        style={{ marginBottom: "10px", opacity: 0.5 }}
+        childStyle={{ overflow: "hidden" }}
+        disabled={true}
+      ></Tree>
+    );
+  }
+
+  return (
+    <button
+      className="w-full p-3 mr-[5px] mb-[5px] rounded-lg bg-gray-100 hover:bg-gray-200"
+      onClick={() => {
+        mutate({ buildingName: buildingName, floorID: floorID });
+      }}
+    >
+      Add Location +
+    </button>
+  );
+}
 
 function SingleLocation({ buildingName, location }) {
   const nameInputId = useId();
@@ -171,23 +207,26 @@ function Locations({
         childStyle={{ margin: "0 0 0 40px" }}
         border={false}
       >
-        {locations[floorID].map((location, index) => (
-          <Tree
-            key={location.locationID}
-            name={location.name}
-            style={{ margin: "0 5px 5px 0" }}
-            childStyle={{ overflowX: "hidden" }}
-            onClick={(isOpen) => {
-              if (isOpen && selectedLocation == location) {
-                setSelectedLocation(null);
-              } else {
-                setSelectedLocation(location);
-              }
-            }}
-          >
-            <SingleLocation buildingName={buildingName} location={location} />
-          </Tree>
-        ))}
+        <div className="p-1">
+          {locations[floorID].map((location, index) => (
+            <Tree
+              key={location.locationID}
+              name={location.name}
+              style={{ marginBottom: "5px" }}
+              childStyle={{ overflowX: "hidden" }}
+              onClick={(isOpen) => {
+                if (isOpen && selectedLocation == location) {
+                  setSelectedLocation(null);
+                } else {
+                  setSelectedLocation(location);
+                }
+              }}
+            >
+              <SingleLocation buildingName={buildingName} location={location} />
+            </Tree>
+          ))}
+          <AddNewLocation buildingName={buildingName} floorID={floorID} />
+        </div>
       </Tree>
     )
   );
