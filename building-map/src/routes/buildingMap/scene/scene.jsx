@@ -115,8 +115,9 @@ function Building({
   return (
     <>
       {floors.map((floor, index) => {
+        const displayFloor = floor.svg.length > 0;
         // Only display if floor is selected or no floor is selected
-        return (
+        return displayFloor ? (
           <Floor
             key={floor.name}
             buildingName={buildingName}
@@ -132,7 +133,7 @@ function Building({
             selectedLocation={selectedLocation}
             setSelectedLocation={setSelectedLocation}
           />
-        );
+        ) : null;
       })}
     </>
   );

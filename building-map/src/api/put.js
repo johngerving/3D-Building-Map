@@ -12,7 +12,6 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 // Edit floor
 export const putFloor = async (data) => {
   try {
-    console.log("put floor");
     const res = {};
 
     // Find floor by ID
@@ -29,6 +28,7 @@ export const putFloor = async (data) => {
     floorData[floorIndex] = {
       floorID: oldData.floorID,
       buildingName: oldData.buildingName,
+      index: data.index,
       name: data.name,
       svg: data.svg,
       scale: data.scale,

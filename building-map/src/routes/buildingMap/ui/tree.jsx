@@ -17,8 +17,10 @@ export function Tree({
   return (
     <div className={className} style={style}>
       <button
-        onClick={() => setOpen((isOpen) => !isOpen)}
-        className="flex items-center w-full"
+        onClick={() => {
+          setOpen((isOpen) => !isOpen);
+        }}
+        className="tree-button flex items-center w-full"
       >
         {isOpen ? (
           <ArrowDown className="fill-black w-10 h-10" />

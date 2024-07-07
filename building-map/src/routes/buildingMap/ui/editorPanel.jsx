@@ -13,6 +13,10 @@ import { useUpdateLocation } from "../../../hooks/api/useUpdateLocation.jsx";
 import { useDebounce } from "../../../hooks/api/useDebounce.jsx";
 import { usePutFloor } from "../../../hooks/api/usePutFloor.jsx";
 import { usePutLocation } from "../../../hooks/api/usePutLocation.jsx";
+import { usePutFloors } from "../../../hooks/api/usePutFloors.jsx";
+
+import SwapUp from "../../../assets/swap_up.svg?react";
+import SwapDown from "../../../assets/swap_down.svg?react";
 
 function SingleLocation({ buildingName, location }) {
   const nameInputId = useId();
@@ -187,7 +191,7 @@ function SingleFloorInfo({ buildingName, floor, index }) {
 
   const queryClient = useQueryClient();
 
-  // Set initial delay to infinity to prevent mutation at start
+  // Set input changed to false to prevent initial debounce
   const [inputChanged, setInputChanged] = useState(false);
 
   // Debounce the floor state and mutate 2 seconds after last input change
@@ -364,25 +368,136 @@ function SingleFloorInfo({ buildingName, floor, index }) {
 }
 
 function FloorInfo({ buildingName }) {
+  const queryClient = useQueryClient();
   const { floors } = useFloors(buildingName);
+
+  // Set input changed to false to prevent initial debounce
+  const [inputChanged, setInputChanged] = useState(false);
+
+  const [changeIndicator, setChangeIndicator] = useState(false);
+
+  // Debounce the floor state and mutate 2 seconds after last input change
+  const { isDebouncing, debouncedValue } = useDebounce(changeIndicator, 2000);
+
+  // Get update and mutate functions
+  const { mutate } = usePutFloors(buildingName, isDebouncing);
+
+  // When the debounced value changes, mutate the data if input has been changed
+  useEffect(() => {
+    if (inputChanged) {
+      mutate(floors);
+    }
+  }, [debouncedValue]);
+
+  // Function to swap floor with the one below it
+  const handleDownClick = (index) => {
+    if (index < floors.length - 1) {
+      // Toggle change indicator to indicate debounce
+      setChangeIndicator((changeIndicator) => !changeIndicator);
+
+      // Set the debounce delay to 2 seconds
+      setInputChanged(true);
+      // Cancel any current queries to prevent overwriting new input with fetched data
+      queryClient.cancelQueries({
+        queryKey: ["floors", buildingName],
+      });
+
+      // Update the query data to swap the floors
+      queryClient.setQueryData(["floors", buildingName], (oldFloors) => {
+        return oldFloors.map((oldFloor, i) => {
+          if (i == index) {
+            const nextOldFloor = oldFloors[index + 1];
+            return {
+              ...nextOldFloor,
+              index: index,
+            };
+          } else if (i == index + 1) {
+            const prevOldFloor = oldFloors[index];
+            return {
+              ...prevOldFloor,
+              index: index + 1,
+            };
+          } else {
+            return oldFloor;
+          }
+        });
+      });
+    }
+  };
+
+  // Function to swap floor with the one below it
+  const handleUpClick = (index) => {
+    if (index > 0) {
+      // Toggle change indicator to indicate debounce
+      setChangeIndicator((changeIndicator) => !changeIndicator);
+
+      // Indicate that the input has been changed
+      setInputChanged(true);
+      // Cancel any current queries to prevent overwriting new input with fetched data
+      queryClient.cancelQueries({
+        queryKey: ["floors", buildingName],
+      });
+
+      // Update the query data to swap the floors
+      queryClient.setQueryData(["floors", buildingName], (oldFloors) => {
+        return oldFloors.map((oldFloor, i) => {
+          if (i == index) {
+            const prevOldFloor = oldFloors[index - 1];
+            return {
+              ...prevOldFloor,
+              index: index,
+            };
+          } else if (i == index - 1) {
+            const nextOldFloor = oldFloors[index];
+            return {
+              ...nextOldFloor,
+              index: index - 1,
+            };
+          } else {
+            return oldFloor;
+          }
+        });
+      });
+    }
+  };
 
   return (
     <div className="p-4 pr-3">
       {floors.map((floor, index) => {
         return (
-          <Tree
-            key={index}
-            name={floor.name}
-            style={{ marginBottom: "10px" }}
-            childStyle={{ overflow: "hidden" }}
-          >
-            <SingleFloorInfo
-              buildingName={buildingName}
-              floor={floor}
-              index={index}
-            />
-            <Locations buildingName={buildingName} floorID={floor.floorID} />
-          </Tree>
+          /* {index == 0 ? (
+              <div className="w-full h-2 bg-blue-400 rounded"></div>
+            ) : null} */
+          <div key={index} className="relative">
+            <div className="absolute top-0 right-0 h-10 flex">
+              <button
+                className="h-full mr-1 fill-black hover:fill-blue-600"
+                onClick={(e) => handleUpClick(index)}
+              >
+                <SwapUp className="fill-inherit" />
+              </button>
+              <button
+                className="h-full mr-2 fill-black hover:fill-blue-600"
+                onClick={(e) => handleDownClick(index)}
+              >
+                <SwapDown className="fill-inherit" />
+              </button>
+            </div>
+
+            <Tree
+              name={floor.name}
+              style={{ marginBottom: "10px" }}
+              childStyle={{ overflow: "hidden" }}
+            >
+              <SingleFloorInfo
+                buildingName={buildingName}
+                floor={floor}
+                index={index}
+              />
+              <Locations buildingName={buildingName} floorID={floor.floorID} />
+            </Tree>
+            {/* <div className="w-full h-2 bg-blue-400 rounded"></div>  */}
+          </div>
         );
       })}
     </div>

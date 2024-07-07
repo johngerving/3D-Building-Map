@@ -9,6 +9,7 @@ export const floorData = [
   {
     floorID: "1",
     buildingName: "library",
+    index: 0,
     name: "B",
     svg: "https://aohkolcopromuzleqove.supabase.co/storage/v1/object/sign/Maps/Library-B.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJNYXBzL0xpYnJhcnktQi5zdmciLCJpYXQiOjE3MTMyODcwNDIsImV4cCI6MTc0NDgyMzA0Mn0.i4ACUeQrptv0ceCCtGfE0J8BaIl3lU2rL7iBIIcVlHw&t=2024-04-16T17%3A04%3A02.170Z",
     scale: 0.01,
@@ -22,6 +23,7 @@ export const floorData = [
   {
     floorID: "2",
     buildingName: "library",
+    index: 1,
     name: "1",
     svg: "https://aohkolcopromuzleqove.supabase.co/storage/v1/object/sign/Maps/Library-1.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJNYXBzL0xpYnJhcnktMS5zdmciLCJpYXQiOjE3MTMyODcwNjEsImV4cCI6MTc0NDgyMzA2MX0.jBoD_VdDGTNUmb0xSS5Y1IX_x7kbmHU_fXUK2i1LeeQ&t=2024-04-16T17%3A04%3A21.826Z",
     scale: 0.01,
@@ -35,6 +37,7 @@ export const floorData = [
   {
     floorID: "3",
     buildingName: "library",
+    index: 2,
     name: "2",
     svg: "https://aohkolcopromuzleqove.supabase.co/storage/v1/object/sign/Maps/Library-2.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJNYXBzL0xpYnJhcnktMi5zdmciLCJpYXQiOjE3MTMyODcwNzcsImV4cCI6MTc0NDgyMzA3N30.GhUQVGrb2BgcIY8S6K6pGFozOATOmlmm9MD4KadKZOg&t=2024-04-16T17%3A04%3A37.265Z",
     scale: 0.01,
@@ -48,6 +51,7 @@ export const floorData = [
   {
     floorID: "4",
     buildingName: "library",
+    index: 3,
     name: "3",
     svg: "https://aohkolcopromuzleqove.supabase.co/storage/v1/object/sign/Maps/Library-3__1_.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJNYXBzL0xpYnJhcnktM19fMV8uc3ZnIiwiaWF0IjoxNzE2NDg3MzgwLCJleHAiOjE3NDgwMjMzODB9.q5TJW587DjEE_hgkWByYQ-TYHW-VCxjWXgeAd87NefQ&t=2024-05-23T18%3A03%3A00.912Z",
     scale: 0.01,
@@ -61,6 +65,7 @@ export const floorData = [
   {
     floorID: "5",
     buildingName: "library",
+    index: 4,
     name: "R",
     svg: "https://aohkolcopromuzleqove.supabase.co/storage/v1/object/sign/Maps/Library-4__1_.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJNYXBzL0xpYnJhcnktNF9fMV8uc3ZnIiwiaWF0IjoxNzE2NDg3NDAxLCJleHAiOjE3NDgwMjM0MDF9.bfwJf10qGRgJaS0HJVn1wr6blVea3ppVbrtJbFAJTaQ&t=2024-05-23T18%3A03%3A21.207Z",
     scale: 0.01,

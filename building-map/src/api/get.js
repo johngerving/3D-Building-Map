@@ -26,7 +26,11 @@ export const getFloorsByBuildingName = async (name) => {
   try {
     // Filter floors under same building name
     const res = {};
-    res.data = floorData.filter((floor) => floor.buildingName == name);
+    res.data = floorData
+      .filter((floor) => floor.buildingName == name)
+      .sort((a, b) => {
+        return a.index - b.index;
+      });
     await sleep(500);
     return await res;
   } catch (err) {
