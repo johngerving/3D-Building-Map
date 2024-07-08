@@ -33,3 +33,18 @@ export const deleteFloor = async (data) => {
     throw new Error(err);
   }
 };
+
+// Delete location
+export const deleteLocation = async (data) => {
+  try {
+    const res = {};
+
+    // Filter from locations, removing the one with the location ID
+    deleteFromLocations((location) => location.locationID != data.locationID);
+
+    await sleep(500);
+    return await res;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
