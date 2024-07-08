@@ -76,7 +76,9 @@ function Floor({
         floor={floor}
       />
       {/* Only add walls if extruded section exists */}
-      {floor.extrudedSections.length > 0 && floor.extrudeDepth > 0 ? (
+      {floor.extrudedSections.length > 0 &&
+      floor.extrudeDepth > 0 &&
+      wallPaths.length > 0 ? (
         <Walls
           position={[0, floor.verticalGap, 0]}
           paths={wallPaths}

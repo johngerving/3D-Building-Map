@@ -10,12 +10,13 @@ export const usePutFloors = (buildingName, isDebouncing) => {
       let newFloors = [];
       for (let i = 0; i < floors.length; i++) {
         const floor = await putFloor(floors[i]);
-        newFloors.push(floor);
+        newFloors.push(floor.data);
       }
 
       return newFloors;
     },
     onMutate: async (floors) => {
+      console.log("usePutFloors", floors);
       await queryClient.cancelQueries({
         queryKey: ["floors", buildingName],
       });

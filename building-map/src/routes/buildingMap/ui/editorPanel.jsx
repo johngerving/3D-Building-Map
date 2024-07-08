@@ -19,6 +19,7 @@ import { usePostLocation } from "../../../hooks/api/usePostLocation.jsx";
 
 import SwapUp from "../../../assets/swap_up.svg?react";
 import SwapDown from "../../../assets/swap_down.svg?react";
+import Trash from "../../../assets/trash-icon.svg?react";
 
 function AddNewLocation({ buildingName, floorID }) {
   const { isPending, variables, mutate, isError } =
@@ -232,7 +233,14 @@ function Locations({
   );
 }
 
-function SingleFloorInfo({ buildingName, floor }) {
+function SingleFloorInfo({
+  buildingName,
+  floor,
+  floorsChanged,
+  setFloorsChanged,
+  debouncingStates,
+  setDebouncingStates,
+}) {
   const nameInputId = useId();
   const svgInputId = useId();
   const scaleInputId = useId();
@@ -245,33 +253,42 @@ function SingleFloorInfo({ buildingName, floor }) {
 
   const queryClient = useQueryClient();
 
-  // Set input changed to false to prevent initial debounce
-  const [inputChanged, setInputChanged] = useState(false);
-
   // Debounce the floor state and mutate 2 seconds after last input change
   const { isDebouncing, debouncedValue } = useDebounce(floor, 2000);
 
   // Get update and mutate functions
   const { update } = useUpdateFloor(buildingName);
-  const { mutate } = usePutFloor(buildingName, isDebouncing);
+  const { mutate } = usePutFloor(buildingName, debouncingStates);
 
   // When the debounced value changes, mutate the data if input has been changed
   useEffect(() => {
-    if (inputChanged) {
-      mutate(debouncedValue);
+    if (floorsChanged.includes(floor.floorID)) {
+      mutate(floor);
     }
   }, [debouncedValue]);
 
+  useEffect(() => {
+    setDebouncingStates((debouncingStates) => {
+      return {
+        ...debouncingStates,
+        [floor.floorID]: isDebouncing,
+      };
+    });
+  }, [isDebouncing]);
+
   // Function to update the value of a parameter in the floor
   const handleInputChange = (newParam) => {
-    // Set the debounce delay to 2 seconds
-    setInputChanged(true);
+    if (!floorsChanged.includes(floor.floorID)) {
+      setFloorsChanged([...floorsChanged, floor.floorID]);
+    }
+
     // Cancel any current queries to prevent overwriting new input with fetched data
     queryClient.cancelQueries({
       queryKey: ["floors", floor.buildingName],
     });
 
     // Update the floor with the new parameter
+
     update(floor.floorID, (old) => {
       return Object.assign({}, old, newParam);
     });
@@ -385,13 +402,60 @@ function SingleFloorInfo({ buildingName, floor }) {
         <label className={labelClassName} htmlFor={extrudedSectionsInputId}>
           Extruded Sections
         </label>
-        <input
-          type="text"
-          id={extrudedSectionsInputId}
-          name="extrudedSections"
-          defaultValue={floor.extrudedSections}
-          className="border"
-        />
+        <div>
+          {floor.extrudedSections.map((section, index) => (
+            <div key={index} className="flex">
+              <input
+                type="text"
+                id={
+                  index == floor.extrudedSections.length - 1
+                    ? extrudedSectionsInputId
+                    : null
+                }
+                name="extrudedSections"
+                value={floor.extrudedSections[index]}
+                onChange={(e) =>
+                  handleInputChange({
+                    extrudedSections: floor.extrudedSections.map(
+                      (section, i) => {
+                        if (i == index) {
+                          return e.target.value;
+                        } else {
+                          return section;
+                        }
+                      }
+                    ),
+                  })
+                }
+                className="border w-full mb-1 mr-1 h-8 p-1"
+              />
+              <button
+                className="bg-red-300 h-8 rounded-sm hover:bg-red-400"
+                onClick={() => {
+                  handleInputChange({
+                    extrudedSections: floor.extrudedSections.filter(
+                      (section, i) => {
+                        return i != index;
+                      }
+                    ),
+                  });
+                }}
+              >
+                <Trash className="fill-red-600" />
+              </button>
+            </div>
+          ))}
+          <button
+            className="w-full h-9 mr-[5px] mb-[5px] rounded-lg bg-gray-100 hover:bg-gray-200"
+            onClick={() => {
+              handleInputChange({
+                extrudedSections: [...floor.extrudedSections, ""],
+              });
+            }}
+          >
+            Add Section +
+          </button>
+        </div>
 
         <label className={labelClassName} htmlFor={extrudeDepthInputId}>
           Extrude Depth
@@ -479,32 +543,25 @@ function FloorInfo({
   const queryClient = useQueryClient();
   const { floors } = useFloors(buildingName);
 
-  // Set input changed to false to prevent initial debounce
-  const [inputChanged, setInputChanged] = useState(false);
+  const [floorsChanged, setFloorsChanged] = useState([]);
 
-  const [changeIndicator, setChangeIndicator] = useState(false);
-
-  // Debounce the floor state and mutate 2 seconds after last input change
-  const { isDebouncing, debouncedValue } = useDebounce(changeIndicator, 2000);
-
-  // Get update and mutate functions
-  const { mutate } = usePutFloors(buildingName, isDebouncing);
-
-  // When the debounced value changes, mutate the data if input has been changed
-  useEffect(() => {
-    if (inputChanged) {
-      mutate(floors);
-    }
-  }, [debouncedValue]);
+  const [debouncingStates, setDebouncingStates] = useState({});
 
   // Function to swap floor with the one below it
   const handleDownClick = (index) => {
     if (index < floors.length - 1) {
-      // Toggle change indicator to indicate debounce
-      setChangeIndicator((changeIndicator) => !changeIndicator);
+      // Indicate that the input has been changed
+      setFloorsChanged((floorsChanged) => {
+        const additions = [];
+        if (!floorsChanged.includes(floors[index].floorID)) {
+          additions.push(floors[index].floorID);
+        }
+        if (!floorsChanged.includes(floors[index + 1].floorID)) {
+          additions.push(floors[index + 1].floorID);
+        }
+        return [...floorsChanged, ...additions];
+      });
 
-      // Set the debounce delay to 2 seconds
-      setInputChanged(true);
       // Cancel any current queries to prevent overwriting new input with fetched data
       queryClient.cancelQueries({
         queryKey: ["floors", buildingName],
@@ -536,11 +593,18 @@ function FloorInfo({
   // Function to swap floor with the one below it
   const handleUpClick = (index) => {
     if (index > 0) {
-      // Toggle change indicator to indicate debounce
-      setChangeIndicator((changeIndicator) => !changeIndicator);
-
       // Indicate that the input has been changed
-      setInputChanged(true);
+      setFloorsChanged((floorsChanged) => {
+        const additions = [];
+        if (!floorsChanged.includes(floors[index].floorID)) {
+          additions.push(floors[index].floorID);
+        }
+        if (!floorsChanged.includes(floors[index - 1].floorID)) {
+          additions.push(floors[index - 1].floorID);
+        }
+        return [...floorsChanged, ...additions];
+      });
+
       // Cancel any current queries to prevent overwriting new input with fetched data
       queryClient.cancelQueries({
         queryKey: ["floors", buildingName],
@@ -548,7 +612,7 @@ function FloorInfo({
 
       // Update the query data to swap the floors
       queryClient.setQueryData(["floors", buildingName], (oldFloors) => {
-        return oldFloors.map((oldFloor, i) => {
+        const newFloors = oldFloors.map((oldFloor, i) => {
           if (i == index) {
             const prevOldFloor = oldFloors[index - 1];
             return {
@@ -565,6 +629,8 @@ function FloorInfo({
             return oldFloor;
           }
         });
+
+        return newFloors;
       });
     }
   };
@@ -597,7 +663,14 @@ function FloorInfo({
               style={{ marginBottom: "10px" }}
               childStyle={{ overflow: "hidden" }}
             >
-              <SingleFloorInfo buildingName={buildingName} floor={floor} />
+              <SingleFloorInfo
+                buildingName={buildingName}
+                floor={floor}
+                floorsChanged={floorsChanged}
+                setFloorsChanged={setFloorsChanged}
+                debouncingStates={debouncingStates}
+                setDebouncingStates={setDebouncingStates}
+              />
               <Locations
                 buildingName={buildingName}
                 floorID={floor.floorID}
