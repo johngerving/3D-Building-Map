@@ -5,7 +5,7 @@ export const buildingData = [
   },
 ];
 
-export const floorData = [
+export let floorData = [
   {
     floorID: "1",
     buildingName: "library",
@@ -78,7 +78,7 @@ export const floorData = [
   },
 ];
 
-export const locationData = [
+export let locationData = [
   {
     name: "19A",
     description: "",
@@ -2942,3 +2942,7 @@ export const locationData = [
     buildingName: "library",
   },
 ];
+
+export const deleteFromLocations = (cb) => {
+  locationData = locationData.filter(cb);
+};
