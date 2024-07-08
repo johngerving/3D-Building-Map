@@ -97,7 +97,8 @@ function SingleLocation({ buildingName, location }) {
     });
   };
 
-  const labelClassName = "text-right w-full";
+  const labelClassName = "text-right w-full leading-8";
+  const inputClassName = "border w-full mb-1 mr-1 h-8 p-1";
 
   return (
     <div
@@ -118,7 +119,7 @@ function SingleLocation({ buildingName, location }) {
         name="name"
         value={location.name}
         onChange={(e) => handleInputChange({ name: e.target.value })}
-        className="border"
+        className={inputClassName}
       />
 
       <label className={labelClassName} htmlFor={descriptionInputId}>
@@ -130,7 +131,7 @@ function SingleLocation({ buildingName, location }) {
         name="description"
         value={location.description}
         onChange={(e) => handleInputChange({ description: e.target.value })}
-        className="border"
+        className={inputClassName}
       />
 
       <label className={labelClassName} htmlFor={positionXInputId}>
@@ -152,7 +153,7 @@ function SingleLocation({ buildingName, location }) {
             }),
           })
         }
-        className="border"
+        className={inputClassName}
       />
 
       <label className={labelClassName} htmlFor={positionYInputId}>
@@ -174,7 +175,7 @@ function SingleLocation({ buildingName, location }) {
             }),
           })
         }
-        className="border"
+        className={inputClassName}
       />
 
       <label className={labelClassName} htmlFor={typeInputId}>
@@ -186,7 +187,7 @@ function SingleLocation({ buildingName, location }) {
         name="type"
         value={location.type}
         onChange={(e) => handleInputChange({ type: e.target.value })}
-        className="border"
+        className={inputClassName}
       />
     </div>
   );
@@ -294,7 +295,8 @@ function SingleFloorInfo({
     });
   };
 
-  const labelClassName = "text-right w-full";
+  const labelClassName = "text-right w-full leading-8";
+  const inputClassName = "border w-full mb-1 mr-1 h-8 p-1";
   return (
     // Label and input for each field in floor
     <div className="p-1">
@@ -315,7 +317,7 @@ function SingleFloorInfo({
           name="name"
           value={floor.name}
           onChange={(e) => handleInputChange({ name: e.target.value })}
-          className="border"
+          className={inputClassName}
         />
 
         <label className={labelClassName} htmlFor={svgInputId}>
@@ -327,7 +329,7 @@ function SingleFloorInfo({
           name="svg"
           value={floor.svg}
           onChange={(e) => handleInputChange({ svg: e.target.value })}
-          className="border"
+          className={inputClassName}
         />
 
         <label className={labelClassName} htmlFor={scaleInputId}>
@@ -339,7 +341,7 @@ function SingleFloorInfo({
           name="scale"
           value={floor.scale}
           onChange={(e) => handleInputChange({ scale: e.target.value })}
-          className="border"
+          className={inputClassName}
         />
 
         <label className={labelClassName} htmlFor={positionXInputId}>
@@ -361,7 +363,7 @@ function SingleFloorInfo({
               }),
             })
           }
-          className="border"
+          className={inputClassName}
         />
 
         <label className={labelClassName} htmlFor={positionYInputId}>
@@ -383,7 +385,7 @@ function SingleFloorInfo({
               }),
             })
           }
-          className="border"
+          className={inputClassName}
         />
 
         <label className={labelClassName} htmlFor={verticalGapInputId}>
@@ -395,10 +397,9 @@ function SingleFloorInfo({
           name="verticalGap"
           value={floor.verticalGap}
           onChange={(e) => handleInputChange({ verticalGap: e.target.value })}
-          className="border"
+          className={inputClassName}
         />
 
-        {/* TODO: Change to add buttons */}
         <label className={labelClassName} htmlFor={extrudedSectionsInputId}>
           Extruded Sections
         </label>
@@ -427,7 +428,7 @@ function SingleFloorInfo({
                     ),
                   })
                 }
-                className="border w-full mb-1 mr-1 h-8 p-1"
+                className={inputClassName}
               />
               <button
                 className="bg-red-300 h-8 rounded-sm hover:bg-red-400"
@@ -466,7 +467,7 @@ function SingleFloorInfo({
           name="extrudeDepth"
           value={floor.extrudeDepth}
           onChange={(e) => handleInputChange({ extrudeDepth: e.target.value })}
-          className="border"
+          className={inputClassName}
         />
 
         <label className={labelClassName} htmlFor={floorLayerInputId}>
@@ -478,7 +479,7 @@ function SingleFloorInfo({
           name="floorLayer"
           value={floor.floorLayer}
           onChange={(e) => handleInputChange({ floorLayer: e.target.value })}
-          className="border"
+          className={inputClassName}
         />
       </div>
     </div>
