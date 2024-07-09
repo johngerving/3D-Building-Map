@@ -21,6 +21,9 @@ import { useDeleteLocation } from "../../../hooks/api/useDeleteLocation.jsx";
 import SwapUp from "../../../assets/swap_up.svg?react";
 import SwapDown from "../../../assets/swap_down.svg?react";
 import Trash from "../../../assets/trash-icon.svg?react";
+import { useDeleteFloor } from "../../../hooks/api/useDeleteFloor.jsx";
+import { createPortal } from "react-dom";
+import { floor } from "three/examples/jsm/nodes/Nodes.js";
 
 function AddNewLocation({ buildingName, floorID }) {
   const { isPending, variables, mutate, isError } =
@@ -568,6 +571,40 @@ function AddNewFloor({ buildingName }) {
   );
 }
 
+function DeleteFloorModal({ floorToDelete, setFloorToDelete, mutate }) {
+  return (
+    <>
+      <div className="z-30 absolute top-0 left-0 w-screen h-screen bg-gray-600 opacity-50"></div>
+      <div className="z-30 absolute top-0 left-0 w-screen h-screen flex items-center justify-center">
+        <div className="w-[35rem] bg-white rounded-lg text-slate-600 p-7">
+          <h1 className="text-4xl mb-4">Confirmation</h1>
+          <p className="text-lg">
+            Are you sure you want to delete floor "{floorToDelete.name}"? This
+            decision cannot be undone.
+          </p>
+          <div className="w-full flex justify-end mt-3">
+            <button
+              className="rounded-md border shadow-sm p-3 mr-7 w-20 hover:bg-gray-100 transition"
+              onClick={() => setFloorToDelete(null)}
+            >
+              Cancel
+            </button>
+            <button
+              className="rounded-md border shadow-sm p-3 bg-red-500 hover:bg-red-600 text-white w-20 transition"
+              onClick={() => {
+                mutate({ floorID: floorToDelete.floorID });
+                setFloorToDelete(null);
+              }}
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
 function FloorInfo({
   buildingName,
   selectedFloor,
@@ -670,54 +707,111 @@ function FloorInfo({
     }
   };
 
-  return (
-    <div className="p-4 pr-3">
-      {floors.map((floor, index) => {
-        return (
-          /* {index == 0 ? (
-              <div className="w-full h-2 bg-blue-400 rounded"></div>
-            ) : null} */
-          <div key={index} className="relative">
-            <div className="absolute top-0 right-0 h-10 flex">
-              <button
-                className="h-full mr-1 fill-black hover:fill-blue-600"
-                onClick={(e) => handleUpClick(index)}
-              >
-                <SwapUp className="fill-inherit" />
-              </button>
-              <button
-                className="h-full mr-2 fill-black hover:fill-blue-600"
-                onClick={(e) => handleDownClick(index)}
-              >
-                <SwapDown className="fill-inherit" />
-              </button>
-            </div>
+  const {
+    isPending: isDeletePending,
+    variables: deleteVariables,
+    mutate: mutateDelete,
+  } = useDeleteFloor(buildingName);
 
-            <Tree
-              name={floor.name}
-              style={{ marginBottom: "10px" }}
-              childStyle={{ overflow: "hidden" }}
+  // Hold state of floor selected to delete
+  const [floorToDelete, setFloorToDelete] = useState(null);
+
+  return (
+    <>
+      {/* Render modal if a floor is selected to delete */}
+      {floorToDelete &&
+        createPortal(
+          <DeleteFloorModal
+            floorToDelete={floorToDelete}
+            setFloorToDelete={setFloorToDelete}
+            mutate={mutateDelete}
+          />,
+          document.body
+        )}
+      <div className="p-4 pr-3">
+        {floors.map((floor, index) => {
+          return (
+            <div
+              key={index}
+              className={`relative ${
+                deleteVariables && deleteVariables.floorID == floor.floorID
+                  ? "opacity-50"
+                  : ""
+              }`}
             >
-              <SingleFloorInfo
-                buildingName={buildingName}
-                floor={floor}
-                floorsChanged={floorsChanged}
-                setFloorsChanged={setFloorsChanged}
-                debouncingStates={debouncingStates}
-                setDebouncingStates={setDebouncingStates}
-              />
-              <Locations
-                buildingName={buildingName}
-                floorID={floor.floorID}
-                selectedLocation={selectedLocation}
-                setSelectedLocation={setSelectedLocation}
-              />
-            </Tree>
-          </div>
-        );
-      })}
-      <AddNewFloor buildingName={buildingName} />
-    </div>
+              <div className="absolute top-0 right-0 h-10 flex">
+                <button
+                  className={`h-full mr-1 fill-black ${
+                    deleteVariables && deleteVariables.floorID == floor.floorID
+                      ? ""
+                      : "hover:fill-blue-600"
+                  }`}
+                  onClick={(e) => handleUpClick(index)}
+                  disabled={
+                    deleteVariables && deleteVariables.floorID == floor.floorID
+                  }
+                >
+                  <SwapUp className="fill-inherit" />
+                </button>
+                <button
+                  className={`h-full mr-4 fill-black ${
+                    deleteVariables && deleteVariables.floorID == floor.floorID
+                      ? ""
+                      : "hover:fill-blue-600"
+                  }`}
+                  onClick={(e) => handleDownClick(index)}
+                  disabled={
+                    deleteVariables && deleteVariables.floorID == floor.floorID
+                  }
+                >
+                  <SwapDown className="fill-inherit" />
+                </button>
+                <button
+                  className={`bg-red-300 h-8 rounded-sm mt-[5px] mr-2 ${
+                    deleteVariables && deleteVariables.floorID == floor.floorID
+                      ? ""
+                      : "hover:bg-red-400"
+                  }`}
+                  onClick={() => {
+                    setFloorToDelete(floor);
+                  }}
+                  disabled={
+                    deleteVariables && deleteVariables.floorID == floor.floorID
+                  }
+                >
+                  <Trash className="fill-red-600" />
+                </button>
+              </div>
+
+              <Tree
+                name={floor.name}
+                style={{ marginBottom: "10px" }}
+                childStyle={{ overflow: "hidden" }}
+                disabled={
+                  deleteVariables && deleteVariables.floorID == floor.floorID
+                }
+              >
+                <SingleFloorInfo
+                  buildingName={buildingName}
+                  floor={floor}
+                  floorsChanged={floorsChanged}
+                  setFloorsChanged={setFloorsChanged}
+                  debouncingStates={debouncingStates}
+                  setDebouncingStates={setDebouncingStates}
+                />
+                <Locations
+                  buildingName={buildingName}
+                  floorID={floor.floorID}
+                  selectedLocation={selectedLocation}
+                  setSelectedLocation={setSelectedLocation}
+                />
+              </Tree>
+            </div>
+          );
+        })}
+        <AddNewFloor buildingName={buildingName} />
+      </div>
+    </>
   );
 }
 
