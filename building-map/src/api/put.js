@@ -72,6 +72,7 @@ export const putLocation = async (data) => {
       description: data.description,
       position: data.position,
       type: data.type,
+      defaultEnabled: data.defaultEnabled,
     };
 
     // Return the new data of floor

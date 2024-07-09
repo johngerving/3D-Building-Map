@@ -63,6 +63,7 @@ function AddNewLocation({ buildingName, floorID }) {
 function SingleLocation({ buildingName, location }) {
   const nameInputId = useId();
   const descriptionInputId = useId();
+  const defaultEnabledId = useId();
   const positionXInputId = useId();
   const positionYInputId = useId();
   const typeInputId = useId();
@@ -137,6 +138,23 @@ function SingleLocation({ buildingName, location }) {
         onChange={(e) => handleInputChange({ description: e.target.value })}
         className={inputClassName}
       />
+
+      <label className={labelClassName} htmlFor={defaultEnabledId}>
+        Default Enabled
+      </label>
+      <div className="flex items-center">
+        <input
+          type="checkbox"
+          id={defaultEnabledId}
+          name="defaultEnabled"
+          checked={location.defaultEnabled}
+          onChange={(e) =>
+            handleInputChange({ defaultEnabled: e.target.checked })
+          }
+          className="scale-125 ml-1"
+        />
+        <div></div>
+      </div>
 
       <label className={labelClassName} htmlFor={positionXInputId}>
         Position X
@@ -231,7 +249,8 @@ function Locations({
                 style={{}}
                 childStyle={{ overflowX: "hidden" }}
                 onClick={(isOpen) => {
-                  if (isOpen && selectedLocation == location) {
+                  // If the tree is already open when clicked, deslect the location, oterwise select it
+                  if (isOpen) {
                     setSelectedLocation(null);
                   } else {
                     setSelectedLocation(location);

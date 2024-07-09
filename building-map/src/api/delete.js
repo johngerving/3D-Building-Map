@@ -39,8 +39,6 @@ export const deleteLocation = async (data) => {
   try {
     const res = {};
 
-    console.log(data);
-
     // Filter from locations, removing the one with the location ID
     deleteFromLocations((location) => location.locationID != data.locationID);
 

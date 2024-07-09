@@ -1,12 +1,12 @@
 import Scene from "./scene/scene.jsx";
 import { ViewPanel } from "./ui/viewPanel.jsx";
 import FloorSelect from "./ui/floorSelect.jsx";
-import { useState, Suspense } from "react";
+import { useState, Suspense, useEffect } from "react";
 import { Stats } from "@react-three/drei";
 import { ErrorBoundary } from "react-error-boundary";
 
 import { useLoaderData, Outlet } from "react-router-dom";
-import { useQueryClient } from "@tanstack/react-query";
+import { useIsFetching, useQueryClient } from "@tanstack/react-query";
 
 import { useFloors } from "../../hooks/api/useFloors.jsx";
 import { useLocations } from "../../hooks/api/useLocations.jsx";

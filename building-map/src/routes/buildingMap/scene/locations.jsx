@@ -15,25 +15,31 @@ function LocationText({
       setSelectedLocation(null);
     }
   }
+
+  const isLocationSelected =
+    selectedLocation && selectedLocation.locationID == location.locationID;
+
   return (
-    <Html
-      zIndexRange={[5, 0]}
-      center
-      position={[
-        location.position[0] * floor.scale,
-        0,
-        location.position[1] * floor.scale,
-      ]}
-    >
-      <div
-        onClick={handleSelectLocation}
-        className={`whitespace-nowrap select-none text-[12px] hover:cursor-pointer hover:text-blue-600 ${
-          selectedLocation == location ? "text-blue-600" : ""
-        }`}
+    (location.defaultEnabled || isLocationSelected) && (
+      <Html
+        zIndexRange={[5, 0]}
+        center
+        position={[
+          location.position[0] * floor.scale,
+          0,
+          location.position[1] * floor.scale,
+        ]}
       >
-        {location.name}
-      </div>
-    </Html>
+        <div
+          onClick={handleSelectLocation}
+          className={`whitespace-nowrap select-none text-[12px] hover:cursor-pointer hover:text-blue-600 ${
+            isLocationSelected ? "text-blue-600" : ""
+          }`}
+        >
+          {location.name}
+        </div>
+      </Html>
+    )
   );
 }
 

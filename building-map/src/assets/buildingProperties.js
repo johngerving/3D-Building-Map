@@ -87,6 +87,7 @@ export let locationData = [
     floorID: "1",
     locationID: 0,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "40",
@@ -96,6 +97,7 @@ export let locationData = [
     floorID: "1",
     locationID: 1,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "19",
@@ -105,6 +107,7 @@ export let locationData = [
     floorID: "1",
     locationID: 2,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "17",
@@ -114,6 +117,7 @@ export let locationData = [
     floorID: "1",
     locationID: 3,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "7",
@@ -123,6 +127,7 @@ export let locationData = [
     floorID: "1",
     locationID: 4,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "2",
@@ -132,6 +137,7 @@ export let locationData = [
     floorID: "1",
     locationID: 5,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "T-0A",
@@ -141,6 +147,7 @@ export let locationData = [
     floorID: "1",
     locationID: 6,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "8",
@@ -150,6 +157,7 @@ export let locationData = [
     floorID: "1",
     locationID: 7,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "6",
@@ -159,6 +167,7 @@ export let locationData = [
     floorID: "1",
     locationID: 8,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "44",
@@ -168,6 +177,7 @@ export let locationData = [
     floorID: "1",
     locationID: 9,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "S-0C",
@@ -177,6 +187,7 @@ export let locationData = [
     floorID: "1",
     locationID: 10,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "S-0B",
@@ -186,6 +197,7 @@ export let locationData = [
     floorID: "1",
     locationID: 11,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "S-0A",
@@ -195,6 +207,7 @@ export let locationData = [
     floorID: "1",
     locationID: 12,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "64",
@@ -204,6 +217,7 @@ export let locationData = [
     floorID: "1",
     locationID: 13,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "EL-0A",
@@ -213,6 +227,7 @@ export let locationData = [
     floorID: "1",
     locationID: 14,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "C-0A",
@@ -222,6 +237,7 @@ export let locationData = [
     floorID: "1",
     locationID: 15,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "C-0B",
@@ -231,6 +247,7 @@ export let locationData = [
     floorID: "1",
     locationID: 16,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[BG]01",
@@ -240,6 +257,7 @@ export let locationData = [
     floorID: "1",
     locationID: 17,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[BG]02",
@@ -249,6 +267,7 @@ export let locationData = [
     floorID: "1",
     locationID: 18,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[CG]01",
@@ -258,6 +277,7 @@ export let locationData = [
     floorID: "1",
     locationID: 19,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[CG]02",
@@ -267,6 +287,7 @@ export let locationData = [
     floorID: "1",
     locationID: 20,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "H-0A",
@@ -276,6 +297,7 @@ export let locationData = [
     floorID: "1",
     locationID: 21,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "S-0D",
@@ -285,6 +307,7 @@ export let locationData = [
     floorID: "1",
     locationID: 22,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "S-0E",
@@ -294,6 +317,7 @@ export let locationData = [
     floorID: "1",
     locationID: 23,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "RR-W-0",
@@ -303,6 +327,7 @@ export let locationData = [
     floorID: "1",
     locationID: 24,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "RR-M-0",
@@ -312,6 +337,7 @@ export let locationData = [
     floorID: "1",
     locationID: 25,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "H-0B",
@@ -321,6 +347,7 @@ export let locationData = [
     floorID: "1",
     locationID: 26,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "H-0E",
@@ -330,6 +357,7 @@ export let locationData = [
     floorID: "1",
     locationID: 27,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "L-0C",
@@ -339,6 +367,7 @@ export let locationData = [
     floorID: "1",
     locationID: 28,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "H-0D",
@@ -348,6 +377,7 @@ export let locationData = [
     floorID: "1",
     locationID: 29,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]B-I4",
@@ -357,6 +387,7 @@ export let locationData = [
     floorID: "1",
     locationID: 30,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]B-H7",
@@ -366,6 +397,7 @@ export let locationData = [
     floorID: "1",
     locationID: 31,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]B-H6",
@@ -375,6 +407,7 @@ export let locationData = [
     floorID: "1",
     locationID: 32,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]B-I6",
@@ -384,6 +417,7 @@ export let locationData = [
     floorID: "1",
     locationID: 33,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]B-I7",
@@ -393,6 +427,7 @@ export let locationData = [
     floorID: "1",
     locationID: 34,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "5",
@@ -402,6 +437,7 @@ export let locationData = [
     floorID: "1",
     locationID: 35,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "5B",
@@ -411,6 +447,7 @@ export let locationData = [
     floorID: "1",
     locationID: 36,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "5C",
@@ -420,6 +457,7 @@ export let locationData = [
     floorID: "1",
     locationID: 37,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "5E",
@@ -429,6 +467,7 @@ export let locationData = [
     floorID: "1",
     locationID: 38,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "5D",
@@ -438,6 +477,7 @@ export let locationData = [
     floorID: "1",
     locationID: 39,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "5A",
@@ -447,6 +487,7 @@ export let locationData = [
     floorID: "1",
     locationID: 40,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "M-0A",
@@ -456,6 +497,7 @@ export let locationData = [
     floorID: "1",
     locationID: 41,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "3",
@@ -465,6 +507,7 @@ export let locationData = [
     floorID: "1",
     locationID: 42,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "3A",
@@ -474,6 +517,7 @@ export let locationData = [
     floorID: "1",
     locationID: 43,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "3B",
@@ -483,6 +527,7 @@ export let locationData = [
     floorID: "1",
     locationID: 44,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "1",
@@ -492,6 +537,7 @@ export let locationData = [
     floorID: "1",
     locationID: 45,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "1A",
@@ -501,6 +547,7 @@ export let locationData = [
     floorID: "1",
     locationID: 46,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "1B",
@@ -510,6 +557,7 @@ export let locationData = [
     floorID: "1",
     locationID: 47,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "1C",
@@ -519,6 +567,7 @@ export let locationData = [
     floorID: "1",
     locationID: 48,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "37",
@@ -528,6 +577,7 @@ export let locationData = [
     floorID: "1",
     locationID: 49,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "39",
@@ -537,6 +587,7 @@ export let locationData = [
     floorID: "1",
     locationID: 50,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "4",
@@ -546,6 +597,7 @@ export let locationData = [
     floorID: "1",
     locationID: 51,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "42",
@@ -555,6 +607,7 @@ export let locationData = [
     floorID: "1",
     locationID: 52,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "7A",
@@ -564,6 +617,7 @@ export let locationData = [
     floorID: "1",
     locationID: 53,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "9",
@@ -573,6 +627,7 @@ export let locationData = [
     floorID: "1",
     locationID: 54,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "11",
@@ -582,6 +637,7 @@ export let locationData = [
     floorID: "1",
     locationID: 55,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "13",
@@ -591,6 +647,7 @@ export let locationData = [
     floorID: "1",
     locationID: 56,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "13A",
@@ -600,6 +657,7 @@ export let locationData = [
     floorID: "1",
     locationID: 57,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "15",
@@ -609,6 +667,7 @@ export let locationData = [
     floorID: "1",
     locationID: 58,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "10",
@@ -618,6 +677,7 @@ export let locationData = [
     floorID: "1",
     locationID: 59,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "35",
@@ -627,6 +687,7 @@ export let locationData = [
     floorID: "1",
     locationID: 60,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "33",
@@ -636,6 +697,7 @@ export let locationData = [
     floorID: "1",
     locationID: 61,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "38",
@@ -645,6 +707,7 @@ export let locationData = [
     floorID: "1",
     locationID: 62,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "36",
@@ -654,6 +717,7 @@ export let locationData = [
     floorID: "1",
     locationID: 63,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "L-0A",
@@ -663,6 +727,7 @@ export let locationData = [
     floorID: "1",
     locationID: 64,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "28",
@@ -672,6 +737,7 @@ export let locationData = [
     floorID: "1",
     locationID: 65,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "26",
@@ -681,6 +747,7 @@ export let locationData = [
     floorID: "1",
     locationID: 66,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "26A",
@@ -690,6 +757,7 @@ export let locationData = [
     floorID: "1",
     locationID: 67,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "31",
@@ -699,6 +767,7 @@ export let locationData = [
     floorID: "1",
     locationID: 68,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "29",
@@ -708,6 +777,7 @@ export let locationData = [
     floorID: "1",
     locationID: 69,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "22",
@@ -717,6 +787,7 @@ export let locationData = [
     floorID: "1",
     locationID: 70,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "24",
@@ -726,6 +797,7 @@ export let locationData = [
     floorID: "1",
     locationID: 71,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "34",
@@ -735,6 +807,7 @@ export let locationData = [
     floorID: "1",
     locationID: 72,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "32",
@@ -744,6 +817,7 @@ export let locationData = [
     floorID: "1",
     locationID: 73,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "30",
@@ -753,6 +827,7 @@ export let locationData = [
     floorID: "1",
     locationID: 74,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "26B",
@@ -762,6 +837,7 @@ export let locationData = [
     floorID: "1",
     locationID: 75,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "27",
@@ -771,6 +847,7 @@ export let locationData = [
     floorID: "1",
     locationID: 76,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "27E",
@@ -780,6 +857,7 @@ export let locationData = [
     floorID: "1",
     locationID: 77,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "27A",
@@ -789,6 +867,7 @@ export let locationData = [
     floorID: "1",
     locationID: 78,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "27B",
@@ -798,6 +877,7 @@ export let locationData = [
     floorID: "1",
     locationID: 79,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "27C",
@@ -807,6 +887,7 @@ export let locationData = [
     floorID: "1",
     locationID: 80,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "27D",
@@ -816,6 +897,7 @@ export let locationData = [
     floorID: "1",
     locationID: 81,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "27F",
@@ -825,6 +907,7 @@ export let locationData = [
     floorID: "1",
     locationID: 82,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "25",
@@ -834,6 +917,7 @@ export let locationData = [
     floorID: "1",
     locationID: 83,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "25A",
@@ -843,6 +927,7 @@ export let locationData = [
     floorID: "1",
     locationID: 84,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "23",
@@ -852,6 +937,7 @@ export let locationData = [
     floorID: "1",
     locationID: 85,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "21",
@@ -861,6 +947,7 @@ export let locationData = [
     floorID: "1",
     locationID: 86,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "M-0B",
@@ -870,6 +957,7 @@ export let locationData = [
     floorID: "1",
     locationID: 87,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "M-0C",
@@ -879,6 +967,7 @@ export let locationData = [
     floorID: "1",
     locationID: 88,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "M-0D",
@@ -888,6 +977,7 @@ export let locationData = [
     floorID: "1",
     locationID: 89,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "M-0M",
@@ -897,6 +987,7 @@ export let locationData = [
     floorID: "1",
     locationID: 90,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "19D",
@@ -906,6 +997,7 @@ export let locationData = [
     floorID: "1",
     locationID: 91,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "19C",
@@ -915,6 +1007,7 @@ export let locationData = [
     floorID: "1",
     locationID: 92,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "M-0P",
@@ -924,6 +1017,7 @@ export let locationData = [
     floorID: "1",
     locationID: 93,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "M-0N",
@@ -933,6 +1027,7 @@ export let locationData = [
     floorID: "1",
     locationID: 94,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "M-0O",
@@ -942,6 +1037,7 @@ export let locationData = [
     floorID: "1",
     locationID: 95,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "M-0Q",
@@ -951,6 +1047,7 @@ export let locationData = [
     floorID: "1",
     locationID: 96,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "M-0K",
@@ -960,6 +1057,7 @@ export let locationData = [
     floorID: "1",
     locationID: 97,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "M-0E",
@@ -969,6 +1067,7 @@ export let locationData = [
     floorID: "1",
     locationID: 98,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "M-0F",
@@ -978,6 +1077,7 @@ export let locationData = [
     floorID: "1",
     locationID: 99,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "M-0G",
@@ -987,6 +1087,7 @@ export let locationData = [
     floorID: "1",
     locationID: 100,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "M-0H",
@@ -996,6 +1097,7 @@ export let locationData = [
     floorID: "1",
     locationID: 101,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "M-0I",
@@ -1005,6 +1107,7 @@ export let locationData = [
     floorID: "1",
     locationID: 102,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "M-0J",
@@ -1014,6 +1117,7 @@ export let locationData = [
     floorID: "1",
     locationID: 103,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "M-0L",
@@ -1023,6 +1127,7 @@ export let locationData = [
     floorID: "1",
     locationID: 104,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "M-0R",
@@ -1032,6 +1137,7 @@ export let locationData = [
     floorID: "1",
     locationID: 105,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "H-0C",
@@ -1041,6 +1147,7 @@ export let locationData = [
     floorID: "1",
     locationID: 106,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "L-0B",
@@ -1050,6 +1157,7 @@ export let locationData = [
     floorID: "1",
     locationID: 107,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "EL/M-0A",
@@ -1059,6 +1167,7 @@ export let locationData = [
     floorID: "1",
     locationID: 108,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "19B",
@@ -1068,6 +1177,7 @@ export let locationData = [
     floorID: "1",
     locationID: 109,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "101A",
@@ -1077,6 +1187,7 @@ export let locationData = [
     floorID: "2",
     locationID: 110,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "111B",
@@ -1086,6 +1197,7 @@ export let locationData = [
     floorID: "2",
     locationID: 111,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "111H",
@@ -1095,6 +1207,7 @@ export let locationData = [
     floorID: "2",
     locationID: 112,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "111G",
@@ -1104,6 +1217,7 @@ export let locationData = [
     floorID: "2",
     locationID: 113,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "111F",
@@ -1113,6 +1227,7 @@ export let locationData = [
     floorID: "2",
     locationID: 114,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "111K",
@@ -1122,6 +1237,7 @@ export let locationData = [
     floorID: "2",
     locationID: 115,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "111E",
@@ -1131,6 +1247,7 @@ export let locationData = [
     floorID: "2",
     locationID: 116,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "111J",
@@ -1140,6 +1257,7 @@ export let locationData = [
     floorID: "2",
     locationID: 117,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "110",
@@ -1149,6 +1267,7 @@ export let locationData = [
     floorID: "2",
     locationID: 118,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "111A",
@@ -1158,6 +1277,7 @@ export let locationData = [
     floorID: "2",
     locationID: 119,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "111C",
@@ -1167,6 +1287,7 @@ export let locationData = [
     floorID: "2",
     locationID: 120,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "111D",
@@ -1176,6 +1297,7 @@ export let locationData = [
     floorID: "2",
     locationID: 121,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "111I",
@@ -1185,6 +1307,7 @@ export let locationData = [
     floorID: "2",
     locationID: 122,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "110C",
@@ -1194,6 +1317,7 @@ export let locationData = [
     floorID: "2",
     locationID: 123,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "110B",
@@ -1203,6 +1327,7 @@ export let locationData = [
     floorID: "2",
     locationID: 124,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "110A",
@@ -1212,6 +1337,7 @@ export let locationData = [
     floorID: "2",
     locationID: 125,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "T-1A",
@@ -1221,6 +1347,7 @@ export let locationData = [
     floorID: "2",
     locationID: 126,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "122",
@@ -1230,6 +1357,7 @@ export let locationData = [
     floorID: "2",
     locationID: 127,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "121",
@@ -1239,6 +1367,7 @@ export let locationData = [
     floorID: "2",
     locationID: 128,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "115",
@@ -1248,6 +1377,7 @@ export let locationData = [
     floorID: "2",
     locationID: 129,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "117",
@@ -1257,6 +1387,7 @@ export let locationData = [
     floorID: "2",
     locationID: 130,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "118",
@@ -1266,6 +1397,7 @@ export let locationData = [
     floorID: "2",
     locationID: 131,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "116",
@@ -1275,6 +1407,7 @@ export let locationData = [
     floorID: "2",
     locationID: 132,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "112",
@@ -1284,6 +1417,7 @@ export let locationData = [
     floorID: "2",
     locationID: 133,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "112A",
@@ -1293,6 +1427,7 @@ export let locationData = [
     floorID: "2",
     locationID: 134,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "113",
@@ -1302,6 +1437,7 @@ export let locationData = [
     floorID: "2",
     locationID: 135,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "114",
@@ -1311,6 +1447,7 @@ export let locationData = [
     floorID: "2",
     locationID: 136,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "101B",
@@ -1320,6 +1457,7 @@ export let locationData = [
     floorID: "2",
     locationID: 137,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "120",
@@ -1329,6 +1467,7 @@ export let locationData = [
     floorID: "2",
     locationID: 138,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "C-1A",
@@ -1338,6 +1477,7 @@ export let locationData = [
     floorID: "2",
     locationID: 139,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "E-1",
@@ -1347,6 +1487,7 @@ export let locationData = [
     floorID: "2",
     locationID: 140,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "C-1B",
@@ -1356,6 +1497,7 @@ export let locationData = [
     floorID: "2",
     locationID: 141,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "109A",
@@ -1365,6 +1507,7 @@ export let locationData = [
     floorID: "2",
     locationID: 142,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "106",
@@ -1374,6 +1517,7 @@ export let locationData = [
     floorID: "2",
     locationID: 143,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "106B",
@@ -1383,6 +1527,7 @@ export let locationData = [
     floorID: "2",
     locationID: 144,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "106C",
@@ -1392,6 +1537,7 @@ export let locationData = [
     floorID: "2",
     locationID: 145,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "109B",
@@ -1401,6 +1547,7 @@ export let locationData = [
     floorID: "2",
     locationID: 146,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "109",
@@ -1410,6 +1557,7 @@ export let locationData = [
     floorID: "2",
     locationID: 147,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "107",
@@ -1419,6 +1567,7 @@ export let locationData = [
     floorID: "2",
     locationID: 148,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "108A",
@@ -1428,6 +1577,7 @@ export let locationData = [
     floorID: "2",
     locationID: 149,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "108",
@@ -1437,6 +1587,7 @@ export let locationData = [
     floorID: "2",
     locationID: 150,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "101",
@@ -1446,6 +1597,7 @@ export let locationData = [
     floorID: "2",
     locationID: 151,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "102",
@@ -1455,6 +1607,7 @@ export let locationData = [
     floorID: "2",
     locationID: 152,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "111",
@@ -1464,6 +1617,7 @@ export let locationData = [
     floorID: "2",
     locationID: 153,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "E-1B",
@@ -1473,6 +1627,7 @@ export let locationData = [
     floorID: "2",
     locationID: 154,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "104",
@@ -1482,6 +1637,7 @@ export let locationData = [
     floorID: "2",
     locationID: 155,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "S-1C",
@@ -1491,6 +1647,7 @@ export let locationData = [
     floorID: "2",
     locationID: 156,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "S-1B",
@@ -1500,6 +1657,7 @@ export let locationData = [
     floorID: "2",
     locationID: 157,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "S-1E",
@@ -1509,6 +1667,7 @@ export let locationData = [
     floorID: "2",
     locationID: 158,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "S-1D",
@@ -1518,6 +1677,7 @@ export let locationData = [
     floorID: "2",
     locationID: 159,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "S-1A",
@@ -1527,6 +1687,7 @@ export let locationData = [
     floorID: "2",
     locationID: 160,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[BG]100",
@@ -1536,6 +1697,7 @@ export let locationData = [
     floorID: "2",
     locationID: 161,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[CG]100",
@@ -1545,6 +1707,7 @@ export let locationData = [
     floorID: "2",
     locationID: 162,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[CG]101",
@@ -1554,6 +1717,7 @@ export let locationData = [
     floorID: "2",
     locationID: 163,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[CG]102",
@@ -1563,6 +1727,7 @@ export let locationData = [
     floorID: "2",
     locationID: 164,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[CG]103",
@@ -1572,6 +1737,7 @@ export let locationData = [
     floorID: "2",
     locationID: 165,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "EL-1A",
@@ -1581,6 +1747,7 @@ export let locationData = [
     floorID: "2",
     locationID: 166,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[XX]101",
@@ -1590,6 +1757,7 @@ export let locationData = [
     floorID: "2",
     locationID: 167,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "EL-1B",
@@ -1599,6 +1767,7 @@ export let locationData = [
     floorID: "2",
     locationID: 168,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "M-1A",
@@ -1608,6 +1777,7 @@ export let locationData = [
     floorID: "2",
     locationID: 169,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "RR-M-1",
@@ -1617,6 +1787,7 @@ export let locationData = [
     floorID: "2",
     locationID: 170,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "RR-W-1",
@@ -1626,6 +1797,7 @@ export let locationData = [
     floorID: "2",
     locationID: 171,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "101C",
@@ -1635,6 +1807,7 @@ export let locationData = [
     floorID: "2",
     locationID: 172,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "T-2B",
@@ -1644,6 +1817,7 @@ export let locationData = [
     floorID: "3",
     locationID: 173,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "204",
@@ -1653,6 +1827,7 @@ export let locationData = [
     floorID: "3",
     locationID: 174,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "203",
@@ -1662,6 +1837,7 @@ export let locationData = [
     floorID: "3",
     locationID: 175,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "208",
@@ -1671,6 +1847,7 @@ export let locationData = [
     floorID: "3",
     locationID: 176,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "206",
@@ -1680,6 +1857,7 @@ export let locationData = [
     floorID: "3",
     locationID: 177,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "207",
@@ -1689,6 +1867,7 @@ export let locationData = [
     floorID: "3",
     locationID: 178,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "205",
@@ -1698,6 +1877,7 @@ export let locationData = [
     floorID: "3",
     locationID: 179,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "C-2A",
@@ -1707,6 +1887,7 @@ export let locationData = [
     floorID: "3",
     locationID: 180,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "205B",
@@ -1716,6 +1897,7 @@ export let locationData = [
     floorID: "3",
     locationID: 181,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "209",
@@ -1725,6 +1907,7 @@ export let locationData = [
     floorID: "3",
     locationID: 182,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "E-2A",
@@ -1734,6 +1917,7 @@ export let locationData = [
     floorID: "3",
     locationID: 183,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "EL-2A",
@@ -1743,6 +1927,7 @@ export let locationData = [
     floorID: "3",
     locationID: 184,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "S-2C",
@@ -1752,6 +1937,7 @@ export let locationData = [
     floorID: "3",
     locationID: 185,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "S-2B",
@@ -1761,6 +1947,7 @@ export let locationData = [
     floorID: "3",
     locationID: 186,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "S-2E",
@@ -1770,6 +1957,7 @@ export let locationData = [
     floorID: "3",
     locationID: 187,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "S-2D",
@@ -1779,6 +1967,7 @@ export let locationData = [
     floorID: "3",
     locationID: 188,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "S-2A",
@@ -1788,6 +1977,7 @@ export let locationData = [
     floorID: "3",
     locationID: 189,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "L-2",
@@ -1797,6 +1987,7 @@ export let locationData = [
     floorID: "3",
     locationID: 190,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "T-2A",
@@ -1806,6 +1997,7 @@ export let locationData = [
     floorID: "3",
     locationID: 191,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "M-2A",
@@ -1815,6 +2007,7 @@ export let locationData = [
     floorID: "3",
     locationID: 192,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[XX]201",
@@ -1824,6 +2017,7 @@ export let locationData = [
     floorID: "3",
     locationID: 193,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]202",
@@ -1833,6 +2027,7 @@ export let locationData = [
     floorID: "3",
     locationID: 194,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[BG]200",
@@ -1842,6 +2037,7 @@ export let locationData = [
     floorID: "3",
     locationID: 195,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "EL-2B",
@@ -1851,6 +2047,7 @@ export let locationData = [
     floorID: "3",
     locationID: 196,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "RR-M-2",
@@ -1860,6 +2057,7 @@ export let locationData = [
     floorID: "3",
     locationID: 197,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "RR-2",
@@ -1869,6 +2067,7 @@ export let locationData = [
     floorID: "3",
     locationID: 198,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "FPS-2",
@@ -1878,6 +2077,7 @@ export let locationData = [
     floorID: "3",
     locationID: 199,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-B10",
@@ -1887,6 +2087,7 @@ export let locationData = [
     floorID: "3",
     locationID: 200,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-C10",
@@ -1896,6 +2097,7 @@ export let locationData = [
     floorID: "3",
     locationID: 201,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-D10",
@@ -1905,6 +2107,7 @@ export let locationData = [
     floorID: "3",
     locationID: 202,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-E10",
@@ -1914,6 +2117,7 @@ export let locationData = [
     floorID: "3",
     locationID: 203,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-B9",
@@ -1923,6 +2127,7 @@ export let locationData = [
     floorID: "3",
     locationID: 204,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-C9",
@@ -1932,6 +2137,7 @@ export let locationData = [
     floorID: "3",
     locationID: 205,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-D9",
@@ -1941,6 +2147,7 @@ export let locationData = [
     floorID: "3",
     locationID: 206,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-E9",
@@ -1950,6 +2157,7 @@ export let locationData = [
     floorID: "3",
     locationID: 207,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-B8",
@@ -1959,6 +2167,7 @@ export let locationData = [
     floorID: "3",
     locationID: 208,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-C8",
@@ -1968,6 +2177,7 @@ export let locationData = [
     floorID: "3",
     locationID: 209,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-D8",
@@ -1977,6 +2187,7 @@ export let locationData = [
     floorID: "3",
     locationID: 210,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-E8",
@@ -1986,6 +2197,7 @@ export let locationData = [
     floorID: "3",
     locationID: 211,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-H8",
@@ -1995,6 +2207,7 @@ export let locationData = [
     floorID: "3",
     locationID: 212,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-I8",
@@ -2004,6 +2217,7 @@ export let locationData = [
     floorID: "3",
     locationID: 213,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-B7",
@@ -2013,6 +2227,7 @@ export let locationData = [
     floorID: "3",
     locationID: 214,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-C7",
@@ -2022,6 +2237,7 @@ export let locationData = [
     floorID: "3",
     locationID: 215,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-D7",
@@ -2031,6 +2247,7 @@ export let locationData = [
     floorID: "3",
     locationID: 216,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-F7",
@@ -2040,6 +2257,7 @@ export let locationData = [
     floorID: "3",
     locationID: 217,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-H7",
@@ -2049,6 +2267,7 @@ export let locationData = [
     floorID: "3",
     locationID: 218,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-I7",
@@ -2058,6 +2277,7 @@ export let locationData = [
     floorID: "3",
     locationID: 219,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-L8",
@@ -2067,6 +2287,7 @@ export let locationData = [
     floorID: "3",
     locationID: 220,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-L7",
@@ -2076,6 +2297,7 @@ export let locationData = [
     floorID: "3",
     locationID: 221,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-B6",
@@ -2085,6 +2307,7 @@ export let locationData = [
     floorID: "3",
     locationID: 222,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-C6",
@@ -2094,6 +2317,7 @@ export let locationData = [
     floorID: "3",
     locationID: 223,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-D6",
@@ -2103,6 +2327,7 @@ export let locationData = [
     floorID: "3",
     locationID: 224,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-L6",
@@ -2112,6 +2337,7 @@ export let locationData = [
     floorID: "3",
     locationID: 225,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-H6",
@@ -2121,6 +2347,7 @@ export let locationData = [
     floorID: "3",
     locationID: 226,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-I6",
@@ -2130,6 +2357,7 @@ export let locationData = [
     floorID: "3",
     locationID: 227,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-J6",
@@ -2139,6 +2367,7 @@ export let locationData = [
     floorID: "3",
     locationID: 228,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-K6",
@@ -2148,6 +2377,7 @@ export let locationData = [
     floorID: "3",
     locationID: 229,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-B5",
@@ -2157,6 +2387,7 @@ export let locationData = [
     floorID: "3",
     locationID: 230,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-C5",
@@ -2166,6 +2397,7 @@ export let locationData = [
     floorID: "3",
     locationID: 231,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-D5",
@@ -2175,6 +2407,7 @@ export let locationData = [
     floorID: "3",
     locationID: 232,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-H5",
@@ -2184,6 +2417,7 @@ export let locationData = [
     floorID: "3",
     locationID: 233,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-I5",
@@ -2193,6 +2427,7 @@ export let locationData = [
     floorID: "3",
     locationID: 234,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-J5",
@@ -2202,6 +2437,7 @@ export let locationData = [
     floorID: "3",
     locationID: 235,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-H4",
@@ -2211,6 +2447,7 @@ export let locationData = [
     floorID: "3",
     locationID: 236,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-I4",
@@ -2220,6 +2457,7 @@ export let locationData = [
     floorID: "3",
     locationID: 237,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-J4",
@@ -2229,6 +2467,7 @@ export let locationData = [
     floorID: "3",
     locationID: 238,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-G7",
@@ -2238,6 +2477,7 @@ export let locationData = [
     floorID: "3",
     locationID: 239,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "210",
@@ -2247,6 +2487,7 @@ export let locationData = [
     floorID: "3",
     locationID: 240,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "201",
@@ -2256,6 +2497,7 @@ export let locationData = [
     floorID: "3",
     locationID: 241,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]2-M6",
@@ -2265,6 +2507,7 @@ export let locationData = [
     floorID: "3",
     locationID: 242,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "202",
@@ -2274,6 +2517,7 @@ export let locationData = [
     floorID: "3",
     locationID: 243,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "S-3C",
@@ -2283,6 +2527,7 @@ export let locationData = [
     floorID: "4",
     locationID: 244,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "S-3B",
@@ -2292,6 +2537,7 @@ export let locationData = [
     floorID: "4",
     locationID: 245,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "S-3E",
@@ -2301,6 +2547,7 @@ export let locationData = [
     floorID: "4",
     locationID: 246,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "S-3D",
@@ -2310,6 +2557,7 @@ export let locationData = [
     floorID: "4",
     locationID: 247,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "S-3A",
@@ -2319,6 +2567,7 @@ export let locationData = [
     floorID: "4",
     locationID: 248,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "EL-3A",
@@ -2328,6 +2577,7 @@ export let locationData = [
     floorID: "4",
     locationID: 249,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "L-3",
@@ -2337,6 +2587,7 @@ export let locationData = [
     floorID: "4",
     locationID: 250,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "301",
@@ -2346,6 +2597,7 @@ export let locationData = [
     floorID: "4",
     locationID: 251,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "314",
@@ -2355,6 +2607,7 @@ export let locationData = [
     floorID: "4",
     locationID: 252,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "312",
@@ -2364,6 +2617,7 @@ export let locationData = [
     floorID: "4",
     locationID: 253,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "313",
@@ -2373,6 +2627,7 @@ export let locationData = [
     floorID: "4",
     locationID: 254,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "315A",
@@ -2382,6 +2637,7 @@ export let locationData = [
     floorID: "4",
     locationID: 255,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "315B",
@@ -2391,6 +2647,7 @@ export let locationData = [
     floorID: "4",
     locationID: 256,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "311",
@@ -2400,6 +2657,7 @@ export let locationData = [
     floorID: "4",
     locationID: 257,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "310",
@@ -2409,6 +2667,7 @@ export let locationData = [
     floorID: "4",
     locationID: 258,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "C-3B",
@@ -2418,6 +2677,7 @@ export let locationData = [
     floorID: "4",
     locationID: 259,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "306",
@@ -2427,6 +2687,7 @@ export let locationData = [
     floorID: "4",
     locationID: 260,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "307",
@@ -2436,6 +2697,7 @@ export let locationData = [
     floorID: "4",
     locationID: 261,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "305",
@@ -2445,6 +2707,7 @@ export let locationData = [
     floorID: "4",
     locationID: 262,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "304",
@@ -2454,6 +2717,7 @@ export let locationData = [
     floorID: "4",
     locationID: 263,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "309",
@@ -2463,6 +2727,7 @@ export let locationData = [
     floorID: "4",
     locationID: 264,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "308",
@@ -2472,6 +2737,7 @@ export let locationData = [
     floorID: "4",
     locationID: 265,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "E-3A",
@@ -2481,6 +2747,7 @@ export let locationData = [
     floorID: "4",
     locationID: 266,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "T-3B",
@@ -2490,6 +2757,7 @@ export let locationData = [
     floorID: "4",
     locationID: 267,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "C-3A",
@@ -2499,6 +2767,7 @@ export let locationData = [
     floorID: "4",
     locationID: 268,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "T-3A",
@@ -2508,6 +2777,7 @@ export let locationData = [
     floorID: "4",
     locationID: 269,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "301B",
@@ -2517,6 +2787,7 @@ export let locationData = [
     floorID: "4",
     locationID: 270,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "301A",
@@ -2526,6 +2797,7 @@ export let locationData = [
     floorID: "4",
     locationID: 271,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "301C",
@@ -2535,6 +2807,7 @@ export let locationData = [
     floorID: "4",
     locationID: 272,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "301D",
@@ -2544,6 +2817,7 @@ export let locationData = [
     floorID: "4",
     locationID: 273,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "301E",
@@ -2553,6 +2827,7 @@ export let locationData = [
     floorID: "4",
     locationID: 274,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[XX]301",
@@ -2562,6 +2837,7 @@ export let locationData = [
     floorID: "4",
     locationID: 275,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "H-3",
@@ -2571,6 +2847,7 @@ export let locationData = [
     floorID: "4",
     locationID: 276,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[BG]300",
@@ -2580,6 +2857,7 @@ export let locationData = [
     floorID: "4",
     locationID: 277,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "EL-3B",
@@ -2589,6 +2867,7 @@ export let locationData = [
     floorID: "4",
     locationID: 278,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "RR-M-3",
@@ -2598,6 +2877,7 @@ export let locationData = [
     floorID: "4",
     locationID: 279,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "RR-W-3",
@@ -2607,6 +2887,7 @@ export let locationData = [
     floorID: "4",
     locationID: 280,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "M-3A",
@@ -2616,6 +2897,7 @@ export let locationData = [
     floorID: "4",
     locationID: 281,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "315",
@@ -2625,6 +2907,7 @@ export let locationData = [
     floorID: "4",
     locationID: 282,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "316",
@@ -2634,6 +2917,7 @@ export let locationData = [
     floorID: "4",
     locationID: 283,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "317",
@@ -2643,6 +2927,7 @@ export let locationData = [
     floorID: "4",
     locationID: 284,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]3-B10",
@@ -2652,6 +2937,7 @@ export let locationData = [
     floorID: "4",
     locationID: 285,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]3-B9",
@@ -2661,6 +2947,7 @@ export let locationData = [
     floorID: "4",
     locationID: 286,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]3-B8",
@@ -2670,6 +2957,7 @@ export let locationData = [
     floorID: "4",
     locationID: 287,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]3-B7",
@@ -2679,6 +2967,7 @@ export let locationData = [
     floorID: "4",
     locationID: 288,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]3-B6",
@@ -2688,6 +2977,7 @@ export let locationData = [
     floorID: "4",
     locationID: 289,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]3-B5",
@@ -2697,6 +2987,7 @@ export let locationData = [
     floorID: "4",
     locationID: 290,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]3-A9",
@@ -2706,6 +2997,7 @@ export let locationData = [
     floorID: "4",
     locationID: 291,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]3-A8",
@@ -2715,6 +3007,7 @@ export let locationData = [
     floorID: "4",
     locationID: 292,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]3-C10",
@@ -2724,6 +3017,7 @@ export let locationData = [
     floorID: "4",
     locationID: 293,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]3-C9",
@@ -2733,6 +3027,7 @@ export let locationData = [
     floorID: "4",
     locationID: 294,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]3-C8",
@@ -2742,6 +3037,7 @@ export let locationData = [
     floorID: "4",
     locationID: 295,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]3-C7",
@@ -2751,6 +3047,7 @@ export let locationData = [
     floorID: "4",
     locationID: 296,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]3-C6",
@@ -2760,6 +3057,7 @@ export let locationData = [
     floorID: "4",
     locationID: 297,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]3-C5",
@@ -2769,6 +3067,7 @@ export let locationData = [
     floorID: "4",
     locationID: 298,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]3-C4",
@@ -2778,6 +3077,7 @@ export let locationData = [
     floorID: "4",
     locationID: 299,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]3-D7",
@@ -2787,6 +3087,7 @@ export let locationData = [
     floorID: "4",
     locationID: 300,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]3-D6",
@@ -2796,6 +3097,7 @@ export let locationData = [
     floorID: "4",
     locationID: 301,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]3-D5",
@@ -2805,6 +3107,7 @@ export let locationData = [
     floorID: "4",
     locationID: 302,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]3-D4",
@@ -2814,6 +3117,7 @@ export let locationData = [
     floorID: "4",
     locationID: 303,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]3-317",
@@ -2823,6 +3127,7 @@ export let locationData = [
     floorID: "4",
     locationID: 304,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]3-F7",
@@ -2832,6 +3137,7 @@ export let locationData = [
     floorID: "4",
     locationID: 305,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]3-H7",
@@ -2841,6 +3147,7 @@ export let locationData = [
     floorID: "4",
     locationID: 306,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]3-H8",
@@ -2850,6 +3157,7 @@ export let locationData = [
     floorID: "4",
     locationID: 307,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]3-H5",
@@ -2859,6 +3167,7 @@ export let locationData = [
     floorID: "4",
     locationID: 308,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]3-I7",
@@ -2868,6 +3177,7 @@ export let locationData = [
     floorID: "4",
     locationID: 309,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]3-I8",
@@ -2877,6 +3187,7 @@ export let locationData = [
     floorID: "4",
     locationID: 310,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]3-I5",
@@ -2886,6 +3197,7 @@ export let locationData = [
     floorID: "4",
     locationID: 311,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]3-J7",
@@ -2895,6 +3207,7 @@ export let locationData = [
     floorID: "4",
     locationID: 312,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]3-J5",
@@ -2904,6 +3217,7 @@ export let locationData = [
     floorID: "4",
     locationID: 313,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "[SA]3-L6",
@@ -2913,6 +3227,7 @@ export let locationData = [
     floorID: "4",
     locationID: 314,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "302",
@@ -2922,6 +3237,7 @@ export let locationData = [
     floorID: "4",
     locationID: 315,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "303",
@@ -2931,6 +3247,7 @@ export let locationData = [
     floorID: "4",
     locationID: 316,
     buildingName: "library",
+    defaultEnabled: true,
   },
   {
     name: "FPS-3",
@@ -2940,6 +3257,7 @@ export let locationData = [
     floorID: "4",
     locationID: 317,
     buildingName: "library",
+    defaultEnabled: true,
   },
 ];
 

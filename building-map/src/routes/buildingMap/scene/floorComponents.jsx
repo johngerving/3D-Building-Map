@@ -62,10 +62,9 @@ function getGeometriesFromShapeAndStroke(shapePaths, strokePaths) {
 
 function FloorOutline({ position = [0, 0, 0], paths, floor }) {
   // Separate floor outline into shape paths and stroke paths
-  const [shapePaths, strokePaths] = useMemo(
-    () => separatePathsIntoShapeAndStroke(paths),
-    [paths]
-  );
+  const [shapePaths, strokePaths] = useMemo(() => {
+    return separatePathsIntoShapeAndStroke(paths);
+  }, [paths]);
 
   // Get geometries from shapes and strokes
   const geometries = useMemo(
