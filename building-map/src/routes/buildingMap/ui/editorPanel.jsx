@@ -16,6 +16,7 @@ import { usePutLocation } from "../../../hooks/api/usePutLocation.jsx";
 import { usePutFloors } from "../../../hooks/api/usePutFloors.jsx";
 import { usePostFloor } from "../../../hooks/api/usePostFloor.jsx";
 import { usePostLocation } from "../../../hooks/api/usePostLocation.jsx";
+import { useDeleteLocation } from "../../../hooks/api/useDeleteLocation.jsx";
 
 import SwapUp from "../../../assets/swap_up.svg?react";
 import SwapDown from "../../../assets/swap_down.svg?react";
@@ -201,6 +202,9 @@ function Locations({
 }) {
   const { locations } = useLocations(buildingName);
 
+  const { isPending, variables, mutate, isError } =
+    useDeleteLocation(buildingName);
+
   return (
     locations[floorID] && (
       <Tree
@@ -211,21 +215,51 @@ function Locations({
       >
         <div className="p-1">
           {locations[floorID].map((location, index) => (
-            <Tree
+            <div
               key={location.locationID}
-              name={location.name}
-              style={{ marginBottom: "5px" }}
-              childStyle={{ overflowX: "hidden" }}
-              onClick={(isOpen) => {
-                if (isOpen && selectedLocation == location) {
-                  setSelectedLocation(null);
-                } else {
-                  setSelectedLocation(location);
-                }
-              }}
+              className={`border rounded-md relative mb-1 ${
+                variables && variables.locationID == location.locationID
+                  ? "opacity-50"
+                  : ""
+              }`}
             >
-              <SingleLocation buildingName={buildingName} location={location} />
-            </Tree>
+              <Tree
+                name={location.name}
+                style={{}}
+                childStyle={{ overflowX: "hidden" }}
+                onClick={(isOpen) => {
+                  if (isOpen && selectedLocation == location) {
+                    setSelectedLocation(null);
+                  } else {
+                    setSelectedLocation(location);
+                  }
+                }}
+                border={false}
+                disabled={
+                  variables && variables.locationID == location.locationID
+                }
+              >
+                <SingleLocation
+                  buildingName={buildingName}
+                  location={location}
+                />
+              </Tree>
+              <button
+                className={`absolute top-1 right-1 rounded-[3px] bg-red-300 h-8 ${
+                  variables && variables.locationID == location.locationID
+                    ? ""
+                    : "hover:bg-red-400"
+                }`}
+                onClick={() => {
+                  mutate({ locationID: location.locationID });
+                }}
+                disabled={
+                  variables && variables.locationID == location.locationID
+                }
+              >
+                <Trash className="fill-red-600" />
+              </button>
+            </div>
           ))}
           <AddNewLocation buildingName={buildingName} floorID={floorID} />
         </div>
