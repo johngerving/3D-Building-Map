@@ -54,6 +54,7 @@ export const postFloor = async (data) => {
   }
 };
 
+// Add single location
 export const postLocation = async (data) => {
   try {
     const res = {};
@@ -66,10 +67,11 @@ export const postLocation = async (data) => {
       locationID: locationID,
       floorID: data.floorID,
       buildingName: data.buildingName,
-      name: "Untitled",
-      description: "",
-      position: [0, 0],
-      type: "",
+      name: data.name || "Untitled",
+      description: data.description || "",
+      position: data.position || [0, 0],
+      type: data.type || "",
+      defaultEnabled: data.defaultEnabled || true,
     };
 
     // Add location to db
@@ -77,6 +79,43 @@ export const postLocation = async (data) => {
 
     // Return response
     res.data = newLocation;
+    await sleep(500);
+    return await res;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
+// Add group of locations
+export const postLocations = async (data) => {
+  try {
+    const res = {};
+
+    const locations = data.locations;
+
+    // Add location for each in array in data
+    for (let i = 0; i < locations.length; i++) {
+      // Get location ID by getting the number of locations already existing
+      const locationID = locationData.length;
+
+      // Create new location object
+      const newLocation = {
+        locationID: locationID,
+        floorID: locations[i].floorID,
+        buildingName: locations[i].buildingName,
+        name: locations[i].name || "Untitled",
+        description: locations[i].description || "",
+        position: locations[i].position || [0, 0],
+        type: locations[i].type || "",
+        defaultEnabled: locations[i].defaultEnabled || true,
+      };
+
+      // Add location to db
+      locationData.push(newLocation);
+    }
+
+    // Return response
+    res.data = {};
     await sleep(500);
     return await res;
   } catch (err) {
