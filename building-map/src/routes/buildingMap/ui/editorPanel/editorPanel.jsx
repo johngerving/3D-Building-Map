@@ -7,15 +7,18 @@ import { FloorInfo } from "./floorInfo.jsx";
 
 import { useFloors } from "../../../../hooks/api/useFloors.jsx";
 import { useLocations } from "../../../../hooks/api/useLocations.jsx";
+import { BuildingInfo } from "./buildingInfo.jsx";
 
 export function EditorPanel() {
   const [
-    buildingID,
+    building,
     selectedFloor,
     selectedLocation,
     setSelectedLocation,
     setSelectedFloor,
   ] = useOutletContext();
+
+  const buildingID = building.buildingID;
 
   const { isFloorPending } = useFloors(buildingID);
   const { isLocationPending } = useLocations(buildingID);
@@ -79,6 +82,7 @@ export function EditorPanel() {
           width < 100 ? "hidden" : ""
         }`}
       >
+        <BuildingInfo building={building} />
         <FloorInfo
           buildingID={buildingID}
           selectedFloor={selectedFloor}

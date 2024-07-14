@@ -9,6 +9,38 @@ import {
 // Simulate API response time
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+// Edit building
+export const putBuilding = async (data) => {
+  try {
+    const res = {};
+
+    // Find building by ID
+    const buildingIndex = buildingData.findIndex(
+      (building) => building.buildingID == data.buildingID
+    );
+    // Return err if floor doesn't exist
+    if (buildingIndex == -1) return { err: "Building not found" };
+
+    // Make copy of old data
+    const oldData = buildingData[buildingIndex];
+
+    // Update db with new data
+    buildingData[buildingIndex] = {
+      buildingID: oldData.buildingID,
+      buildingName: data.buildingName,
+      locationFontSize: data.locationFontSize,
+      initialCameraPosition: data.initialCameraPosition,
+    };
+
+    // Return the new data of floor
+    res.data = buildingData[buildingIndex];
+    await sleep(500);
+    return await res;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
 // Edit floor
 export const putFloor = async (data) => {
   try {

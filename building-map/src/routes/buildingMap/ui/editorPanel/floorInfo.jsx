@@ -475,6 +475,7 @@ export function FloorInfo({
           document.body
         )}
       <div className="p-4 pr-3">
+        <h2 className="text-4xl text-slate-600 p-3">Floors</h2>
         {floors.map((floor, index) => {
           return (
             <div

@@ -7,12 +7,14 @@ import { useOutletContext } from "react-router-dom";
 export function ViewPanel() {
   // Get props from outlet context
   const [
-    buildingID,
+    building,
     selectedFloor,
     selectedLocation,
     setSelectedLocation,
     setSelectedFloor,
   ] = useOutletContext();
+
+  const buildingID = building.buildingID;
 
   return (
     <>
