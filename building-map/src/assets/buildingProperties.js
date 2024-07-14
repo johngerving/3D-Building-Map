@@ -2,8 +2,8 @@ export const buildingData = [
   {
     buildingID: "1",
     buildingName: "library",
-    locationFontSize: 12,
-    initialCameraPosition: [0, 4, 4],
+    locationFontSize: 5,
+    initialCameraPosition: [0, 3, 5],
   },
 ];
 

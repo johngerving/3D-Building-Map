@@ -108,6 +108,7 @@ export default function BuildingMap() {
           ></FloorSelect>
           <ErrorBoundary FallbackComponent={SceneFallback}>
             <Scene
+              buildingName={building.buildingName}
               buildingID={building.buildingID}
               selectedFloor={selectedFloor}
               selectedLocation={selectedLocation}

@@ -11,6 +11,7 @@ import { SVGLoader } from "three/examples/jsm/loaders/SVGLoader";
 import { useFloors } from "../../../hooks/api/useFloors.jsx";
 import { useLocations } from "../../../hooks/api/useLocations.jsx";
 import { ErrorBoundary } from "react-error-boundary";
+import { useBuilding } from "../../../hooks/api/useBuilding.jsx";
 
 // Function that takes in array of paths and adds them to a dictionary grouped by the ID of their parent
 function groupPaths(paths) {
@@ -25,6 +26,7 @@ function groupPaths(paths) {
 }
 
 function Floor({
+  buildingName,
   buildingID,
   yPos,
   floor,
@@ -93,6 +95,7 @@ function Floor({
         />
       ) : null}
       <Locations
+        buildingName={buildingName}
         buildingID={buildingID}
         floor={floor}
         selectedFloor={selectedFloor}
@@ -108,6 +111,7 @@ function Floor({
 }
 
 function Building({
+  buildingName,
   buildingID,
   selectedFloor,
   selectedLocation,
@@ -124,6 +128,7 @@ function Building({
         return displayFloor ? (
           <Floor
             key={floor.name}
+            buildingName={buildingName}
             buildingID={buildingID}
             yPos={getFloorYPosFromIndex(floors, index)}
             floor={floor}
@@ -144,11 +149,13 @@ function Building({
 }
 
 export default function Scene({
+  buildingName,
   buildingID,
   selectedFloor,
   selectedLocation,
   setSelectedLocation,
 }) {
+  const { building } = useBuilding(buildingName);
   const { floors } = useFloors(buildingID);
   const { locations } = useLocations(buildingID);
 
@@ -164,7 +171,7 @@ export default function Scene({
       {/* Fill entire screen */}
       <Canvas>
         <Controls
-          initialPosition={[0, 3, 5]}
+          initialPosition={building.initialCameraPosition}
           zoomMultiplier={75}
           floors={floors}
           selectedFloor={selectedFloor}
@@ -172,6 +179,7 @@ export default function Scene({
         <directionalLight args={[0xffffff, 2.5]} position={[-1, 2, 4]} />
         <ambientLight args={[0xcfe2e3]} />
         <Building
+          buildingName={buildingName}
           buildingID={buildingID}
           selectedFloor={selectedFloor}
           selectedLocation={selectedLocation}

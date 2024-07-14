@@ -1,12 +1,15 @@
 import { Html } from "@react-three/drei";
 
 import { useLocations } from "../../../hooks/api/useLocations.jsx";
+import { useBuilding } from "../../../hooks/api/useBuilding.jsx";
+import { useEffect } from "react";
 
 function LocationText({
   floor,
   location,
   selectedLocation,
   setSelectedLocation,
+  fontSize,
 }) {
   function handleSelectLocation() {
     if (selectedLocation != location) {
@@ -29,10 +32,11 @@ function LocationText({
           0,
           location.position[1] * floor.scale,
         ]}
+        distanceFactor={fontSize}
       >
         <div
           onClick={handleSelectLocation}
-          className={`whitespace-nowrap select-none text-[12px] hover:cursor-pointer hover:text-blue-600 ${
+          className={`whitespace-nowrap select-none hover:cursor-pointer hover:text-blue-600 ${
             isLocationSelected ? "text-blue-600" : ""
           }`}
         >
@@ -44,6 +48,7 @@ function LocationText({
 }
 
 export default function Locations({
+  buildingName,
   buildingID,
   floor,
   visible,
@@ -51,6 +56,7 @@ export default function Locations({
   selectedLocation,
   setSelectedLocation,
 }) {
+  const { building } = useBuilding(buildingName);
   const { locations } = useLocations(buildingID);
 
   // Only draw locations if floor is visible
@@ -76,6 +82,7 @@ export default function Locations({
                 key={index}
                 selectedLocation={selectedLocation}
                 setSelectedLocation={setSelectedLocation}
+                fontSize={building.locationFontSize}
               />
             );
           } else {

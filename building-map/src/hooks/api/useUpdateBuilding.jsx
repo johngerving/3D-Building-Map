@@ -6,7 +6,6 @@ export const useUpdateBuilding = (buildingName) => {
 
   // Take in ID of floor to update and a callback function
   const update = (newBuilding) => {
-    console.log(queryClient.getQueryData(["building", "library"]));
     // Set the cache to the updated value
     queryClient.setQueryData(["building", buildingName], (old) => {
       return newBuilding;

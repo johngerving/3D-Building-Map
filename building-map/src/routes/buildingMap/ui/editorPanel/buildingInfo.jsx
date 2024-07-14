@@ -113,6 +113,9 @@ export function BuildingInfo({ building }) {
     update(Object.assign({}, building, newParam));
   };
 
+  // Match only numbers and decimals
+  const numRegex = /^[0-9.]*$/;
+
   return (
     <div className="p-4 pr-3">
       <h2 className="text-4xl text-slate-600 p-3">Building</h2>
@@ -149,13 +152,15 @@ export function BuildingInfo({ building }) {
           name="cameraX"
           value={building.initialCameraPosition[0]}
           onChange={(e) => {
-            handleInputChange({
-              initialCameraPosition: [
-                e.target.value,
-                building.initialCameraPosition[1],
-                building.initialCameraPosition[2],
-              ],
-            });
+            if (numRegex.test(e.target.value)) {
+              handleInputChange({
+                initialCameraPosition: [
+                  e.target.value.length == 0 ? 0 : parseFloat(e.target.value),
+                  building.initialCameraPosition[1],
+                  building.initialCameraPosition[2],
+                ],
+              });
+            }
           }}
           className={inputClassName}
         />
@@ -169,13 +174,15 @@ export function BuildingInfo({ building }) {
           name="cameraY"
           value={building.initialCameraPosition[1]}
           onChange={(e) => {
-            handleInputChange({
-              initialCameraPosition: [
-                building.initialCameraPosition[0],
-                e.target.value,
-                building.initialCameraPosition[2],
-              ],
-            });
+            if (numRegex.test(e.target.value)) {
+              handleInputChange({
+                initialCameraPosition: [
+                  building.initialCameraPosition[0],
+                  e.target.value.length == 0 ? 0 : parseFloat(e.target.value),
+                  building.initialCameraPosition[2],
+                ],
+              });
+            }
           }}
           className={inputClassName}
         />
@@ -189,13 +196,15 @@ export function BuildingInfo({ building }) {
           name="cameraZ"
           value={building.initialCameraPosition[2]}
           onChange={(e) => {
-            handleInputChange({
-              initialCameraPosition: [
-                building.initialCameraPosition[0],
-                building.initialCameraPosition[1],
-                e.target.value,
-              ],
-            });
+            if (numRegex.test(e.target.value)) {
+              handleInputChange({
+                initialCameraPosition: [
+                  building.initialCameraPosition[0],
+                  building.initialCameraPosition[1],
+                  e.target.value.length == 0 ? 0 : parseFloat(e.target.value),
+                ],
+              });
+            }
           }}
           className={inputClassName}
         />
@@ -209,9 +218,12 @@ export function BuildingInfo({ building }) {
           name="fontSize"
           value={building.locationFontSize}
           onChange={(e) => {
-            handleInputChange({
-              locationFontSize: e.target.value,
-            });
+            if (numRegex.test(e.target.value)) {
+              handleInputChange({
+                locationFontSize:
+                  e.target.value.length == 0 ? 0 : parseFloat(e.target.value),
+              });
+            }
           }}
           className={inputClassName}
         />

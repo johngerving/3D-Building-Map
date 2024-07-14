@@ -213,5 +213,12 @@ export default function Controls({
     }
   }, [selectedFloor]);
 
+  // Update camera position when edited
+  useEffect(() => {
+    controlsRef.current.object.position.x = initialPosition[0];
+    controlsRef.current.object.position.y = initialPosition[1];
+    controlsRef.current.object.position.z = initialPosition[2];
+  }, [initialPosition]);
+
   return <OrbitControls ref={controlsRef} target={[0, 0, 0]} />;
 }
