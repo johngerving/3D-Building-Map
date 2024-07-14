@@ -44,14 +44,14 @@ function LocationText({
 }
 
 export default function Locations({
-  buildingName,
+  buildingID,
   floor,
   visible,
   selectedFloor,
   selectedLocation,
   setSelectedLocation,
 }) {
-  const { locations } = useLocations(buildingName);
+  const { locations } = useLocations(buildingID);
 
   // Only draw locations if floor is visible
   if (visible) {

@@ -1,7 +1,7 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { deleteFloor } from "../../api/delete";
 
-export const useDeleteFloor = (buildingName) => {
+export const useDeleteFloor = (buildingID) => {
   const queryClient = useQueryClient();
 
   const { isPending, variables, mutate, isError } = useMutation({
@@ -10,10 +10,10 @@ export const useDeleteFloor = (buildingName) => {
     onSettled: async () => {
       // Invalidate location queries
       await queryClient.invalidateQueries({
-        queryKey: ["floors", buildingName],
+        queryKey: ["floors", buildingID],
       });
       return await queryClient.invalidateQueries({
-        queryKey: ["locations", buildingName],
+        queryKey: ["locations", buildingID],
       });
     },
   });

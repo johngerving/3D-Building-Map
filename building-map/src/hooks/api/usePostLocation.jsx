@@ -1,7 +1,7 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { postLocation } from "../../api/post.js";
 
-export const usePostLocation = (buildingName) => {
+export const usePostLocation = (buildingID) => {
   const queryClient = useQueryClient();
 
   const { isPending, variables, mutate, isError } = useMutation({
@@ -10,7 +10,7 @@ export const usePostLocation = (buildingName) => {
     onSettled: async () => {
       // Invalidate location queries
       return await queryClient.invalidateQueries({
-        queryKey: ["locations", buildingName],
+        queryKey: ["locations", buildingID],
       });
     },
   });

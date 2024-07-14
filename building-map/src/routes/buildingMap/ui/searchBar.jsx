@@ -40,14 +40,14 @@ function getSearchResults(locations, term, n) {
 }
 
 function Results({
-  buildingName,
+  buildingID,
   results,
   setSelectedLocation,
   setFocused,
   setSelectedFloor,
   setText,
 }) {
-  const { floors } = useFloors(buildingName);
+  const { floors } = useFloors(buildingID);
 
   return (
     <div className="z-20 rounded-b-xl border shadow-md">
@@ -78,12 +78,12 @@ function Results({
 }
 
 export default function SearchBar({
-  buildingName,
+  buildingID,
   selectedLocation,
   setSelectedLocation,
   setSelectedFloor,
 }) {
-  const { locations } = useLocations(buildingName);
+  const { locations } = useLocations(buildingID);
 
   const [text, setText] = useState("");
   const [results, setResults] = useState([]);
@@ -155,7 +155,7 @@ export default function SearchBar({
       {/* Only show search results if input has value and the search elements are focused on */}
       {showResults ? (
         <Results
-          buildingName={buildingName}
+          buildingID={buildingID}
           results={results}
           setSelectedLocation={setSelectedLocation}
           setFocused={setFocused}

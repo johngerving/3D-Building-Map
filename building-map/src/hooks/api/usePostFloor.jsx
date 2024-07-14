@@ -1,7 +1,7 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { postFloor } from "../../api/post.js";
 
-export const usePostFloor = (buildingName) => {
+export const usePostFloor = (buildingID) => {
   const queryClient = useQueryClient();
 
   const { isPending, variables, mutate, isError } = useMutation({
@@ -10,10 +10,10 @@ export const usePostFloor = (buildingName) => {
     onSettled: async () => {
       // Invalidate floor and location queries
       queryClient.invalidateQueries({
-        queryKey: ["locations", buildingName],
+        queryKey: ["locations", buildingID],
       });
       return await queryClient.invalidateQueries({
-        queryKey: ["floors", buildingName],
+        queryKey: ["floors", buildingID],
       });
     },
   });

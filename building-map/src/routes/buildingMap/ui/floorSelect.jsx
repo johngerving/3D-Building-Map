@@ -47,11 +47,11 @@ function FloorButton({ text, onSelect, selected, isTop, isBottom }) {
 }
 
 export default function FloorSelect({
-  buildingName,
+  buildingID,
   selectedFloor,
   setSelectedFloor,
 }) {
-  const { floors } = useFloors(buildingName);
+  const { floors } = useFloors(buildingID);
   return (
     <div className="z-20 absolute bottom-4 right-4 flex flex-col-reverse shadow-md rounded-md">
       {/* Add button for each floor */}

@@ -27,7 +27,7 @@ export const putFloor = async (data) => {
     // Update db with new data
     floorData[floorIndex] = {
       floorID: oldData.floorID,
-      buildingName: oldData.buildingName,
+      buildingID: oldData.buildingID,
       index: data.index,
       name: data.name,
       svg: data.svg,
@@ -67,7 +67,7 @@ export const putLocation = async (data) => {
     locationData[locationIndex] = {
       locationID: oldData.locationID,
       floorID: oldData.floorID,
-      buildingName: oldData.buildingName,
+      buildingID: oldData.buildingID,
       name: data.name,
       description: data.description,
       position: data.position,

@@ -22,12 +22,12 @@ export const getBuilding = async (name) => {
   }
 };
 
-export const getFloorsByBuildingName = async (name) => {
+export const getFloorsByBuildingID = async (id) => {
   try {
     // Filter floors under same building name
     const res = {};
     res.data = floorData
-      .filter((floor) => floor.buildingName == name)
+      .filter((floor) => floor.buildingID == id)
       .sort((a, b) => {
         return a.index - b.index;
       });
@@ -38,10 +38,10 @@ export const getFloorsByBuildingName = async (name) => {
   }
 };
 
-export const getLocationsByBuildingName = async (name) => {
+export const getLocationsByBuildingID = async (id) => {
   try {
     // Get floors in building
-    const floorRes = await getFloorsByBuildingName(name);
+    const floorRes = await getFloorsByBuildingID(id);
 
     // Filter locations and group by floor
     const res = {};

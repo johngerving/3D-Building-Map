@@ -19,14 +19,14 @@ export const postFloor = async (data) => {
 
     // Get index of new floor by counting the number of floors already existing
     const index = floorData.reduce(
-      (acc, cur) => (cur.buildingName === data.buildingName ? ++acc : acc),
+      (acc, cur) => (cur.buildingID === data.buildingID ? ++acc : acc),
       0
     );
 
     // Create new floor object
     const newFloor = {
       floorID: floorID,
-      buildingName: data.buildingName,
+      buildingID: data.buildingID,
       index: index,
       name: "Untitled Floor",
       svg: "",
@@ -59,14 +59,17 @@ export const postLocation = async (data) => {
   try {
     const res = {};
 
-    // Get location ID by getting the number of locations already existing
-    const locationID = locationData.length;
+    // Get location ID by getting one more than the greatest location ID
+    const locationID =
+      locationData.reduce((prev, current) =>
+        prev && prev.locationID > current.locationID ? prev : current
+      ) + 1;
 
     // Create new location object
     const newLocation = {
       locationID: locationID,
       floorID: data.floorID,
-      buildingName: data.buildingName,
+      buildingID: data.buildingID,
       name: data.name || "Untitled",
       description: data.description || "",
       position: data.position || [0, 0],
@@ -102,7 +105,7 @@ export const postLocations = async (data) => {
       const newLocation = {
         locationID: locationID,
         floorID: locations[i].floorID,
-        buildingName: locations[i].buildingName,
+        buildingID: locations[i].buildingID,
         name: locations[i].name || "Untitled",
         description: locations[i].description || "",
         position: locations[i].position || [0, 0],

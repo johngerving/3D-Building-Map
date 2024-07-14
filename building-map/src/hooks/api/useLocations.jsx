@@ -1,14 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import { getLocationsByBuildingName } from "../../api/get";
+import { getLocationsByBuildingID } from "../../api/get";
 
-export const useLocations = (buildingName) => {
+export const useLocations = (buildingID, enabled = true) => {
   const { isPending, isError, data, error } = useQuery({
-    queryKey: ["locations", buildingName],
+    queryKey: ["locations", buildingID],
     queryFn: () =>
-      getLocationsByBuildingName(buildingName).then((res) => {
+      getLocationsByBuildingID(buildingID).then((res) => {
         return res.data;
       }),
     staleTime: Infinity,
+    enabled: enabled,
   });
 
   return {

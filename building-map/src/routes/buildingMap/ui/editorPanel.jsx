@@ -28,9 +28,8 @@ import { createPortal } from "react-dom";
 import { floor } from "three/examples/jsm/nodes/Nodes.js";
 import { usePostLocations } from "../../../hooks/api/usePostLocations.jsx";
 
-function AddNewLocation({ buildingName, floorID }) {
-  const { isPending, variables, mutate, isError } =
-    usePostLocation(buildingName);
+function AddNewLocation({ buildingID, floorID }) {
+  const { isPending, variables, mutate, isError } = usePostLocation(buildingID);
 
   if (isError)
     return (
@@ -55,7 +54,7 @@ function AddNewLocation({ buildingName, floorID }) {
     <button
       className="w-full p-3 mr-[5px] mb-[5px] rounded-lg bg-gray-100 hover:bg-gray-200 transition"
       onClick={() => {
-        mutate({ buildingName: buildingName, floorID: floorID });
+        mutate({ buildingID: buildingID, floorID: floorID });
       }}
     >
       Add Location +
@@ -63,7 +62,7 @@ function AddNewLocation({ buildingName, floorID }) {
   );
 }
 
-function SingleLocation({ buildingName, location }) {
+function SingleLocation({ buildingID, location }) {
   const nameInputId = useId();
   const descriptionInputId = useId();
   const defaultEnabledId = useId();
@@ -80,8 +79,8 @@ function SingleLocation({ buildingName, location }) {
   const { isDebouncing, debouncedValue } = useDebounce(location, 2000);
 
   // Get update and mutate functions
-  const { update } = useUpdateLocation(buildingName, location.floorID);
-  const { mutate } = usePutLocation(buildingName, isDebouncing);
+  const { update } = useUpdateLocation(buildingID, location.floorID);
+  const { mutate } = usePutLocation(buildingID, isDebouncing);
 
   // When the debounced value changes, mutate the data if input has been changed
   useEffect(() => {
@@ -96,7 +95,7 @@ function SingleLocation({ buildingName, location }) {
     setInputChanged(true);
     // Cancel any current queries to prevent overwriting new input with fetched data
     queryClient.cancelQueries({
-      queryKey: ["locations", location.buildingName],
+      queryKey: ["locations", location.buildingID],
     });
 
     // Update the location with the new parameter
@@ -218,7 +217,7 @@ function SingleLocation({ buildingName, location }) {
   );
 }
 
-function ScanLocationsModal({ buildingName, floor, setShowModal }) {
+function ScanLocationsModal({ buildingID, floor, setShowModal }) {
   const [floorLayer, setFloorLayer] = useState("");
   const [error, setError] = useState(null);
   const inputClassName = "border-2 border-gray-300 w-full mb-1 mr-1 h-8 p-1";
@@ -227,7 +226,7 @@ function ScanLocationsModal({ buildingName, floor, setShowModal }) {
   const [locations, setLocations] = useState(null);
 
   const { isPending, variables, mutate, isError } =
-    usePostLocations(buildingName);
+    usePostLocations(buildingID);
 
   const getLayerChildrenFromSVG = async (url, layerName) => {
     // Fetch the SVG and parse into an XML object
@@ -264,7 +263,7 @@ function ScanLocationsModal({ buildingName, floor, setShowModal }) {
             name: name,
             position: position,
             floorID: floor.floorID,
-            buildingName: buildingName,
+            buildingID: buildingID,
           });
         }
 
@@ -374,7 +373,7 @@ function ScanLocationsModal({ buildingName, floor, setShowModal }) {
   );
 }
 
-function ScanLocationsButton({ buildingName, floor }) {
+function ScanLocationsButton({ buildingID, floor }) {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -388,7 +387,7 @@ function ScanLocationsButton({ buildingName, floor }) {
       {showModal &&
         createPortal(
           <ScanLocationsModal
-            buildingName={buildingName}
+            buildingID={buildingID}
             floor={floor}
             setShowModal={setShowModal}
           />,
@@ -399,18 +398,18 @@ function ScanLocationsButton({ buildingName, floor }) {
 }
 
 function Locations({
-  buildingName,
+  buildingID,
   floorID,
   selectedLocation,
   setSelectedLocation,
 }) {
-  const { floors } = useFloors(buildingName);
-  const { locations } = useLocations(buildingName);
+  const { floors } = useFloors(buildingID);
+  const { locations } = useLocations(buildingID);
 
   const floor = floors.find((floor) => floor.floorID == floorID);
 
   const { isPending, variables, mutate, isError } =
-    useDeleteLocation(buildingName);
+    useDeleteLocation(buildingID);
 
   return (
     locations[floorID] && (
@@ -422,7 +421,7 @@ function Locations({
       >
         <div className="p-1">
           {locations[floorID].length == 0 ? (
-            <ScanLocationsButton buildingName={buildingName} floor={floor} />
+            <ScanLocationsButton buildingID={buildingID} floor={floor} />
           ) : null}
           {locations[floorID].map((location, index) => (
             <div
@@ -450,10 +449,7 @@ function Locations({
                   variables && variables.locationID == location.locationID
                 }
               >
-                <SingleLocation
-                  buildingName={buildingName}
-                  location={location}
-                />
+                <SingleLocation buildingID={buildingID} location={location} />
               </Tree>
               <button
                 className={`absolute top-1 right-1 rounded-[3px] bg-red-300 h-8 ${
@@ -472,7 +468,7 @@ function Locations({
               </button>
             </div>
           ))}
-          <AddNewLocation buildingName={buildingName} floorID={floorID} />
+          <AddNewLocation buildingID={buildingID} floorID={floorID} />
         </div>
       </Tree>
     )
@@ -480,7 +476,7 @@ function Locations({
 }
 
 function SingleFloorInfo({
-  buildingName,
+  buildingID,
   floor,
   floorsChanged,
   setFloorsChanged,
@@ -503,8 +499,8 @@ function SingleFloorInfo({
   const { isDebouncing, debouncedValue } = useDebounce(floor, 2000);
 
   // Get update and mutate functions
-  const { update } = useUpdateFloor(buildingName);
-  const { mutate } = usePutFloor(buildingName, debouncingStates);
+  const { update } = useUpdateFloor(buildingID);
+  const { mutate } = usePutFloor(buildingID, debouncingStates);
 
   // When the debounced value changes, mutate the data if input has been changed
   useEffect(() => {
@@ -530,7 +526,7 @@ function SingleFloorInfo({
 
     // Cancel any current queries to prevent overwriting new input with fetched data
     queryClient.cancelQueries({
-      queryKey: ["floors", floor.buildingName],
+      queryKey: ["floors", floor.buildingID],
     });
 
     // Update the floor with the new parameter
@@ -731,8 +727,8 @@ function SingleFloorInfo({
   );
 }
 
-function AddNewFloor({ buildingName }) {
-  const { isPending, variables, mutate, isError } = usePostFloor(buildingName);
+function AddNewFloor({ buildingID }) {
+  const { isPending, variables, mutate, isError } = usePostFloor(buildingID);
 
   if (isError)
     return (
@@ -745,7 +741,7 @@ function AddNewFloor({ buildingName }) {
   if (isPending) {
     const tempFloorInfo = {
       floorID: 0,
-      buildingName: buildingName,
+      buildingID: buildingID,
       index: 0,
       name: "Untitled Floor",
       svg: "",
@@ -771,7 +767,7 @@ function AddNewFloor({ buildingName }) {
     <button
       className="w-full p-3 rounded-lg bg-gray-100 hover:bg-gray-200"
       onClick={() => {
-        mutate({ buildingName: buildingName });
+        mutate({ buildingID: buildingID });
       }}
     >
       Add Floor +
@@ -814,14 +810,14 @@ function DeleteFloorModal({ floorToDelete, setFloorToDelete, mutate }) {
 }
 
 function FloorInfo({
-  buildingName,
+  buildingID,
   selectedFloor,
   selectedLocation,
   setSelectedFloor,
   setSelectedLocation,
 }) {
   const queryClient = useQueryClient();
-  const { floors } = useFloors(buildingName);
+  const { floors } = useFloors(buildingID);
 
   const [floorsChanged, setFloorsChanged] = useState([]);
 
@@ -844,11 +840,11 @@ function FloorInfo({
 
       // Cancel any current queries to prevent overwriting new input with fetched data
       queryClient.cancelQueries({
-        queryKey: ["floors", buildingName],
+        queryKey: ["floors", buildingID],
       });
 
       // Update the query data to swap the floors
-      queryClient.setQueryData(["floors", buildingName], (oldFloors) => {
+      queryClient.setQueryData(["floors", buildingID], (oldFloors) => {
         return oldFloors.map((oldFloor, i) => {
           if (i == index) {
             const nextOldFloor = oldFloors[index + 1];
@@ -887,11 +883,11 @@ function FloorInfo({
 
       // Cancel any current queries to prevent overwriting new input with fetched data
       queryClient.cancelQueries({
-        queryKey: ["floors", buildingName],
+        queryKey: ["floors", buildingID],
       });
 
       // Update the query data to swap the floors
-      queryClient.setQueryData(["floors", buildingName], (oldFloors) => {
+      queryClient.setQueryData(["floors", buildingID], (oldFloors) => {
         const newFloors = oldFloors.map((oldFloor, i) => {
           if (i == index) {
             const prevOldFloor = oldFloors[index - 1];
@@ -919,7 +915,7 @@ function FloorInfo({
     isPending: isDeletePending,
     variables: deleteVariables,
     mutate: mutateDelete,
-  } = useDeleteFloor(buildingName);
+  } = useDeleteFloor(buildingID);
 
   // Hold state of floor selected to delete
   const [floorToDelete, setFloorToDelete] = useState(null);
@@ -1000,7 +996,7 @@ function FloorInfo({
                 }
               >
                 <SingleFloorInfo
-                  buildingName={buildingName}
+                  buildingID={buildingID}
                   floor={floor}
                   floorsChanged={floorsChanged}
                   setFloorsChanged={setFloorsChanged}
@@ -1008,7 +1004,7 @@ function FloorInfo({
                   setDebouncingStates={setDebouncingStates}
                 />
                 <Locations
-                  buildingName={buildingName}
+                  buildingID={buildingID}
                   floorID={floor.floorID}
                   selectedLocation={selectedLocation}
                   setSelectedLocation={setSelectedLocation}
@@ -1017,7 +1013,7 @@ function FloorInfo({
             </div>
           );
         })}
-        <AddNewFloor buildingName={buildingName} />
+        <AddNewFloor buildingID={buildingID} />
       </div>
     </>
   );
@@ -1025,15 +1021,15 @@ function FloorInfo({
 
 export function EditorPanel() {
   const [
-    buildingName,
+    buildingID,
     selectedFloor,
     selectedLocation,
     setSelectedLocation,
     setSelectedFloor,
   ] = useOutletContext();
 
-  const { isFloorPending } = useFloors(buildingName);
-  const { isLocationPending } = useLocations(buildingName);
+  const { isFloorPending } = useFloors(buildingID);
+  const { isLocationPending } = useLocations(buildingID);
 
   // Set min and max width of editor panel
   const maxWidth = 800;
@@ -1095,7 +1091,7 @@ export function EditorPanel() {
         }`}
       >
         <FloorInfo
-          buildingName={buildingName}
+          buildingID={buildingID}
           selectedFloor={selectedFloor}
           selectedLocation={selectedLocation}
           setSelectedFloor={setSelectedFloor}

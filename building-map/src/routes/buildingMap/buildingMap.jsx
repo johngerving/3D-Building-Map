@@ -10,6 +10,7 @@ import { useIsFetching, useQueryClient } from "@tanstack/react-query";
 
 import { useFloors } from "../../hooks/api/useFloors.jsx";
 import { useLocations } from "../../hooks/api/useLocations.jsx";
+import { useBuilding } from "../../hooks/api/useBuilding.jsx";
 
 export const loader = async ({ params }) => {
   return await params.buildingName;
@@ -61,19 +62,26 @@ export default function BuildingMap() {
 
   const buildingName = useLoaderData();
 
-  const { isFloorPending, isFloorError, floors, floorError } =
-    useFloors(buildingName);
+  const { isBuildingPending, isBuildingError, building, buildingError } =
+    useBuilding(buildingName);
+
+  const { isFloorPending, isFloorError, floors, floorError } = useFloors(
+    !!building ? building.buildingID : null,
+    !!building
+  );
   const { isLocationPending, isLocationError, locations, locationError } =
-    useLocations(buildingName);
+    useLocations(!!building ? building.buildingID : null, !!building);
 
   const [selectedFloor, setSelectedFloor] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState(null);
 
-  if (isFloorPending || isLocationPending) return <LoadingScreen />;
+  if (isBuildingPending || isFloorPending || isLocationPending)
+    return <LoadingScreen />;
 
-  if (isFloorError || isLocationError)
+  if (isBuildingError || isFloorError || isLocationError)
     return (
       <>
+        {isBuildingError ? <p>Error: {buildingError}</p> : null}
         {isFloorError ? <p>Error: {floorError}</p> : null}
         {isLocationError ? <p>Error: {locationError}</p> : null}
       </>
@@ -86,7 +94,7 @@ export default function BuildingMap() {
         <>
           <Outlet
             context={[
-              buildingName,
+              building.buildingID,
               selectedFloor,
               selectedLocation,
               setSelectedLocation,
@@ -94,13 +102,13 @@ export default function BuildingMap() {
             ]}
           />
           <FloorSelect
-            buildingName={buildingName}
+            buildingID={building.buildingID}
             selectedFloor={selectedFloor}
             setSelectedFloor={setSelectedFloor}
           ></FloorSelect>
           <ErrorBoundary FallbackComponent={SceneFallback}>
             <Scene
-              buildingName={buildingName}
+              buildingID={building.buildingID}
               selectedFloor={selectedFloor}
               selectedLocation={selectedLocation}
               setSelectedLocation={setSelectedLocation}

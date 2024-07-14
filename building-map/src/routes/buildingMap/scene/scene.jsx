@@ -25,7 +25,7 @@ function groupPaths(paths) {
 }
 
 function Floor({
-  buildingName,
+  buildingID,
   yPos,
   floor,
   selected,
@@ -93,7 +93,7 @@ function Floor({
         />
       ) : null}
       <Locations
-        buildingName={buildingName}
+        buildingID={buildingID}
         floor={floor}
         selectedFloor={selectedFloor}
         visible={
@@ -108,12 +108,12 @@ function Floor({
 }
 
 function Building({
-  buildingName,
+  buildingID,
   selectedFloor,
   selectedLocation,
   setSelectedLocation,
 }) {
-  const { floors } = useFloors(buildingName);
+  const { floors } = useFloors(buildingID);
 
   // Map floors to Floor components
   return (
@@ -124,7 +124,7 @@ function Building({
         return displayFloor ? (
           <Floor
             key={floor.name}
-            buildingName={buildingName}
+            buildingID={buildingID}
             yPos={getFloorYPosFromIndex(floors, index)}
             floor={floor}
             selectedFloor={selectedFloor}
@@ -144,13 +144,13 @@ function Building({
 }
 
 export default function Scene({
-  buildingName,
+  buildingID,
   selectedFloor,
   selectedLocation,
   setSelectedLocation,
 }) {
-  const { floors } = useFloors(buildingName);
-  const { locations } = useLocations(buildingName);
+  const { floors } = useFloors(buildingID);
+  const { locations } = useLocations(buildingID);
 
   return (
     <div
@@ -172,7 +172,7 @@ export default function Scene({
         <directionalLight args={[0xffffff, 2.5]} position={[-1, 2, 4]} />
         <ambientLight args={[0xcfe2e3]} />
         <Building
-          buildingName={buildingName}
+          buildingID={buildingID}
           selectedFloor={selectedFloor}
           selectedLocation={selectedLocation}
           setSelectedLocation={setSelectedLocation}
