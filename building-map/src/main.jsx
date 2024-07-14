@@ -7,7 +7,7 @@ import "./index.css";
 import BuildingMap from "./routes/buildingMap/buildingMap.jsx";
 import ErrorPage from "./error-page.jsx";
 import { ViewPanel } from "./routes/buildingMap/ui/viewPanel.jsx";
-import { EditorPanel } from "./routes/buildingMap/ui/editorPanel.jsx";
+import { EditorPanel } from "./routes/buildingMap/ui/editorPanel/editorPanel.jsx";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 

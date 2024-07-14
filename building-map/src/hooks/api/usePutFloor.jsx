@@ -1,14 +1,14 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { putFloor } from "../../api/put.js";
 
-export const usePutFloor = (buildingName, debouncingStates) => {
+export const usePutFloor = (buildingID, debouncingStates) => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: putFloor,
     onMutate: async (floor) => {
       await queryClient.cancelQueries({
-        queryKey: ["floors", buildingName],
+        queryKey: ["floors", buildingID],
       });
     },
     // If the mutation fails, roll back the change
@@ -20,7 +20,7 @@ export const usePutFloor = (buildingName, debouncingStates) => {
       // Do not invalidate queries if any floor states are debouncing
       if (Object.values(debouncingStates).every((item) => item === false)) {
         queryClient.invalidateQueries({
-          queryKey: ["floors", floor.data.buildingName],
+          queryKey: ["floors", floor.data.buildingID],
         });
       }
     },
