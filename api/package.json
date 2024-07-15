@@ -1,0 +1,27 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "An API for a 3D building map",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johngerving/3D-Building-Map.git"
+  },
+  "keywords": [
+    "API",
+    "Node.js",
+    "Express"
+  ],
+  "author": "John Gerving",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/johngerving/3D-Building-Map/issues"
+  },
+  "homepage": "https://github.com/johngerving/3D-Building-Map#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
