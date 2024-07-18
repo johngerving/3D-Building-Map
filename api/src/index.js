@@ -4,6 +4,7 @@ const cors = require("cors");
 const passport = require("passport");
 require("dotenv").config();
 require("./auth.js");
+const pool = require("./db/db.js");
 
 PORT = process.env.PORT || 8080;
 
@@ -20,8 +21,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 
+// Use express session, store sessions in database
 app.use(
   session({
+    store: new (require("connect-pg-simple")(session))({
+      pool: pool,
+    }),
     secret: [process.env.COOKIE_SECRET],
     cookie: {
       secure: process.env.NODE_ENV === "production" ? "true" : "auto",
