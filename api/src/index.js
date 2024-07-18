@@ -1,10 +1,42 @@
 const express = require("express");
+const session = require("express-session");
+const cors = require("cors");
+const passport = require("passport");
+require("dotenv").config();
+require("./auth.js");
 
 PORT = process.env.PORT || 8080;
 
 const app = express();
 
+app.use(
+  cors({
+    credentials: true,
+    origin: process.env.CLIENT_URL,
+  })
+);
+
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static("public"));
+
+app.use(
+  session({
+    secret: [process.env.COOKIE_SECRET],
+    cookie: {
+      secure: process.env.NODE_ENV === "production" ? "true" : "auto",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      maxAge: 1000 * 60 * 2,
+    },
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+app.use(passport.session());
+app.use(passport.authenticate("session"));
+const authRouter = require("./routes/authRouter.js");
+app.use("/auth", authRouter);
 
 app.get("/helloworld", function (req, res) {
   res.status(200).json({ message: "Hello World!" });

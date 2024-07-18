@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { loader as buildingLoader } from "./routes/buildingMap/buildingMap.jsx";
 import "./index.css";
 
+import { Root } from "./routes/root/root.jsx";
 import BuildingMap from "./routes/buildingMap/buildingMap.jsx";
 import ErrorPage from "./error-page.jsx";
 import { ViewPanel } from "./routes/buildingMap/ui/viewPanel.jsx";
@@ -11,9 +12,16 @@ import { EditorPanel } from "./routes/buildingMap/ui/editorPanel/editorPanel.jsx
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+export const baseApiURL = "http://localhost:8080";
+
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Root />,
+    errorElement: <ErrorPage />,
+  },
   {
     path: "/:buildingName",
     element: <BuildingMap />,
