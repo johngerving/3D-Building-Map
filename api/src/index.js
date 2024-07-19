@@ -43,17 +43,27 @@ app.use(passport.authenticate("session"));
 const authRouter = require("./routes/authRouter.js");
 app.use("/auth", authRouter);
 
-app.get("/helloworld", function (req, res) {
-  res.status(200).json({ message: "Hello World!" });
-});
+/** GET REQUESTS **/
 
 // Get building information by building name
-app.get("/buildings/:buildingName", function (req, res) {
+app.get("/buildings/:buildingName", async function (req, res) {
   const { buildingName } = req.params;
 
   try {
     // Look for buildings matching the building name
-    const building = {};
+    const query = await pool.query(
+      "SELECT * FROM buildings WHERE building_name=$1",
+      [buildingName]
+    );
+
+    // Send error response if building does not exist
+    if (query.rows.length == 0)
+      return res
+        .status(404)
+        .json({ error: `Building with name ${buildingName} not found` });
+
+    // Create object to store building data
+    const building = query.rows[0];
 
     res.status(200).json(building);
   } catch (error) {
@@ -65,36 +75,55 @@ app.get("/buildings/:buildingName", function (req, res) {
 });
 
 // Get floors by building ID
-app.get("/floors/:buildingID", function (req, res) {
+app.get("/floors/:buildingID", async function (req, res) {
   const { buildingID } = req.params;
 
   try {
     // Get all floors with building ID
-    const floors = [];
+    const query = await pool.query(
+      "SELECT * FROM floors WHERE building_id = $1 ORDER BY index",
+      [buildingID]
+    );
+
+    // Get array of floors from rows returned
+    const floors = query.rows;
 
     res.status(200).json(floors);
   } catch (error) {
     // Respond with an error message
-    res
-      .status(404)
-      .json({ error: `No floors under building ID ${buildingID} found` });
+    res.status(404).json({ error: `Error retrieving floors` });
   }
 });
 
 // Get locations by building ID
-app.get("/locations/:buildingID", function (req, res) {
+app.get("/locations/:buildingID", async function (req, res) {
   const { buildingID } = req.params;
 
   try {
-    // Get all locations with building ID
-    const locations = [];
+    // Get all locations with building ID by performing a join
+    const query = await pool.query(
+      "SELECT location_id, floor_id, description, locations.position, default_enabled, type FROM buildings RIGHT JOIN floors USING(building_id) RIGHT JOIN locations USING(floor_id) WHERE building_id = $1",
+      [buildingID]
+    );
+
+    const locations = {};
+
+    // Loop through locations returned
+    query.rows.forEach((location) => {
+      // Group locations by floor id
+      if (!Object.hasOwn(locations, location.floor_id)) {
+        // Add empty array for the floor if it doesn't already exist
+        locations[location.floor_id] = [];
+      }
+      // Add location to the array for the floor
+      locations[location.floor_id].push(location);
+    });
 
     res.status(200).json(locations);
   } catch (error) {
+    console.log(error);
     // Respond with an error message
-    res
-      .status(404)
-      .json({ error: `No locations under building ID ${buildingID} found` });
+    res.status(404).json({ error: `Error retrieving locations` });
   }
 });
 
