@@ -19,7 +19,7 @@ function ChangeNameModal({ building, setShowModal }) {
 
   const isNameValid = nameRegex.test(name);
 
-  const { isPending, variables, mutate, isError } = usePutBuildingName();
+  const { isPending, variables, mutate, error, isError } = usePutBuildingName();
 
   const inputClassName = `border w-full mb-4 mr-1 h-8 p-1 ${
     !isNameValid && name.length > 0 ? "border-red-500 outline-red-500" : ""
@@ -37,9 +37,13 @@ function ChangeNameModal({ building, setShowModal }) {
             <Close className="fill-gray-400 hover:fill-gray-500 transition w-9 h-9" />
           </button>
           <h1 className="text-4xl mb-4">Change Building Name</h1>
-          <p className="text-lg mb-4">
-            Building name must be lowercase a-z or 0-9 separated by dashes.
-          </p>
+          {isError ? (
+            <p className="text-lg text-red-400 mb-4">{error.message}</p>
+          ) : (
+            <p className="text-lg mb-4">
+              Building name must be lowercase a-z or 0-9 separated by dashes.
+            </p>
+          )}
           <form>
             <input
               type="text"

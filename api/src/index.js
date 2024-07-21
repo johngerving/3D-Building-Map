@@ -333,7 +333,6 @@ app.put("/buildings/:buildingID", async function (req, res) {
     }
 
     // Construct new building object - fill in with request body if provided, otherwise use existing data
-
     const newBuilding = {
       buildingName: req.body.hasOwnProperty("buildingName")
         ? req.body.buildingName
@@ -345,6 +344,22 @@ app.put("/buildings/:buildingID", async function (req, res) {
         ? req.body.initialCameraPosition
         : existingBuilding.rows[0].initial_camera_pos,
     };
+
+    // Check if building with same already exists
+    const buildingWithName = await pool.query(
+      "SELECT building_id FROM buildings WHERE building_name = $1",
+      [newBuilding.buildingName]
+    );
+
+    // If building name already exists, return an error response
+    if (
+      buildingWithName.rows.length > 0 &&
+      buildingWithName.rows[0].building_id != buildingID
+    ) {
+      return res.status(400).json({
+        error: `Building with name '${newBuilding.buildingName}' already exists`,
+      });
+    }
 
     // Update table with new data
     const query = await pool.query(

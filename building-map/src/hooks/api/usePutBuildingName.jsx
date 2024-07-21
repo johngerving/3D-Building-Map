@@ -8,7 +8,7 @@ export const usePutBuildingName = () => {
 
   const navigate = useNavigate();
 
-  const { isPending, variables, mutate, isError } = useMutation({
+  const { isPending, variables, mutate, error, isError } = useMutation({
     mutationFn: async (data) => {
       // Create new building object
       const newBuilding = data;
@@ -34,5 +34,5 @@ export const usePutBuildingName = () => {
     },
   });
 
-  return { isPending, variables, mutate, isError };
+  return { isPending, variables, mutate, error, isError };
 };
