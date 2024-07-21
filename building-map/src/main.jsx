@@ -13,8 +13,6 @@ import { EditorPanel } from "./routes/buildingMap/ui/editorPanel/editorPanel.jsx
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-export const baseApiURL = "http://localhost:8080";
-
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([

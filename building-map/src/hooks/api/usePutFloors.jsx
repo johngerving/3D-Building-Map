@@ -9,14 +9,30 @@ export const usePutFloors = (buildingName, isDebouncing) => {
       // Make a request for each floor
       let newFloors = [];
       for (let i = 0; i < floors.length; i++) {
-        const floor = await putFloor(floors[i]);
-        newFloors.push(floor.data);
+        // Modify the floor in question
+        const res = await fetch(
+          `${baseURL}/buildings/${buildingID}/floors/${floors[i].floorID}`,
+          {
+            method: "PUT",
+            body: JSON.stringify(newFloor),
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+        const json = await res.json();
+        // Throw error if response had error
+        if (!res.ok) {
+          console.log(json.error);
+          throw new Error(json.error);
+        }
+        // Add new floor to the
+        newFloors.push(json);
       }
+
+      console.log("usePutFloors");
 
       return newFloors;
     },
     onMutate: async (floors) => {
-      console.log("usePutFloors", floors);
       await queryClient.cancelQueries({
         queryKey: ["floors", buildingName],
       });

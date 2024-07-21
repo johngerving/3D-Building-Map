@@ -1,11 +1,30 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { putFloor } from "../../api/put.js";
+import { baseURL } from "../../http-common.js";
 
 export const usePutFloor = (buildingID, debouncingStates) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: putFloor,
+    mutationFn: async (data) => {
+      // Create new floor object
+      const newFloor = data;
+
+      const res = await fetch(
+        `${baseURL}/buildings/${buildingID}/floors/${data.floorID}`,
+        {
+          method: "PUT",
+          body: JSON.stringify(newFloor),
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      const json = await res.json();
+      if (!res.ok) {
+        console.log(json.error);
+        throw new Error(json.error);
+      }
+      return json;
+    },
     onMutate: async (floor) => {
       await queryClient.cancelQueries({
         queryKey: ["floors", buildingID],
@@ -20,7 +39,7 @@ export const usePutFloor = (buildingID, debouncingStates) => {
       // Do not invalidate queries if any floor states are debouncing
       if (Object.values(debouncingStates).every((item) => item === false)) {
         queryClient.invalidateQueries({
-          queryKey: ["floors", floor.data.buildingID],
+          queryKey: ["floors", floor.buildingID],
         });
       }
     },

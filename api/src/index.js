@@ -12,7 +12,7 @@ const app = express();
 
 app.use(
   cors({
-    credentials: true,
+    credentials: false,
     origin: process.env.CLIENT_URL,
   })
 );
@@ -67,7 +67,7 @@ app.get("/buildings/:buildingName", async function (req, res) {
       buildingID: query.rows[0].building_id,
       buildingName: query.rows[0].building_name,
       locationFontSize: query.rows[0].location_font_size,
-      initialCameraPosition: query.rows[0].inital_camera_pos,
+      initialCameraPosition: query.rows[0].initial_camera_pos,
     };
 
     res.status(200).json(building);
@@ -117,24 +117,29 @@ app.get("/buildings/:buildingID/locations", async function (req, res) {
   const { buildingID } = req.params;
 
   try {
+    const locations = {};
+
+    // Get floors in building
+    const floors = await pool.query(
+      "SELECT floor_id FROM floors WHERE building_id = $1",
+      [buildingID]
+    );
+    // Make an empty array for each floor
+    floors.rows.forEach((floor) => {
+      locations[floor.floor_id] = [];
+    });
+
     // Get all locations with building ID by performing a join
     const query = await pool.query(
-      "SELECT location_id, floor_id, description, locations.position, default_enabled, type FROM buildings RIGHT JOIN floors USING(building_id) RIGHT JOIN locations USING(floor_id) WHERE building_id = $1",
+      "SELECT location_id, floor_id, description, locations.position, default_enabled, type, location_name FROM buildings RIGHT JOIN floors USING(building_id) RIGHT JOIN locations USING(floor_id) WHERE building_id = $1",
       [buildingID]
     );
 
-    const locations = {};
-
     // Loop through locations returned
     query.rows.forEach((location) => {
-      // Group locations by floor id
-      if (!Object.hasOwn(locations, location.floor_id)) {
-        // Add empty array for the floor if it doesn't already exist
-        locations[location.floor_id] = [];
-      }
       // Add location to the array for the floor - rename keys
       locations[location.floor_id].push({
-        name: location.name,
+        name: location.location_name,
         description: location.description,
         position: location.position,
         type: location.type,
@@ -207,23 +212,28 @@ app.post("/buildings", async function (req, res) {
 app.post("/buildings/:buildingID/floors", async function (req, res) {
   const { buildingID } = req.params;
 
-  const floor = req.body;
-
-  // Check if request body has necessary properties
-  const isBodyValid =
-    "index" in floor &&
-    "name" in floor &&
-    "svg" in floor &&
-    "scale" in floor &&
-    "verticalGap" in floor &&
-    "position" in floor &&
-    "extrudedSections" in floor &&
-    "floorLayer" in floor &&
-    "extrudeDepth" in floor;
-
-  if (!isBodyValid) {
-    return res.status(400).json({ error: "Missing request body parameters" });
+  // Query the database to get the max index of a floor
+  const getFloorIndices = await pool.query(
+    "SELECT index FROM floors WHERE building_id = $1 ORDER BY index DESC",
+    [buildingID]
+  );
+  let maxIndex = -1;
+  if (getFloorIndices.rows.length > 0) {
+    maxIndex = getFloorIndices.rows[0].index;
   }
+
+  // Make a new floor
+  const floor = {
+    index: maxIndex + 1,
+    name: "Untitled Floor",
+    svg: "",
+    scale: 1,
+    verticalGap: 0,
+    position: [0, 0],
+    extrudedSections: [],
+    floorLayer: "",
+    extrudeDepth: 0,
+  };
 
   try {
     // Insert a row into the floors table with the request body data - return the new floor ID
@@ -264,7 +274,6 @@ app.post("/buildings/:buildingID/locations", async function (req, res) {
     const locationIDs = [];
 
     for (const location of locations) {
-      console.log(location);
       // Check if request body has necessary properties
       const isBodyValid =
         "name" in location &&
@@ -324,6 +333,7 @@ app.put("/buildings/:buildingID", async function (req, res) {
     }
 
     // Construct new building object - fill in with request body if provided, otherwise use existing data
+
     const newBuilding = {
       buildingName: req.body.hasOwnProperty("buildingName")
         ? req.body.buildingName
@@ -348,7 +358,12 @@ app.put("/buildings/:buildingID", async function (req, res) {
     );
 
     // Send response with updated building data
-    res.status(201).json(query.rows[0]);
+    res.status(201).json({
+      buildingID: query.rows[0].building_id,
+      buildingName: query.rows[0].building_name,
+      initialCameraPosition: query.rows[0].initial_camera_pos,
+      locationFontSize: query.rows[0].location_font_size,
+    });
   } catch (error) {
     console.log(error);
 
@@ -377,8 +392,8 @@ app.put("/buildings/:buildingID/floors/:floorID", async function (req, res) {
       index: req.body.hasOwnProperty("index")
         ? req.body.index
         : existingFloor.rows[0].index,
-      floorName: req.body.hasOwnProperty("floorName")
-        ? req.body.floorName
+      floorName: req.body.hasOwnProperty("name")
+        ? req.body.name
         : existingFloor.rows[0].floor_name,
       svg: req.body.hasOwnProperty("svg")
         ? req.body.svg
@@ -421,7 +436,18 @@ app.put("/buildings/:buildingID/floors/:floorID", async function (req, res) {
     );
 
     // Send response with updated building data
-    res.status(201).json(query.rows[0]);
+    res.status(201).json({
+      buildingID: query.rows[0].building_id,
+      index: query.rows[0].index,
+      name: query.rows[0].floor_name,
+      svg: query.rows[0].svg,
+      scale: query.rows[0].scale,
+      verticalGap: query.rows[0].vertical_gap,
+      position: query.rows[0].position,
+      extrudedSections: query.rows[0].extruded_sections,
+      floorLayer: query.rows[0].floor_layer,
+      extrudeDepth: query.rows[0].extrude_depth,
+    });
   } catch (error) {
     console.log(error);
 
@@ -480,7 +506,15 @@ app.put(
       );
 
       // Send response with updated building data
-      res.status(201).json(query.rows[0]);
+      res.status(201).json({
+        locationID: query.rows[0].location_id,
+        floorID: query.rows[0].floor_id,
+        description: query.rows[0].description,
+        position: query.rows[0].position,
+        defaultEnabled: query.rows[0].default_enabled,
+        type: query.rows[0].type,
+        name: query.rows[0].location_name,
+      });
     } catch (error) {
       console.log(error);
 
@@ -521,13 +555,13 @@ app.delete("/buildings/:buildingName", async function (req, res) {
 });
 
 app.delete("/buildings/:buildingID/floors/:floorID", async function (req, res) {
-  const { buildingName, floorID } = req.params;
+  const { buildingID, floorID } = req.params;
 
   try {
     // Check if floor exists and that it is in the building
     const floorSearch = await pool.query(
       "SELECT * FROM floors WHERE building_id = $1 AND floor_id = $2",
-      [buildingName, floorID]
+      [buildingID, floorID]
     );
 
     // Respond with error if it doesn't exist

@@ -30,7 +30,7 @@ function LoadingScreen() {
   );
 }
 
-function SceneFallback({ error, resetErrorBoundary }) {
+function SceneFallback({ error, resetErrorBoundary = null }) {
   return (
     <div
       className="flex justify-center w-screen h-screen"
@@ -40,18 +40,20 @@ function SceneFallback({ error, resetErrorBoundary }) {
       }}
       id="error-page"
     >
-      <div className="m-auto text-center">
+      <div className="m-auto text-center w-full">
         <h1 className="text-4xl mb-5">Oops!</h1>
         <p className="text-lg mb-4">Sorry, an unexpected error has occurred.</p>
         <p className="m-auto mb-5 text-lg text-center w-3/4 text-wrap break-all">
           <i>{error.message}</i>
         </p>
-        <button
-          onClick={resetErrorBoundary}
-          className="bg-blue-600 rounded-md shadow-sm text-white p-3"
-        >
-          Try Again
-        </button>
+        {resetErrorBoundary ? (
+          <button
+            onClick={resetErrorBoundary}
+            className="bg-blue-600 rounded-md shadow-sm text-white p-3"
+          >
+            Try Again
+          </button>
+        ) : null}
       </div>
     </div>
   );
@@ -75,22 +77,34 @@ export default function BuildingMap() {
   const [selectedFloor, setSelectedFloor] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState(null);
 
-  if (isBuildingPending || isFloorPending || isLocationPending)
-    return <LoadingScreen />;
-
-  if (isBuildingError || isFloorError || isLocationError)
+  if (isBuildingError || isFloorError || isLocationError) {
     return (
       <>
-        {isBuildingError ? <p>Error: {buildingError}</p> : null}
-        {isFloorError ? <p>Error: {floorError}</p> : null}
-        {isLocationError ? <p>Error: {locationError}</p> : null}
+        <SceneFallback
+          error={
+            isBuildingError
+              ? buildingError
+              : isFloorError
+              ? floorError
+              : isLocationError
+              ? locationError
+              : null
+          }
+        />
+        {/* {isBuildingError ? <p>Error: {buildingError.message}</p> : null}
+        {isFloorError ? <p>Error: {floorError.message}</p> : null}
+        {isLocationError ? <p>Error: {locationError.message}</p> : null} */}
       </>
     );
+  }
+
+  if (isBuildingPending || isFloorPending || isLocationPending)
+    return <LoadingScreen />;
 
   return (
     <>
       {/* <Stats showPanel={0} className="stats" /> */}
-      {floors && locations ? (
+      {!!floors && !!locations ? (
         <>
           <Outlet
             context={[

@@ -1,20 +1,36 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { putBuilding } from "../../api/put";
 import { useNavigate } from "react-router-dom";
+import { baseURL } from "../../http-common";
 
-export const usePutBuildingName = (buildingName) => {
+export const usePutBuildingName = () => {
   const queryClient = useQueryClient();
 
   const navigate = useNavigate();
 
   const { isPending, variables, mutate, isError } = useMutation({
-    mutationFn: putBuilding,
-    // Returning the promise makes the mutation stay in pending state until the cache has finished revalidating
-    onSettled: async (building) => {
-      console.log("settled");
-      console.log(`/${building.data.buildingName}/editor`);
+    mutationFn: async (data) => {
+      // Create new building object
+      const newBuilding = data;
+
+      const res = await fetch(
+        `${baseURL}/buildings/${newBuilding.buildingID}`,
+        {
+          method: "PUT",
+          body: JSON.stringify(newBuilding),
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      const json = await res.json();
+      if (!res.ok) {
+        console.log(json.error);
+        throw new Error(json.error);
+      }
+      return json;
+    },
+    onSuccess: async (building) => {
       // Redirect to new building route
-      navigate(`/${building.data.buildingName}/editor`);
+      navigate(`/${building.buildingName}/editor`);
     },
   });
 

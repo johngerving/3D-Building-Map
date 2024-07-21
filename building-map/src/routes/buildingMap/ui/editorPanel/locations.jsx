@@ -42,7 +42,7 @@ function AddNewLocation({ buildingID, floorID }) {
     <button
       className="w-full p-3 mr-[5px] mb-[5px] rounded-lg bg-gray-100 hover:bg-gray-200 transition"
       onClick={() => {
-        mutate({ buildingID: buildingID, floorID: floorID });
+        mutate({ floorID: floorID });
       }}
     >
       Add Location +

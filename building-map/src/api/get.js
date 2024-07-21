@@ -52,8 +52,6 @@ export const getLocationsByBuildingID = async (id) => {
       );
     });
 
-    console.log(res);
-
     await sleep(500);
     return await res;
   } catch (err) {

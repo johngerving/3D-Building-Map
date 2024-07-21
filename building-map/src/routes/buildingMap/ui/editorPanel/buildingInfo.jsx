@@ -19,9 +19,7 @@ function ChangeNameModal({ building, setShowModal }) {
 
   const isNameValid = nameRegex.test(name);
 
-  const { isPending, variables, mutate, isError } = usePutBuildingName(
-    building.buildingName
-  );
+  const { isPending, variables, mutate, isError } = usePutBuildingName();
 
   const inputClassName = `border w-full mb-4 mr-1 h-8 p-1 ${
     !isNameValid && name.length > 0 ? "border-red-500 outline-red-500" : ""
