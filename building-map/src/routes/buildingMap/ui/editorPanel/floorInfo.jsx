@@ -1,6 +1,6 @@
 import { useId, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useDebounce } from "../../../../hooks/api/useDebounce";
 import { Tree } from "../tree";
 import { Locations } from "./locations";
@@ -16,6 +16,71 @@ import { useState } from "react";
 import SwapUp from "../../../../assets/swap_up.svg?react";
 import SwapDown from "../../../../assets/swap_down.svg?react";
 import Trash from "../../../../assets/trash-icon.svg?react";
+
+import { baseURL } from "../../../../http-common.js";
+import { useUploadSVG } from "../../../../hooks/api/useUploadSVG.jsx";
+
+function UploadSVGModal({ floor, debouncingStates, setShowModal }) {
+  const { isPending, variables, mutate, error, isError } = useUploadSVG(
+    floor,
+    debouncingStates,
+    () => setShowModal(false)
+  );
+
+  const [file, setFile] = useState();
+
+  // Update file on change
+  const handleChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    mutate(file);
+  };
+
+  return (
+    <>
+      <div className="z-30 absolute top-0 left-0 w-screen h-screen bg-gray-600 opacity-50"></div>
+      <div className="z-30 absolute top-0 left-0 w-screen h-screen flex items-center justify-center">
+        <div className="w-[35rem] bg-white rounded-lg text-slate-600 p-7">
+          <h1 className="text-4xl mb-4">Upload SVG</h1>
+          <form className={isPending ? "opacity-50" : ""}>
+            <p className="text-lg mb-3">
+              Select an SVG file to upload for floor {floor.name}:
+            </p>
+            <input
+              type="file"
+              name="uploaded_file"
+              onChange={handleChange}
+              className="mb-3"
+            ></input>
+            <div className="w-full flex justify-start mt-3">
+              <button
+                disabled={isPending}
+                className={`rounded-md border shadow-sm p-3 mr-7 w-20  transition ${
+                  isPending ? "" : "hover:bg-gray-100"
+                }`}
+                onClick={() => setShowModal(false)}
+              >
+                Cancel
+              </button>
+              <button
+                disabled={isPending}
+                className={`rounded-md border shadow-sm p-3 bg-blue-600  text-white w-20 transition ${
+                  isPending ? "" : "hover:bg-blue-700"
+                }`}
+                onClick={handleSubmit}
+              >
+                Upload
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </>
+  );
+}
 
 function SingleFloorInfo({
   buildingID,
@@ -78,6 +143,8 @@ function SingleFloorInfo({
     });
   };
 
+  const [showModal, setShowModal] = useState(false);
+
   const labelClassName = "text-right w-full leading-8";
   const inputClassName = "border w-full mb-1 mr-1 h-8 p-1";
   return (
@@ -106,14 +173,32 @@ function SingleFloorInfo({
         <label className={labelClassName} htmlFor={svgInputId}>
           SVG
         </label>
-        <input
-          type="text"
-          id={svgInputId}
-          name="svg"
-          value={floor.svg}
-          onChange={(e) => handleInputChange({ svg: e.target.value })}
-          className={inputClassName}
-        />
+        <div className="flex">
+          <input
+            readOnly
+            type="text"
+            id={svgInputId}
+            name="svg"
+            value={floor.svg}
+            onChange={(e) => handleInputChange({ svg: e.target.value })}
+            className={inputClassName}
+          />
+          <button
+            className="h-8 px-3 text-nowrap mr-[5px] mb-[5px] rounded-lg bg-gray-100 hover:bg-gray-200"
+            onClick={() => setShowModal(true)}
+          >
+            Upload File
+          </button>
+        </div>
+        {showModal &&
+          createPortal(
+            <UploadSVGModal
+              floor={floor}
+              setShowModal={setShowModal}
+              debouncingStates={debouncingStates}
+            />,
+            document.body
+          )}
 
         <label className={labelClassName} htmlFor={scaleInputId}>
           Scale

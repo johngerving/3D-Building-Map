@@ -42,6 +42,8 @@ app.use(passport.session());
 app.use(passport.authenticate("session"));
 const authRouter = require("./routes/authRouter.js");
 app.use("/auth", authRouter);
+const fileRouter = require("./routes/storageRouter.js");
+app.use("/files", fileRouter);
 
 /** GET REQUESTS **/
 
