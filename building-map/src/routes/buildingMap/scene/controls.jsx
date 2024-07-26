@@ -9,6 +9,7 @@ export default function Controls({
   zoomMultiplier,
   floors,
   selectedFloor,
+  setLoaded = null,
 }) {
   // Get reference to OrbitControls
   const controlsRef = useRef();
@@ -49,6 +50,9 @@ export default function Controls({
     onRest: () => {
       controlsRef.current.enabled = true;
       setInitialized(true); // Set initialized to true
+      if (setLoaded) {
+        setLoaded(true);
+      }
     },
   }));
 

@@ -236,6 +236,7 @@ function ScanLocationsModal({ buildingID, floor, setShowModal }) {
         let locations = [];
         for (let i = 0; i < layer.children.length; i++) {
           // Go down layers to get to location data
+
           const translate =
             layer.children[i].children[0].getAttribute("transform");
           const positionRegex = /^translate\(([0-9|.]+) ([0-9|.]+)\)/;

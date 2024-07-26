@@ -127,6 +127,8 @@ export default function BuildingMap() {
               selectedFloor={selectedFloor}
               selectedLocation={selectedLocation}
               setSelectedLocation={setSelectedLocation}
+              width="100vw"
+              height="100vh"
             />
           </ErrorBoundary>
         </>

@@ -38,8 +38,8 @@ const router = createBrowserRouter([
         element: <ViewPanel />,
       },
       {
-        // At route /:buildingName/editor, show the editor panel instead
-        path: "/:buildingName/editor",
+        // At route /:buildingName/edit, show the editor panel instead
+        path: "/:buildingName/edit",
         element: <EditorPanel />,
       },
     ],

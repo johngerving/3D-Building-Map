@@ -12,7 +12,7 @@ const app = express();
 
 app.use(
   cors({
-    credentials: false,
+    credentials: true,
     origin: process.env.CLIENT_URL,
   })
 );
@@ -31,7 +31,7 @@ app.use(
     cookie: {
       secure: process.env.NODE_ENV === "production" ? "true" : "auto",
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-      maxAge: 1000 * 60 * 2,
+      maxAge: 1000 * 60 * 10,
     },
     resave: false,
     saveUninitialized: false,
@@ -46,6 +46,91 @@ const fileRouter = require("./routes/storageRouter.js");
 app.use("/files", fileRouter);
 
 /** GET REQUESTS **/
+
+app.get("/users", async function (req, res) {
+  if (!req.user) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
+  try {
+    // Pattern matching with search term
+    const term = "%" + req.query.term + "%";
+    // Get number of users to return
+    const limit = req.query.limit;
+
+    // Get users in database matching search term
+    const query = await pool.query(
+      "SELECT * FROM users WHERE email LIKE $1 LIMIT $2",
+      [term, limit]
+    );
+
+    const users = query.rows.map((user) => ({
+      userID: user.user_id,
+      email: user.email,
+    }));
+
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(400).json({ error: "Error retrieving users" });
+  }
+});
+
+// Get user information
+app.get("/me", async function (req, res) {
+  // Return empty response if not authenticated
+  if (!req.user) {
+    return res.status(200).json({});
+  }
+  // Return user information if authenticated
+  return res.status(200).json({ user: req.user });
+});
+
+// Get buildings under user
+app.get("/users/buildings", async function (req, res) {
+  // Redirect if user is not authenticated
+  if (!req.user) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
+  try {
+    // Get buildings belonging to user
+    const query = await pool.query(
+      "SELECT building_name, building_id FROM users_buildings LEFT JOIN buildings USING(building_id) WHERE user_id = $1",
+      [req.user.user_id]
+    );
+
+    const buildings = query.rows.map((row) => ({
+      buildingName: row.building_name,
+      buildingID: row.building_id,
+    }));
+
+    res.status(200).json(buildings);
+  } catch (error) {
+    return res.status(400).json({ error: "Error retrieving user buildings" });
+  }
+});
+
+app.get("/buildings/:buildingID/permissions", async function (req, res) {
+  const { buildingID } = req.params;
+
+  try {
+    const query = await pool.query(
+      "SELECT user_id, email, building_id, role FROM users RIGHT JOIN users_buildings USING(user_id) WHERE building_id=$1",
+      [buildingID]
+    );
+
+    const permissions = query.rows.map((row) => ({
+      userID: row.user_id,
+      email: row.email,
+      buildingID: row.building_id,
+      role: row.role,
+    }));
+
+    res.status(200).json(permissions);
+  } catch (error) {
+    res.status(400).json({ error: "Error retrieving permissions" });
+  }
+});
 
 // Get building information by building name
 app.get("/buildings/:buildingName", async function (req, res) {
@@ -161,6 +246,45 @@ app.get("/buildings/:buildingID/locations", async function (req, res) {
 });
 
 /** POST REQUESTS **/
+
+// Add user permissions
+app.post("/buildings/:buildingID/permissions", async function (req, res) {
+  const { buildingID } = req.params;
+  const permissions = req.body;
+
+  try {
+    if (!req.user) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    const isBodyValid =
+      "userID" in permissions &&
+      "buildingID" in permissions &&
+      "role" in permissions;
+
+    if (!isBodyValid) {
+      return res.status(400).json({ error: "Missing request parameters" });
+    }
+
+    const permissionsExist = await pool.query(
+      "SELECT * FROM users_buildings WHERE user_id = $1 AND building_id = $2",
+      [permissions.userID, permissions.buildingID]
+    );
+    if (permissionsExist.rows.length > 0) {
+      return res.status(400).json({ error: "Permissions already exist" });
+    }
+
+    const query = await pool.query(
+      "INSERT INTO users_buildings (user_id, building_id, role) VALUES ($1, $2, $3)",
+      [permissions.userID, permissions.buildingID, permissions.role]
+    );
+
+    res.status(200).json({});
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ error: "Error adding permissions" });
+  }
+});
 
 // Create new building
 app.post("/buildings", async function (req, res) {
@@ -319,6 +443,55 @@ app.post("/buildings/:buildingID/locations", async function (req, res) {
 });
 
 /** PUT REQUESTS **/
+
+// Put permissions
+app.put(
+  "/buildings/:buildingID/permissions/:userID",
+  async function (req, res) {
+    try {
+      console.log(req.body);
+      const { buildingID, userID } = req.params;
+
+      // Get existing permission
+      const existingPermissions = await pool.query(
+        "SELECT * FROM users_buildings WHERE user_id = $1 AND building_id = $2",
+        [userID, buildingID]
+      );
+
+      // Return error response if building with ID does not exist
+      if (existingPermissions.rows.length == 0) {
+        return res.status(404).json({ error: "Permissions do not exist" });
+      }
+
+      // Make sure role property is provided
+      const isBodyValid = "role" in req.body;
+
+      // Send error response if role not provided
+      if (!isBodyValid) {
+        return res.status(400).json({ error: "Invalid request body" });
+      }
+
+      // Update database
+      const query = await pool.query(
+        "UPDATE users_buildings SET role = $1 WHERE user_id = $2 AND building_id = $3",
+        [req.body.role, userID, buildingID]
+      );
+
+      // Send response with updated data
+      const newPermissions = {
+        userID: userID,
+        buildingID: buildingID,
+        role: req.body.role,
+      };
+
+      res.status(201).json(newPermissions);
+    } catch (error) {
+      console.log(error);
+      res.status(400).json({ error: "Error updating permissions" });
+    }
+  }
+);
+
 app.put("/buildings/:buildingID", async function (req, res) {
   const { buildingID } = req.params;
 
@@ -541,6 +714,39 @@ app.put(
 );
 
 /** DELETE REQUESTS **/
+
+// Delete permissions
+app.delete(
+  "/buildings/:buildingID/permissions/:userID",
+  async function (req, res) {
+    const { buildingID, userID } = req.params;
+
+    try {
+      // Check if permission exists
+      const permissionSearch = await pool.query(
+        "SELECT * FROM users_buildings WHERE user_id = $1 AND building_id = $2",
+        [userID, buildingID]
+      );
+
+      // Respond with error if it doesn't exist
+      if (permissionSearch.rows.length == 0) {
+        return res.status(404).json({ error: "Permissions not found" });
+      }
+
+      // Delete permission
+      const query = await pool.query(
+        "DELETE FROM users_buildings WHERE user_id = $1 AND building_id = $2",
+        [userID, buildingID]
+      );
+
+      // Return successful response
+      res.status(204).json({});
+    } catch (error) {
+      console.log(error);
+      res.status(400).json({ error: "Error deleting permissions" });
+    }
+  }
+);
 
 // Delete building
 app.delete("/buildings/:buildingName", async function (req, res) {

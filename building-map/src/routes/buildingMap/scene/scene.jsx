@@ -154,38 +154,45 @@ export default function Scene({
   selectedFloor,
   selectedLocation,
   setSelectedLocation,
+  width,
+  height,
+  setLoaded = null,
 }) {
   const { building } = useBuilding(buildingName);
   const { floors } = useFloors(buildingID);
   const { locations } = useLocations(buildingID);
 
   return (
-    <div
-      style={{
-        width: "100vw",
-        height: "100vh",
-        background:
-          "radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(207,226,227,1) 93%, rgba(205,205,205,1) 100%)",
-      }}
-    >
-      {/* Fill entire screen */}
-      <Canvas>
-        <Controls
-          initialPosition={building.initialCameraPosition}
-          zoomMultiplier={75}
-          floors={floors}
-          selectedFloor={selectedFloor}
-        />
-        <directionalLight args={[0xffffff, 2.5]} position={[-1, 2, 4]} />
-        <ambientLight args={[0xcfe2e3]} />
-        <Building
-          buildingName={buildingName}
-          buildingID={buildingID}
-          selectedFloor={selectedFloor}
-          selectedLocation={selectedLocation}
-          setSelectedLocation={setSelectedLocation}
-        />
-      </Canvas>
-    </div>
+    building &&
+    floors && (
+      <div
+        style={{
+          width: width,
+          height: height,
+          background:
+            "radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(207,226,227,1) 93%, rgba(205,205,205,1) 100%)",
+        }}
+      >
+        {/* Fill entire screen */}
+        <Canvas>
+          <Controls
+            initialPosition={building.initialCameraPosition}
+            zoomMultiplier={75}
+            floors={floors}
+            selectedFloor={selectedFloor}
+            setLoaded={setLoaded}
+          />
+          <directionalLight args={[0xffffff, 2.5]} position={[-1, 2, 4]} />
+          <ambientLight args={[0xcfe2e3]} />
+          <Building
+            buildingName={buildingName}
+            buildingID={buildingID}
+            selectedFloor={selectedFloor}
+            selectedLocation={selectedLocation}
+            setSelectedLocation={setSelectedLocation}
+          />
+        </Canvas>
+      </div>
+    )
   );
 }
