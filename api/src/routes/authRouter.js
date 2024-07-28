@@ -20,4 +20,16 @@ router.get(
   }
 );
 
+// Logout the user
+router.post("/logout", function (req, res, next) {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    console.log("logout");
+
+    res.status(200).json({});
+  });
+});
+
 module.exports = router;

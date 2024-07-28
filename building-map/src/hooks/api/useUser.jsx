@@ -1,7 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { baseURL } from "../../http-common";
+import { useNavigate } from "react-router-dom";
 
-export const useUser = () => {
+export const useUser = (redirect = false) => {
+  const navigate = useNavigate();
   const { isPending, isError, data, error } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
@@ -9,6 +11,12 @@ export const useUser = () => {
         credentials: "include",
       });
       const json = await res.json();
+
+      // Redirect if not authorized and redirect is true
+      if (res.status == 401 && redirect) {
+        navigate("/login");
+      }
+
       if (!res.ok) {
         throw new Error(json.error);
       }

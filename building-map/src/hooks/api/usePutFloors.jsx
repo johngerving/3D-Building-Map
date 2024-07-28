@@ -28,8 +28,6 @@ export const usePutFloors = (buildingName, isDebouncing) => {
         newFloors.push(json);
       }
 
-      console.log("usePutFloors");
-
       return newFloors;
     },
     onMutate: async (floors) => {

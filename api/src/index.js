@@ -31,7 +31,7 @@ app.use(
     cookie: {
       secure: process.env.NODE_ENV === "production" ? "true" : "auto",
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-      maxAge: 1000 * 60 * 10,
+      maxAge: 1000 * 60 * 60 * 12,
     },
     resave: false,
     saveUninitialized: false,
@@ -79,10 +79,10 @@ app.get("/users", async function (req, res) {
 app.get("/me", async function (req, res) {
   // Return empty response if not authenticated
   if (!req.user) {
-    return res.status(200).json({});
+    return res.status(401).json({ error: "Unauthorized" });
   }
   // Return user information if authenticated
-  return res.status(200).json({ user: req.user });
+  return res.status(200).json(req.user);
 });
 
 // Get buildings under user

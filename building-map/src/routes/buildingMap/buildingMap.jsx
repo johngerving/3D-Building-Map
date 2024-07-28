@@ -11,6 +11,7 @@ import { useIsFetching, useQueryClient } from "@tanstack/react-query";
 import { useFloors } from "../../hooks/api/useFloors.jsx";
 import { useLocations } from "../../hooks/api/useLocations.jsx";
 import { useBuilding } from "../../hooks/api/useBuilding.jsx";
+import { Profile } from "../../profile.jsx";
 
 export const loader = async ({ params }) => {
   return await params.buildingName;

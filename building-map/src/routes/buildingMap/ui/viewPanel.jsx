@@ -1,3 +1,4 @@
+import { Profile } from "../../../profile.jsx";
 import SearchBar from "./searchBar.jsx";
 import SideBar from "./sideBar.jsx";
 
@@ -18,6 +19,7 @@ export function ViewPanel() {
 
   return (
     <>
+      <Profile />
       <SearchBar
         buildingID={buildingID}
         selectedLocation={selectedLocation}

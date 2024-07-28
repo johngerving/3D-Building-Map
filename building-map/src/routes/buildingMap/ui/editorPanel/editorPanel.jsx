@@ -8,6 +8,7 @@ import { FloorInfo } from "./floorInfo.jsx";
 import { useFloors } from "../../../../hooks/api/useFloors.jsx";
 import { useLocations } from "../../../../hooks/api/useLocations.jsx";
 import { BuildingInfo } from "./buildingInfo.jsx";
+import { Profile } from "../../../../profile.jsx";
 
 export function EditorPanel() {
   const [
@@ -71,36 +72,39 @@ export function EditorPanel() {
   }, [isResizing]);
 
   return (
-    <div
-      id="editor-panel"
-      style={{ width: width, ...position }}
-      className={`z-10 absolute top-0 h-full bg-white`}
-    >
+    <>
+      <Profile redirect={true} />
       <div
-        id="scroll-container"
-        className={`h-full mr-2 overflow-y-scroll ${
-          width < 100 ? "hidden" : ""
-        }`}
+        id="editor-panel"
+        style={{ width: width, ...position }}
+        className={`z-10 absolute top-0 h-full bg-white`}
       >
-        <BuildingInfo building={building} />
-        <FloorInfo
-          buildingID={buildingID}
-          selectedFloor={selectedFloor}
-          selectedLocation={selectedLocation}
-          setSelectedFloor={setSelectedFloor}
-          setSelectedLocation={setSelectedLocation}
-        />
+        <div
+          id="scroll-container"
+          className={`h-full mr-2 overflow-y-scroll ${
+            width < 100 ? "hidden" : ""
+          }`}
+        >
+          <BuildingInfo building={building} />
+          <FloorInfo
+            buildingID={buildingID}
+            selectedFloor={selectedFloor}
+            selectedLocation={selectedLocation}
+            setSelectedFloor={setSelectedFloor}
+            setSelectedLocation={setSelectedLocation}
+          />
+        </div>
+        <div
+          id="resize"
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+          // Resizer should change cursor on hover if resizing is not enabled
+          // Resizer should be blue if hovered over or resizing is enabled
+          className={`resize z-10 absolute top-0 right-0 w-2 h-full shadow-md ${
+            !isResizing ? "hover:cursor-col-resize transition" : ""
+          } ${isHovering || isResizing ? "bg-blue-500" : "bg-white"}`}
+        ></div>
       </div>
-      <div
-        id="resize"
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
-        // Resizer should change cursor on hover if resizing is not enabled
-        // Resizer should be blue if hovered over or resizing is enabled
-        className={`resize z-10 absolute top-0 right-0 w-2 h-full shadow-md ${
-          !isResizing ? "hover:cursor-col-resize" : ""
-        } ${isHovering || isResizing ? "bg-blue-500" : "bg-white"}`}
-      ></div>
-    </div>
+    </>
   );
 }

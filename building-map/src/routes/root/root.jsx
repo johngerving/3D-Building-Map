@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { baseURL } from "../../http-common";
 import { useUser } from "../../hooks/api/useUser";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 
 import Scene from "../buildingMap/scene/scene";
 import { useEffect, useRef, useState } from "react";
@@ -14,8 +14,9 @@ import { useUserPermissions } from "../../hooks/api/useUserPermissions";
 import { usePostUserPermissions } from "../../hooks/api/usePostUserPermissions";
 import { useDeleteUserPermissions } from "../../hooks/api/useDeleteUserPermissions";
 import { usePutUserPermissions } from "../../hooks/api/usePutUserPermissions";
+import { Profile } from "../../profile";
 
-function Results({ building, results, setFocused }) {
+function Results({ building, results, setFocused, setText }) {
   const { isPending, variables, mutate, isError } = usePostUserPermissions(
     building.buildingID
   );
@@ -23,10 +24,11 @@ function Results({ building, results, setFocused }) {
   const handleClick = (result) => () => {
     mutate(result.userID);
     setFocused(false);
+    setText("");
   };
 
   return (
-    <div className="z-30 absolute bottom-0 left-0 translate-y-full w-full rounded-b-lg border-b-2 border-l-2 border-r-2 bg-white">
+    <div className="z-30 absolute bottom-0 left-0 translate-y-full w-full rounded-b-lg border-b border-l border-r bg-white shadow-md">
       {results.map((result) => (
         <button
           tabIndex={"0"}
@@ -167,10 +169,11 @@ function ManageAccessModal({ building, setShowModal }) {
                 building={building}
                 results={results}
                 setFocused={setFocused}
+                setText={setText}
               />
             )}
           </div>
-          <div className="mt-3">
+          <div className="mt-3 max-h-32 overflow-scroll">
             {permissions &&
               permissions.map((permission) => (
                 <div
@@ -266,7 +269,7 @@ function SceneView({ building }) {
   const [loaded, setLoaded] = useState(false);
 
   return (
-    <div className="w-fit rounded-xl shadow-md border mb-6">
+    <div className="w-fit rounded-xl shadow-md border mt-16">
       <Link to={`/${building.buildingName}/edit`}>
         <div className="w-96 h-52 relative overflow-hidden rounded-t-xl">
           <div
@@ -304,8 +307,6 @@ function SceneView({ building }) {
 export function Root() {
   const navigate = useNavigate();
 
-  const { isUserPending, isUserError, user, userError } = useUser();
-
   const { isPending, error, data } = useQuery({
     queryKey: ["user", "buildings"],
     queryFn: async () => {
@@ -328,7 +329,7 @@ export function Root() {
 
   return (
     <>
-      {user && <div className="w-full h-12"></div>}
+      <Profile redirect={true} />
       {data && (
         <div className="w-full flex flex-col items-center justify-center">
           {data.map((building) => (
