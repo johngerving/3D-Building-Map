@@ -1,8 +1,10 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { baseURL } from "../../http-common.js";
+import { useNavigate } from "react-router-dom";
 
 export const usePostUserPermissions = (buildingID) => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const { isPending, variables, mutate, isError } = useMutation({
     mutationFn: async (userID) => {
@@ -20,6 +22,11 @@ export const usePostUserPermissions = (buildingID) => {
         }
       );
       const json = await res.json();
+
+      if (res.status == 401) {
+        navigate("/login");
+      }
+
       if (!res.ok) {
         throw new Error(json.error);
       }

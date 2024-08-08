@@ -1,9 +1,11 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { postLocations } from "../../api/post.js";
 import { baseURL } from "../../http-common.js";
+import { useNavigate } from "react-router-dom";
 
 export const usePostLocations = (buildingID) => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const { isPending, variables, mutate, isError } = useMutation({
     mutationFn: async (data) => {
@@ -37,8 +39,14 @@ export const usePostLocations = (buildingID) => {
         method: "POST",
         body: JSON.stringify(newLocations),
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
       });
       const json = await res.json();
+
+      if (res.status == 401) {
+        navigate("/login");
+      }
+
       if (!res.ok) {
         console.log(json.error);
         throw new Error(json.error);

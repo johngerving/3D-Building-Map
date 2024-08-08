@@ -15,6 +15,8 @@ import { usePostUserPermissions } from "../../hooks/api/usePostUserPermissions";
 import { useDeleteUserPermissions } from "../../hooks/api/useDeleteUserPermissions";
 import { usePutUserPermissions } from "../../hooks/api/usePutUserPermissions";
 import { Profile } from "../../profile";
+import { NewBuildingButton } from "./newBuilding";
+import { DeleteBuildingButton } from "./deleteBuilding";
 
 function Results({ building, results, setFocused, setText }) {
   const { isPending, variables, mutate, isError } = usePostUserPermissions(
@@ -237,19 +239,24 @@ function Kebab({ building }) {
   return (
     <div ref={ref} className="rounded-xl relative bg-white">
       {active && (
-        <div className="absolute z-0 top-0 left-0 pt-11 bg-white border rounded-xl">
+        <div className="z-20 absolute top-0 left-0 pt-11 bg-white border rounded-xl overflow-hidden">
           <Link to={`/${building.buildingName}`}>
-            <div className="w-full px-4 py-3 hover:bg-slate-100">View</div>
+            <div className="w-full px-4 py-2 hover:bg-slate-100">View</div>
           </Link>
-          <button onClick={() => setShowModal(true)}>
-            <div className="w-full px-4 py-3 hover:bg-slate-100 text-nowrap">
-              Manage Access
-            </div>
-          </button>
+          {building.role === "admin" && (
+            <>
+              <button onClick={() => setShowModal(true)}>
+                <div className="w-full px-4 py-2 hover:bg-slate-100 text-nowrap">
+                  Manage Access
+                </div>
+              </button>
+              <DeleteBuildingButton building={building} />
+            </>
+          )}
         </div>
       )}
       <button
-        className={`more-button z-10 p-2 opacity-50 rounded-lg m-1 ${
+        className={`z-30 relative more-button p-2 opacity-50 rounded-lg m-1 ${
           !active ? "hover:opacity-100 hover:bg-slate-100" : ""
         }`}
         onClick={handleClick}
@@ -269,11 +276,11 @@ function SceneView({ building }) {
   const [loaded, setLoaded] = useState(false);
 
   return (
-    <div className="w-fit rounded-xl shadow-md border mt-16">
+    <div className="w-fit rounded-xl shadow-md border mb-8">
       <Link to={`/${building.buildingName}/edit`}>
         <div className="w-96 h-52 relative overflow-hidden rounded-t-xl">
           <div
-            className={`w-full h-full absolute top-0 left-0 z-20 flex items-center justify-center hover:cursor-pointer ${
+            className={`z-10 w-full h-full absolute top-0 left-0 flex items-center justify-center hover:cursor-pointer ${
               !loaded ? "bg-gray-50" : ""
             }`}
           >
@@ -330,11 +337,14 @@ export function Root() {
   return (
     <>
       <Profile redirect={true} />
+      <NewBuildingButton />
       {data && (
-        <div className="w-full flex flex-col items-center justify-center">
-          {data.map((building) => (
-            <SceneView key={building.buildingID} building={building} />
-          ))}
+        <div className="h-screen overflow-y-scroll">
+          <div className="w-full flex flex-col items-center justify-center pt-16 pb-24">
+            {data.map((building) => (
+              <SceneView key={building.buildingID} building={building} />
+            ))}
+          </div>
         </div>
       )}
     </>

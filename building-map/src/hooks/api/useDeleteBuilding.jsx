@@ -1,16 +1,15 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query";
-import { postFloor } from "../../api/post.js";
-import { baseURL } from "../../http-common.js";
+import { baseURL } from "../../http-common";
 import { useNavigate } from "react-router-dom";
 
-export const usePostFloor = (buildingID) => {
+export const useDeleteBuilding = (buildingName) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   const { isPending, variables, mutate, isError } = useMutation({
-    mutationFn: async (floor) => {
-      const res = await fetch(`${baseURL}/buildings/${buildingID}/floors`, {
-        method: "POST",
+    mutationFn: async () => {
+      const res = await fetch(`${baseURL}/buildings/${buildingName}`, {
+        method: "DELETE",
         credentials: "include",
       });
       const json = await res.json();
@@ -26,12 +25,9 @@ export const usePostFloor = (buildingID) => {
     },
     // Returning the promise makes the mutation stay in pending state until the cache has finished revalidating
     onSettled: async () => {
-      // Invalidate floor and location queries
-      queryClient.invalidateQueries({
-        queryKey: ["locations", buildingID],
-      });
+      // Invalidate building queries
       return await queryClient.invalidateQueries({
-        queryKey: ["floors", buildingID],
+        queryKey: ["user", "buildings"],
       });
     },
   });

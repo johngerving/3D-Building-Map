@@ -3,7 +3,7 @@ const session = require("express-session");
 const cors = require("cors");
 const passport = require("passport");
 require("dotenv").config();
-require("./auth.js");
+const { isUserAdmin, isUserEditor } = require("./auth.js");
 const pool = require("./db/db.js");
 
 PORT = process.env.PORT || 8080;
@@ -95,13 +95,14 @@ app.get("/users/buildings", async function (req, res) {
   try {
     // Get buildings belonging to user
     const query = await pool.query(
-      "SELECT building_name, building_id FROM users_buildings LEFT JOIN buildings USING(building_id) WHERE user_id = $1",
+      "SELECT building_name, building_id, role FROM users_buildings LEFT JOIN buildings USING(building_id) WHERE user_id = $1 ORDER BY building_name",
       [req.user.user_id]
     );
 
     const buildings = query.rows.map((row) => ({
       buildingName: row.building_name,
       buildingID: row.building_id,
+      role: row.role,
     }));
 
     res.status(200).json(buildings);
@@ -253,7 +254,14 @@ app.post("/buildings/:buildingID/permissions", async function (req, res) {
   const permissions = req.body;
 
   try {
+    // Respond with 401 status if user is not authorized
     if (!req.user) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    // Check if user has admin permissions for the building - if not, respond with 401 status
+    const isAdmin = await isUserAdmin(req.user, buildingID);
+    if (!isAdmin) {
       return res.status(401).json({ error: "Unauthorized" });
     }
 
@@ -290,6 +298,11 @@ app.post("/buildings/:buildingID/permissions", async function (req, res) {
 app.post("/buildings", async function (req, res) {
   const building = req.body;
 
+  // Respond with 401 status if user is not authorized
+  if (!req.user) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
   // Check if request body has necessary properties
   const isBodyValid =
     "buildingName" in building &&
@@ -316,7 +329,7 @@ app.post("/buildings", async function (req, res) {
 
     // Insert a row into the buildings table with the request body data - return the new building ID
     const query = await pool.query(
-      "INSERT INTO buildings (building_name, location_font_size, initial_camera_pos) VALUES ($1, $2, $3) RETURNING building_id",
+      "INSERT INTO buildings (building_name, location_font_size, initial_camera_pos) VALUES ($1, $2, $3) RETURNING building_id, building_name",
       [
         building.buildingName,
         building.locationFontSize,
@@ -324,9 +337,21 @@ app.post("/buildings", async function (req, res) {
       ]
     );
 
-    // Get the new building ID and return it
+    // Add user permissions to building
+    const userID = req.user.user_id;
     const newBuildingID = query.rows[0].building_id;
-    res.status(201).json({ buildingID: newBuildingID });
+
+    // Insert row
+    const addPermissions = await pool.query(
+      "INSERT INTO users_buildings (user_id, building_id, role) VALUES ($1, $2, 'admin')",
+      [userID, newBuildingID]
+    );
+
+    // Return the new building ID and name
+    const newBuildingName = query.rows[0].building_name;
+    res
+      .status(201)
+      .json({ buildingID: newBuildingID, buildingName: newBuildingName });
   } catch (error) {
     console.log(error);
 
@@ -337,6 +362,18 @@ app.post("/buildings", async function (req, res) {
 // Create new floor
 app.post("/buildings/:buildingID/floors", async function (req, res) {
   const { buildingID } = req.params;
+
+  // Respond with 401 status if user is not authorized
+  if (!req.user) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
+  // Check if user has admin permissions for the building - if not, respond with 401 status
+  const isAdmin = await isUserAdmin(req.user, buildingID);
+  const isEditor = await isUserEditor(req.user, buildingID);
+  if (!isAdmin && !isEditor) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
 
   // Query the database to get the max index of a floor
   const getFloorIndices = await pool.query(
@@ -393,6 +430,18 @@ app.post("/buildings/:buildingID/floors", async function (req, res) {
 app.post("/buildings/:buildingID/locations", async function (req, res) {
   const { buildingID } = req.params;
 
+  // Respond with 401 status if user is not authorized
+  if (!req.user) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
+  // Check if user has admin permissions for the building - if not, respond with 401 status
+  const isAdmin = await isUserAdmin(req.user, buildingID);
+  const isEditor = await isUserEditor(req.user, buildingID);
+  if (!isAdmin && !isEditor) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
   // Get array of locations
   const locations = req.body;
 
@@ -448,9 +497,19 @@ app.post("/buildings/:buildingID/locations", async function (req, res) {
 app.put(
   "/buildings/:buildingID/permissions/:userID",
   async function (req, res) {
+    const { buildingID, userID } = req.params;
+
     try {
-      console.log(req.body);
-      const { buildingID, userID } = req.params;
+      // Respond with 401 status if user is not authorized
+      if (!req.user) {
+        return res.status(401).json({ error: "Unauthorized" });
+      }
+
+      // Check if user has admin permissions for the building - if not, respond with 401 status
+      const isAdmin = await isUserAdmin(req.user, buildingID);
+      if (!isAdmin) {
+        return res.status(401).json({ error: "Unauthorized" });
+      }
 
       // Get existing permission
       const existingPermissions = await pool.query(
@@ -496,6 +555,19 @@ app.put("/buildings/:buildingID", async function (req, res) {
   const { buildingID } = req.params;
 
   try {
+    // Respond with 401 status if user is not authorized
+    if (!req.user) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    // Check if user has admin permissions for the building - if not, respond with 401 status
+    const isAdmin = await isUserAdmin(req.user, buildingID);
+    const isEditor = await isUserEditor(req.user, buildingID);
+
+    if (!isAdmin && !isEditor) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
     // Get existing building
     const existingBuilding = await pool.query(
       "SELECT * FROM buildings WHERE building_id = $1",
@@ -566,6 +638,18 @@ app.put("/buildings/:buildingID/floors/:floorID", async function (req, res) {
   const { buildingID, floorID } = req.params;
 
   try {
+    // Respond with 401 status if user is not authorized
+    if (!req.user) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    // Check if user has admin permissions for the building - if not, respond with 401 status
+    const isAdmin = await isUserAdmin(req.user, buildingID);
+    const isEditor = await isUserEditor(req.user, buildingID);
+    if (!isAdmin && !isEditor) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
     // Get existing floor
     const existingFloor = await pool.query(
       "SELECT * FROM floors WHERE floor_id = $1 AND building_id = $2",
@@ -652,6 +736,18 @@ app.put(
     const { buildingID, locationID } = req.params;
 
     try {
+      // Respond with 401 status if user is not authorized
+      if (!req.user) {
+        return res.status(401).json({ error: "Unauthorized" });
+      }
+
+      // Check if user has admin permissions for the building - if not, respond with 401 status
+      const isAdmin = await isUserAdmin(req.user, buildingID);
+      const isEditor = await isUserEditor(req.user, buildingID);
+      if (!isAdmin && !isEditor) {
+        return res.status(401).json({ error: "Unauthorized" });
+      }
+
       // Get existing location
       const existingLocation = await pool.query(
         "SELECT location_id, description, locations.position, default_enabled, type, location_name FROM buildings RIGHT JOIN floors USING(building_id) RIGHT JOIN locations USING(floor_id) WHERE location_id = $1 AND building_id = $2",
@@ -722,6 +818,17 @@ app.delete(
     const { buildingID, userID } = req.params;
 
     try {
+      // Respond with 401 status if user is not authorized
+      if (!req.user) {
+        return res.status(401).json({ error: "Unauthorized" });
+      }
+
+      // Check if user has admin permissions for the building - if not, respond with 401 status
+      const isAdmin = await isUserAdmin(req.user, buildingID);
+      if (!isAdmin) {
+        return res.status(401).json({ error: "Unauthorized" });
+      }
+
       // Check if permission exists
       const permissionSearch = await pool.query(
         "SELECT * FROM users_buildings WHERE user_id = $1 AND building_id = $2",
@@ -753,6 +860,11 @@ app.delete("/buildings/:buildingName", async function (req, res) {
   const { buildingName } = req.params;
 
   try {
+    // Respond with 401 status if user is not authorized
+    if (!req.user) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
     // Check if building exists
     const buildingSearch = await pool.query(
       "SELECT * FROM buildings WHERE building_name = $1",
@@ -764,6 +876,14 @@ app.delete("/buildings/:buildingName", async function (req, res) {
       return res.status(404).json({ error: "Building not found" });
     }
 
+    const buildingID = buildingSearch.rows[0].building_id;
+
+    // Check if user has admin permissions for the building - if not, respond with 401 status
+    const isAdmin = await isUserAdmin(req.user, buildingID);
+    if (!isAdmin) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
     // Delete building
     const query = await pool.query(
       "DELETE FROM buildings WHERE building_name = $1",
@@ -773,6 +893,7 @@ app.delete("/buildings/:buildingName", async function (req, res) {
     // Return successful response
     res.status(204).json({});
   } catch (error) {
+    console.log(error);
     res.status(400).json({ error: "Error deleting building" });
   }
 });
@@ -781,6 +902,18 @@ app.delete("/buildings/:buildingID/floors/:floorID", async function (req, res) {
   const { buildingID, floorID } = req.params;
 
   try {
+    // Respond with 401 status if user is not authorized
+    if (!req.user) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    // Check if user has admin permissions for the building - if not, respond with 401 status
+    const isAdmin = await isUserAdmin(req.user, buildingID);
+    const isEditor = await isUserEditor(req.user, buildingID);
+    if (!isAdmin && !isEditor) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
     // Check if floor exists and that it is in the building
     const floorSearch = await pool.query(
       "SELECT * FROM floors WHERE building_id = $1 AND floor_id = $2",
@@ -810,6 +943,18 @@ app.delete(
     const { buildingID, locationID } = req.params;
 
     try {
+      // Respond with 401 status if user is not authorized
+      if (!req.user) {
+        return res.status(401).json({ error: "Unauthorized" });
+      }
+
+      // Check if user has admin permissions for the building - if not, respond with 401 status
+      const isAdmin = await isUserAdmin(req.user, buildingID);
+      const isEditor = await isUserEditor(req.user, buildingID);
+      if (!isAdmin && !isEditor) {
+        return res.status(401).json({ error: "Unauthorized" });
+      }
+
       // Get existing location
       const existingLocation = await pool.query(
         "SELECT location_id, description, locations.position, default_enabled, type, location_name FROM buildings RIGHT JOIN floors USING(building_id) RIGHT JOIN locations USING(floor_id) WHERE location_id = $1 AND building_id = $2",

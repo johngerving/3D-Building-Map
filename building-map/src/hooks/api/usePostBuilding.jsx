@@ -1,16 +1,17 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query";
-import { postFloor } from "../../api/post.js";
 import { baseURL } from "../../http-common.js";
 import { useNavigate } from "react-router-dom";
 
-export const usePostFloor = (buildingID) => {
+export const usePostBuilding = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   const { isPending, variables, mutate, isError } = useMutation({
-    mutationFn: async (floor) => {
-      const res = await fetch(`${baseURL}/buildings/${buildingID}/floors`, {
+    mutationFn: async (building) => {
+      const res = await fetch(`${baseURL}/buildings`, {
         method: "POST",
+        body: JSON.stringify(building),
+        headers: { "Content-Type": "application/json" },
         credentials: "include",
       });
       const json = await res.json();
@@ -25,14 +26,13 @@ export const usePostFloor = (buildingID) => {
       return json;
     },
     // Returning the promise makes the mutation stay in pending state until the cache has finished revalidating
-    onSettled: async () => {
-      // Invalidate floor and location queries
-      queryClient.invalidateQueries({
-        queryKey: ["locations", buildingID],
+    onSettled: async (building) => {
+      // Invalidate building queries
+      await queryClient.invalidateQueries({
+        queryKey: ["user", "buildings"],
       });
-      return await queryClient.invalidateQueries({
-        queryKey: ["floors", buildingID],
-      });
+      // Redirect to new building
+      navigate(`/${building.buildingName}/edit`);
     },
   });
 

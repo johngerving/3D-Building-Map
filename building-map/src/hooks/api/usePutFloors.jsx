@@ -1,8 +1,10 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { putFloor } from "../../api/put.js";
+import { useNavigate } from "react-router-dom";
 
 export const usePutFloors = (buildingName, isDebouncing) => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   return useMutation({
     mutationFn: async (floors) => {
@@ -16,9 +18,15 @@ export const usePutFloors = (buildingName, isDebouncing) => {
             method: "PUT",
             body: JSON.stringify(newFloor),
             headers: { "Content-Type": "application/json" },
+            credentials: "include",
           }
         );
         const json = await res.json();
+
+        if (res.status == 401) {
+          navigate("/login");
+        }
+
         // Throw error if response had error
         if (!res.ok) {
           console.log(json.error);

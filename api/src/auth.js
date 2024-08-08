@@ -57,3 +57,27 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((user, done) => {
   done(null, user);
 });
+
+const isUserAdmin = async (user, buildingID) => {
+  // Select permissions for user under the building ID where user is admin
+  const query = await pool.query(
+    "SELECT * FROM users_buildings WHERE user_id=$1 AND building_id=$2 AND role='admin'",
+    [user.user_id, buildingID]
+  );
+
+  // Return true if permissions exist, false otherwise
+  return query.rows.length > 0;
+};
+
+const isUserEditor = async (user, buildingID) => {
+  // Select permissions for user under the building ID where user is editor
+  const query = await pool.query(
+    "SELECT * FROM users_buildings WHERE user_id=$1 AND building_id=$2 AND role='editor'",
+    [user.user_id, buildingID]
+  );
+
+  // Return true if permissions exist, false otherwise
+  return query.rows.length > 0;
+};
+
+module.exports = { isUserAdmin, isUserEditor };

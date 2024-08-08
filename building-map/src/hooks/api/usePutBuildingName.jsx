@@ -5,7 +5,6 @@ import { baseURL } from "../../http-common";
 
 export const usePutBuildingName = () => {
   const queryClient = useQueryClient();
-
   const navigate = useNavigate();
 
   const { isPending, variables, mutate, error, isError } = useMutation({
@@ -19,9 +18,15 @@ export const usePutBuildingName = () => {
           method: "PUT",
           body: JSON.stringify(newBuilding),
           headers: { "Content-Type": "application/json" },
+          credentials: "include",
         }
       );
       const json = await res.json();
+
+      if (res.status == 401) {
+        navigate("/login");
+      }
+
       if (!res.ok) {
         console.log(json.error);
         throw new Error(json.error);
@@ -30,7 +35,7 @@ export const usePutBuildingName = () => {
     },
     onSuccess: async (building) => {
       // Redirect to new building route
-      navigate(`/${building.buildingName}/editor`);
+      navigate(`/${building.buildingName}/edit`);
     },
   });
 
