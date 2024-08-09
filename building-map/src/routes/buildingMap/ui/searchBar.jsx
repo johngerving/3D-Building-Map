@@ -4,6 +4,7 @@ import fuzzysort from "fuzzysort";
 
 import { useFloors } from "../../../hooks/api/useFloors.jsx";
 import { useLocations } from "../../../hooks/api/useLocations.jsx";
+import { useMobile } from "../../../hooks/useMobile.jsx";
 
 function CloseButton({ handleClear }) {
   const [hover, setHover] = useState(false);
@@ -142,9 +143,9 @@ export default function SearchBar({
   const showResults = text.length > 0 && focused && results.length > 0;
 
   return (
-    <div className="z-20 absolute top-3 left-3 w-80 h-12">
+    <div className="z-40 absolute top-3 left-3 right-3 md:w-80 sm:full h-12">
       <input
-        className={`search w-80 h-12 shadow-[0_0_0_1px_rgba(0,0,0,0.05),rgb(209,213,219)_0_0_0_1px_inset] py-0 pl-6 pr-14 ${
+        className={`search w-full h-12 shadow-[0_0_0_1px_rgba(0,0,0,0.05),rgb(209,213,219)_0_0_0_1px_inset] py-0 pl-6 pr-14 ${
           showResults ? "rounded-t-xl" : "rounded-3xl"
         }`}
         value={text}

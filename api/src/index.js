@@ -79,7 +79,7 @@ app.get("/users", async function (req, res) {
 app.get("/me", async function (req, res) {
   // Return empty response if not authenticated
   if (!req.user) {
-    return res.status(401).json({ error: "Unauthorized" });
+    return res.status(200).json({});
   }
   // Return user information if authenticated
   return res.status(200).json(req.user);

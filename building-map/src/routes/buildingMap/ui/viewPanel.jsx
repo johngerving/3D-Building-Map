@@ -19,7 +19,6 @@ export function ViewPanel() {
 
   return (
     <>
-      <Profile />
       <SearchBar
         buildingID={buildingID}
         selectedLocation={selectedLocation}

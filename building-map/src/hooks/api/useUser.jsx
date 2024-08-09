@@ -13,12 +13,8 @@ export const useUser = (redirect = false) => {
       const json = await res.json();
 
       // Redirect if not authorized and redirect is true
-      if (res.status == 401 && redirect) {
-        navigate("/login");
-      }
-
-      if (!res.ok) {
-        throw new Error(json.error);
+      if (res.json == {} && redirect) {
+        return navigate("/login");
       }
 
       return json;

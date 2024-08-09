@@ -12,6 +12,7 @@ import { useFloors } from "../../hooks/api/useFloors.jsx";
 import { useLocations } from "../../hooks/api/useLocations.jsx";
 import { useBuilding } from "../../hooks/api/useBuilding.jsx";
 import { Profile } from "../../profile.jsx";
+import { useMobile } from "../../hooks/useMobile.jsx";
 
 export const loader = async ({ params }) => {
   return await params.buildingName;
@@ -62,8 +63,9 @@ function SceneFallback({ error, resetErrorBoundary = null }) {
 
 export default function BuildingMap() {
   const queryClient = useQueryClient();
-
   const buildingName = useLoaderData();
+
+  const isMobile = useMobile();
 
   const { isBuildingPending, isBuildingError, building, buildingError } =
     useBuilding(buildingName);
@@ -92,9 +94,9 @@ export default function BuildingMap() {
               : null
           }
         />
-        {/* {isBuildingError ? <p>Error: {buildingError.message}</p> : null}
+        {isBuildingError ? <p>Error: {buildingError.message}</p> : null}
         {isFloorError ? <p>Error: {floorError.message}</p> : null}
-        {isLocationError ? <p>Error: {locationError.message}</p> : null} */}
+        {isLocationError ? <p>Error: {locationError.message}</p> : null}
       </>
     );
   }
@@ -107,6 +109,7 @@ export default function BuildingMap() {
       {/* <Stats showPanel={0} className="stats" /> */}
       {!!floors && !!locations ? (
         <>
+          {!isMobile && <Profile />}
           <Outlet
             context={[
               building,
