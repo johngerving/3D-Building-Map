@@ -31,7 +31,7 @@ app.use(
     cookie: {
       secure: process.env.NODE_ENV === "production" ? "true" : "auto",
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-      maxAge: 1000 * 60 * 60 * 12,
+      maxAge: 1000 * 60 * 60 * 24,
     },
     resave: false,
     saveUninitialized: false,
