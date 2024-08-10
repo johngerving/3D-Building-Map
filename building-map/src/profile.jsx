@@ -20,7 +20,7 @@ export function Profile({ redirect = false }) {
   useEffect(() => {
     // If user clicks outside of the profile, hide it
     function onClick(e) {
-      if (!ref.current.contains(e.target)) {
+      if (ref.current && !ref.current.contains(e.target)) {
         setShowOptions(false);
       }
     }
