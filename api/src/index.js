@@ -32,6 +32,8 @@ app.use(
       secure: process.env.NODE_ENV === "production" ? "true" : "auto",
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       maxAge: 1000 * 60 * 60 * 24,
+      domain:
+        process.env.NODE_ENV === "production" ? process.env.CLIENT_URL : "",
     },
     resave: false,
     saveUninitialized: false,
