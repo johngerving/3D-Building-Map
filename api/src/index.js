@@ -20,6 +20,7 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.set("trust proxy", true);
 
 // Use express session, store sessions in database
 console.log("Environment:", process.env.NODE_ENV);
@@ -31,8 +32,8 @@ app.use(
     secret: [process.env.COOKIE_SECRET],
     cookie: {
       secure: process.env.NODE_ENV === "production" ? true : "auto",
-      httpOnly: process.env.NODE_ENV === "production",
       sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+      path: "/",
       maxAge: 1000 * 60 * 60 * 24,
       domain:
         process.env.NODE_ENV === "production" ? process.env.COOKIE_DOMAIN : "",
