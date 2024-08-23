@@ -22,6 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 // Use express session, store sessions in database
+console.log("Environment:", process.env.NODE_ENV);
 app.use(
   session({
     store: new (require("connect-pg-simple")(session))({
