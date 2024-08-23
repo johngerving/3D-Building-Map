@@ -33,9 +33,7 @@ app.use(
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       maxAge: 1000 * 60 * 60 * 24,
       domain:
-        process.env.NODE_ENV === "production"
-          ? "white-dune-0380f7c1e.5.azurestaticapps.net"
-          : "",
+        process.env.NODE_ENV === "production" ? process.env.COOKIE_DOMAIN : "",
     },
     resave: false,
     saveUninitialized: false,
