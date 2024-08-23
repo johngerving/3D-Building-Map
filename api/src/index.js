@@ -31,6 +31,7 @@ app.use(
     secret: [process.env.COOKIE_SECRET],
     cookie: {
       secure: process.env.NODE_ENV === "production" ? true : "auto",
+      httpOnly: process.env.NODE_ENV === "production",
       sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
       maxAge: 1000 * 60 * 60 * 24,
       domain:
