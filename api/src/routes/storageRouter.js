@@ -5,6 +5,7 @@ const multer = require("multer");
 const fs = require("fs").promises;
 const { BlobServiceClient } = require("@azure/storage-blob");
 const { v1: uuidv1 } = require("uuid");
+const path = require("path");
 require("dotenv").config();
 
 const storage = multer.diskStorage({
