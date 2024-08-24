@@ -30,6 +30,7 @@ export const useUploadSVG = (floor, debouncingStates, onSuccess) => {
           method: "PUT",
           body: JSON.stringify({ ...floor, svg: fileURL }), // Replace SVG path with file URL
           headers: { "Content-Type": "application/json" },
+          credentials: "include",
         }
       );
       const putFloorJson = await putFloorRes.json();
