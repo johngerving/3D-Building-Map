@@ -113,28 +113,7 @@ function Content({ selectedLocation }) {
       }}
     >
       <h1 className="text-2xl text-slate-700 mb-2">{selectedLocation.name}</h1>
-      <p className="text-slate-700">
-        {selectedLocation.description}Anim fugiat id nulla voluptate ad ad dolor
-        minim ex eu proident cupidatat minim sit. Anim duis cillum veniam aute
-        sit excepteur laborum sit ut anim ullamco minim qui eu. Tempor culpa id
-        nostrud commodo et anim elit ut cillum magna minim irure elit.
-        Adipisicing eu qui et reprehenderit aliqua ad sunt. Aliqua veniam est id
-        adipisicing. Laboris aliqua ullamco reprehenderit cillum laboris in
-        dolor do fugiat tempor sint aute ullamco Lorem. Ex laboris dolore
-        commodo quis nisi dolor in ex laboris elit dolore laboris commodo elit.
-        Exercitation ad ex est incididunt ex ea eu consequat. Proident anim
-        ullamco excepteur anim nisi tempor id exercitation tempor consequat.
-        Sint commodo aliqua Lorem aute deserunt ad enim reprehenderit ad
-        exercitation. Incididunt et consectetur enim sunt. Ipsum qui deserunt
-        culpa velit ut laborum minim dolor elit consectetur ipsum consectetur
-        laborum. Ullamco id tempor cupidatat cupidatat. Est ex eiusmod magna
-        ullamco occaecat aliqua. Fugiat nulla ipsum ex veniam cupidatat laboris
-        quis laborum mollit fugiat non cupidatat culpa tempor. Aliqua pariatur
-        eu laboris exercitation sint sint velit nulla excepteur laborum.
-        Deserunt sint labore eiusmod dolor commodo officia eu irure. Id duis
-        dolore nulla occaecat ut sunt quis qui nostrud labore et nisi veniam
-        esse. Sunt mollit dolor ex culpa dolor.
-      </p>
+      <p className="text-slate-700">{selectedLocation.description}</p>
     </animated.div>
   );
 }

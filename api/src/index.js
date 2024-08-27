@@ -92,7 +92,6 @@ app.get("/me", async function (req, res) {
 
 // Get buildings under user
 app.get("/users/buildings", async function (req, res) {
-  console.log(req);
   // Redirect if user is not authenticated
   if (!req.user) {
     return res.status(401).json({ error: "Unauthorized" });
